@@ -1,1 +1,7 @@
 Place holder for car race server code
+
+Draws a linear path with 4 tracks with fixed N tiles window shown
+Random obstcales 
+3 lives for each car at start , incorrect behavour loses 1 start , 0 starts exits game
+  when car loses life it goes 1 tile backward
+not handling collisions between cars , displaying which cars on each tile by color
