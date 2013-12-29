@@ -1,3 +1,5 @@
+from server.Matrix import Matrix
+
 author = 'gickowic'
 import pygame, sys
 
@@ -25,7 +27,6 @@ class RacingGamingClient():
     def init(self):
         for component in self.components:
             if component.__hasattr__('init'):
-                if not component.initialized:
                     component.init()
 
     def main_game_loop(self):
@@ -49,6 +50,8 @@ def main():
      ## create car
 
      ## create matrix
+    matrix = Matrix()
+    game.add_component(matrix)
 
     # TODO: initialize objects
     game.init()
