@@ -1,3 +1,5 @@
+from twisted.internet import reactor
+from twisted.internet import task
 from components import Matrix
 
 author = 'gickowic'
@@ -5,6 +7,20 @@ import pygame, sys
 
 
 class RacingGamingClient():
+
+    def __init__(self, client):
+        self.client = client
+        self.init_pygame_resources()
+        # TODO: construct objects (matrix + car)
+        ## create car
+
+        matrix = Matrix.Matrix()
+        self.add_component(matrix)
+
+        self.init()
+        self.looper = task.LoopingCall(self.tick)
+        frame_delay = 1 / config.frame_rate
+        self.looper.start(frame_delay)
 
     def init_pygame_resources(self):
         pygame.init()
@@ -34,35 +50,25 @@ class RacingGamingClient():
 
     def tick(self):
         screen = pygame.display.set_mode(self.size)
-        while 1:
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            self.update()
-            self.draw(screen)
-            pygame.time.delay(100)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+        self.update()
+        self.draw(screen)
 
+    # Client events
 
-def main():
-    # TODO: Initialize pygame resources
-    game = RacingGamingClient()
-    game.init_pygame_resources()
+    def client_connected(self):
+        print 'client connected'
 
-    # TODO: Initialize communications server
+    def client_disconnected(self):
+        print 'client disconnected'
 
-    # TODO: construct objects (matrix + car)
-     ## create car
+    def client_failed(self):
+        print 'client failed'
 
-     ## create matrix
-    matrix = Matrix()
-    game.add_component(matrix)
+    def client_update(self, info):
+        print 'client_update', info
 
-    # TODO: initialize objects
-    game.init()
-
-    # move to main game loop:
-    game.tick()
-
-
-if __name__ == '__main__':
-    main()
+    def client_welcome(self):
+        print 'client_welcome'
