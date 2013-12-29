@@ -1,6 +1,6 @@
 from twisted.internet import reactor
 from twisted.internet import task
-from components import Matrix
+from components import matrix
 from components import message
 import config
 
@@ -16,8 +16,7 @@ class Game(object):
         # TODO: construct objects (matrix + car)
         ## create car
 
-        matrix = Matrix.Matrix()
-        self.add_component(matrix)
+        self.add_component(matrix.Matrix())
 
         self.init()
         self.looper = task.LoopingCall(self.tick)
