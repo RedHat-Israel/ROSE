@@ -1,6 +1,7 @@
-__author__ = 'mbourvin'
+
 import config
-import Matrix
+import matrix
+
 
 class GameServer:
     """
@@ -8,7 +9,7 @@ class GameServer:
     """
 
     def __init__(self):
-        self.matrix = Matrix()
+        self.matrix = matrix()
         self.lives = [3] * config.NUMBER_OF_PLAYERS
 
     def do(self, car_num, action, x, y):
@@ -28,26 +29,26 @@ class GameServer:
         """
         if action == config.MOVE['FORWARD']:
             if self.matrix.check_above(x, y): # can move forward
-                return (x, y-1)
+                return x, y-1
             else:
                 return self._dec_life_and_return(car_num, x, y)
         elif action == config.MOVE['RIGHT']:
-            if self.matrix.check_right: # can move right
-                return (x+1, y)
+            if self.matrix.check_right:  # can move right
+                return x+1, y
             else:
                 return self._dec_life_and_return(car_num, x, y)
         elif action == config.MOVE['LEFT']:
-            if self.matrix.check_left: # can move left
-                return (x-1, y)
+            if self.matrix.check_left:  # can move left
+                return x-1, y
             else:
                 return self._dec_life_and_return(car_num, x, y)
         elif action == config.ACTIONS['PICK']:
             self._pick(car_num, x, y)
-            return (x, y) # don't check location
+            return x, y  # don't check location
         elif action == config.ACTIONS['JUMP']:
-            return (x, y-2)
-        else: # unknown action - don't move
-            return (x, y)
+            return x, y-2
+        else:  # unknown action - don't move
+            return x, y
 
     def _pick(self, car_num, x, y):
         """
@@ -64,13 +65,13 @@ class GameServer:
         """
         Increase number of lives
         """
-        self.lives[car_num-1] = self.lives[car_num-1] + 1
+        self.lives[car_num-1] += 1
 
     def _dec_life(self, car_num):
         """
         Decrease number of lives
         """
-        self.lives[car_num-1] = self.lives[car_num-1] - 1
+        self.lives[car_num-1] -= 1
 
     def _is_alive(self, car_num):
         """
@@ -84,6 +85,6 @@ class GameServer:
         """
         self._dec_life(car_num)
         if self._is_alive(car_num):
-            return (x, y)
-        else: # dead
-            return (-1, -1)
+            return x, y
+        else:  # dead
+            return -1, -1
