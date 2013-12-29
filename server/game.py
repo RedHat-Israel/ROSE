@@ -1,9 +1,9 @@
 from twisted.internet import task
 
 import matrix
-import message
 import config
 
+from common import message
 
 class Game(object):
     """

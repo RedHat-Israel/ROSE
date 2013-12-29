@@ -3,7 +3,7 @@ import time
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 import game
-import message
+from common import message
 
 
 class Player(basic.LineReceiver):
