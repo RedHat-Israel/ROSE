@@ -1,7 +1,7 @@
 RaananaTiraProject
 ==================
 
-Car race game for Raanana Tira project 
+Car race game for Raanana Tira project
 
 Race project
 
