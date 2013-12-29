@@ -1,5 +1,4 @@
-
-import config
+from components import matrix_config
 import matrix
 
 
@@ -10,7 +9,7 @@ class GameServer:
 
     def __init__(self):
         self.matrix = matrix()
-        self.lives = [3] * config.NUMBER_OF_PLAYERS
+        self.lives = [3] * matrix_config.NUMBER_OF_PLAYERS
 
     def do(self, car_num, action, x, y):
         """
@@ -27,25 +26,25 @@ class GameServer:
             - Jump
             - Pick (star)
         """
-        if action == config.MOVE['FORWARD']:
+        if action == matrix_config.MOVE['FORWARD']:
             if self.matrix.check_above(x, y): # can move forward
                 return x, y-1
             else:
                 return self._dec_life_and_return(car_num, x, y)
-        elif action == config.MOVE['RIGHT']:
+        elif action == matrix_config.MOVE['RIGHT']:
             if self.matrix.check_right:  # can move right
                 return x+1, y
             else:
                 return self._dec_life_and_return(car_num, x, y)
-        elif action == config.MOVE['LEFT']:
+        elif action == matrix_config.MOVE['LEFT']:
             if self.matrix.check_left:  # can move left
                 return x-1, y
             else:
                 return self._dec_life_and_return(car_num, x, y)
-        elif action == config.ACTIONS['PICK']:
+        elif action == matrix_config.ACTIONS['PICK']:
             self._pick(car_num, x, y)
             return x, y  # don't check location
-        elif action == config.ACTIONS['JUMP']:
+        elif action == matrix_config.ACTIONS['JUMP']:
             return x, y-2
         else:  # unknown action - don't move
             return x, y
@@ -58,7 +57,7 @@ class GameServer:
             * x - latitude
             * y - altitude
         """
-        if self.matrix.get_obstacle(x, y) == config.OBSTACLES['STAR']:
+        if self.matrix.get_obstacle(x, y) == matrix_config.OBSTACLES['STAR']:
             self._inc_life()
 
     def _inc_life(self, car_num):
