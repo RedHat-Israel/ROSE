@@ -1,7 +1,7 @@
 from twisted.internet import task
 from components import message
 
-import matrix
+from components import Matrix
 import components.matrix_config as config
 
 
@@ -12,7 +12,7 @@ class Game(object):
 
     def __init__(self, server):
         self.server = server
-        self.matrix = matrix.Matrix()
+        self.matrix = Matrix.Matrix()
         self.lives = [config.NUM_OF_LIVES,
                       config.NUM_OF_LIVES,
                       config.NUM_OF_LIVES,
