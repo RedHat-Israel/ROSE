@@ -1,4 +1,4 @@
-from server.Matrix import Matrix
+from components import Matrix
 
 author = 'gickowic'
 import pygame, sys
@@ -12,24 +12,27 @@ class RacingGamingClient():
         self.bg_color = 0, 0, 0
         self.components = []
 
+    def add_component(self, component):
+        self.components.append(component)
+
     def update(self):
         for component in self.components:
-            if component.__hasattr__('update'):
+            if hasattr(component, 'update'):
                 component.update()
 
     def draw(self, screen):
         screen.fill(self.bg_color)
         for component in self.components:
-            if component.__hasattr__('draw'):
-                component.draw()
+            if hasattr(component, 'draw'):
+                component.draw(screen)
         pygame.display.flip()
 
     def init(self):
         for component in self.components:
-            if component.__hasattr__('init'):
+            if hasattr(component, 'init'):
                     component.init()
 
-    def main_game_loop(self):
+    def tick(self):
         screen = pygame.display.set_mode(self.size)
         while 1:
             for event in pygame.event.get():
@@ -37,6 +40,7 @@ class RacingGamingClient():
                     sys.exit()
             self.update()
             self.draw(screen)
+            pygame.time.delay(100)
 
 
 def main():
@@ -57,7 +61,7 @@ def main():
     game.init()
 
     # move to main game loop:
-    game.main_game_loop()
+    game.tick()
 
 
 if __name__ == '__main__':
