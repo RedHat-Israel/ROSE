@@ -1,0 +1,3 @@
+#!/bin/sh
+
+PYTHONPATH=. python server/main.py
