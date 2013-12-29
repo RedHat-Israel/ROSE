@@ -26,7 +26,7 @@ class Client(basic.LineReceiver):
         elif msg.action == 'update':
             self.factory.update(msg.payload)
 
-class ClientFactory(protocol.ClientFactory):
+class ClientFactory(protocol.ReconnectingClientFactory):
 
     protocol = Client
 
@@ -34,24 +34,20 @@ class ClientFactory(protocol.ClientFactory):
         self.game = game.Game(self)
         self.client = None
 
-    def reconnect(self):
-        reactor.callLater(0.1, reactor.connectTCP, config.host, config.port, self)
-
     # Client events
 
     def connected(self, client):
+        self.resetDelay()
         self.client = client
         self.game.client_connected()
 
     def disconnected(self, reason):
         self.client = None
         self.game.client_disconnected(reason)
-        self.reconnect()
 
     def failed(self, reason):
         self.client = None
         self.game.client_failed(reason)
-        self.reconnect()
 
     def update(self, info):
         self.game.client_update(info)
