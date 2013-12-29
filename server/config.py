@@ -16,14 +16,14 @@ OBSTACLES = {'WATER': 0,
              'WALL': 3,
              'OIL': 4,
              'NAILS': 5,
-             'BUMPER': 6,}
+             'BUMPER': 6, }
 
 MOVE = {'FORWARD': 0,
         'RIGHT': 1,
         'LEFT': 2}
 
 ACTIONS = {'PICK': 0,
-           'JUMP': 1,}
+           'JUMP': 1, }
 
 OBSTACLES_FOR_NEXT_ROW = OBSTACLES
 OBSTACLES_FOR_NEXT_ROW['EMPTY'] = EMPTY

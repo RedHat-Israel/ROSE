@@ -1,8 +1,10 @@
 import json
 
+
 def parse(line):
     d = json.loads(line)
     return Message(d['action'], d.get('payload'))
+
 
 class Message(object):
 

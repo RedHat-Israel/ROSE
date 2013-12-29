@@ -5,6 +5,7 @@ from twisted.protocols import basic
 import game
 import message
 
+
 class Player(basic.LineReceiver):
 
     def __init__(self):
@@ -24,6 +25,7 @@ class Player(basic.LineReceiver):
             self.factory.start()
         elif msg.action == 'update':
             self.factory.updatePlayer(msg.payload)
+
 
 class Server(protocol.ServerFactory):
     protocol = Player
