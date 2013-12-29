@@ -1,9 +1,9 @@
 from twisted.internet import task
+from components import message
 
 import matrix
-import config
+import components.matrix_config as config
 
-from common import message
 
 class Game(object):
     """
