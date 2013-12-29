@@ -31,9 +31,22 @@ class Matrix():
     def check_above(self, x, y):
         return self.matrix[y - 1][x] == config.EMPTY
 
+    def check_right(self, x, y):
+        return self.matrix[y][x+1] == config.EMPTY
+
+    def check_left(self, x, y):
+        return self.matrix[y][x-1] == config.EMPTY
+
     def print_matrix(self):
         for i in self.matrix:
             print i
+
+    def get_obstacle(self, x, y):
+        """
+        Return the obstacle in location x, y
+        """
+        return self.matrix[y][x]
+
 
     def load_tiles(self):
         import pygame
