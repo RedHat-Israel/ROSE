@@ -3,6 +3,7 @@ from twisted.internet import task
 import matrix
 import message
 
+
 class Game(object):
     """
     Implements the server for the car race

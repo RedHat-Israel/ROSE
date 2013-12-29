@@ -2,6 +2,7 @@ import random
 import config
 import os
 
+
 class Matrix():
     def __init__(self):
         self.matrix = [[config.EMPTY for x in xrange(config.WIDTH)]
@@ -86,7 +87,6 @@ class Matrix():
         _tmp_row = self.__generate_row()
         self.__update_matrix(_tmp_row)
         return _tmp_row
-
 
     def load_tiles(self):
         import pygame
