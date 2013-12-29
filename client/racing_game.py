@@ -1,6 +1,7 @@
 from twisted.internet import reactor
 from twisted.internet import task
 from components import Matrix
+import config
 
 author = 'gickowic'
 import pygame, sys
@@ -52,8 +53,7 @@ class RacingGamingClient():
         screen = pygame.display.set_mode(self.size)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                sys.exit()
-        self.update()
+                reactor.stop()
         self.draw(screen)
 
     # Client events
@@ -69,6 +69,7 @@ class RacingGamingClient():
 
     def client_update(self, info):
         print 'client_update', info
+        self.update()
 
     def client_welcome(self):
         print 'client_welcome'

@@ -90,14 +90,23 @@ class Matrix():
 
     def load_tiles(self):
         import pygame
-        # self.obstacle_textures = []
-        # for tile_tex_file in os.listdir(config.TILE_TEXTURE_FILES_DIR):
-        #     self.obstacle_textures.append(pygame.image.load(tile_tex_file))
+        self.obstacle_textures = []
+        for tile_tex_file in os.listdir(matrix_config.TILE_TEXTURE_FILES_DIR):
+            tex_file = os.path.join(matrix_config.TILE_TEXTURE_FILES_DIR,
+                                    tile_tex_file)
+            if os.path.isfile(tex_file):
+                print tex_file
+                self.obstacle_textures.append(pygame.image.load(tex_file))
+
 
         self.road_textures = []
-        for tile_tex_file in os.listdir(matrix_config.ROAD_TEXTURE_FILES):
-            self.road_textures.append(pygame.image.load(os.path
-            .join(matrix_config.ROAD_TEXTURE_FILES, tile_tex_file)))
+        for tile_tex_file in sorted(os.listdir(matrix_config
+        .ROAD_TEXTURE_FILES)):
+            tex_file = os.path.join(matrix_config.ROAD_TEXTURE_FILES,
+                                    tile_tex_file)
+            if os.path.isfile(tex_file):
+                print tex_file
+                self.road_textures.append(pygame.image.load(tex_file))
 
     def init(self):
         self.load_tiles()

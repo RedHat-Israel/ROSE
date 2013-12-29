@@ -1,5 +1,6 @@
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
+from components import message
 
 import racing_game
 import config

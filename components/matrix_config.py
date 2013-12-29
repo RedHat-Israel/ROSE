@@ -5,8 +5,8 @@ NUMBER_OF_OBSTACLES = 15
 NUMBER_OF_PLAYERS = 4
 ROW_HEIGHT = 65
 
-TILE_TEXTURE_FILES_DIR = 'res/obstacle_tiles'
-ROAD_TEXTURE_FILES = 'res'
+TILE_TEXTURE_FILES_DIR = 'client/res/obstacles'
+ROAD_TEXTURE_FILES = 'client/res/bg'
 
 # Obstacles
 EMPTY = 0
