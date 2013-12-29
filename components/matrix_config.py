@@ -6,7 +6,9 @@ NUMBER_OF_PLAYERS = 4
 ROW_HEIGHT = 65
 
 TILE_TEXTURE_FILES_DIR = 'res/obstacle_tiles'
+CAR_TEXTURE_FILES_DIR = 'res/car_files'
 ROAD_TEXTURE_FILES = 'res'
+CAR_TEXTURE_FILE = 'cartexture'
 
 # Obstacles
 EMPTY = 0
