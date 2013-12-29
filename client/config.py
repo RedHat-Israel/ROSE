@@ -1,3 +1,3 @@
-host = '10.201.132.16'
+host = "localhost"
 port = 8888
 frame_rate = 60

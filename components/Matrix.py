@@ -95,7 +95,6 @@ class Matrix():
             tex_file = os.path.join(matrix_config.TILE_TEXTURE_FILES_DIR,
                                     tile_tex_file)
             if os.path.isfile(tex_file):
-                print tex_file
                 self.obstacle_textures.append(pygame.image.load(tex_file))
 
 
@@ -105,7 +104,6 @@ class Matrix():
             tex_file = os.path.join(matrix_config.ROAD_TEXTURE_FILES,
                                     tile_tex_file)
             if os.path.isfile(tex_file):
-                print tex_file
                 self.road_textures.append(pygame.image.load(tex_file))
 
     def init(self):
