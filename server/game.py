@@ -2,6 +2,7 @@ from twisted.internet import task
 
 import matrix
 import message
+import config
 
 
 class Game(object):
@@ -12,7 +13,10 @@ class Game(object):
     def __init__(self, server):
         self.server = server
         self.matrix = matrix.Matrix()
-        self.lives = [3, 3, 3, 3]
+        self.lives = [config.NUM_OF_LIVES,
+                      config.NUM_OF_LIVES,
+                      config.NUM_OF_LIVES,
+                      config.NUM_OF_LIVES]
         self.looper = task.LoopingCall(self.loop)
         self.player_id = 0
         self.started = False
@@ -41,8 +45,7 @@ class Game(object):
         print 'loop'
         # Send updates to the clients
         # XXX process game logic here (self.do)
-        self.matrix.matrix.pop()
-        self.matrix.matrix.insert(0, self.get_next())
+        self.matrix.next_row()
         msg = message.Message('update', {'next': self.matrix.matrix[0]})
         self.server.broadcast(str(msg))
 
@@ -50,7 +53,7 @@ class Game(object):
         """
         Returns the next row
         """
-        return [1, 2, 3, 4]
+        return self.matrix.next_row()
 
     def do(self, car1_action, car2_action, car3_action, car4_action):
         """
