@@ -1,6 +1,7 @@
 from twisted.internet import reactor
 from twisted.internet import task
 from components import Matrix
+from components import message
 import config
 
 author = 'gickowic'
@@ -60,12 +61,14 @@ class RacingGamingClient():
 
     def client_connected(self):
         print 'client connected'
+        msg = message.Message('start', None)
+        self.client.send_message(msg)
 
-    def client_disconnected(self):
-        print 'client disconnected'
+    def client_disconnected(self, reason):
+        print 'client disconnected', reason.getErrorMessage()
 
-    def client_failed(self):
-        print 'client failed'
+    def client_failed(self, reason):
+        print 'client failed', reason.getErrorMessage()
 
     def client_update(self, info):
         print 'client_update', info
