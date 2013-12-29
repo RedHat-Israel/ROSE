@@ -2,7 +2,7 @@ from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 from components import message
 
-import racing_game
+import game
 import config
 
 class Client(basic.LineReceiver):
@@ -31,7 +31,7 @@ class ClientFactory(protocol.ClientFactory):
     protocol = Client
 
     def __init__(self):
-        self.game = racing_game.RacingGamingClient(self)
+        self.game = game.Game(self)
         self.client = None
 
     def reconnect(self):

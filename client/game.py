@@ -8,7 +8,7 @@ author = 'gickowic'
 import pygame, sys
 
 
-class RacingGamingClient():
+class Game(object):
 
     def __init__(self, client):
         self.client = client
