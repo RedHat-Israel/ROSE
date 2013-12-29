@@ -1,7 +1,7 @@
 from twisted.internet import task
 from components import message
 
-import matrix
+from components import matrix
 import components.matrix_config as config
 
 

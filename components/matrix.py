@@ -2,6 +2,7 @@ import random
 import matrix_config
 import os
 
+
 class Matrix():
     def __init__(self):
         self.matrix = [[matrix_config.EMPTY for x in xrange(matrix_config.WIDTH)]

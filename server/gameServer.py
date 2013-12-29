@@ -1,5 +1,5 @@
 from components import matrix_config
-import matrix
+from components import matrix
 
 
 class GameServer:

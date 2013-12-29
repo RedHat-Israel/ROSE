@@ -1,7 +1,7 @@
-from components import Matrix
+from components import matrix
 
-author = 'gickowic'
-import pygame, sys
+import pygame
+import sys
 
 
 class RacingGamingClient():
@@ -54,7 +54,6 @@ def main():
      ## create car
 
      ## create matrix
-    matrix = Matrix()
     game.add_component(matrix)
 
     # TODO: initialize objects
