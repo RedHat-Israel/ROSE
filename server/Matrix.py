@@ -6,18 +6,27 @@ class Matrix():
     def __init__(self):
         self.matrix = [[config.EMPTY for x in xrange(config.WIDTH)]
                        for x in xrange(config.HEIGHT)]
+        self.__generate_obstacles()
 
-    def generate_obstacles(self):
+    def __generate_obstacles(self):
+        """
+        Generates obstacles for __init__
+        """
+
         obstacles = 0
         while obstacles < config.NUMBER_OF_OBSTACLES:
             x = random.randint(0, config.WIDTH - 1)
             y = random.randint(0, config.HEIGHT - 1)
 
-            if self.is_legal_obstacle_placement(x,y):
+            if self.is_legal_obstacle_placement(x, y):
                 self.matrix[y][x] = random.choice(config.OBSTACLES.values())
                 obstacles += 1
 
     def is_legal_obstacle_placement(self, x, y):
+        """
+        Checks if x and y are legal
+        """
+
         if y == 0:
             return self.check_below(x, y)
         elif y == config.HEIGHT - 1:
@@ -47,6 +56,37 @@ class Matrix():
         """
         return self.matrix[y][x]
 
+    def __generate_row(self):
+        """
+        Generates new row with obstacle
+        """
+
+        _counter = 0
+        _tmp_list = []
+        for i in self.matrix[0]:
+            if i == config.EMPTY:
+                _tmp_list.insert(_counter, random.choice(
+                    config.OBSTACLES_FOR_NEXT_ROW.values())
+                )
+            else:
+                _tmp_list.insert(_counter, config.EMPTY)
+            _counter += 1
+
+        return _tmp_list
+
+    def __update_matrix(self, row):
+        """"
+        Updates the current matrix with the new row
+        """
+
+        self.matrix.pop()
+        self.matrix.insert(0, row)
+
+    def next_row(self):
+        _tmp_row = self.__generate_row()
+        self.__update_matrix(_tmp_row)
+        return _tmp_row
+
 
     def load_tiles(self):
         import pygame
@@ -74,3 +114,4 @@ if __name__ == '__main__':
     m = Matrix()
     m.generate_obstacles()
     m.print_matrix()
+
