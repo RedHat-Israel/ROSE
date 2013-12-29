@@ -7,7 +7,7 @@ class RacingGamingClient():
     def init_pygame_resources(self):
         pygame.init()
         self.size = 640, 480
-        self.bg_color = 155, 0, 155
+        self.bg_color = 0, 0, 0
         self.components = []
 
     def update(self):
@@ -15,16 +15,18 @@ class RacingGamingClient():
             if component.__hasattr__('update'):
                 component.update()
 
-    def draw(self):
+    def draw(self, screen):
+        screen.fill(self.bg_color)
         for component in self.components:
             if component.__hasattr__('draw'):
                 component.draw()
+        pygame.display.flip()
 
     def init(self):
         for component in self.components:
             if component.__hasattr__('init'):
-                if not component.initialized
-                component.init()
+                if not component.initialized:
+                    component.init()
 
     def main_game_loop(self):
         screen = pygame.display.set_mode(self.size)
@@ -33,10 +35,7 @@ class RacingGamingClient():
                 if event.type == pygame.QUIT:
                     sys.exit()
             self.update()
-            self.draw()
-
-            screen.fill(self.bg_color)
-            pygame.display.flip()
+            self.draw(screen)
 
 
 def main():
