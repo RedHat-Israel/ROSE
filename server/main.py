@@ -1,9 +1,7 @@
-import json
-import time
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
+from components import message
 import game
-from common import message
 
 
 class Player(basic.LineReceiver):
