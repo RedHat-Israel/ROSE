@@ -1,25 +1,24 @@
+import pygame
 import matrix_config
 import os
-import car_config
-from components import components
+import config
+from components import component
 
 class Car(component.Component):
 
     def __init__(self, id, x, y):
+        self.id = id
         self._location = (x, y)
-        self._texture = os.path.join(
-            car_config.CAR_TEXTURE_FILES_DIR, car_config.CAR_TEXTURE_FILE
-        ) + str(id)
+        self.texture = None
 
     def init(self):
-        pass
+        path = os.path.join(config.cars_dir, 'car%d.png' % self.id)
+        self.texture = pygame.image.load(path)
 
     def update(self, info):
         pass
 
     def draw(self, surface):
-        surface.blit(
-            self.texture,
-            self._location[1]*matrix_config.TILEHEIGHT,
-            self._location[0]*matrix_config.TILEHEIGHT
-        )
+        x = matrix_config.LEFT_MARGIN + self._location[0] * matrix_config.CELL_WIDTH
+        y = self._location[1] * matrix_config.ROW_HEIGHT
+        surface.blit( self.texture, (x, y))
