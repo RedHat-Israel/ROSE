@@ -1,6 +1,7 @@
 import random
 import matrix_config
 import os
+import pygame
 from components import component
 
 
@@ -126,9 +127,7 @@ class Matrix(component.Component):
         self.__update_matrix(_tmp_row)
         return _tmp_row
 
-
     def load_tiles(self):
-        import pygame
         self.obstacle_textures = []
         textures = sorted(os.listdir(matrix_config.TILE_TEXTURE_FILES_DIR))
         # load obstacle textures
