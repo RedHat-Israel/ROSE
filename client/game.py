@@ -1,6 +1,7 @@
 from twisted.internet import reactor
 from twisted.internet import task
 from components import matrix
+from components import car
 from components import message
 from components import component
 import config
@@ -15,7 +16,10 @@ class Game(component.Component):
         self.client = client
         self.components = [
             matrix.Matrix(),
-            # XXX Add cars
+            car.Car(1, 0, 4),
+            car.Car(2, 1, 4),
+            car.Car(3, 2, 4),
+            car.Car(4, 3, 4),
         ]
         pygame.init()
         self.surface = pygame.display.set_mode(config.window_size)
