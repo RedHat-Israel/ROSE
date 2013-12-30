@@ -18,7 +18,7 @@ class Game(component.Component):
             # XXX Add cars
         ]
         pygame.init()
-        self.screen = pygame.display.set_mode(config.window_size)
+        self.surface = pygame.display.set_mode(config.window_size)
         self.looper = task.LoopingCall(self.tick)
 
         self.init()
@@ -30,17 +30,17 @@ class Game(component.Component):
     def init(self):
         for component in self.components:
             component.init()
-        self.draw(self.screen)
+        self.draw(self.surface)
 
     def update(self, info):
         for component in self.components:
             component.update(info)
-        self.draw(self.screen)
+        self.draw(self.surface)
 
-    def draw(self, screen):
-        screen.fill(config.background_color)
+    def draw(self, surface):
+        surface.fill(config.background_color)
         for component in self.components:
-            component.draw(screen)
+            component.draw(surface)
         pygame.display.flip()
 
     # Hanlding pygame events

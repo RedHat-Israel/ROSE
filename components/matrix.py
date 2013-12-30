@@ -23,10 +23,10 @@ class Matrix(component.Component):
         elif info.get('matrix', None):
             self.matrix = info['matrix']
 
-    def draw(self, screen):
+    def draw(self, surface):
         # draw road background:
         for i in range(matrix_config.HEIGHT):
-            screen.blit(self.road_textures[i % len(self.road_textures)],
+            surface.blit(self.road_textures[i % len(self.road_textures)],
                         (0, i * matrix_config.ROW_HEIGHT))
 
         # draw obstacles on top of road:
@@ -39,11 +39,11 @@ class Matrix(component.Component):
                     # get the obstacles texture
                     texture = self.obstacle_textures[obstacle - 1]
 
-                    # convert the matrix grid (x,y) to screen (x,y)
-                    coordinates = self.get_screen_coordinates(x, y)
+                    # convert the matrix grid (x,y) to surface (x,y)
+                    coordinates = self.get_surface_coordinates(x, y)
 
-                    # draw texture on screen
-                    screen.blit(texture, coordinates)
+                    # draw texture on surface
+                    surface.blit(texture, coordinates)
 
     # Other stuff
 
@@ -147,10 +147,10 @@ class Matrix(component.Component):
             if os.path.isfile(tex_file):
                 self.road_textures.append(pygame.image.load(tex_file))
 
-    def get_screen_coordinates(self, x, y):
-        screen_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH
-        screen_y = matrix_config.TOP_MARGIN + y * matrix_config.ROW_HEIGHT
-        return screen_x, screen_y
+    def get_surface_coordinates(self, x, y):
+        surface_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH
+        surface_y = matrix_config.TOP_MARGIN + y * matrix_config.ROW_HEIGHT
+        return surface_x, surface_y
 
 
 if __name__ == '__main__':
