@@ -1,13 +1,51 @@
 import random
 import matrix_config
 import os
+from components import component
 
 
-class Matrix():
+class Matrix(component.Component):
+
     def __init__(self):
         self.matrix = [[matrix_config.EMPTY for x in xrange(matrix_config.WIDTH)]
                        for x in xrange(matrix_config.HEIGHT)]
         self.__generate_obstacles()
+
+    # Component interface
+
+    def init(self):
+        self.load_tiles()
+
+    def update(self, info):
+        self.road_textures.insert(0, self.road_textures.pop())
+        if info.get('next', None):
+            self.__update_matrix(info['next'])
+        elif info.get('matrix', None):
+            self.matrix = info['matrix']
+
+    def draw(self, screen):
+        # draw road background:
+        for i in range(matrix_config.HEIGHT):
+            screen.blit(self.road_textures[i % len(self.road_textures)],
+                        (0, i * matrix_config.ROW_HEIGHT))
+
+        # draw obstacles on top of road:
+        # for each cell, check if obstacle exists
+        for x in range(matrix_config.WIDTH):
+            for y in range(matrix_config.HEIGHT):
+                obstacle = self.get_obstacle(x, y)
+                if obstacle != matrix_config.EMPTY:
+
+                    # get the obstacles texture
+                    texture = self.obstacle_textures[obstacle - 1]
+
+                    # convert the matrix grid (x,y) to screen (x,y)
+                    coordinates = self.get_screen_coordinates(x, y)
+
+                    # draw texture on screen
+                    screen.blit(texture, coordinates)
+
+    # Other stuff
 
     def __generate_obstacles(self):
         """
@@ -109,42 +147,11 @@ class Matrix():
             if os.path.isfile(tex_file):
                 self.road_textures.append(pygame.image.load(tex_file))
 
-    def init(self):
-        self.load_tiles()
-
-    def draw(self, screen):
-        # draw road background:
-        for i in range(matrix_config.HEIGHT):
-            screen.blit(self.road_textures[i % len(self.road_textures)],
-                        (0, i * matrix_config.ROW_HEIGHT))
-
-        # draw obstacles on top of road:
-        # for each cell, check if obstacle exists
-        for x in range(matrix_config.WIDTH):
-            for y in range(matrix_config.HEIGHT):
-                obstacle = self.get_obstacle(x, y)
-                if obstacle != matrix_config.EMPTY:
-
-                    # get the obstacles texture
-                    texture = self.obstacle_textures[obstacle - 1]
-
-                    # convert the matrix grid (x,y) to screen (x,y)
-                    coordinates = self.get_screen_coordinates(x, y)
-
-                    # draw texture on screen
-                    screen.blit(texture, coordinates)
-
     def get_screen_coordinates(self, x, y):
         screen_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH
         screen_y = matrix_config.TOP_MARGIN + y * matrix_config.ROW_HEIGHT
         return screen_x, screen_y
 
-    def update(self, info):
-        self.road_textures.insert(0, self.road_textures.pop())
-        if info.get('next', None):
-            self.__update_matrix(info['next'])
-        elif info.get('matrix', None):
-            self.matrix = info['matrix']
 
 if __name__ == '__main__':
     m = Matrix()
