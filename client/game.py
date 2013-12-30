@@ -20,7 +20,7 @@ class Game(object):
 
         self.init()
         self.looper = task.LoopingCall(self.tick)
-        frame_delay = 1 / config.frame_rate
+        frame_delay = 1.0 / config.frame_rate
         self.looper.start(frame_delay)
 
     def init_pygame_resources(self):
