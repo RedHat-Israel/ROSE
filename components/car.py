@@ -1,4 +1,4 @@
-import matrix_config 
+import matrix_config
 import os
 import car_config
 from components import components
@@ -17,8 +17,8 @@ class Car(component.Component):
     def update(self, info):
         pass
 
-    def draw(self, screen):
-        screen.blit(
+    def draw(self, surface):
+        surface.blit(
             self.texture,
             self._location[1]*matrix_config.TILEHEIGHT,
             self._location[0]*matrix_config.TILEHEIGHT
