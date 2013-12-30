@@ -25,17 +25,17 @@ class Game(object):
 
     def init_pygame_resources(self):
         pygame.init()
-        self.size = 640, 480
+        self.size = 650, 585
         self.bg_color = 0, 0, 0
         self.components = []
 
     def add_component(self, component):
         self.components.append(component)
 
-    def update(self):
+    def update(self, info):
         for component in self.components:
             if hasattr(component, 'update'):
-                component.update()
+                component.update(info)
 
     def draw(self, screen):
         screen.fill(self.bg_color)
@@ -71,7 +71,7 @@ class Game(object):
 
     def client_update(self, info):
         print 'client_update', info
-        self.update()
+        self.update(info)
 
     def client_welcome(self):
         print 'client_welcome'
