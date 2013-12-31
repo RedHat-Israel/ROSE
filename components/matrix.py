@@ -1,13 +1,57 @@
 import random
 import matrix_config
-import os
+import glob
+import pygame
+from components import component
 
 
-class Matrix():
+class Matrix(component.Component):
+
     def __init__(self):
         self.matrix = [[matrix_config.EMPTY for x in xrange(matrix_config.WIDTH)]
                        for x in xrange(matrix_config.HEIGHT)]
+        self.road_textures = None
+        self.obstacle_textures = None
         self.__generate_obstacles()
+
+    # Component interface
+
+    def init(self):
+        self.road_textures = [pygame.image.load(path) for path in
+                              glob.glob(matrix_config.ROAD_GLOB)]
+        self.obstacle_textures = [pygame.image.load(path) for path in
+                                  glob.glob(matrix_config.OBSTACLES_GLOB)]
+
+    def update(self, info):
+        self.road_textures.insert(0, self.road_textures.pop())
+        if info.get('next', None):
+            self.__update_matrix(info['next'])
+        elif info.get('matrix', None):
+            self.matrix = info['matrix']
+
+    def draw(self, surface):
+        # draw road background:
+        for i in range(matrix_config.HEIGHT):
+            surface.blit(self.road_textures[i % len(self.road_textures)],
+                        (0, i * matrix_config.ROW_HEIGHT))
+
+        # draw obstacles on top of road:
+        # for each cell, check if obstacle exists
+        for x in range(matrix_config.WIDTH):
+            for y in range(matrix_config.HEIGHT):
+                obstacle = self.get_obstacle(x, y)
+                if obstacle != matrix_config.EMPTY:
+
+                    # get the obstacles texture
+                    texture = self.obstacle_textures[obstacle - 1]
+
+                    # convert the matrix grid (x,y) to surface (x,y)
+                    coordinates = self.get_surface_coordinates(x, y)
+
+                    # draw texture on surface
+                    surface.blit(texture, coordinates)
+
+    # Other stuff
 
     def __generate_obstacles(self):
         """
@@ -88,63 +132,11 @@ class Matrix():
         self.__update_matrix(_tmp_row)
         return _tmp_row
 
+    def get_surface_coordinates(self, x, y):
+        surface_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH
+        surface_y = matrix_config.TOP_MARGIN + y * matrix_config.ROW_HEIGHT
+        return surface_x, surface_y
 
-    def load_tiles(self):
-        import pygame
-        self.obstacle_textures = []
-        textures = sorted(os.listdir(matrix_config.TILE_TEXTURE_FILES_DIR))
-        # load obstacle textures
-        for tile_tex_file in textures:
-            tex_file = os.path.join(matrix_config.TILE_TEXTURE_FILES_DIR,
-                                    tile_tex_file)
-            if os.path.isfile(tex_file):
-                self.obstacle_textures.append(pygame.image.load(tex_file))
-
-
-        self.road_textures = []
-        textures = sorted(os.listdir(matrix_config.ROAD_TEXTURE_FILES_DIR))
-        for tile_tex_file in textures:
-            tex_file = os.path.join(matrix_config.ROAD_TEXTURE_FILES_DIR,
-                                    tile_tex_file)
-            if os.path.isfile(tex_file):
-                self.road_textures.append(pygame.image.load(tex_file))
-
-    def init(self):
-        self.load_tiles()
-
-    def draw(self, screen):
-        # draw road background:
-        for i in range(matrix_config.HEIGHT):
-            screen.blit(self.road_textures[i % len(self.road_textures)],
-                        (0, i * matrix_config.ROW_HEIGHT))
-
-        # draw obstacles on top of road:
-        # for each cell, check if obstacle exists
-        for x in range(matrix_config.WIDTH):
-            for y in range(matrix_config.HEIGHT):
-                obstacle = self.get_obstacle(x, y)
-                if obstacle != matrix_config.EMPTY:
-
-                    # get the obstacles texture
-                    texture = self.obstacle_textures[obstacle - 1]
-
-                    # convert the matrix grid (x,y) to screen (x,y)
-                    coordinates = self.get_screen_coordinates(x, y)
-
-                    # draw texture on screen
-                    screen.blit(texture, coordinates)
-
-    def get_screen_coordinates(self, x, y):
-        screen_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH
-        screen_y = matrix_config.TOP_MARGIN + y * matrix_config.ROW_HEIGHT
-        return screen_x, screen_y
-
-    def update(self, info):
-        self.road_textures.insert(0, self.road_textures.pop())
-        if info.get('next', None):
-            self.__update_matrix(info['next'])
-        elif info.get('matrix', None):
-            self.matrix = info['matrix']
 
 if __name__ == '__main__':
     m = Matrix()
