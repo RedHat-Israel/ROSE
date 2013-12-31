@@ -1,6 +1,6 @@
 import random
 import matrix_config
-import os
+import glob
 import pygame
 from components import component
 
@@ -10,12 +10,17 @@ class Matrix(component.Component):
     def __init__(self):
         self.matrix = [[matrix_config.EMPTY for x in xrange(matrix_config.WIDTH)]
                        for x in xrange(matrix_config.HEIGHT)]
+        self.road_textures = None
+        self.obstacle_textures = None
         self.__generate_obstacles()
 
     # Component interface
 
     def init(self):
-        self.load_tiles()
+        self.road_textures = [pygame.image.load(path) for path in
+                              glob.glob(matrix_config.ROAD_GLOB)]
+        self.obstacle_textures = [pygame.image.load(path) for path in
+                                  glob.glob(matrix_config.OBSTACLES_GLOB)]
 
     def update(self, info):
         self.road_textures.insert(0, self.road_textures.pop())
@@ -126,25 +131,6 @@ class Matrix(component.Component):
         _tmp_row = self.__generate_row()
         self.__update_matrix(_tmp_row)
         return _tmp_row
-
-    def load_tiles(self):
-        self.obstacle_textures = []
-        textures = sorted(os.listdir(matrix_config.TILE_TEXTURE_FILES_DIR))
-        # load obstacle textures
-        for tile_tex_file in textures:
-            tex_file = os.path.join(matrix_config.TILE_TEXTURE_FILES_DIR,
-                                    tile_tex_file)
-            if os.path.isfile(tex_file):
-                self.obstacle_textures.append(pygame.image.load(tex_file))
-
-
-        self.road_textures = []
-        textures = sorted(os.listdir(matrix_config.ROAD_TEXTURE_FILES_DIR))
-        for tile_tex_file in textures:
-            tex_file = os.path.join(matrix_config.ROAD_TEXTURE_FILES_DIR,
-                                    tile_tex_file)
-            if os.path.isfile(tex_file):
-                self.road_textures.append(pygame.image.load(tex_file))
 
     def get_surface_coordinates(self, x, y):
         surface_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH

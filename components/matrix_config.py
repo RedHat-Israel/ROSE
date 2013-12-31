@@ -8,8 +8,8 @@ CELL_WIDTH = 130
 LEFT_MARGIN = 95
 TOP_MARGIN = 10
 
-TILE_TEXTURE_FILES_DIR = 'client/res/obstacles'
-ROAD_TEXTURE_FILES_DIR = 'client/res/bg'
+OBSTACLES_GLOB = 'client/res/obstacles/obstacle*.png'
+ROAD_GLOB = 'client/res/bg/bg*.png'
 
 # Obstacles
 EMPTY = 0
