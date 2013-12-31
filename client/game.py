@@ -20,8 +20,9 @@ class Game(object):
 
         self.init()
         self.looper = task.LoopingCall(self.tick)
-        frame_delay = 1 / config.frame_rate
+        frame_delay = 1.0 / config.frame_rate
         self.looper.start(frame_delay)
+        self.screen = pygame.display.set_mode(self.size)
 
     def init_pygame_resources(self):
         pygame.init()
@@ -36,12 +37,13 @@ class Game(object):
         for component in self.components:
             if hasattr(component, 'update'):
                 component.update(info)
+        self.draw()
 
-    def draw(self, screen):
-        screen.fill(self.bg_color)
+    def draw(self):
+        self.screen.fill(self.bg_color)
         for component in self.components:
             if hasattr(component, 'draw'):
-                component.draw(screen)
+                component.draw(self.screen)
         pygame.display.flip()
 
     def init(self):
@@ -50,11 +52,9 @@ class Game(object):
                     component.init()
 
     def tick(self):
-        screen = pygame.display.set_mode(self.size)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 reactor.stop()
-        self.draw(screen)
 
     # Client events
 
