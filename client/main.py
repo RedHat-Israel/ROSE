@@ -29,6 +29,8 @@ class Client(basic.LineReceiver):
 class ClientFactory(protocol.ReconnectingClientFactory):
 
     protocol = Client
+    initialDelay = 0.1
+    maxDelay = 5
 
     def __init__(self):
         self.game = game.Game(self)
