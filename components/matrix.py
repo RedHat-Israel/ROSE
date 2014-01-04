@@ -17,8 +17,10 @@ class Matrix(component.Component):
     # Component interface
 
     def init(self):
+        # Note: road texture files must be sorted to avoid horizontal seems
+        # between images.
         self.road_textures = [pygame.image.load(path) for path in
-                              glob.glob(matrix_config.ROAD_GLOB)]
+                              sorted(glob.glob(matrix_config.ROAD_GLOB))]
         self.obstacle_textures = [pygame.image.load(path) for path in
                                   glob.glob(matrix_config.OBSTACLES_GLOB)]
 
