@@ -33,7 +33,7 @@ class Game(component.Component):
     # Component interface
 
     def init(self):
-        pygame.display.set_caption(config.window_caption)
+        pygame.display.set_caption(config.window_caption + ' - ' + self.name)
         for component in self.components:
             component.init()
         self.draw(self.surface)
