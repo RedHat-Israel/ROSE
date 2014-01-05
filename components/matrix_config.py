@@ -20,7 +20,8 @@ OBSTACLES = {'CRACK': 0,
              'WATER': 4,
              'BARRIER': 5}
 
-ACTIONS = {'RIGHT': 1,
+ACTIONS = {'NONE': 0,
+           'RIGHT': 1,
            'LEFT': 2,
            'PICKUP': 3,
            'JUMP': 4,
@@ -32,9 +33,9 @@ OBSTACLES_FOR_NEXT_ROW['EMPTY'] = EMPTY
 # Gamer lives
 NUM_OF_LIVES = 3
 
-SCORE = {'CRACK': ({'JUMP': 0}, -1),
-         'TRASH': ({}, -1),
-         'PENGUIN': ({'PICK': 1}, 0),
-         'BIKE': ({}, -1),
-         'WATER': ({'BRAKE'}, -1),
-         'BARRIER': ({}, -1)}
+SCORE = [({'JUMP': 0}, -1),
+         ({}, -1),
+         ({'PICK': 1}, 0),
+         ({}, -1),
+         ({'BRAKE': 0}, -1),
+         ({}, -1)]
