@@ -8,9 +8,11 @@ from components.matrix_config import SCORE
 
 
 from player import Player
+import random
 
 
 MAX_PLAYERS = 4
+MAX_LANES = 4
 
 
 class Game(object):
@@ -38,13 +40,27 @@ class Game(object):
         self.looper.stop()
         self.started = False
 
+    def check_lane_availability(self, lane):
+        for p in self.players:
+            if p.lane == lane:
+                return False
+
+        return True
+
+    def find_available_lane(self):
+        picked_lane = random.randrange(MAX_LANES)
+        while self.check_lane_availability(picked_lane):
+            picked_lane = random.randrange(MAX_LANES)
+        return picked_lane
+
     def add_player(self, name):
         if name in self.players:
             raise error.PlayerExists(name)
         if len(self.players) == MAX_PLAYERS:  # XXX add server/config.py
             raise error.TooManyPlayers()
         print 'add player:', name
-        self.players[name] = Player(len(self.players))
+        lane = self.find_available_lane()
+        self.players[name] = Player(lane)
         # Start the game when the first player joins
         if not self.started:
             self.start()
