@@ -1,18 +1,11 @@
+import random
 from twisted.internet import task
 from components import message
 
 from components import matrix
 import components.matrix_config as config
 from common import error
-from components.matrix_config import SCORE
-
-
-from player import Player
-import random
-
-
-MAX_PLAYERS = 4
-MAX_LANES = 4
+import player
 
 
 class Game(object):
@@ -23,12 +16,9 @@ class Game(object):
     def __init__(self, server):
         self.server = server
         self.matrix = matrix.Matrix()
-        self.lives = [config.NUM_OF_LIVES,
-                      config.NUM_OF_LIVES,
-                      config.NUM_OF_LIVES,
-                      config.NUM_OF_LIVES]
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
+        self.free_lanes = set(range(config.MAX_PLAYERS))
         self.started = False
 
     def start(self):
@@ -37,30 +27,19 @@ class Game(object):
         self.looper.start(1, now=False)
 
     def stop(self):
-        self.looper.stop()
-        self.started = False
-
-    def check_lane_availability(self, lane):
-        for p in self.players:
-            if p.lane == lane:
-                return False
-
-        return True
-
-    def find_available_lane(self):
-        picked_lane = random.randrange(MAX_LANES)
-        while self.check_lane_availability(picked_lane):
-            picked_lane = random.randrange(MAX_LANES)
-        return picked_lane
+        if self.started:
+            self.looper.stop()
+            self.started = False
 
     def add_player(self, name):
         if name in self.players:
             raise error.PlayerExists(name)
-        if len(self.players) == MAX_PLAYERS:  # XXX add server/config.py
+        if not self.free_lanes:
             raise error.TooManyPlayers()
-        print 'add player:', name
-        lane = self.find_available_lane()
-        self.players[name] = Player(name, lane)
+        lane = random.choice(tuple(self.free_lanes))
+        self.free_lanes.remove(lane)
+        print 'add player:', name, 'lane:', lane
+        self.players[name] = player.Player(name, lane)
         # Start the game when the first player joins
         if not self.started:
             self.start()
@@ -68,8 +47,9 @@ class Game(object):
     def remove_player(self, name):
         if name not in self.players:
             raise error.NoSuchPlayer(name)
-        print 'remove player:', name
-        del self.players[name]
+        player = self.players.pop(name)
+        self.free_lanes.add(player.lane)
+        print 'remove player:', name, 'lane:', player.lane
         # Stop the game when the first player leave
         if not self.players:
             self.stop()
@@ -86,10 +66,7 @@ class Game(object):
         self.players[name].action = action
 
     def loop(self):
-        print 'loop'
-        # Send updates to the clients
-        # XXX process game logic here (self.do)
-        self.matrix.next_row()
+        self.matrix.advance()
         self.process_actions()
         msg = message.Message('update', self.encode())
         self.server.broadcast(msg)
@@ -99,26 +76,38 @@ class Game(object):
                        for name, player in self.players.iteritems())
         return {'matrix': self.matrix.encode(), 'players': players}
 
-    def get_next(self):
-        """
-        Returns the next row
-        """
-        return self.matrix.next_row()
-
     def process_actions(self):
-        """
-        Gets action for each car
-        Returns the new position of each car
-        Available actions are:
-        - Move forward
-        - Move right
-        - Move left
-        - Jump
-        - Pick (star)
-        """
         for player in self.players.values():
-            obstacle = self.matrix.matrix[player.speed][player.lane]
-            acceptable, default = SCORE[obstacle]
-            score = acceptable.get(player.action, default)
-            player.life += score
 
+            if player.life == 0:
+                continue
+
+            # First move playe, keeping inside the track
+
+            if player.action == config.LEFT:
+                if player.lane > 0:
+                    player.lane -= 1
+            elif player.action == config.RIGHT:
+                if player.lane < config.MAX_PLAYERS - 1:
+                    player.lane += 1
+
+            # Now check if player hit any obstacle
+
+            obstacle = self.matrix.matrix[player.speed][player.lane]
+            if obstacle == config.CRACK:
+                if player.action != config.JUMP:
+                    player.life -= 1
+            elif obstacle in (config.TRASH,
+                              config.BIKE,
+                              config.BARRIER):
+                player.life -= 1
+            elif obstacle == config.WATER:
+                if player.action != config.BRAKE:
+                    player.life -= 1
+            elif obstacle == config.PENGIUN:
+                player.life += 1
+
+            # Set player speed
+
+            speed = config.HEIGHT / 2 + player.life - config.MAX_LIVES
+            player.speed = min(config.HEIGHT - 1, max(0, speed))
