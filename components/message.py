@@ -1,10 +1,14 @@
 import json
-
+from common import error
 
 def parse(line):
-    d = json.loads(line)
+    try:
+        d = json.loads(line)
+    except ValueError as e:
+        raise error.InvalidMessage(str(e))
+    if 'action' not in d:
+        raise error.InvalidMessage("action required")
     return Message(d['action'], d.get('payload'))
-
 
 class Message(object):
 

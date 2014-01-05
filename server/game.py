@@ -1,9 +1,9 @@
-from twisted.internet import task
+from twisted.internet import reactor, task
 from components import message
 
 from components import matrix
 import components.matrix_config as config
-
+from common import error
 
 class Game(object):
     """
@@ -18,36 +18,49 @@ class Game(object):
                       config.NUM_OF_LIVES,
                       config.NUM_OF_LIVES]
         self.looper = task.LoopingCall(self.loop)
-        self.player_id = 0
+        self.players = {}
         self.started = False
 
     def start(self):
         assert not self.started
         self.started = True
         self.looper.start(1, now=False)
-        msg = message.Message('update', {'matrix': self.matrix.matrix})
-        self.server.broadcast(str(msg))
 
-    def add_player(self):
-        id = self.player_id
-        self.player_id += 1
-        print 'add_player:', id
-        return id
+    def stop(self):
+        self.looper.stop()
+        self.started = False
 
-    def remove_player(self, id):
-        print 'remove_player:', id
-        pass
+    def add_player(self, name):
+        if name in self.players:
+            raise error.PlayerExists(name)
+        if len(self.players) == 4: # XXX add server/config.py
+            raise error.TooManyPlayers()
+        print 'add player:', name
+        self.players[name] = None  # XXX Needs a player class here
+        # Start the game when the first player joins
+        if not self.started:
+            self.start()
 
-    def update_player(self, info):
-        print 'update_player:', info
+    def remove_player(self, name):
+        if name not in self.players:
+            raise error.NoSuchPlayer(name)
+        print 'remove player:', name
+        del self.players[name]
+        # Stop the game when the first player leave
+        if not self.players:
+            self.stop()
+
+    def update_player(self, name, info):
+        print 'update_player:', name, info
 
     def loop(self):
         print 'loop'
         # Send updates to the clients
         # XXX process game logic here (self.do)
         self.matrix.next_row()
-        msg = message.Message('update', {'next': self.matrix.matrix[0]})
-        self.server.broadcast(str(msg))
+        msg = message.Message('update', {'matrix': self.matrix.matrix,
+                                         'players': self.players})
+        self.server.broadcast(msg)
 
     def get_next(self):
         """

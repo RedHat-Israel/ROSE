@@ -1,3 +1,5 @@
+import sys
+
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 from components import message
@@ -6,8 +8,6 @@ import game
 import config
 
 class Client(basic.LineReceiver):
-
-    id = None
 
     def connectionMade(self):
         self.factory.connected(self)
@@ -20,20 +20,21 @@ class Client(basic.LineReceiver):
 
     def lineReceived(self, line):
         msg = message.parse(line)
-        if msg.action == 'welcome':
-            self.id = msg.payload['id']
-            self.factory.welcome()
-        elif msg.action == 'update':
+        if msg.action == 'update':
             self.factory.update(msg.payload)
+        elif msg.action == 'error':
+            self.factory.error(msg.payload)
+        else:
+            print 'Unexpected message:', msg.action, msg.payload
 
 class ClientFactory(protocol.ReconnectingClientFactory):
 
     protocol = Client
-    initialDelay = 0.1
-    maxDelay = 5
+    initialDelay = 2
+    maxDelay = 2
 
-    def __init__(self):
-        self.game = game.Game(self)
+    def __init__(self, name):
+        self.game = game.Game(self, name)
         self.client = None
 
     # Client events
@@ -51,16 +52,20 @@ class ClientFactory(protocol.ReconnectingClientFactory):
         self.client = None
         self.game.client_failed(reason)
 
+    def error(self, error):
+        self.game.client_error(error)
+
     def update(self, info):
         self.game.client_update(info)
-
-    def welcome(self):
-        self.game.client_welcome()
 
     # Client interface
 
     def send_message(self, msg):
         self.client.sendLine(str(msg))
 
-reactor.connectTCP(config.host, config.port, ClientFactory())
+if len(sys.argv) < 2:
+    print 'usage: start_client player-name'
+    sys.exit(2)
+
+reactor.connectTCP(config.host, config.port, ClientFactory(sys.argv[1]))
 reactor.run()

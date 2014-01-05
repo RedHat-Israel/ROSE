@@ -12,8 +12,9 @@ import pygame, sys
 
 class Game(component.Component):
 
-    def __init__(self, client):
+    def __init__(self, client, name):
         self.client = client
+        self.name = name
         self.components = [
             matrix.Matrix(),
             car.Car(1, 0, 4),
@@ -32,7 +33,7 @@ class Game(component.Component):
     # Component interface
 
     def init(self):
-        pygame.display.set_caption(config.window_caption)
+        pygame.display.set_caption(config.window_caption + ' - ' + self.name)
         for component in self.components:
             component.init()
         self.draw(self.surface)
@@ -58,19 +59,19 @@ class Game(component.Component):
     # Handling client events
 
     def client_connected(self):
-        print 'client connected'
-        msg = message.Message('start', None)
+        print 'client connected: joining as', self.name
+        msg = message.Message('join', {"name": self.name})
         self.client.send_message(msg)
 
     def client_disconnected(self, reason):
-        print 'client disconnected', reason.getErrorMessage()
+        print 'client disconnected:', reason.getErrorMessage()
 
     def client_failed(self, reason):
-        print 'client failed', reason.getErrorMessage()
+        print 'client failed:', reason.getErrorMessage()
+
+    def client_error(self, error):
+        print 'client error:', error.get('message')
 
     def client_update(self, info):
         print 'client_update', info
         self.update(info)
-
-    def client_welcome(self):
-        print 'client_welcome'
