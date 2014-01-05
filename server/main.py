@@ -42,8 +42,8 @@ class Player(basic.LineReceiver):
             # Registered player
             if msg.action == 'start':
                 self.factory.start()
-            elif msg.action == 'update':
-                self.factory.updatePlayer(self.name, msg.payload)
+            elif msg.action == 'drive':
+                self.factory.drivePlayer(self.name, msg.payload)
             else:
                 raise error.ActionForbidden(msg.action)
 
@@ -65,8 +65,8 @@ class Server(protocol.ServerFactory):
     def registerPlayer(self, name):
         self.game.add_player(name)
 
-    def updatePlayer(self, name, info):
-        self.game.update_player(name, info)
+    def drivePlayer(self, name, info):
+        self.game.drive_player(name, info)
 
     def start(self):
         if not self.game.started:
