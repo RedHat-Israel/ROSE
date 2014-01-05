@@ -1,9 +1,15 @@
-from twisted.internet import reactor, task
+from twisted.internet import task
 from components import message
 
 from components import matrix
 import components.matrix_config as config
 from common import error
+
+from player import Player
+
+
+MAX_PLAYERS = 4
+
 
 class Game(object):
     """
@@ -33,10 +39,10 @@ class Game(object):
     def add_player(self, name):
         if name in self.players:
             raise error.PlayerExists(name)
-        if len(self.players) == 4: # XXX add server/config.py
+        if len(self.players) == MAX_PLAYERS:  # XXX add server/config.py
             raise error.TooManyPlayers()
         print 'add player:', name
-        self.players[name] = None  # XXX Needs a player class here
+        self.players[name] = Player(len(self.players))
         # Start the game when the first player joins
         if not self.started:
             self.start()
@@ -80,14 +86,6 @@ class Game(object):
         - Pick (star)
         """
         pass
-
-    def _pick(self, car_num):
-        """
-        Increase life for a car if there is a star there
-        """
-        x, y = get_location(car_num)
-        if get_obstacle(x, y) == ENUMS.STAR:
-            self.lives[car_num-1] = self.lives[car_num-1] + 1
 
     def _get_obstacle(self, x, y):
         """
