@@ -60,7 +60,7 @@ class Game(object):
             raise error.TooManyPlayers()
         print 'add player:', name
         lane = self.find_available_lane()
-        self.players[name] = Player(lane)
+        self.players[name] = Player(name, lane)
         # Start the game when the first player joins
         if not self.started:
             self.start()
@@ -76,17 +76,28 @@ class Game(object):
 
     def drive_player(self, name, info):
         print 'drive_player:', name, info
-        # XXX Update player name action 
+        if name not in self.players:
+            raise error.NoSuchPlayer(name)
+        if 'action' not in info:
+            raise error.InvalidMessage("action required")
+        action = info['action']
+        if action not in config.ACTIONS:
+            raise error.InvalidMessage("invalid drive action %s" % action)
+        self.players[name].action = action
 
     def loop(self):
         print 'loop'
         # Send updates to the clients
         # XXX process game logic here (self.do)
-        self.process_actions()
         self.matrix.next_row()
-        msg = message.Message('update', {'matrix': self.matrix.matrix,
-                                         'players': self.players})
+        self.process_actions()
+        msg = message.Message('update', self.encode())
         self.server.broadcast(msg)
+
+    def encode(self):
+        players = dict((name, player.encode())
+                       for name, player in self.players.iteritems())
+        return {'matrix': self.matrix.encode(), 'players': players}
 
     def get_next(self):
         """
@@ -105,7 +116,9 @@ class Game(object):
         - Jump
         - Pick (star)
         """
-        for player in self.players:
-            obstacle = self.matrix.get_obstacle(player.lane, player.speed)
-            score = SCORE[obstacle][0].get(player.action, SCORE[obstacle][1])
+        for player in self.players.values():
+            obstacle = self.matrix.matrix[player.speed][player.lane]
+            acceptable, default = SCORE[obstacle]
+            score = acceptable.get(player.action, default)
             player.life += score
+
