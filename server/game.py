@@ -58,8 +58,9 @@ class Game(object):
         if not self.players:
             self.stop()
 
-    def update_player(self, name, info):
-        print 'update_player:', name, info
+    def drive_player(self, name, info):
+        print 'drive_player:', name, info
+        # XXX Update player name action 
 
     def loop(self):
         print 'loop'
