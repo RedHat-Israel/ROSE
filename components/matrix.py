@@ -55,6 +55,9 @@ class Matrix(component.Component):
 
     # Other stuff
 
+    def encode(self):
+        return self.matrix
+
     def __generate_obstacles(self):
         """
         Generates obstacles for __init__
