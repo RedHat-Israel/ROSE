@@ -31,3 +31,10 @@ OBSTACLES_FOR_NEXT_ROW['EMPTY'] = EMPTY
 
 # Gamer lives
 NUM_OF_LIVES = 3
+
+SCORE = {'CRACK': ({'JUMP': 0}, -1),
+         'TRASH': ({}, -1),
+         'PENGUIN': ({'PICK': 1}, 0),
+         'BIKE': ({}, -1),
+         'WATER': ({'BRAKE'}, -1),
+         'BARRIER': ({}, -1)}
