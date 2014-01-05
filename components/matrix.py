@@ -8,8 +8,8 @@ from components import component
 class Matrix(component.Component):
 
     def __init__(self):
-        self.matrix = [[matrix_config.EMPTY for x in xrange(matrix_config.WIDTH)]
-                       for x in xrange(matrix_config.HEIGHT)]
+        self.matrix = [[matrix_config.EMPTY] * matrix_config.WIDTH
+                       for x in range(matrix_config.HEIGHT)]
         self.road_textures = None
         self.obstacle_textures = None
         self.__generate_obstacles()
@@ -26,9 +26,7 @@ class Matrix(component.Component):
 
     def update(self, info):
         self.road_textures.insert(0, self.road_textures.pop())
-        if info.get('next', None):
-            self.__update_matrix(info['next'])
-        elif info.get('matrix', None):
+        if 'matrix' in info:
             self.matrix = info['matrix']
 
     def draw(self, surface):
@@ -37,20 +35,12 @@ class Matrix(component.Component):
             surface.blit(self.road_textures[i % len(self.road_textures)],
                         (0, i * matrix_config.ROW_HEIGHT))
 
-        # draw obstacles on top of road:
-        # for each cell, check if obstacle exists
-        for x in range(matrix_config.WIDTH):
-            for y in range(matrix_config.HEIGHT):
-                obstacle = self.get_obstacle(x, y)
-                if obstacle != matrix_config.EMPTY:
-
-                    # get the obstacles texture
-                    texture = self.obstacle_textures[obstacle - 1]
-
-                    # convert the matrix grid (x,y) to surface (x,y)
+        # Draw obstacles on top of road:
+        for y, row in enumerate(self.matrix):
+            for x, cell in enumerate(row):
+                if cell != matrix_config.EMPTY:
+                    texture = self.obstacle_textures[cell]
                     coordinates = self.get_surface_coordinates(x, y)
-
-                    # draw texture on surface
                     surface.blit(texture, coordinates)
 
     # Other stuff
@@ -63,7 +53,7 @@ class Matrix(component.Component):
         Generates obstacles for __init__
         """
         obstacles = 0
-        while obstacles < matrix_config.NUMBER_OF_OBSTACLES:
+        while obstacles < matrix_config.MAX_OBSTACLES:
             x = random.randint(0, matrix_config.WIDTH - 1)
             y = random.randint(0, matrix_config.HEIGHT - 1)
 
@@ -105,7 +95,7 @@ class Matrix(component.Component):
         """
         return self.matrix[y][x]
 
-    def __generate_row(self):
+    def generate_row(self):
         """
         Generates new row with obstacle
         """
@@ -122,20 +112,12 @@ class Matrix(component.Component):
         return _tmp_list
 
     def get_random_obstacle(self):
-        return random.choice(matrix_config.OBSTACLES_FOR_NEXT_ROW.values())
+        return random.choice(matrix_config.OBSTACLES)
 
-    def __update_matrix(self, row):
-        """"
-        Updates the current matrix with the new row
-        """
-
+    def advance(self):
+        row = self.generate_row()
         self.matrix.pop()
         self.matrix.insert(0, row)
-
-    def next_row(self):
-        _tmp_row = self.__generate_row()
-        self.__update_matrix(_tmp_row)
-        return _tmp_row
 
     def get_surface_coordinates(self, x, y):
         surface_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH

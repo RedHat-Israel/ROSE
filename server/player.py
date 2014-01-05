@@ -11,7 +11,7 @@ class Player(object):
         self.speed = 4  # y - location, between 0 to 8 on the board
         self.lane = start_lane  # x - between 0-3
         self.life = MAX_LIVES  # means how many blocks we can handle
-        self.action = matrix_config.ACTIONS['NONE']
+        self.action = matrix_config.NONE
 
     def encode(self):
         """ Return representation as native type the can be serialized """
