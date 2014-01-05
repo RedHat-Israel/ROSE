@@ -7,6 +7,7 @@ from components import message
 import game
 import config
 
+
 class Client(basic.LineReceiver):
 
     def connectionMade(self):
@@ -27,14 +28,15 @@ class Client(basic.LineReceiver):
         else:
             print 'Unexpected message:', msg.action, msg.payload
 
+
 class ClientFactory(protocol.ReconnectingClientFactory):
 
     protocol = Client
     initialDelay = 2
     maxDelay = 2
 
-    def __init__(self, name):
-        self.game = game.Game(self, name)
+    def __init__(self, name, drive_func):
+        self.game = game.Game(self, name, drive_func)
         self.client = None
 
     # Client events
@@ -63,9 +65,14 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     def send_message(self, msg):
         self.client.sendLine(str(msg))
 
-if len(sys.argv) < 2:
-    print 'usage: start_client player-name'
+if len(sys.argv) < 3:
+    print 'usage: start_client player-name player-drive_module'
     sys.exit(2)
 
-reactor.connectTCP(config.host, config.port, ClientFactory(sys.argv[1]))
+with open(sys.argv[2]) as f:
+    d = {}
+    exec f in d, d
+
+reactor.connectTCP(config.host, config.port, ClientFactory(sys.argv[1],
+                                                           d['drive']))
 reactor.run()

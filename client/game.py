@@ -1,8 +1,7 @@
 from twisted.internet import reactor
 from twisted.internet import task
-from components import matrix, car, message, component, matrix_config
+from components import matrix, car, message, component
 import config
-import random
 
 author = 'gickowic'
 import pygame
@@ -10,8 +9,9 @@ import pygame
 
 class Game(component.Component):
 
-    def __init__(self, client, name):
+    def __init__(self, client, name, drive_func):
         self.client = client
+        self.drive_func = drive_func
         self.name = name
         self.components = [
             matrix.Matrix(),
@@ -41,10 +41,8 @@ class Game(component.Component):
             component.update(info)
         self.draw(self.surface)
 
-        # TODO: this should be replaced with the specifc car drive
-        # implementation
-        action = random.choice(matrix_config.ACTIONS.values())
-        ###
+        action = self.drive_func()
+
         msg = message.Message('drive', {"action": action})
         self.client.send_message(msg)
 
