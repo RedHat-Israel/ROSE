@@ -4,6 +4,8 @@ from components import message
 from components import matrix
 import components.matrix_config as config
 from common import error
+from components.matrix_config import SCORE
+
 
 from player import Player
 
@@ -63,6 +65,7 @@ class Game(object):
         print 'loop'
         # Send updates to the clients
         # XXX process game logic here (self.do)
+        self.process_actions()
         self.matrix.next_row()
         msg = message.Message('update', {'matrix': self.matrix.matrix,
                                          'players': self.players})
@@ -74,7 +77,7 @@ class Game(object):
         """
         return self.matrix.next_row()
 
-    def do(self, car1_action, car2_action, car3_action, car4_action):
+    def process_actions(self):
         """
         Gets action for each car
         Returns the new position of each car
@@ -85,10 +88,7 @@ class Game(object):
         - Jump
         - Pick (star)
         """
-        pass
-
-    def _get_obstacle(self, x, y):
-        """
-        Return the obstacle in location x, y
-        """
-        pass
+        for player in self.players:
+            obstacle = self.matrix.get_obstacle(player.lane, player.speed)
+            score = SCORE[obstacle][0].get(player.action, SCORE[obstacle][1])
+            player.life += score
