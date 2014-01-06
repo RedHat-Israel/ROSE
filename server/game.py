@@ -79,9 +79,6 @@ class Game(object):
     def process_actions(self):
         for player in self.players.values():
 
-            if player.life == 0:
-                continue
-
             # First move playe, keeping inside the track
 
             if player.action == config.LEFT:
