@@ -106,6 +106,8 @@ class Game(object):
                     player.life -= 1
             elif obstacle == config.PENGIUN:
                 player.life += 1
+                if player.action == config.PICKUP:
+                    player.life += 1
 
             # Set player speed
 
