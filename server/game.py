@@ -109,5 +109,5 @@ class Game(object):
 
             # Set player speed
 
-            speed = config.HEIGHT / 2 + player.life - config.MAX_LIVES
+            speed = config.HEIGHT / 2 - player.life + config.MAX_LIVES
             player.speed = min(config.HEIGHT - 1, max(0, speed))
