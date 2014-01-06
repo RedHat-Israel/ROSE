@@ -13,13 +13,12 @@ class Game(component.Component):
         self.client = client
         self.drive_func = drive_func
         self.name = name
-        self.components = [
-            matrix.Matrix(),
-            car.Car(1, 0, 4),
-            car.Car(2, 1, 4),
-            car.Car(3, 2, 4),
-            car.Car(4, 3, 4),
-        ]
+        self.matrix = matrix.Matrix()
+        self.players = {}
+        self.cars = [car.Car(1, 0, 4),
+                     car.Car(2, 1, 4),
+                     car.Car(3, 2, 4),
+                     car.Car(4, 3, 4)]
         pygame.init()
         self.surface = pygame.display.set_mode(config.window_size)
         self.looper = task.LoopingCall(self.tick)
@@ -32,13 +31,16 @@ class Game(component.Component):
 
     def init(self):
         pygame.display.set_caption(config.window_caption + ' - ' + self.name)
-        for component in self.components:
-            component.init()
+        self.matrix.init()
+        for car in self.cars:
+            car.init()
         self.draw(self.surface)
 
     def update(self, info):
-        for component in self.components:
-            component.update(info)
+        self.matrix.update(info)
+        self.players = info['players']
+        for player in self.players.itervalues():
+            self.cars[player.car].update(player)
         self.draw(self.surface)
 
         action = self.drive_func()
@@ -48,8 +50,9 @@ class Game(component.Component):
 
     def draw(self, surface):
         surface.fill(config.background_color)
-        for component in self.components:
-            component.draw(surface)
+        self.matrix.draw(surface)
+        for player in self.players.itervalues():
+            self.cars[player.car].draw(surface)
         pygame.display.flip()
 
     # Hanlding pygame events
