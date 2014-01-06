@@ -106,7 +106,14 @@ class Game(object):
                 if player.action == config.PICKUP:
                     player.life += 1
 
+            # Remove obstacle after colusion
+            self.matrix.matrix[player.speed][player.lane] = config.EMPTY
+
             # Set player speed
 
             speed = config.HEIGHT / 2 - player.life + config.MAX_LIVES
             player.speed = min(config.HEIGHT - 1, max(0, speed))
+
+            # Finally forget action
+            player.action = config.NONE
+
