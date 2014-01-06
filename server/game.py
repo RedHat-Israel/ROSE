@@ -18,7 +18,7 @@ class Game(object):
         self.matrix = matrix.Matrix()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
-        self.free_lanes = set(range(config.MAX_PLAYERS))
+        self.free_cars = set(range(config.MAX_PLAYERS))
         self.started = False
 
     def start(self):
@@ -34,12 +34,12 @@ class Game(object):
     def add_player(self, name):
         if name in self.players:
             raise error.PlayerExists(name)
-        if not self.free_lanes:
+        if not self.free_cars:
             raise error.TooManyPlayers()
-        lane = random.choice(tuple(self.free_lanes))
-        self.free_lanes.remove(lane)
-        print 'add player:', name, 'lane:', lane
-        self.players[name] = player.Player(name, lane)
+        car = random.choice(tuple(self.free_cars))
+        self.free_cars.remove(car)
+        print 'add player:', name, 'car:', car
+        self.players[name] = player.Player(name, car)
         # Start the game when the first player joins
         if not self.started:
             self.start()
@@ -48,8 +48,8 @@ class Game(object):
         if name not in self.players:
             raise error.NoSuchPlayer(name)
         player = self.players.pop(name)
-        self.free_lanes.add(player.lane)
-        print 'remove player:', name, 'lane:', player.lane
+        self.free_cars.add(player.lane)
+        print 'remove player:', name, 'car:', player.car
         # Stop the game when the first player leave
         if not self.players:
             self.stop()
