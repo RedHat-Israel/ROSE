@@ -1,18 +1,11 @@
+import random
 from twisted.internet import task
 from components import message
 
 from components import matrix
 import components.matrix_config as config
 from common import error
-from components.matrix_config import SCORE
-
-
-from player import Player
-import random
-
-
-MAX_PLAYERS = 4
-MAX_LANES = 4
+import player
 
 
 class Game(object):
@@ -23,12 +16,9 @@ class Game(object):
     def __init__(self, server):
         self.server = server
         self.matrix = matrix.Matrix()
-        self.lives = [config.NUM_OF_LIVES,
-                      config.NUM_OF_LIVES,
-                      config.NUM_OF_LIVES,
-                      config.NUM_OF_LIVES]
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
+        self.free_cars = set(range(config.MAX_PLAYERS))
         self.started = False
 
     def start(self):
@@ -37,30 +27,19 @@ class Game(object):
         self.looper.start(1, now=False)
 
     def stop(self):
-        self.looper.stop()
-        self.started = False
-
-    def check_lane_availability(self, lane):
-        for p in self.players:
-            if p.lane == lane:
-                return False
-
-        return True
-
-    def find_available_lane(self):
-        picked_lane = random.randrange(MAX_LANES)
-        while self.check_lane_availability(picked_lane):
-            picked_lane = random.randrange(MAX_LANES)
-        return picked_lane
+        if self.started:
+            self.looper.stop()
+            self.started = False
 
     def add_player(self, name):
         if name in self.players:
             raise error.PlayerExists(name)
-        if len(self.players) == MAX_PLAYERS:  # XXX add server/config.py
+        if not self.free_cars:
             raise error.TooManyPlayers()
-        print 'add player:', name
-        lane = self.find_available_lane()
-        self.players[name] = Player(lane)
+        car = random.choice(tuple(self.free_cars))
+        self.free_cars.remove(car)
+        print 'add player:', name, 'car:', car
+        self.players[name] = player.Player(name, car)
         # Start the game when the first player joins
         if not self.started:
             self.start()
@@ -68,43 +47,73 @@ class Game(object):
     def remove_player(self, name):
         if name not in self.players:
             raise error.NoSuchPlayer(name)
-        print 'remove player:', name
-        del self.players[name]
+        player = self.players.pop(name)
+        self.free_cars.add(player.lane)
+        print 'remove player:', name, 'car:', player.car
         # Stop the game when the first player leave
         if not self.players:
             self.stop()
 
-    def update_player(self, name, info):
-        print 'update_player:', name, info
+    def drive_player(self, name, info):
+        print 'drive_player:', name, info
+        if name not in self.players:
+            raise error.NoSuchPlayer(name)
+        if 'action' not in info:
+            raise error.InvalidMessage("action required")
+        action = info['action']
+        if action not in config.ACTIONS:
+            raise error.InvalidMessage("invalid drive action %s" % action)
+        self.players[name].action = action
 
     def loop(self):
-        print 'loop'
-        # Send updates to the clients
-        # XXX process game logic here (self.do)
+        self.matrix.advance()
         self.process_actions()
-        self.matrix.next_row()
-        msg = message.Message('update', {'matrix': self.matrix.matrix,
-                                         'players': self.players})
+        msg = message.Message('update', self.encode())
         self.server.broadcast(msg)
 
-    def get_next(self):
-        """
-        Returns the next row
-        """
-        return self.matrix.next_row()
+    def encode(self):
+        players = dict((name, player.encode())
+                       for name, player in self.players.iteritems())
+        return {'matrix': self.matrix.encode(), 'players': players}
 
     def process_actions(self):
-        """
-        Gets action for each car
-        Returns the new position of each car
-        Available actions are:
-        - Move forward
-        - Move right
-        - Move left
-        - Jump
-        - Pick (star)
-        """
-        for player in self.players:
-            obstacle = self.matrix.get_obstacle(player.lane, player.speed)
-            score = SCORE[obstacle][0].get(player.action, SCORE[obstacle][1])
-            player.life += score
+        for player in self.players.values():
+
+            # First move playe, keeping inside the track
+
+            if player.action == config.LEFT:
+                if player.lane > 0:
+                    player.lane -= 1
+            elif player.action == config.RIGHT:
+                if player.lane < config.MAX_PLAYERS - 1:
+                    player.lane += 1
+
+            # Now check if player hit any obstacle
+
+            obstacle = self.matrix.matrix[player.speed][player.lane]
+            if obstacle == config.CRACK:
+                if player.action != config.JUMP:
+                    player.life -= 1
+            elif obstacle in (config.TRASH,
+                              config.BIKE,
+                              config.BARRIER):
+                player.life -= 1
+            elif obstacle == config.WATER:
+                if player.action != config.BRAKE:
+                    player.life -= 1
+            elif obstacle == config.PENGIUN:
+                player.life += 1
+                if player.action == config.PICKUP:
+                    player.life += 1
+
+            # Remove obstacle after colusion
+            self.matrix.matrix[player.speed][player.lane] = config.EMPTY
+
+            # Set player speed
+
+            speed = config.HEIGHT / 2 - player.life + config.MAX_LIVES
+            player.speed = min(config.HEIGHT - 1, max(0, speed))
+
+            # Finally forget action
+            player.action = config.NONE
+
