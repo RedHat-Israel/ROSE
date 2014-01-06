@@ -43,7 +43,8 @@ class Game(component.Component):
             self.cars[player['car']].update(player)
         self.draw(self.surface)
 
-        action = self.drive_func()
+        action = self.drive_func(self.cars[self.players[self.name]['car']],
+                                 self.matrix)
 
         msg = message.Message('drive', {"action": action})
         self.client.send_message(msg)
