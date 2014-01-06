@@ -8,7 +8,7 @@ from components import component
 class Matrix(component.Component):
 
     def __init__(self):
-        self.matrix = [self.generate_row()
+        self.matrix = [[matrix_config.EMPTY] * matrix_config.WIDTH
                        for x in range(matrix_config.HEIGHT)]
         self.road_textures = None
         self.obstacle_textures = None
