@@ -1,3 +1,4 @@
+import random
 import pygame
 import matrix_config
 import os
@@ -5,6 +6,8 @@ import config
 from components import component
 
 class Car(component.Component):
+
+    jitter = 20
 
     def __init__(self, id, lane, speed):
         self.id = id
@@ -23,4 +26,6 @@ class Car(component.Component):
     def draw(self, surface):
         x = matrix_config.LEFT_MARGIN + self.lane * matrix_config.CELL_WIDTH
         y = self.speed * matrix_config.ROW_HEIGHT
+        x += random.randrange(self.jitter) - self.jitter/2
+        y += random.randrange(self.jitter) - self.jitter/2
         surface.blit(self.texture, (x, y))
