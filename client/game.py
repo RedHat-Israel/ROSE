@@ -1,6 +1,7 @@
 from twisted.internet import reactor
 from twisted.internet import task
 from components import matrix, car, message, component
+from collections import namedtuple
 import config
 
 author = 'gickowic'
@@ -43,8 +44,11 @@ class Game(component.Component):
             self.cars[player['car']].update(player)
         self.draw(self.surface)
 
-        action = self.drive_func(self.cars[self.players[self.name]['car']],
-                                 self.matrix)
+        client_car = self.cars[self.players[self.name]['car']]
+        car_location = namedtuple('CarLocation', ['x', 'y'])
+        car_location.x = client_car.lane
+        car_location.y = client_car.speed
+        action = self.drive_func(car_location, self.matrix.get_obstacle)
 
         msg = message.Message('drive', {"action": action})
         self.client.send_message(msg)
