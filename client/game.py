@@ -40,7 +40,7 @@ class Game(component.Component):
         self.matrix.update(info)
         self.players = info['players']
         for player in self.players.itervalues():
-            self.cars[player.car].update(player)
+            self.cars[player['car']].update(player)
         self.draw(self.surface)
 
         action = self.drive_func()
@@ -52,7 +52,7 @@ class Game(component.Component):
         surface.fill(config.background_color)
         self.matrix.draw(surface)
         for player in self.players.itervalues():
-            self.cars[player.car].draw(surface)
+            self.cars[player['car']].draw(surface)
         pygame.display.flip()
 
     # Hanlding pygame events
