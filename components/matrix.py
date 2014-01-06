@@ -8,11 +8,10 @@ from components import component
 class Matrix(component.Component):
 
     def __init__(self):
-        self.matrix = [[matrix_config.EMPTY] * matrix_config.WIDTH
+        self.matrix = [self.generate_row()
                        for x in range(matrix_config.HEIGHT)]
         self.road_textures = None
         self.obstacle_textures = None
-        self.__generate_obstacles()
 
     # Component interface
 
@@ -48,47 +47,6 @@ class Matrix(component.Component):
     def encode(self):
         return self.matrix
 
-    def __generate_obstacles(self):
-        """
-        Generates obstacles for __init__
-        """
-        obstacles = 0
-        while obstacles < matrix_config.MAX_OBSTACLES:
-            x = random.randint(0, matrix_config.WIDTH - 1)
-            y = random.randint(0, matrix_config.HEIGHT - 1)
-
-            if self.is_legal_obstacle_placement(x, y):
-                self.matrix[y][x] = self.get_random_obstacle()
-                obstacles += 1
-
-    def is_legal_obstacle_placement(self, x, y):
-        """
-        Checks if x and y are legal
-        """
-
-        if y == 0:
-            return self.check_below(x, y)
-        elif y == matrix_config.HEIGHT - 1:
-            return self.check_above(x, y)
-        else:
-            return self.check_above(x, y) and self.check_below(x, y)
-
-    def check_below(self, x, y):
-        return self.matrix[y + 1][x] == matrix_config.EMPTY
-
-    def check_above(self, x, y):
-        return self.matrix[y - 1][x] == matrix_config.EMPTY
-
-    def check_right(self, x, y):
-        return self.matrix[y][x+1] == matrix_config.EMPTY
-
-    def check_left(self, x, y):
-        return self.matrix[y][x-1] == matrix_config.EMPTY
-
-    def print_matrix(self):
-        for i in self.matrix:
-            print i
-
     def get_obstacle(self, x, y):
         """
         Return the obstacle in location x, y
@@ -99,17 +57,10 @@ class Matrix(component.Component):
         """
         Generates new row with obstacle
         """
-
-        _counter = 0
-        _tmp_list = []
-        for i in self.matrix[0]:
-            if i == matrix_config.EMPTY:
-                _tmp_list.append(self.get_random_obstacle())
-            else:
-                _tmp_list.insert(_counter, matrix_config.EMPTY)
-            _counter += 1
-
-        return _tmp_list
+        cell = random.randrange(matrix_config.WIDTH)
+        row = [matrix_config.EMPTY] * matrix_config.WIDTH
+        row[cell] = self.get_random_obstacle()
+        return row
 
     def get_random_obstacle(self):
         return random.choice(matrix_config.OBSTACLES)
