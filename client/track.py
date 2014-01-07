@@ -15,12 +15,12 @@ class Track(component.Component):
     # Component interface
 
     def init(self):
-        # Note: road texture files must be sorted to avoid horizontal seems
-        # between images.
+        # Note: all texture files must be sorted by file name to get the
+        # texture in the correct order.
         self._road_textures = [pygame.image.load(path) for path in
                                sorted(glob.glob(config.road_glob))]
         self._obstacle_textures = [pygame.image.load(path) for path in
-                                   glob.glob(config.obstacles_glob)]
+                                   sorted(glob.glob(config.obstacles_glob))]
 
     def update(self, info):
         self._matrix = info['track']
