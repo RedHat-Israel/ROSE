@@ -2,7 +2,7 @@ import random
 from twisted.internet import task
 from components import message
 
-from components import matrix
+from components import track
 from common import actions, config, error, obstacles
 import player
 
@@ -14,7 +14,7 @@ class Game(object):
 
     def __init__(self, server):
         self.server = server
-        self.matrix = matrix.Matrix()
+        self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.max_players))
@@ -65,7 +65,7 @@ class Game(object):
         self.players[name].action = action
 
     def loop(self):
-        self.matrix.advance()
+        self.track.advance()
         self.process_actions()
         msg = message.Message('update', self.encode())
         self.server.broadcast(msg)
@@ -73,7 +73,7 @@ class Game(object):
     def encode(self):
         players = dict((name, player.encode())
                        for name, player in self.players.iteritems())
-        return {'matrix': self.matrix.encode(), 'players': players}
+        return {'track': self.track.encode(), 'players': players}
 
     def process_actions(self):
         for player in self.players.values():
@@ -89,7 +89,7 @@ class Game(object):
 
             # Now check if player hit any obstacle
 
-            obstacle = self.matrix.matrix[player.speed][player.lane]
+            obstacle = self.track.matrix[player.speed][player.lane]
             if obstacle == obstacles.CRACK:
                 if player.action != actions.JUMP:
                     player.life -= 1
@@ -106,7 +106,7 @@ class Game(object):
                     player.life += 1
 
             # Remove obstacle after colusion
-            self.matrix.matrix[player.speed][player.lane] = obstacles.NONE
+            self.track.matrix[player.speed][player.lane] = obstacles.NONE
 
             # Set player speed
 

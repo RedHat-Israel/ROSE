@@ -29,7 +29,7 @@ def drive(your_car_location, world):
     if valid_move(world.watch_item_in_cell(your_car_location.x,
                                            your_car_location.y - 1)):
         if world.watch_item_in_cell(your_car_location.x,
-                                    your_car_location.y) == config.PENGIUN:
+                                    your_car_location.y) == obstacles.PENGIUN:
             print 'PICK'
             return actions.PICKUP
         else:

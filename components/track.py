@@ -5,7 +5,7 @@ from components import component
 from common import config, obstacles
 
 
-class Matrix(component.Component):
+class Track(component.Component):
 
     def __init__(self):
         self.matrix = [[obstacles.NONE] * config.matrix_width
@@ -25,8 +25,8 @@ class Matrix(component.Component):
 
     def update(self, info):
         self.road_textures.insert(0, self.road_textures.pop())
-        if 'matrix' in info:
-            self.matrix = info['matrix']
+        if 'track' in info:
+            self.matrix = info['track']
 
     def draw(self, surface):
         # draw road background:
@@ -74,6 +74,6 @@ class Matrix(component.Component):
 
 
 if __name__ == '__main__':
-    m = Matrix()
+    m = Track()
     m.generate_obstacles()
     m.print_matrix()
