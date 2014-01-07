@@ -13,7 +13,6 @@ components/__init__.py
 components/car.py
 components/component.py
 components/matrix.py
-components/matrix_config.py
 components/message.py
 server/game.py
 server/gameServer.py
