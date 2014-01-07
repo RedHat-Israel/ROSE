@@ -2,8 +2,7 @@ from common import actions, config
 
 
 class Player(object):
-    """
-    """
+
     def __init__(self, name, car):
         self.name = name
         self.car = car
@@ -12,11 +11,15 @@ class Player(object):
         self.life = config.max_lives  # means how many blocks we can handle
         self.action = actions.NONE
 
-    def encode(self):
-        """ Return representation as native type the can be serialized """
+    # Game state interface
+
+    def update(self):
+        """ Go to the next game state """
+
+    def state(self):
+        """ Return read only serialize-able state for sending to client """
         return {'name': self.name,
                 'car': self.car,
                 'speed': self.speed,
                 'lane': self.lane,
                 'life': self.life}
-
