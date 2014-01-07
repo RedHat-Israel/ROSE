@@ -46,7 +46,6 @@ Game for the grown up
 /usr/lib/python2.7/site-packages/components/car.py*
 /usr/lib/python2.7/site-packages/components/component.py*
 /usr/lib/python2.7/site-packages/components/__init__.py*
-/usr/lib/python2.7/site-packages/components/matrix_config.py*
 /usr/lib/python2.7/site-packages/components/matrix.py*
 /usr/lib/python2.7/site-packages/components/message.py*
 /usr/lib/python2.7/site-packages/%{libname}-%{version}-py*.egg-info

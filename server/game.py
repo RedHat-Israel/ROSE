@@ -3,8 +3,7 @@ from twisted.internet import task
 from components import message
 
 from components import matrix
-import components.matrix_config as config
-from common import error, obstacles, actions
+from common import actions, config, error, obstacles
 import player
 
 
@@ -18,7 +17,7 @@ class Game(object):
         self.matrix = matrix.Matrix()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
-        self.free_cars = set(range(config.MAX_PLAYERS))
+        self.free_cars = set(range(config.max_players))
         self.started = False
 
     def start(self):
@@ -85,7 +84,7 @@ class Game(object):
                 if player.lane > 0:
                     player.lane -= 1
             elif player.action == actions.RIGHT:
-                if player.lane < config.MAX_PLAYERS - 1:
+                if player.lane < config.max_players - 1:
                     player.lane += 1
 
             # Now check if player hit any obstacle
@@ -111,8 +110,8 @@ class Game(object):
 
             # Set player speed
 
-            speed = config.HEIGHT / 2 - player.life + config.MAX_LIVES
-            player.speed = min(config.HEIGHT - 1, max(0, speed))
+            speed = config.matrix_height / 2 - player.life + config.max_lives
+            player.speed = min(config.matrix_height - 1, max(0, speed))
 
             # Finally forget action
             player.action = actions.NONE

@@ -1,16 +1,15 @@
 import random
-import matrix_config
 import glob
 import pygame
 from components import component
-from common import obstacles, actions
+from common import config, obstacles
 
 
 class Matrix(component.Component):
 
     def __init__(self):
-        self.matrix = [[obstacles.NONE] * matrix_config.WIDTH
-                       for x in range(matrix_config.HEIGHT)]
+        self.matrix = [[obstacles.NONE] * config.matrix_width
+                       for x in range(config.matrix_height)]
         self.road_textures = None
         self.obstacle_textures = None
 
@@ -20,9 +19,9 @@ class Matrix(component.Component):
         # Note: road texture files must be sorted to avoid horizontal seems
         # between images.
         self.road_textures = [pygame.image.load(path) for path in
-                              sorted(glob.glob(matrix_config.ROAD_GLOB))]
+                              sorted(glob.glob(config.road_glob))]
         self.obstacle_textures = [pygame.image.load(path) for path in
-                                  glob.glob(matrix_config.OBSTACLES_GLOB)]
+                                  glob.glob(config.obstacles_glob)]
 
     def update(self, info):
         self.road_textures.insert(0, self.road_textures.pop())
@@ -31,9 +30,9 @@ class Matrix(component.Component):
 
     def draw(self, surface):
         # draw road background:
-        for i in range(matrix_config.HEIGHT):
+        for i in range(config.matrix_height):
             surface.blit(self.road_textures[i % len(self.road_textures)],
-                        (0, i * matrix_config.ROW_HEIGHT))
+                        (0, i * config.row_height))
 
         # Draw obstacles on top of road:
         for y, row in enumerate(self.matrix):
@@ -58,8 +57,8 @@ class Matrix(component.Component):
         """
         Generates new row with obstacle
         """
-        cell = random.randrange(matrix_config.WIDTH)
-        row = [obstacles.NONE] * matrix_config.WIDTH
+        cell = random.randrange(config.matrix_width)
+        row = [obstacles.NONE] * config.matrix_width
         row[cell] = obstacles.get_random_obstacle()
         return row
 
@@ -69,8 +68,8 @@ class Matrix(component.Component):
         self.matrix.insert(0, row)
 
     def get_surface_coordinates(self, x, y):
-        surface_x = matrix_config.LEFT_MARGIN + x * matrix_config.CELL_WIDTH
-        surface_y = matrix_config.TOP_MARGIN + y * matrix_config.ROW_HEIGHT
+        surface_x = config.left_margin + x * config.cell_width
+        surface_y = config.top_margin + y * config.row_height
         return surface_x, surface_y
 
 
