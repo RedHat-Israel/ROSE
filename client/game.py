@@ -1,11 +1,11 @@
+from collections import namedtuple
 from twisted.internet import reactor
 from twisted.internet import task
+import pygame
 from components import matrix, car, message, component, world
-from collections import namedtuple
-import config
+from common import config
 
 author = 'gickowic'
-import pygame
 
 
 class Game(component.Component):
