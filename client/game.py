@@ -2,8 +2,8 @@ from collections import namedtuple
 from twisted.internet import reactor
 from twisted.internet import task
 import pygame
-from components import track, car, message, component, world
-from common import config
+from components import track, car, component, world
+from common import config, message
 
 author = 'gickowic'
 

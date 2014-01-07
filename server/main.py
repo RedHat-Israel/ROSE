@@ -1,7 +1,6 @@
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
-from components import message
-from common import error
+from common import error, message
 import game
 
 
