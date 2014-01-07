@@ -1,9 +1,8 @@
 import random
 from twisted.internet import task
-from components import message
 
 from components import track
-from common import actions, config, error, obstacles
+from common import actions, config, error, message, obstacles
 import player
 
 
