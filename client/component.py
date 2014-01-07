@@ -13,7 +13,6 @@ class Component(object):
         info: dictionary with changes received from game server.
         """
 
-
     def draw(self, surface):
         """
         Called when a component should draw itself on surface.
