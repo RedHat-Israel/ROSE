@@ -2,7 +2,7 @@ import random
 import pygame
 import os
 from common import config
-from components import component
+import component
 
 class Car(component.Component):
 
