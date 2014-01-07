@@ -4,7 +4,7 @@ from components import message
 
 from components import matrix
 import components.matrix_config as config
-from common import error
+from common import error, obstacles, actions
 import player
 
 
@@ -61,7 +61,7 @@ class Game(object):
         if 'action' not in info:
             raise error.InvalidMessage("action required")
         action = info['action']
-        if action not in config.ACTIONS:
+        if action not in actions.ALL:
             raise error.InvalidMessage("invalid drive action %s" % action)
         self.players[name].action = action
 
@@ -81,33 +81,33 @@ class Game(object):
 
             # First move playe, keeping inside the track
 
-            if player.action == config.LEFT:
+            if player.action == actions.LEFT:
                 if player.lane > 0:
                     player.lane -= 1
-            elif player.action == config.RIGHT:
+            elif player.action == actions.RIGHT:
                 if player.lane < config.MAX_PLAYERS - 1:
                     player.lane += 1
 
             # Now check if player hit any obstacle
 
             obstacle = self.matrix.matrix[player.speed][player.lane]
-            if obstacle == config.CRACK:
-                if player.action != config.JUMP:
+            if obstacle == obstacles.CRACK:
+                if player.action != actions.JUMP:
                     player.life -= 1
-            elif obstacle in (config.TRASH,
-                              config.BIKE,
-                              config.BARRIER):
+            elif obstacle in (obstacles.TRASH,
+                              obstacles.BIKE,
+                              obstacles.BARRIER):
                 player.life -= 1
-            elif obstacle == config.WATER:
-                if player.action != config.BRAKE:
+            elif obstacle == obstacles.WATER:
+                if player.action != actions.BRAKE:
                     player.life -= 1
-            elif obstacle == config.PENGIUN:
+            elif obstacle == obstacles.PENGIUN:
                 player.life += 1
-                if player.action == config.PICKUP:
+                if player.action == actions.PICKUP:
                     player.life += 1
 
             # Remove obstacle after colusion
-            self.matrix.matrix[player.speed][player.lane] = config.EMPTY
+            self.matrix.matrix[player.speed][player.lane] = obstacles.NONE
 
             # Set player speed
 
@@ -115,5 +115,5 @@ class Game(object):
             player.speed = min(config.HEIGHT - 1, max(0, speed))
 
             # Finally forget action
-            player.action = config.NONE
+            player.action = actions.NONE
 

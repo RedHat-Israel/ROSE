@@ -3,12 +3,13 @@ import matrix_config
 import glob
 import pygame
 from components import component
+from common import obstacles, actions
 
 
 class Matrix(component.Component):
 
     def __init__(self):
-        self.matrix = [[matrix_config.EMPTY] * matrix_config.WIDTH
+        self.matrix = [[obstacles.NONE] * matrix_config.WIDTH
                        for x in range(matrix_config.HEIGHT)]
         self.road_textures = None
         self.obstacle_textures = None
@@ -37,7 +38,7 @@ class Matrix(component.Component):
         # Draw obstacles on top of road:
         for y, row in enumerate(self.matrix):
             for x, cell in enumerate(row):
-                if cell != matrix_config.EMPTY:
+                if cell != obstacles.NONE:
                     texture = self.obstacle_textures[cell]
                     coordinates = self.get_surface_coordinates(x, y)
                     surface.blit(texture, coordinates)
@@ -58,12 +59,9 @@ class Matrix(component.Component):
         Generates new row with obstacle
         """
         cell = random.randrange(matrix_config.WIDTH)
-        row = [matrix_config.EMPTY] * matrix_config.WIDTH
-        row[cell] = self.get_random_obstacle()
+        row = [obstacles.NONE] * matrix_config.WIDTH
+        row[cell] = obstacles.get_random_obstacle()
         return row
-
-    def get_random_obstacle(self):
-        return random.choice(matrix_config.OBSTACLES)
 
     def advance(self):
         row = self.generate_row()

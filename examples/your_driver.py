@@ -1,4 +1,4 @@
-import components.matrix_config as config
+from common import obstacles, actions
 
 
 def drive(your_car_location, check_for_obstacle_func):
