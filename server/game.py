@@ -1,8 +1,8 @@
 import random
 from twisted.internet import task
 
-from components import track
 from common import actions, config, error, message, obstacles
+import track
 import player
 
 
@@ -64,15 +64,15 @@ class Game(object):
         self.players[name].action = action
 
     def loop(self):
-        self.track.advance()
+        self.track.update()
         self.process_actions()
-        msg = message.Message('update', self.encode())
+        msg = message.Message('update', self.state())
         self.server.broadcast(msg)
 
-    def encode(self):
-        players = dict((name, player.encode())
+    def state(self):
+        players = dict((name, player.state())
                        for name, player in self.players.iteritems())
-        return {'track': self.track.encode(), 'players': players}
+        return {'track': self.track.state(), 'players': players}
 
     def process_actions(self):
         for player in self.players.values():
@@ -88,7 +88,7 @@ class Game(object):
 
             # Now check if player hit any obstacle
 
-            obstacle = self.track.matrix[player.speed][player.lane]
+            obstacle = self.track.get_obstacle(player.lane, player.speed)
             if obstacle == obstacles.CRACK:
                 if player.action != actions.JUMP:
                     player.life -= 1
@@ -104,8 +104,8 @@ class Game(object):
                 if player.action == actions.PICKUP:
                     player.life += 1
 
-            # Remove obstacle after colusion
-            self.track.matrix[player.speed][player.lane] = obstacles.NONE
+            # Remove obstacle after collision
+            self.track.set_obstacle(player.lane, player.speed, obstacles.NONE)
 
             # Set player speed
 
@@ -114,4 +114,3 @@ class Game(object):
 
             # Finally forget action
             player.action = actions.NONE
-
