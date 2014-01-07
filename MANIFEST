@@ -9,12 +9,11 @@ client/__init__.py
 client/config.py
 client/game.py
 client/main.py
+common/message.py
 components/__init__.py
 components/car.py
 components/component.py
-components/matrix.py
-components/matrix_config.py
-components/message.py
+components/track.py
 server/game.py
 server/gameServer.py
 server/main.py

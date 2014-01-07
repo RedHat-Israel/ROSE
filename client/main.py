@@ -2,10 +2,9 @@ import sys
 
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
-from components import message
 
+from common import config, message
 import game
-import config
 
 
 class Client(basic.LineReceiver):

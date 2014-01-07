@@ -1,11 +1,11 @@
+from collections import namedtuple
 from twisted.internet import reactor
 from twisted.internet import task
-from components import matrix, car, message, component
-from collections import namedtuple
-import config
+import pygame
+from common import config, message
+import track, car, component
 
 author = 'gickowic'
-import pygame
 
 
 class Game(component.Component):
@@ -14,7 +14,7 @@ class Game(component.Component):
         self.client = client
         self.drive_func = drive_func
         self.name = name
-        self.matrix = matrix.Matrix()
+        self.track = track.Track()
         self.players = {}
         self.cars = [car.Car(1, 0, 4),
                      car.Car(2, 1, 4),
@@ -32,13 +32,13 @@ class Game(component.Component):
 
     def init(self):
         pygame.display.set_caption(config.window_caption + ' - ' + self.name)
-        self.matrix.init()
+        self.track.init()
         for car in self.cars:
             car.init()
         self.draw(self.surface)
 
     def update(self, info):
-        self.matrix.update(info)
+        self.track.update(info)
         self.players = info['players']
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
@@ -48,14 +48,14 @@ class Game(component.Component):
         car_location = namedtuple('CarLocation', ['x', 'y'])
         car_location.x = client_car.lane
         car_location.y = client_car.speed
-        action = self.drive_func(car_location, self.matrix.get_obstacle)
+        action = self.drive_func(car_location, self.track.get_obstacle)
 
         msg = message.Message('drive', {"action": action})
         self.client.send_message(msg)
 
     def draw(self, surface):
         surface.fill(config.background_color)
-        self.matrix.draw(surface)
+        self.track.draw(surface)
         for player in self.players.itervalues():
             self.cars[player['car']].draw(surface)
         pygame.display.flip()
