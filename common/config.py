@@ -1,3 +1,5 @@
+import os
+
 # Networking
 
 host = "localhost"
@@ -24,9 +26,10 @@ top_margin = 10
 
 # Files
 
-obstacles_glob = 'client/res/obstacles/obstacle*.png'
-road_glob = 'client/res/bg/bg*.png'
-cars_dir = 'client/res/cars'
+install_dir = os.path.dirname(__file__)
+obstacles_glob = os.path.join(install_dir, '../client/res/obstacles/obstacle*.png')
+road_glob = os.path.join(install_dir, '../client/res/bg/bg*.png')
+cars_dir = os.path.join(install_dir, '../client/res/cars')
 
 # Player
 
