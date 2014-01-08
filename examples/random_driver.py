@@ -1,5 +1,5 @@
 import random
-from common import obstacles, actions
+from rtp.common import obstacles, actions
 
 
 def drive(your_car_location, check_for_obstacle_func):

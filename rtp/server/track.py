@@ -1,5 +1,5 @@
 import random
-from common import config, obstacles
+from rtp.common import config, obstacles
 
 
 class Track(object):

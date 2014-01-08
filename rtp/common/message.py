@@ -1,5 +1,5 @@
 import json
-from common import error
+from rtp.common import error
 
 def parse(line):
     try:

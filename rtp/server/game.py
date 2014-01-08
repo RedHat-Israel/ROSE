@@ -1,7 +1,7 @@
 import random
 from twisted.internet import task
 
-from common import actions, config, error, message, obstacles
+from rtp.common import actions, config, error, message, obstacles
 import track
 import player
 

@@ -27,9 +27,9 @@ top_margin = 10
 # Files
 
 install_dir = os.path.dirname(__file__)
-obstacles_glob = os.path.join(install_dir, '../client/res/obstacles/obstacle*.png')
-road_glob = os.path.join(install_dir, '../client/res/bg/bg*.png')
-cars_dir = os.path.join(install_dir, '../client/res/cars')
+obstacles_glob = os.path.join(install_dir, '../res/obstacles/obstacle*.png')
+road_glob = os.path.join(install_dir, '../res/bg/bg*.png')
+cars_dir = os.path.join(install_dir, '../res/cars')
 
 # Player
 
