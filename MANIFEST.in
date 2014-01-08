@@ -1,1 +1,2 @@
 include AUTHORS COPYING README
+recursive-include examples *

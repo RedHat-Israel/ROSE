@@ -1,28 +1,26 @@
 RaananaTiraProject
 ==================
 
-Car race game for Raanana Tira project
+Creating a tarball
+------------------
 
-Race project
+    python setup.py sdist
 
-    Goals
+Running the game
+----------------
 
-    Make sure every participant ends up writing and understanding a Python class
+Start up to 4 clients:
 
-    Create competition to engage the participants
+    ./rtp-client player-name drive-module
 
-    Have fun
+Start the server on some machine:
 
-    How
+    ./rtp-server
 
-    Devide participants into 2-4 mixed groups
+For drive modules, see the examples direcotory.
 
-    Each group writes a class that implements a Raceable interface we provide
+Notes
+-----
 
-    Sample classes: car, bike, humanoids...
-
-    The task for each group is to provide a class which will race against other group classes.
-
-    We should provide a black box that reads the classes and uses the race method along with other methods (override obstacles?) to generate the competition
-
-
+Curently it configure to localhost. To use a server on another machine, edit
+rtp/common/config.py and set the host option.

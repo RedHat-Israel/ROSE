@@ -1,9 +1,8 @@
 import random
 import pygame
-import matrix_config
 import os
-import config
-from components import component
+from rtp.common import config
+import component
 
 class Car(component.Component):
 
@@ -24,8 +23,8 @@ class Car(component.Component):
         self.speed = info['speed']
 
     def draw(self, surface):
-        x = matrix_config.LEFT_MARGIN + self.lane * matrix_config.CELL_WIDTH
-        y = self.speed * matrix_config.ROW_HEIGHT
+        x = config.left_margin + self.lane * config.cell_width
+        y = self.speed * config.row_height
         x += random.randrange(self.jitter) - self.jitter/2
         y += random.randrange(self.jitter) - self.jitter/2
         surface.blit(self.texture, (x, y))
