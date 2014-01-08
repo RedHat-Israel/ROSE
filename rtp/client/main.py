@@ -3,7 +3,7 @@ import sys
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 
-from common import config, message
+from rtp.common import config, message
 import game
 
 
@@ -64,14 +64,16 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     def send_message(self, msg):
         self.client.sendLine(str(msg))
 
-if len(sys.argv) < 3:
-    print 'usage: start_client player-name player-drive_module'
-    sys.exit(2)
 
-with open(sys.argv[2]) as f:
-    d = {}
-    exec f in d, d
+def main():
+    if len(sys.argv) < 3:
+        print 'usage: start_client player-name player-drive_module'
+        sys.exit(2)
 
-reactor.connectTCP(config.host, config.port, ClientFactory(sys.argv[1],
-                                                           d['drive']))
-reactor.run()
+    with open(sys.argv[2]) as f:
+        d = {}
+        exec f in d, d
+
+    reactor.connectTCP(config.host, config.port, ClientFactory(sys.argv[1],
+                                                               d['drive']))
+    reactor.run()

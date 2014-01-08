@@ -1,4 +1,4 @@
-from common import actions, config
+from rtp.common import actions, config
 
 
 class Player(object):
