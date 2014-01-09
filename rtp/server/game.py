@@ -75,7 +75,14 @@ class Game(object):
         return {'track': self.track.state(), 'players': players}
 
     def process_actions(self):
-        for player in self.players.values():
+
+        # Give all players equal chance to make the first move
+        players = self.players.values()
+        random.shuffle(players)
+
+        positions = set()
+
+        for player in players:
 
             # First move playe, keeping inside the track
 
@@ -114,3 +121,15 @@ class Game(object):
 
             # Finally forget action
             player.action = actions.NONE
+
+            # Fix up collisions
+
+            while (player.lane, player.speed) in positions:
+                if player.speed < config.matrix_height:
+                    player.speed += 1
+                elif player.lane > 0:
+                    player.lane -= 1
+                elif player.lane < config.matrix_width:
+                    player.lane += 1
+
+            positions.add((player.lane, player.speed))
