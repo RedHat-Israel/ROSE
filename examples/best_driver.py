@@ -8,17 +8,18 @@ def drive(your_car_location, world):
     your_car_location - tuple of (x, y) -> x for raw, y for col.
                         (0, 0) is the uppest left edge.
 
-    check_for_obstacle_func - The func gets x, y cordination and returns what
-                              exists on that cell in the world.
-                              for example:
-                              your_car_location.x, your_car_location.y - 1
-                              detemine what exists in-front of your car
+    world - an object for getting info about the game world
+
+        workd.watch_item_in_cell(pos)
+
+            returns the obstacle in position pos
     '''
-    def valid_move(i):
+    def valid_move(pos):
         try:
-            return i in (obstacles.NONE, obstacles.PENGIUN)
+            obstacle = world.watch_item_in_cell(pos)
         except IndexError:
             return False
+        return obstacle in (obstacles.NONE, obstacles.PENGIUN)
 
     print 'POSITION: x=%s y=%s' % (your_car_location.x, your_car_location.y)
 
@@ -26,10 +27,9 @@ def drive(your_car_location, world):
     # x = 0 is the leftest lane
 
     # check cell above the car (y-1)
-    if valid_move(world.watch_item_in_cell(your_car_location.x,
-                                           your_car_location.y - 1)):
-        if world.watch_item_in_cell(your_car_location.x,
-                                    your_car_location.y) == obstacles.PENGIUN:
+    up = your_car_location.x, your_car_location.y - 1
+    if valid_move(up):
+        if world.watch_item_in_cell(up) == obstacles.PENGIUN:
             print 'PICK'
             return actions.PICKUP
         else:
@@ -37,19 +37,16 @@ def drive(your_car_location, world):
             return actions.NONE
 
     # check cell above and right
-    elif valid_move(world.watch_item_in_cell(
-                    your_car_location.x + 1,
-                    your_car_location.y - 1)):
+    right = your_car_location.x + 1, your_car_location.y - 1
+    if valid_move(right):
         print 'RIGHT'
         return actions.RIGHT
 
     # check cell above and left
-    elif valid_move(world.watch_item_in_cell(
-                    your_car_location.x - 1,
-                    your_car_location.y - 1)):
+    left = your_car_location.x + -1, your_car_location.y - 1
+    if valid_move(left):
         print 'LEFT'
         return actions.LEFT
 
-    else:
-        print 'JUMP'
-        return actions.JUMP
+    print 'JUMP'
+    return actions.JUMP
