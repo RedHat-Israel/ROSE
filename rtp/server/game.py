@@ -100,7 +100,6 @@ class Game(object):
                 if player.action != actions.BRAKE:
                     player.life -= 1
             elif obstacle == obstacles.PENGIUN:
-                player.life += 1
                 if player.action == actions.PICKUP:
                     player.life += 1
 
