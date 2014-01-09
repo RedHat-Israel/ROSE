@@ -92,19 +92,20 @@ class Game(object):
             if obstacle == obstacles.CRACK:
                 if player.action != actions.JUMP:
                     player.life -= 1
+                    self.track.clear(player.lane, player.speed)
             elif obstacle in (obstacles.TRASH,
                               obstacles.BIKE,
                               obstacles.BARRIER):
                 player.life -= 1
+                self.track.clear(player.lane, player.speed)
             elif obstacle == obstacles.WATER:
                 if player.action != actions.BRAKE:
                     player.life -= 1
+                    self.track.clear(player.lane, player.speed)
             elif obstacle == obstacles.PENGIUN:
                 if player.action == actions.PICKUP:
                     player.life += 1
-
-            # Remove obstacle after collision
-            self.track.set_obstacle(player.lane, player.speed, obstacles.NONE)
+                    self.track.clear(player.lane, player.speed)
 
             # Set player speed
 

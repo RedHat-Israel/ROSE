@@ -25,9 +25,9 @@ class Track(object):
         """ Return the obstacle in position x, y """
         return self._matrix[y][x]
 
-    def set_obstacle(self, x, y, obstacle):
-        """ Set obstacle in position x, y """
-        self._matrix[y][x] = obstacle
+    def clear(self, x, y):
+        """ Clear obstacle in position x, y """
+        self._matrix[y][x] = obstacles.NONE
 
     # Private
 
