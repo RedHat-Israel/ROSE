@@ -1,7 +1,0 @@
-Place holder for car race client code
-
-Should know how to get the N first tiles
-The server send to the client the next line + cars positions 
-sends the current action to the server 
-students :
-Have to implemernt the drive() function 

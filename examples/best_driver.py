@@ -1,4 +1,4 @@
-import components.matrix_config as config
+from rtp.common import obstacles, actions
 
 
 def drive(your_car_location, world):
@@ -16,7 +16,7 @@ def drive(your_car_location, world):
     '''
     def valid_move(i):
         try:
-            return i in (config.EMPTY, config.PENGIUN)
+            return i in (obstacles.NONE, obstacles.PENGIUN)
         except IndexError:
             return False
 
@@ -29,27 +29,27 @@ def drive(your_car_location, world):
     if valid_move(world.watch_item_in_cell(your_car_location.x,
                                            your_car_location.y - 1)):
         if world.watch_item_in_cell(your_car_location.x,
-                                    your_car_location.y) == config.PENGIUN:
+                                    your_car_location.y) == obstacles.PENGIUN:
             print 'PICK'
-            return config.PICKUP
+            return actions.PICKUP
         else:
             print 'NONE'
-            return config.NONE
+            return actions.NONE
 
     # check cell above and right
     elif valid_move(world.watch_item_in_cell(
                     your_car_location.x + 1,
                     your_car_location.y - 1)):
         print 'RIGHT'
-        return config.RIGHT
+        return actions.RIGHT
 
     # check cell above and left
     elif valid_move(world.watch_item_in_cell(
                     your_car_location.x - 1,
                     your_car_location.y - 1)):
         print 'LEFT'
-        return config.LEFT
+        return actions.LEFT
 
     else:
         print 'JUMP'
-        return config.JUMP
+        return actions.JUMP

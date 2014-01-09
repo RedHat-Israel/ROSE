@@ -1,7 +1,6 @@
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
-from components import message
-from common import error
+from rtp.common import error, message
 import game
 
 
@@ -79,6 +78,6 @@ class Server(protocol.ServerFactory):
                 player.sendLine(data)
 
 
-reactor.listenTCP(8888, Server())
-reactor.run()
-
+def main():
+    reactor.listenTCP(8888, Server())
+    reactor.run()

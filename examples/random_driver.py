@@ -1,5 +1,5 @@
 import random
-from components import matrix_config
+from rtp.common import obstacles, actions
 
 
 def drive(your_car_location, check_for_obstacle_func):
@@ -15,4 +15,4 @@ def drive(your_car_location, check_for_obstacle_func):
                               your_car_location.x, your_car_location.y - 1
                               detemine what exists in-front of your car
     '''
-    return random.choice(matrix_config.ACTIONS)
+    return random.choice(actions.ALL)

@@ -1,28 +1,33 @@
 RaananaTiraProject
 ==================
 
-Car race game for Raanana Tira project
+Requirements
+------------
 
-Race project
+* python-twisted
+* pygame
 
-    Goals
 
-    Make sure every participant ends up writing and understanding a Python class
+Running the game
+----------------
 
-    Create competition to engage the participants
+Start up to 4 clients:
 
-    Have fun
+    ./rtp-client player-name drive-module
 
-    How
+Start the server on some machine:
 
-    Devide participants into 2-4 mixed groups
+    ./rtp-server
 
-    Each group writes a class that implements a Raceable interface we provide
+For drive modules, see the examples direcotory.
 
-    Sample classes: car, bike, humanoids...
+Note: Curently clients connect to localhost. To use a server on another
+machine, edit rtp/common/config.py and modify the host option to the server ip
+address.
 
-    The task for each group is to provide a class which will race against other group classes.
 
-    We should provide a black box that reads the classes and uses the race method along with other methods (override obstacles?) to generate the competition
+Creating a tarball
+------------------
 
+    python setup.py sdist
 
