@@ -1,10 +1,12 @@
 RaananaTiraProject
 ==================
 
-Creating a tarball
-------------------
+Requirements
+------------
 
-    python setup.py sdist
+* python-twisted
+* pygame
+
 
 Running the game
 ----------------
@@ -19,8 +21,13 @@ Start the server on some machine:
 
 For drive modules, see the examples direcotory.
 
-Notes
------
+Note: Curently clients connect to localhost. To use a server on another
+machine, edit rtp/common/config.py and modify the host option to the server ip
+address.
 
-Curently it configure to localhost. To use a server on another machine, edit
-rtp/common/config.py and set the host option.
+
+Creating a tarball
+------------------
+
+    python setup.py sdist
+
