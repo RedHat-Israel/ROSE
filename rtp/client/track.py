@@ -43,9 +43,16 @@ class Track(component.Component):
 
     def get_obstacle(self, x, y):
         """ Return the obstacle in position x, y """
+        self._validate_pos(x, y)
         return self._matrix[y][x]
 
     # Private
+
+    def _validate_pos(self, x, y):
+        if x < 0 or x > config.matrix_width - 1:
+            raise IndexError('x out of range: 0-%d', config.matrix_width - 1)
+        if y < 0 or y > config.matrix_height - 1:
+            raise IndexError('y out of range: 0-%d', config.matrix_height - 1)
 
     def _get_surface_coordinates(self, x, y):
         """ Convert matrix coordinates to surface coordinates """
