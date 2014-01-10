@@ -125,11 +125,11 @@ class Game(object):
             # Fix up collisions
 
             while (player.lane, player.speed) in positions:
-                if player.speed < config.matrix_height:
+                if player.speed < config.matrix_height - 1:
                     player.speed += 1
                 elif player.lane > 0:
                     player.lane -= 1
-                elif player.lane < config.matrix_width:
+                elif player.lane < config.matrix_width - 1:
                     player.lane += 1
 
             positions.add((player.lane, player.speed))
