@@ -8,6 +8,9 @@ import track, car, component, world
 author = 'gickowic'
 
 
+CarPosition = namedtuple('CarPosition', ['x', 'y'])
+
+
 class Game(component.Component):
 
     def __init__(self, client, name, drive_func):
@@ -44,11 +47,9 @@ class Game(component.Component):
             self.cars[player['car']].update(player)
         self.draw(self.surface)
 
-        client_car = self.cars[self.players[self.name]['car']]
-        car_location = namedtuple('CarLocation', ['x', 'y'])
-        car_location.x = client_car.lane
-        car_location.y = client_car.speed
-        action = self.drive_func(car_location, world.world(self.track))
+        car = self.cars[self.players[self.name]['car']]
+        car_position = CarPosition(car.lane, car.speed)
+        action = self.drive_func(car_position, world.world(self.track))
         msg = message.Message('drive', {"action": action})
         self.client.send_message(msg)
 
