@@ -10,6 +10,7 @@ class Player(object):
         self.lane = car  # x - between 0-3
         self.life = config.max_lives  # means how many blocks we can handle
         self.action = actions.NONE
+        self.response_time = 1.0
 
     # Game state interface
 

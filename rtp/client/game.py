@@ -1,3 +1,4 @@
+import time
 from collections import namedtuple
 from twisted.internet import reactor
 from twisted.internet import task
@@ -23,6 +24,7 @@ class Game(component.Component):
                      car.Car(2, 1, 4),
                      car.Car(3, 2, 4),
                      car.Car(4, 3, 4)]
+        self.world = world.world(self.track)
         pygame.init()
         self.surface = pygame.display.set_mode(config.window_size)
         self.looper = task.LoopingCall(self.tick)
@@ -49,8 +51,11 @@ class Game(component.Component):
 
         car = self.cars[self.players[self.name]['car']]
         car_position = CarPosition(car.lane, car.speed)
-        action = self.drive_func(car_position, world.world(self.track))
-        msg = message.Message('drive', {"action": action})
+        start = time.time()
+        action = self.drive_func(car_position, self.world)
+        response_time = time.time() - start
+        msg = message.Message('drive', {"action": action,
+                                        "response_time": response_time})
         self.client.send_message(msg)
 
     def draw(self, surface):

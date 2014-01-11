@@ -1,4 +1,5 @@
 import random
+import operator
 from twisted.internet import task
 
 from rtp.common import actions, config, error, message, obstacles
@@ -62,6 +63,7 @@ class Game(object):
         if action not in actions.ALL:
             raise error.InvalidMessage("invalid drive action %s" % action)
         self.players[name].action = action
+        self.players[name].response_time = info.get('response_time', 1.0)
 
     def loop(self):
         self.track.update()
@@ -75,11 +77,10 @@ class Game(object):
         return {'track': self.track.state(), 'players': players}
 
     def process_actions(self):
-
-        # Give all players equal chance to make the first move
-        players = self.players.values()
-        random.shuffle(players)
-
+        # Drivers with smaller response time move first, overriding slower
+        # drivers.
+        players = sorted(self.players.itervalues(),
+                         key=operator.attrgetter('response_time'))
         positions = set()
 
         for player in players:
@@ -132,4 +133,7 @@ class Game(object):
                 elif player.lane < config.matrix_width - 1:
                     player.lane += 1
 
+            print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f' % (
+                    player.name, player.car, player.lane, player.speed,
+                    player.response_time)
             positions.add((player.lane, player.speed))
