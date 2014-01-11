@@ -1,5 +1,4 @@
 import time
-from collections import namedtuple
 from twisted.internet import reactor
 from twisted.internet import task
 import pygame
@@ -7,9 +6,6 @@ from rtp.common import config, message
 import track, car, component, world
 
 author = 'gickowic'
-
-
-CarPosition = namedtuple('CarPosition', ['x', 'y'])
 
 
 class Game(component.Component):
@@ -24,7 +20,7 @@ class Game(component.Component):
                      car.Car(2, 1, 4),
                      car.Car(3, 2, 4),
                      car.Car(4, 3, 4)]
-        self.world = world.world(self.track)
+        self.world = world.generate_world(self)
         pygame.init()
         self.surface = pygame.display.set_mode(config.window_size)
         self.looper = task.LoopingCall(self.tick)
@@ -49,10 +45,8 @@ class Game(component.Component):
             self.cars[player['car']].update(player)
         self.draw(self.surface)
 
-        car = self.cars[self.players[self.name]['car']]
-        car_position = CarPosition(car.lane, car.speed)
         start = time.time()
-        action = self.drive_func(car_position, self.world)
+        action = self.drive_func(self.world)
         response_time = time.time() - start
         msg = message.Message('drive', {"action": action,
                                         "response_time": response_time})
@@ -71,6 +65,12 @@ class Game(component.Component):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 reactor.stop()
+
+    # Accessing
+
+    @property
+    def car(self):
+        return self.cars[self.players[self.name]['car']]
 
     # Handling client events
 

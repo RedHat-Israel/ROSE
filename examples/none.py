@@ -4,5 +4,5 @@ This driver does not do any action.
 from rtp.common import obstacles, actions
 
 
-def drive(your_car_location, world):
+def drive(world):
     return actions.NONE

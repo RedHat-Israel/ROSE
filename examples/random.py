@@ -8,5 +8,5 @@ import random
 from rtp.common import obstacles, actions
 
 
-def drive(your_car_location, world):
+def drive(world):
     return random.choice(actions.ALL)
