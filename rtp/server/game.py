@@ -77,10 +77,10 @@ class Game(object):
         return {'track': self.track.state(), 'players': players}
 
     def process_actions(self):
-        # Drivers with smaller response time move first, overriding slower
-        # drivers.
+        # Process first the leading drivers, preferring those with faster
+        # response time.
         players = sorted(self.players.itervalues(),
-                         key=operator.attrgetter('response_time'))
+                         key=operator.attrgetter('speed', 'response_time'))
         positions = set()
 
         for player in players:
