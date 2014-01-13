@@ -6,9 +6,8 @@ class Player(object):
     def __init__(self, name, car):
         self.name = name
         self.car = car
-        self.speed = 4  # y - location, between 0 to 8 on the board
+        self.speed = 6   # y - location, between 0 to 8 on the board
         self.lane = car  # x - between 0-3
-        self.life = config.max_lives  # means how many blocks we can handle
         self.action = actions.NONE
         self.response_time = 1.0
 
@@ -22,5 +21,4 @@ class Player(object):
         return {'name': self.name,
                 'car': self.car,
                 'speed': self.speed,
-                'lane': self.lane,
-                'life': self.life}
+                'lane': self.lane}

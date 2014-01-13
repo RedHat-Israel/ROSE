@@ -22,13 +22,10 @@ def drive(world):
 # Scores:
 #
 # 5 - I can pick up a penguin *now*
-# 4 - I can handle next obstacle (none, water, crack)
-# 3 - I can switch lane and pick up a penguin later
+# 4 - I can switch lane and pick up a penguin later
+# 3 - I can handle next obstacle (none, water, crack)
 # 2 - I can switch to a lane without a penguin
 # 1 - I cannot handle next obstacle (bike, trash, barier)
-#
-# Note: Turning is dangerous, since I can bump into other cars, so these
-# actions get lower score.
 
 def check_forward(world, (x, y), options):
     try:
@@ -38,13 +35,13 @@ def check_forward(world, (x, y), options):
             options.append((5, actions.PICKUP))
         elif obstacle == obstacles.WATER:
             print 'check_forward obstacle:', obstacle, 'score: 4 action:', actions.BRAKE
-            options.append((4, actions.BRAKE))
+            options.append((3, actions.BRAKE))
         elif obstacle == obstacles.CRACK:
             print 'check_forward obstacle:', obstacle, 'score: 4 action:', actions.JUMP
-            options.append((4, actions.JUMP))
+            options.append((3, actions.JUMP))
         elif obstacle == obstacles.NONE:
             print 'check_forward obstacle:', obstacle, 'score: 4 action:', actions.NONE
-            options.append((4, actions.NONE))
+            options.append((3, actions.NONE))
         else:
             print 'check_forward obstacle:', obstacle, 'score: 1 action:', actions.NONE
             options.append((1, actions.NONE))
@@ -67,7 +64,7 @@ def check_turn(world, (x, y), action, options):
     # I can switch, but how good is this lane?
     if penguin_ahead(world, (x, y - 1)):
         print 'check_turn:', 'penguin ahead in lane: %d' % x
-        options.append((3, action))
+        options.append((4, action))
     else:
         print 'check_turn:', 'no penguin ahead in lane: %d' % x
         options.append((2, action))
