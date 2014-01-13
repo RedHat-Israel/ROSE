@@ -1,5 +1,6 @@
 """
-This driver like to pickup peguins and jump over everything else.
+This driver like to switch lanes even when it does not need to, prefering right
+turn.
 """
 from rtp.common import obstacles, actions
 
