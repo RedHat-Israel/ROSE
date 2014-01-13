@@ -99,26 +99,26 @@ class Game(object):
             obstacle = self.track.get_obstacle(player.lane, player.speed)
             if obstacle == obstacles.CRACK:
                 if player.action != actions.JUMP:
-                    player.life -= 1
                     self.track.clear(player.lane, player.speed)
+                    player.speed += 1
             elif obstacle in (obstacles.TRASH,
                               obstacles.BIKE,
                               obstacles.BARRIER):
-                player.life -= 1
                 self.track.clear(player.lane, player.speed)
+                player.speed += 1
             elif obstacle == obstacles.WATER:
                 if player.action != actions.BRAKE:
-                    player.life -= 1
                     self.track.clear(player.lane, player.speed)
+                    player.speed += 1
             elif obstacle == obstacles.PENGIUN:
                 if player.action == actions.PICKUP:
-                    player.life += 1
                     self.track.clear(player.lane, player.speed)
+                    player.speed -= 1
 
-            # Set player speed
-
-            speed = config.matrix_height / 2 - player.life + config.max_lives
-            player.speed = min(config.matrix_height - 1, max(0, speed))
+            # Here we can end the game when player gets out of
+            # the track bounds. For now, just keep the player at the same
+            # location.
+            player.speed = min(config.matrix_height - 1, max(0, player.speed))
 
             # Finally forget action
             player.action = actions.NONE
