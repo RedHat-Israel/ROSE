@@ -14,21 +14,26 @@ class Game(object):
 
     def __init__(self):
         self.server = None
-        self.track = track.Track()
+        self.track = None
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.max_players))
         self.started = False
 
     def start(self):
-        assert not self.started
+        if self.started:
+            raise error.GameAlreadyStarted()
+        self.track = track.Track()
+        for player in self.players.values():
+            player.reset()
+        self.looper.start(1)
         self.started = True
-        self.looper.start(1, now=False)
 
     def stop(self):
-        if self.started:
-            self.looper.stop()
-            self.started = False
+        if not self.started:
+            raise error.GameNotStarted()
+        self.looper.stop()
+        self.started = False
 
     def add_player(self, name):
         if name in self.players:
@@ -39,9 +44,6 @@ class Game(object):
         self.free_cars.remove(car)
         print 'add player:', name, 'car:', car
         self.players[name] = player.Player(name, car)
-        # Start the game when the first player joins
-        if not self.started:
-            self.start()
 
     def remove_player(self, name):
         if name not in self.players:
@@ -49,9 +51,6 @@ class Game(object):
         player = self.players.pop(name)
         self.free_cars.add(player.lane)
         print 'remove player:', name, 'car:', player.car
-        # Stop the game when the first player leave
-        if not self.players:
-            self.stop()
 
     def drive_player(self, name, info):
         print 'drive_player:', name, info

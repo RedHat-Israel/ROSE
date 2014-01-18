@@ -1,5 +1,6 @@
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
+from twisted.web import server, resource, xmlrpc
 from rtp.common import config, error, message
 import game
 
@@ -78,8 +79,29 @@ class Server(protocol.ServerFactory):
             if player.name is not None:
                 player.sendLine(data)
 
+class XMLRPC(xmlrpc.XMLRPC):
+
+    def __init__(self, game):
+        self.game = game
+        xmlrpc.XMLRPC.__init__(self, allowNone=True)
+
+    def xmlrpc_start(self):
+        try:
+            self.game.start()
+        except error.GameAlreadyStarted as e:
+            raise xmlrpc.Fault(1, str(e))
+
+    def xmlrpc_stop(self):
+        try:
+            self.game.stop()
+        except error.GameNotStarted as e:
+            raise xmlrpc.Fault(1, str(e))
 
 def main():
     g = game.Game()
-    reactor.listenTCP(config.port, Server(g))
+    reactor.listenTCP(config.game_port, Server(g))
+    root = resource.Resource()
+    root.putChild('rpc2', XMLRPC(g))
+    site = server.Site(root)
+    reactor.listenTCP(config.web_port, site)
     reactor.run()
