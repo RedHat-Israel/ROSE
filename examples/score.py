@@ -1,6 +1,8 @@
 """
 This driver try to pick the action with the best score.
 """
+import random
+import itertools
 from rtp.common import obstacles, actions
 
 
@@ -12,11 +14,15 @@ def drive(world):
     check_turn(world, (x + 1, y), actions.RIGHT, options)
     check_turn(world, (x - 1, y), actions.LEFT, options)
 
-    # Pick the action with the best score
-    options.sort()
-    score, action = options[-1]
-    print 'action:', action
-    return action
+    # Pick the action with the best score. If several actions have the best
+    # score, pick one randomly.
+    options.sort(reverse=True)
+    print 'options:', options
+    for k, g in itertools.groupby(options, lambda x: x[0]):
+        best = list(g)
+        score, action = random.choice(best)
+        print 'score:', score, 'action:', action
+        return action
 
 
 # Scores:
