@@ -12,8 +12,8 @@ class Game(object):
     Implements the server for the car race
     """
 
-    def __init__(self, server):
-        self.server = server
+    def __init__(self):
+        self.server = None
         self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}

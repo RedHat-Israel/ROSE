@@ -49,8 +49,9 @@ class Player(basic.LineReceiver):
 class Server(protocol.ServerFactory):
     protocol = Player
 
-    def __init__(self):
-        self.game = game.Game(self)
+    def __init__(self, game):
+        game.server = self
+        self.game = game
         self.players = set()
 
     def playerConnected(self, player):
@@ -79,5 +80,6 @@ class Server(protocol.ServerFactory):
 
 
 def main():
-    reactor.listenTCP(config.port, Server())
+    g = game.Game()
+    reactor.listenTCP(config.port, Server(g))
     reactor.run()
