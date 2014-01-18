@@ -11,15 +11,23 @@ Requirements
 Running the game
 ----------------
 
-Start up to 4 clients:
-
-    ./rtp-client player-name drive-module
-
 Start the server on some machine:
 
     ./rtp-server
 
+Start up to 4 clients:
+
+    ./rtp-client player-name /path/to/driver.py
+
 For drive modules, see the examples direcotory.
+
+To start a race, use rtp-admin tool on any machine:
+
+    ./rtp-admin start
+
+To stop a race, use rtp-admin tool on any machine:
+
+    ./rtp-admin stop
 
 Note: Curently clients connect to localhost. To use a server on another
 machine, edit rtp/common/config.py and modify the host option to the server ip
@@ -30,4 +38,3 @@ Creating a tarball
 ------------------
 
     python setup.py sdist
-
