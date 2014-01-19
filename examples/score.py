@@ -27,7 +27,8 @@ def drive(world):
 
 # Scores:
 #
-# 5 - I can pick up a penguin *now*
+# 6 - I can pick up a penguin *now*
+# 5 - I can handle next obstacle and pick up a penguin later
 # 4 - I can switch lane and pick up a penguin later
 # 3 - I can handle next obstacle (none, water, crack)
 # 2 - I can switch to a lane without a penguin
@@ -37,20 +38,22 @@ def check_forward(world, (x, y), options):
     try:
         obstacle = world.get_obstacle((x, y))
         if obstacle == obstacles.PENGIUN:
-            print 'check_forward obstacle:', obstacle, 'score: 5 action:', actions.PICKUP
+            print 'check_forward obstacle:', obstacle, 'score: 6 action:', actions.PICKUP
             options.append((5, actions.PICKUP))
-        elif obstacle == obstacles.WATER:
-            print 'check_forward obstacle:', obstacle, 'score: 4 action:', actions.BRAKE
-            options.append((3, actions.BRAKE))
-        elif obstacle == obstacles.CRACK:
-            print 'check_forward obstacle:', obstacle, 'score: 4 action:', actions.JUMP
-            options.append((3, actions.JUMP))
-        elif obstacle == obstacles.NONE:
-            print 'check_forward obstacle:', obstacle, 'score: 4 action:', actions.NONE
-            options.append((3, actions.NONE))
-        else:
+        elif obstacle in (obstacles.TRASH, obstacles.BARRIER, obstacles.BIKE):
             print 'check_forward obstacle:', obstacle, 'score: 1 action:', actions.NONE
             options.append((1, actions.NONE))
+        else:
+            score = 5 if penguin_ahead(world, (x, y - 1)) else 3
+            if obstacle == obstacles.WATER:
+                print 'check_forward obstacle:', obstacle, 'score:', score, 'action:', actions.BRAKE
+                options.append((score, actions.BRAKE))
+            elif obstacle == obstacles.CRACK:
+                print 'check_forward obstacle:', obstacle, 'score:', score, 'action:', actions.JUMP
+                options.append((score, actions.JUMP))
+            elif obstacle == obstacles.NONE:
+                print 'check_forward obstacle:', obstacle, 'score:', score, 'action:', actions.NONE
+                options.append((score, actions.NONE))
     except IndexError:
         print 'check_forward obstacle: invalid', 'score: 4 action:', actions.NONE
         options.append((4, actions.NONE))
