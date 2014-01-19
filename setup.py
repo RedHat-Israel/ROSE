@@ -9,4 +9,4 @@ setup(name='RaananaTiraProject',
       author='Yaniv Bronhaim',
       author_email='ybronhei@redhat.com',
       url="https://github.com/emesika/RaananaTiraProject",
-      scripts=["rtp-client", "rtp-server"],)
+      scripts=["rtp-client", "rtp-server", "rtp-admin"],)

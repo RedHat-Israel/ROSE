@@ -25,3 +25,9 @@ class InvalidMessage(Error):
     def __init__(self, reason):
         self.args = (reason,)
     message = "Invalid message: %s"
+
+class GameAlreadyStarted(Error):
+    message = "Game already started"
+
+class GameNotStarted(Error):
+    message = "Game not started yet"

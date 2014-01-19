@@ -74,6 +74,6 @@ def main():
         d = {}
         exec f in d, d
 
-    reactor.connectTCP(config.host, config.port, ClientFactory(sys.argv[1],
-                                                               d['drive']))
+    reactor.connectTCP(config.host, config.game_port,
+                       ClientFactory(sys.argv[1], d['drive']))
     reactor.run()

@@ -1,3 +1,4 @@
+import traceback
 import time
 from twisted.internet import reactor
 from twisted.internet import task
@@ -44,13 +45,7 @@ class Game(component.Component):
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
         self.draw(self.surface)
-
-        start = time.time()
-        action = self.drive_func(self.world)
-        response_time = time.time() - start
-        msg = message.Message('drive', {"action": action,
-                                        "response_time": response_time})
-        self.client.send_message(msg)
+        self.drive()
 
     def draw(self, surface):
         surface.fill(config.background_color)
@@ -58,6 +53,20 @@ class Game(component.Component):
         for player in self.players.itervalues():
             self.cars[player['car']].draw(surface)
         pygame.display.flip()
+
+    # Driving
+
+    def drive(self):
+        start = time.time()
+        try:
+            action = self.drive_func(self.world)
+        except Exception:
+            traceback.print_exc()
+        else:
+            response_time = time.time() - start
+            msg = message.Message('drive', {"action": action,
+                                            "response_time": response_time})
+            self.client.send_message(msg)
 
     # Hanlding pygame events
 
