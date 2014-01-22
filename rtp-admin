@@ -1,33 +1,59 @@
 #!/usr/bin/env python
 
 import sys
+import os
 import xmlrpclib
 from rtp.common import config
 
-VERBS = ('start', 'stop')
+class Client(object):
 
-def main():
-    if len(sys.argv) != 2:
-        usage('No verb specified')
+    def __init__(self, args):
+        self.args = args
+        url = 'http://127.0.0.1:%d/rpc2' % config.web_port
+        self.server = xmlrpclib.Server(url)
 
-    verb = sys.argv[1]
-    if verb not in VERBS:
-        usage('unknown verb: %r' % verb)
+    def run(self):
+        if len(sys.argv) < 2:
+            self.usage('No verb specified')
 
-    url = 'http://127.0.0.1:%d/rpc2' % config.web_port
-    server = xmlrpclib.Server(url)
-    method = getattr(server, verb)
-    try:
-        method()
-    except Exception as e:
-        print e
-        sys.exit(1)
+        verb = self.args[1]
+        method_name = 'do_' + verb.replace('-', '_')
+        try:
+            method = getattr(self, method_name)
+        except AttributeError:
+            self.usage('Unknown verb: %r' % verb)
+        try:
+            method()
+        except Exception as e:
+            print e
+            sys.exit(1)
 
-def usage(msg):
-    if msg:
-        print msg
-    print 'usage: %s [%s]' % (sys.argv[0], '|'.join(VERBS))
-    sys.exit(2)
+    def do_start(self):
+        """start"""
+        self.server.start()
+
+    def do_stop(self):
+        """stop"""
+        self.server.stop()
+
+    def do_set_rate(self):
+        """set-rate RATE"""
+        if len(self.args) < 3:
+            self.usage("RATE required")
+        rate = float(self.args[2])
+        self.server.set_rate(rate)
+
+    def commands(self):
+        return sorted(getattr(self, name).__doc__
+                      for name in dir(self)
+                      if name.startswith('do_'))
+
+    def usage(self, msg):
+        if msg:
+            print msg
+        basename = os.path.basename(self.args[0])
+        print 'Usage: %s [%s]' % (basename, '|'.join(self.commands()))
+        sys.exit(2)
 
 if __name__ == '__main__':
-    main()
+    Client(sys.argv).run()
