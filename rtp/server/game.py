@@ -18,7 +18,21 @@ class Game(object):
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.max_players))
+        self._rate = config.game_rate
         self.started = False
+
+    @property
+    def rate(self):
+        return self._rate
+
+    @rate.setter
+    def rate(self, value):
+        if value != self._rate:
+            print 'change game rate to %d frames per second' % value
+            self._rate = value
+            if self.started:
+                self.looper.stop()
+                self.looper.start(1.0 / self._rate)
 
     def start(self):
         if self.started:
@@ -26,7 +40,7 @@ class Game(object):
         self.track = track.Track()
         for player in self.players.values():
             player.reset()
-        self.looper.start(1)
+        self.looper.start(1.0 / self._rate)
         self.started = True
 
     def stop(self):

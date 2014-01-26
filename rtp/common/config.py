@@ -6,6 +6,10 @@ host = "localhost"
 game_port = 8888
 web_port = 8880
 
+# Server
+
+game_rate = 1.0
+
 # Client
 
 frame_rate = 30

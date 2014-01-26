@@ -97,6 +97,9 @@ class XMLRPC(xmlrpc.XMLRPC):
         except error.GameNotStarted as e:
             raise xmlrpc.Fault(1, str(e))
 
+    def xmlrpc_set_rate(self, rate):
+        self.game.rate = rate
+
 def main():
     g = game.Game()
     reactor.listenTCP(config.game_port, Server(g))
