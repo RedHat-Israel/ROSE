@@ -6,8 +6,6 @@ import component
 
 class Car(component.Component):
 
-    jitter = 20
-
     def __init__(self, id, lane, speed):
         self.id = id
         self.lane = lane
@@ -27,8 +25,8 @@ class Car(component.Component):
     def draw(self, surface):
         x = config.left_margin + self.lane * config.cell_width
         y = self.speed * config.row_height
-        x += random.randrange(self.jitter) - self.jitter/2
-        y += random.randrange(self.jitter) - self.jitter/2
+        x += random.randrange(config.car_jitter) - config.car_jitter/2
+        y += random.randrange(config.car_jitter) - config.car_jitter/2
         surface.blit(self.texture, (x, y))
         self.draw_label(surface, (x, y))
 

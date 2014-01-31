@@ -12,6 +12,7 @@ game_rate = 1.0
 # Client
 
 frame_rate = 30
+car_jitter = 10
 
 # Window
 
