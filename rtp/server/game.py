@@ -63,7 +63,7 @@ class Game(object):
         if name not in self.players:
             raise error.NoSuchPlayer(name)
         player = self.players.pop(name)
-        self.free_cars.add(player.lane)
+        self.free_cars.add(player.car)
         print 'remove player:', name, 'car:', player.car
 
     def drive_player(self, name, info):
