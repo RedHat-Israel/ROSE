@@ -5,6 +5,8 @@ import random
 import itertools
 from rtp.common import obstacles, actions
 
+server_address = "localhost"
+driver_name = "Score"
 
 def drive(world):
     # Calculate the score for each action and collect the results

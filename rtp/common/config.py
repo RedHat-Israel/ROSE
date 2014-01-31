@@ -2,7 +2,6 @@ import os
 
 # Networking
 
-host = "localhost"
 game_port = 8888
 web_port = 8880
 

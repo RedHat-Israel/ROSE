@@ -66,14 +66,14 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 
 def main():
-    if len(sys.argv) < 3:
-        print 'usage: start_client player-name player-drive_module'
+    if len(sys.argv) < 2:
+        print 'usage: rtp-client drive-module'
         sys.exit(2)
 
-    with open(sys.argv[2]) as f:
+    with open(sys.argv[1]) as f:
         d = {}
         exec f in d, d
 
-    reactor.connectTCP(config.host, config.game_port,
-                       ClientFactory(sys.argv[1], d['drive']))
+    reactor.connectTCP(d['server_address'], config.game_port,
+                       ClientFactory(d['driver_name'], d['drive']))
     reactor.run()
