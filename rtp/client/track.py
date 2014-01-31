@@ -24,6 +24,10 @@ class Track(component.Component):
 
     def update(self, info):
         self._matrix = info['track']
+        if info['started']:
+            # Simulate track movement
+            last = self._road_textures.pop()
+            self._road_textures.insert(0, last)
 
     def draw(self, surface):
         # draw road background:
