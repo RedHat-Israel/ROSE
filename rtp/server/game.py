@@ -123,7 +123,7 @@ class Game(object):
                 if player.action != actions.BRAKE:
                     self.track.clear(player.lane, player.speed)
                     player.speed += 1
-            elif obstacle == obstacles.PENGIUN:
+            elif obstacle == obstacles.PENGUIN:
                 if player.action == actions.PICKUP:
                     self.track.clear(player.lane, player.speed)
                     player.speed -= 1

@@ -13,7 +13,7 @@ def drive(world):
             obstacle = world.get_obstacle(pos)
         except IndexError:
             return False
-        return obstacle in (obstacles.NONE, obstacles.PENGIUN)
+        return obstacle in (obstacles.NONE, obstacles.PENGUIN)
 
     print 'POSITION: x=%s y=%s' % (world.car.x, world.car.y)
 
@@ -23,7 +23,7 @@ def drive(world):
     # Check cell above the car (y-1)
     up = world.car.x, world.car.y - 1
     if valid_move(up):
-        if world.get_obstacle(up) == obstacles.PENGIUN:
+        if world.get_obstacle(up) == obstacles.PENGUIN:
             print 'PICK'
             return actions.PICKUP
         else:
