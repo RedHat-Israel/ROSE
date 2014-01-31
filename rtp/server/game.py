@@ -1,6 +1,6 @@
 import random
 import operator
-from twisted.internet import task
+from twisted.internet import reactor, task
 
 from rtp.common import actions, config, error, message, obstacles
 import track
@@ -14,7 +14,7 @@ class Game(object):
 
     def __init__(self):
         self.server = None
-        self.track = None
+        self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.max_players))
@@ -37,7 +37,7 @@ class Game(object):
     def start(self):
         if self.started:
             raise error.GameAlreadyStarted()
-        self.track = track.Track()
+        self.track.reset()
         for player in self.players.values():
             player.reset()
         self.looper.start(1.0 / self._rate)
@@ -58,6 +58,7 @@ class Game(object):
         self.free_cars.remove(car)
         print 'add player:', name, 'car:', car
         self.players[name] = player.Player(name, car)
+        reactor.callLater(0, self.update_players)
 
     def remove_player(self, name):
         if name not in self.players:
@@ -65,6 +66,7 @@ class Game(object):
         player = self.players.pop(name)
         self.free_cars.add(player.car)
         print 'remove player:', name, 'car:', player.car
+        reactor.callLater(0, self.update_players)
 
     def drive_player(self, name, info):
         print 'drive_player:', name, info
@@ -81,13 +83,20 @@ class Game(object):
     def loop(self):
         self.track.update()
         self.process_actions()
+        self.update_players()
+
+    def update_players(self):
         msg = message.Message('update', self.state())
         self.server.broadcast(msg)
 
     def state(self):
-        players = dict((name, player.state())
-                       for name, player in self.players.iteritems())
-        return {'track': self.track.state(), 'players': players}
+        return {'started': self.started,
+                'track': self.track.state(),
+                'players': self.players_state()}
+
+    def players_state(self):
+        return dict((name, player.state()) for name, player in
+                    self.players.iteritems())
 
     def process_actions(self):
         # Process first the leading drivers, preferring those with faster

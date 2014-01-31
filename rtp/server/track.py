@@ -5,8 +5,8 @@ from rtp.common import config, obstacles
 class Track(object):
 
     def __init__(self):
-        self._matrix = [[obstacles.NONE] * config.matrix_width
-                        for x in range(config.matrix_height)]
+        self._matrix = None
+        self.reset()
 
     # Game state interface
 
@@ -28,6 +28,10 @@ class Track(object):
     def clear(self, x, y):
         """ Clear obstacle in position x, y """
         self._matrix[y][x] = obstacles.NONE
+
+    def reset(self):
+        self._matrix = [[obstacles.NONE] * config.matrix_width
+                        for x in range(config.matrix_height)]
 
     # Private
 

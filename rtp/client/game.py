@@ -45,7 +45,8 @@ class Game(component.Component):
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
         self.draw(self.surface)
-        self.drive()
+        if info['started']:
+            self.drive()
 
     def draw(self, surface):
         surface.fill(config.background_color)
