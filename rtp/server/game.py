@@ -138,7 +138,8 @@ class Game(object):
 
             # Fix up collisions
 
-            while (player.lane, player.speed) in positions:
+            if (player.lane, player.speed) in positions:
+                print 'fix up collisions for player', player.name
                 if player.speed < config.matrix_height - 1:
                     player.speed += 1
                 elif player.lane > 0:
