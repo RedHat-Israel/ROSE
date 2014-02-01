@@ -4,6 +4,8 @@ turn.
 """
 from rtp.common import obstacles, actions
 
+server_address = "localhost"
+driver_name = "Zig Zag"
 
 def drive(world):
     def valid_move(pos):
