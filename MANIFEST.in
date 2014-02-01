@@ -1,2 +1,2 @@
-include AUTHORS COPYING README
+include AUTHORS LICENSE README
 recursive-include examples *

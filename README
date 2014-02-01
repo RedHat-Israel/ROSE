@@ -29,11 +29,10 @@ To stop a race, use rtp-admin tool on any machine:
 
     ./rtp-admin stop
 
-To modify the game rate, you can use set-rate. This commnad would increate game
-rate to 10 frames per second:
+To modify the game rate, you can use set-rate command. The following command
+would change game rate to 10 frames per second:
 
     ./rtp-admin set-rate 10
-
 
 Creating a tarball
 ------------------
