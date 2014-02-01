@@ -39,7 +39,7 @@ def drive(world):
 def check_forward(world, (x, y), options):
     try:
         obstacle = world.get_obstacle((x, y))
-        if obstacle == obstacles.PENGIUN:
+        if obstacle == obstacles.PENGUIN:
             print 'check_forward obstacle:', obstacle, 'score: 6 action:', actions.PICKUP
             options.append((5, actions.PICKUP))
         elif obstacle in (obstacles.TRASH, obstacles.BARRIER, obstacles.BIKE):
@@ -68,7 +68,7 @@ def check_turn(world, (x, y), action, options):
     except IndexError:
         print 'check_turn: cannot switch to lane: %d' % x
         return  # No
-    if obstacle not in (obstacles.NONE, obstacles.PENGIUN):
+    if obstacle not in (obstacles.NONE, obstacles.PENGUIN):
         print 'check_turn: obstacle:', obstacle, 'score: 1 action:', action
         options.append((1, action))
         return
@@ -87,7 +87,7 @@ def penguin_ahead(world, (x, y)):
             obstacle = world.get_obstacle((x, y))
         except IndexError:
             return False
-        if obstacle == obstacles.PENGIUN:
+        if obstacle == obstacles.PENGUIN:
             return True
         if obstacle in (obstacles.TRASH, obstacles.BARRIER, obstacles.BIKE):
             return False
