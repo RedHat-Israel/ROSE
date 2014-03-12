@@ -25,6 +25,9 @@ class Player(object):
         self.response_time = 1.0
         self.life = 0
 
+    def __cmp__(self, other):
+        return cmp((self.speed, -self.life), (other.speed, -other.life))
+
     def state(self):
         """ Return read only serialize-able state for sending to client """
         return {'name': self.name,
