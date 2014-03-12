@@ -5,20 +5,24 @@ import os
 import xmlrpclib
 from rtp.common import config
 
-server_address = 'localhost'
-
 class Client(object):
 
     def __init__(self, args):
         self.args = args
+        self.server = None
+
+    def run(self):
+        if len(self.args) < 2:
+            self.usage('server-address required')
+
+        server_address = self.args[1]
         url = 'http://%s:%d/rpc2' % (server_address, config.web_port)
         self.server = xmlrpclib.Server(url)
 
-    def run(self):
-        if len(sys.argv) < 2:
-            self.usage('No verb specified')
+        if len(self.args) < 3:
+            self.usage('Verb required')
 
-        verb = self.args[1]
+        verb = self.args[2]
         method_name = 'do_' + verb.replace('-', '_')
         try:
             method = getattr(self, method_name)
@@ -40,9 +44,9 @@ class Client(object):
 
     def do_set_rate(self):
         """set-rate RATE"""
-        if len(self.args) < 3:
+        if len(self.args) < 4:
             self.usage("RATE required")
-        rate = float(self.args[2])
+        rate = float(self.args[3])
         self.server.set_rate(rate)
 
     def commands(self):
@@ -50,11 +54,12 @@ class Client(object):
                       for name in dir(self)
                       if name.startswith('do_'))
 
-    def usage(self, msg):
+    def usage(self, msg=None):
         if msg:
             print msg
         basename = os.path.basename(self.args[0])
-        print 'Usage: %s [%s]' % (basename, '|'.join(self.commands()))
+        commands = '|'.join(self.commands())
+        print 'Usage: %s <server-address> [%s]' % (basename, commands)
         sys.exit(2)
 
 if __name__ == '__main__':
