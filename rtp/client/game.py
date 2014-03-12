@@ -1,4 +1,3 @@
-import traceback
 import time
 from twisted.internet import reactor
 from twisted.internet import task
@@ -62,12 +61,15 @@ class Game(component.Component):
         try:
             action = self.drive_func(self.world)
         except Exception:
-            traceback.print_exc()
-        else:
-            response_time = time.time() - start
-            msg = message.Message('drive', {"action": action,
-                                            "response_time": response_time})
-            self.client.send_message(msg)
+            # Make it easy to detect and handle errors by crashing loudly. In
+            # the past we used to print a traceback and continue, and students
+            # had trouble detecting and handling errors.
+            reactor.stop()
+            raise
+        response_time = time.time() - start
+        msg = message.Message('drive', {"action": action,
+                                        "response_time": response_time})
+        self.client.send_message(msg)
 
     # Hanlding pygame events
 
