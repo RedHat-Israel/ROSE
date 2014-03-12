@@ -99,5 +99,5 @@ class Game(component.Component):
         print 'client error:', error.get('message')
 
     def client_update(self, info):
-        print 'client_update', info
+        #print 'client_update', info
         self.update(info)
