@@ -136,6 +136,7 @@ class Game(object):
                 if player.action == actions.PICKUP:
                     self.track.clear(player.lane, player.speed)
                     player.speed -= 1
+                    player.life += 1
 
             # Here we can end the game when player gets out of
             # the track bounds. For now, just keep the player at the same
@@ -156,7 +157,7 @@ class Game(object):
                 elif player.lane < config.matrix_width - 1:
                     player.lane += 1
 
-            print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f' % (
+            print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f life=%d' % (
                     player.name, player.car, player.lane, player.speed,
-                    player.response_time)
+                    player.response_time, player.life)
             positions.add((player.lane, player.speed))

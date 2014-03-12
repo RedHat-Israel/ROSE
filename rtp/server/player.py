@@ -10,6 +10,7 @@ class Player(object):
         self.lane = None
         self.action = None
         self.response_time = None
+        self.life = None
         self.reset()
 
     # Game state interface
@@ -22,10 +23,12 @@ class Player(object):
         self.lane = self.car  # x - between 0-3
         self.action = actions.NONE
         self.response_time = 1.0
+        self.life = 0
 
     def state(self):
         """ Return read only serialize-able state for sending to client """
         return {'name': self.name,
                 'car': self.car,
                 'speed': self.speed,
-                'lane': self.lane}
+                'lane': self.lane,
+                'life': self.life}
