@@ -97,6 +97,7 @@ class Game(component.Component):
 
     def client_error(self, error):
         print 'client error:', error.get('message')
+        reactor.stop()
 
     def client_update(self, info):
         print 'client_update', info
