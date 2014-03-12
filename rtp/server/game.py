@@ -48,6 +48,7 @@ class Game(object):
             raise error.GameNotStarted()
         self.looper.stop()
         self.started = False
+        self.print_stats()
 
     def add_player(self, name):
         if name in self.players:
@@ -79,6 +80,13 @@ class Game(object):
             raise error.InvalidMessage("invalid drive action %s" % action)
         self.players[name].action = action
         self.players[name].response_time = info.get('response_time', 1.0)
+
+    def print_stats(self):
+        print
+        print 'Stats'
+        for i, p in enumerate(sorted(self.players.values())):
+            print '%d  %10s  row:%d  life:%d' % (i+1, p.name, p.speed, p.life)
+        print
 
     def loop(self):
         self.track.update()
