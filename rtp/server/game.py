@@ -48,6 +48,7 @@ class Game(object):
             raise error.GameNotStarted()
         self.looper.stop()
         self.started = False
+        self.print_stats()
 
     def add_player(self, name):
         if name in self.players:
@@ -79,6 +80,13 @@ class Game(object):
             raise error.InvalidMessage("invalid drive action %s" % action)
         self.players[name].action = action
         self.players[name].response_time = info.get('response_time', 1.0)
+
+    def print_stats(self):
+        print
+        print 'Stats'
+        for i, p in enumerate(sorted(self.players.values())):
+            print '%d  %10s  row:%d  life:%d' % (i+1, p.name, p.speed, p.life)
+        print
 
     def loop(self):
         self.track.update()
@@ -136,6 +144,7 @@ class Game(object):
                 if player.action == actions.PICKUP:
                     self.track.clear(player.lane, player.speed)
                     player.speed -= 1
+                    player.life += 1
 
             # Here we can end the game when player gets out of
             # the track bounds. For now, just keep the player at the same
@@ -156,7 +165,7 @@ class Game(object):
                 elif player.lane < config.matrix_width - 1:
                     player.lane += 1
 
-            print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f' % (
+            print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f life=%d' % (
                     player.name, player.car, player.lane, player.speed,
-                    player.response_time)
+                    player.response_time, player.life)
             positions.add((player.lane, player.speed))
