@@ -42,6 +42,7 @@ class Game(object):
         self.track.reset()
         for player in self.players.values():
             player.reset()
+        self._duration = config.game_duration
         self.looper.start(1.0 / self._rate)
         self.started = True
 
