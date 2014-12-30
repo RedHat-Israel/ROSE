@@ -8,8 +8,7 @@ class Car(component.Component):
 
     def __init__(self, id, lane, speed):
         self.id = id
-        self.lane = lane
-        self.speed = speed
+        self.position = [lane, speed]
         self.texture = None
         self.name = None
 
@@ -18,13 +17,12 @@ class Car(component.Component):
         self.texture = pygame.image.load(path)
 
     def update(self, info):
-        self.lane = info['lane']
-        self.speed = info['speed']
+        self.position = info['position']
         self.name = info['name']
 
     def draw(self, surface):
-        x = config.left_margin + self.lane * config.cell_width
-        y = self.speed * config.row_height
+        x = config.left_margin + self.position[0] * config.cell_width
+        y = self.position[1] * config.row_height
         x += random.randrange(config.car_jitter) - config.car_jitter/2
         y += random.randrange(config.car_jitter) - config.car_jitter/2
         surface.blit(self.texture, (x, y))
