@@ -15,7 +15,7 @@ Start the server on some machine:
 
     ./rtp-server
 
-Start up to 4 clients:
+Start up to 2 clients:
 
     ./rtp-client mydriver.py
 
