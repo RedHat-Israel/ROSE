@@ -3,9 +3,10 @@ from rtp.common import actions, config
 
 class Player(object):
 
-    def __init__(self, name, car):
+    def __init__(self, name, car, lane=0):
         self.name = name
         self.car = car
+        self.lane = lane
         self.position = None
         self.action = None
         self.response_time = None
@@ -33,4 +34,5 @@ class Player(object):
         return {'name': self.name,
                 'car': self.car,
                 'position': self.position,
+                'lane': self.lane,
                 'life': self.life}
