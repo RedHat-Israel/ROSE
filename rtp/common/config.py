@@ -43,6 +43,8 @@ obstacles_glob = os.path.join(install_dir, '../res/obstacles/obstacle*.png')
 road_glob = os.path.join(install_dir, '../res/bg/bg*.png')
 cars_dir = os.path.join(install_dir, '../res/cars')
 dashboard_png = os.path.join(install_dir, '../res/dashboard/dashboard.png')
+splash_png = os.path.join(install_dir, '../res/splash/splash_screen.png')
+end_png = os.path.join(install_dir, '../res/end/final_flag.png')
 
 # Player
 
