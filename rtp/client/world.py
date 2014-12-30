@@ -12,12 +12,12 @@ def generate_world(game):
         @property
         def x(self):
             """ Returns car x position in game logical units """
-            return game.car.lane
+            return game.car.position[0]
 
         @property
         def y(self):
             """ Returns car y position in game logical units """
-            return game.car.speed
+            return game.car.position[1]
 
     car = Car()
 

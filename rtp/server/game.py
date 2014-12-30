@@ -85,7 +85,7 @@ class Game(object):
         print
         print 'Stats'
         for i, p in enumerate(sorted(self.players.values())):
-            print '%d  %10s  row:%d  life:%d' % (i+1, p.name, p.speed, p.life)
+            print '%d  %10s  row:%d  life:%d' % (i+1, p.name, p.position[1], p.life)
         print
 
     def loop(self):
@@ -110,7 +110,7 @@ class Game(object):
         # Process first the leading drivers, preferring those with faster
         # response time.
         players = sorted(self.players.itervalues(),
-                         key=operator.attrgetter('speed', 'response_time'))
+                         key=lambda p: (p.position[1] , p.response_time))
         positions = set()
 
         for player in players:
@@ -118,54 +118,54 @@ class Game(object):
             # First move playe, keeping inside the track
 
             if player.action == actions.LEFT:
-                if player.lane > 0:
-                    player.lane -= 1
+                if player.position[0] > 0:
+                    player.position[0] -= 1
             elif player.action == actions.RIGHT:
-                if player.lane < config.max_players - 1:
-                    player.lane += 1
+                if player.position[0] < config.max_players - 1:
+                    player.position[0] += 1
 
             # Now check if player hit any obstacle
 
-            obstacle = self.track.get_obstacle(player.lane, player.speed)
+            obstacle = self.track.get_obstacle(player.position[0], player.position[1])
             if obstacle == obstacles.CRACK:
                 if player.action != actions.JUMP:
-                    self.track.clear(player.lane, player.speed)
-                    player.speed += 1
+                    self.track.clear(player.position[0], player.position[1])
+                    player.position[1] += 1
             elif obstacle in (obstacles.TRASH,
                               obstacles.BIKE,
                               obstacles.BARRIER):
-                self.track.clear(player.lane, player.speed)
-                player.speed += 1
+                self.track.clear(player.position[0], player.position[1])
+                player.position[1] += 1
             elif obstacle == obstacles.WATER:
                 if player.action != actions.BRAKE:
-                    self.track.clear(player.lane, player.speed)
-                    player.speed += 1
+                    self.track.clear(player.position[0], player.position[1])
+                    player.position[1] += 1
             elif obstacle == obstacles.PENGUIN:
                 if player.action == actions.PICKUP:
-                    self.track.clear(player.lane, player.speed)
-                    player.speed -= 1
+                    self.track.clear(player.position[0], player.position[1])
+                    player.position[1] -= 1
                     player.life += 1
 
             # Here we can end the game when player gets out of
             # the track bounds. For now, just keep the player at the same
             # location.
-            player.speed = min(config.matrix_height - 1, max(0, player.speed))
+            player.position[1] = min(config.matrix_height - 1, max(0, player.position[1]))
 
             # Finally forget action
             player.action = actions.NONE
 
             # Fix up collisions
 
-            if (player.lane, player.speed) in positions:
+            if (player.position[0], player.position[1]) in positions:
                 print 'fix up collisions for player', player.name
-                if player.speed < config.matrix_height - 1:
-                    player.speed += 1
-                elif player.lane > 0:
-                    player.lane -= 1
-                elif player.lane < config.matrix_width - 1:
-                    player.lane += 1
+                if player.position[1] < config.matrix_height - 1:
+                    player.position[1] += 1
+                elif player.position[0] > 0:
+                    player.position[0] -= 1
+                elif player.position[0] < config.matrix_width - 1:
+                    player.position[0] += 1
 
             print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f life=%d' % (
-                    player.name, player.car, player.lane, player.speed,
+                    player.name, player.car, player.position[0], player.position[1],
                     player.response_time, player.life)
-            positions.add((player.lane, player.speed))
+            positions.add((player.position[0], player.position[1]))

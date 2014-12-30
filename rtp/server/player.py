@@ -6,8 +6,7 @@ class Player(object):
     def __init__(self, name, car):
         self.name = name
         self.car = car
-        self.speed = None
-        self.lane = None
+        self.position = None
         self.action = None
         self.response_time = None
         self.life = None
@@ -19,19 +18,19 @@ class Player(object):
         """ Go to the next game state """
 
     def reset(self):
-        self.speed = 6   # y - location, between 0 to 8 on the board
-        self.lane = self.car  # x - between 0-3
+        # x - between 0-3
+        # y - location, between 0 to 8 on the board
+        self.position = [self.car, 6]
         self.action = actions.NONE
         self.response_time = 1.0
         self.life = 0
 
     def __cmp__(self, other):
-        return cmp((self.speed, -self.life), (other.speed, -other.life))
+        return cmp((self.position[1], -self.life), (other.position[1], -other.life))
 
     def state(self):
         """ Return read only serialize-able state for sending to client """
         return {'name': self.name,
                 'car': self.car,
-                'speed': self.speed,
-                'lane': self.lane,
+                'position': self.position,
                 'life': self.life}
