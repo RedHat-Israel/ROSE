@@ -8,6 +8,7 @@ web_port = 8880
 # Server
 
 game_rate = 1.0
+game_duration = 60
 
 # Client
 

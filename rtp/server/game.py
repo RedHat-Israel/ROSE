@@ -21,6 +21,7 @@ class Game(object):
         self.free_lanes = set(range(config.max_players))
         self._rate = config.game_rate
         self.started = False
+        self._duration = config.game_duration
 
     @property
     def rate(self):
@@ -93,6 +94,10 @@ class Game(object):
         print
 
     def loop(self):
+        self._duration -= 1
+        if self._duration < 0:
+            self.stop()
+            return
         self.track.update()
         self.process_actions()
         self.update_players()
@@ -104,7 +109,8 @@ class Game(object):
     def state(self):
         return {'started': self.started,
                 'track': self.track.state(),
-                'players': self.players_state()}
+                'players': self.players_state(),
+                'timeleft': self._duration}
 
     def players_state(self):
         return dict((name, player.state()) for name, player in

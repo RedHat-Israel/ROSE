@@ -47,7 +47,7 @@ class Game(component.Component):
     def update(self, info):
         self.track.update(info)
         self.players = info['players']
-        self.dashboard.update(self.players)
+        self.dashboard.update(self.players, info["timeleft"])
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
         self.draw(self.surface)
