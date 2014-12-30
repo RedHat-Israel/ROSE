@@ -66,5 +66,5 @@ class Track(component.Component):
     def _get_surface_coordinates(self, x, y):
         """ Convert matrix coordinates to surface coordinates """
         surface_x = config.left_margin + x * config.cell_width
-        surface_y = config.top_margin + y * config.row_height
+        surface_y = config.dashboard_height + config.top_margin + y * config.row_height
         return surface_x, surface_y
