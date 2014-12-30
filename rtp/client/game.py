@@ -7,6 +7,7 @@ import track
 import car
 import world
 import dashboard
+import component
 
 author = 'gickowic'
 
