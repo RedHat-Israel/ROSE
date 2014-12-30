@@ -3,7 +3,10 @@ from twisted.internet import reactor
 from twisted.internet import task
 import pygame
 from rtp.common import config, message
-import track, car, component, world
+import track
+import car
+import world
+import dashboard
 
 author = 'gickowic'
 
@@ -15,6 +18,7 @@ class Game(component.Component):
         self.drive_func = drive_func
         self.name = name
         self.track = track.Track()
+        self.dashboard = dashboard.Dashboard()
         self.players = {}
         self.cars = [car.Car(1, 0, 4),
                      car.Car(2, 1, 4),
@@ -34,6 +38,7 @@ class Game(component.Component):
     def init(self):
         pygame.display.set_caption(config.window_caption + ' - ' + self.name)
         self.track.init()
+        self.dashboard.init()
         for car in self.cars:
             car.init()
         self.draw(self.surface)
@@ -41,6 +46,7 @@ class Game(component.Component):
     def update(self, info):
         self.track.update(info)
         self.players = info['players']
+        self.dashboard.update(self.players)
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
         self.draw(self.surface)
@@ -50,6 +56,7 @@ class Game(component.Component):
     def draw(self, surface):
         surface.fill(config.background_color)
         self.track.draw(surface)
+        self.dashboard.draw(surface)
         for player in self.players.itervalues():
             self.cars[player['car']].draw(surface)
         pygame.display.flip()
