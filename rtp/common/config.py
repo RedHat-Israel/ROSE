@@ -38,4 +38,4 @@ cars_dir = os.path.join(install_dir, '../res/cars')
 
 # Player
 
-max_players = 4
+max_players = 2
