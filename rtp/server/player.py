@@ -3,7 +3,7 @@ from rtp.common import actions, config, core
 
 class Player(object):
 
-    def __init__(self, name, car, lane=0):
+    def __init__(self, name, car, lane):
         self.name = name
         self.car = car
         self.lane = lane
@@ -19,9 +19,10 @@ class Player(object):
         """ Go to the next game state """
 
     def reset(self):
-        # x - between 0-3
-        # y - location, between 0 to 8 on the board
-        self.position = core.Point(self.car, 6)
+        # x: | |0| | |1 | |
+        # y: 2 / 3 of the track
+        self.position = core.Point(self.lane * 3 + 1,
+                                   config.matrix_height / 3 * 2)
         self.action = actions.NONE
         self.response_time = 1.0
         self.life = 0
