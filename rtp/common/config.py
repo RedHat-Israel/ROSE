@@ -14,12 +14,6 @@ game_rate = 1.0
 frame_rate = 30
 car_jitter = 10
 
-# Window
-
-background_color = 0, 0, 0
-window_size = 650, 585
-window_caption = "Raanana Tira Project"
-
 # Matrix
 
 matrix_height = 9
@@ -29,6 +23,12 @@ cell_width = 130
 left_margin = 95
 top_margin = 10
 
+# Window
+
+background_color = 0, 0, 0
+window_caption = "Raanana Tira Project"
+window_size = ((cell_width*(matrix_width+1) )),\
+              (row_height * matrix_height)
 # Files
 
 install_dir = os.path.dirname(__file__)
