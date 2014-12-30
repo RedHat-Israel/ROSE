@@ -6,9 +6,9 @@ import component
 
 class Car(component.Component):
 
-    def __init__(self, id, lane, speed):
+    def __init__(self, id, x, y):
         self.id = id
-        self.position = [lane, speed]
+        self.position = [x, y]
         self.texture = None
         self.name = None
 
