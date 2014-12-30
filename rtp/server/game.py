@@ -18,6 +18,7 @@ class Game(object):
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.max_players))
+        self.free_lanes = set(range(config.max_players))
         self._rate = config.game_rate
         self.started = False
 
@@ -57,8 +58,10 @@ class Game(object):
             raise error.TooManyPlayers()
         car = random.choice(tuple(self.free_cars))
         self.free_cars.remove(car)
-        print 'add player:', name, 'car:', car
-        self.players[name] = player.Player(name, car)
+        lane = random.choice(tuple(self.free_lanes))
+        self.free_lanes.remove(lane)
+        print 'add player:', name, 'lane:', lane, 'car:', car
+        self.players[name] = player.Player(name, car, lane)
         reactor.callLater(0, self.update_players)
 
     def remove_player(self, name):
@@ -66,7 +69,8 @@ class Game(object):
             raise error.NoSuchPlayer(name)
         player = self.players.pop(name)
         self.free_cars.add(player.car)
-        print 'remove player:', name, 'car:', player.car
+        self.free_lanes.add(player.lane)
+        print 'remove player:', name, 'lane:', player.lane, 'car:', player.car
         reactor.callLater(0, self.update_players)
 
     def drive_player(self, name, info):
