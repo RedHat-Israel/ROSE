@@ -29,8 +29,12 @@ dashboard_height = 150
 
 background_color = 0, 0, 0
 window_caption = "ROSE Project"
-window_size = ((cell_width*(matrix_width+1) )),\
-              (row_height * matrix_height)+dashboard_height
+windows_width = cell_width*(matrix_width+1)
+windows_height = (row_height * matrix_height)+dashboard_height
+window_size = windows_width, windows_height
+
+player_name_pos = 35
+player_score_pos = 70
 # Files
 
 install_dir = os.path.dirname(__file__)
