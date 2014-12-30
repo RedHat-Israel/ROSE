@@ -1,7 +1,7 @@
 import random
 import pygame
 import os
-from rtp.common import config
+from rtp.common import config, core
 import component
 
 class Car(component.Component):
@@ -17,12 +17,12 @@ class Car(component.Component):
         self.texture = pygame.image.load(path)
 
     def update(self, info):
-        self.position = info['position']
+        self.position = core.Point(*info['position'])
         self.name = info['name']
 
     def draw(self, surface):
-        x = config.left_margin + self.position[0] * config.cell_width
-        y = self.position[1] * config.row_height
+        x = config.left_margin + self.position.x * config.cell_width
+        y = self.position.y * config.row_height
         x += random.randrange(config.car_jitter) - config.car_jitter/2
         y += random.randrange(config.car_jitter) - config.car_jitter/2
         surface.blit(self.texture, (x, y))
