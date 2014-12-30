@@ -17,7 +17,7 @@ class Game(object):
         self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
-        self.free_cars = set(range(config.max_players))
+        self.free_cars = set(range(config.number_of_cars))
         self.free_lanes = set(range(config.max_players))
         self._rate = config.game_rate
         self.started = False

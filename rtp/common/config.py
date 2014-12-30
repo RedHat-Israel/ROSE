@@ -12,6 +12,7 @@ game_rate = 1.0
 # Client
 
 frame_rate = 30
+number_of_cars = 4
 car_jitter = 10
 
 # Matrix
@@ -37,6 +38,7 @@ obstacles_glob = os.path.join(install_dir, '../res/obstacles/obstacle*.png')
 road_glob = os.path.join(install_dir, '../res/bg/bg*.png')
 cars_dir = os.path.join(install_dir, '../res/cars')
 dashboard_png = os.path.join(install_dir, '../res/dashboard/dashboard.png')
+
 # Player
 
 max_players = 2
