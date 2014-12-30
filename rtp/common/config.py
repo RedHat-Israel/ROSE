@@ -27,7 +27,7 @@ dashboard_height = 150
 # Window
 
 background_color = 0, 0, 0
-window_caption = "Raanana Tira Project"
+window_caption = "ROSE Project"
 window_size = ((cell_width*(matrix_width+1) )),\
               (row_height * matrix_height)+dashboard_height
 # Files
