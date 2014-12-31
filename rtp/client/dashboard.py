@@ -13,13 +13,8 @@ class Dashboard(component.Component):
         self.timer = str(config.game_duration)
 
     def update(self, players, timeleft):
-        '''
-        :param info:
-        :return:
-        '''
         self.timer = str(timeleft)
-        for player in players.itervalues():
-            self.players[player['name']] = player['life']
+        self.players = players
 
     def draw(self, surface):
         timer_font = pygame.font.SysFont(pygame.font.get_default_font(), 70)
@@ -33,8 +28,8 @@ class Dashboard(component.Component):
 
     def draw_name_and_score(self, surface, (x, y)):
         font = pygame.font.SysFont(pygame.font.get_default_font(), 50)
-        for name, score in self.players.iteritems():
-            name_and_score = "%s : %s" % (name, str(score))
+        for player in self.players.values():
+            name_and_score = "%(name)s : %(life)d" % player
             text = font.render(str(name_and_score), 1, (153, 153, 153))
             surface.blit(text, (x, y))
             x += 550
