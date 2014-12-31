@@ -22,7 +22,7 @@ class Car(component.Component):
 
     def draw(self, surface):
         x = config.left_margin + self.position.x * config.cell_width
-        y = self.position.y * config.row_height
+        y = config.dashboard_height + self.position.y * config.row_height
         x += random.randrange(config.car_jitter) - config.car_jitter/2
         y += random.randrange(config.car_jitter) - config.car_jitter/2
         surface.blit(self.texture, (x, y))
