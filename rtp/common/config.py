@@ -36,6 +36,7 @@ window_size = windows_width, windows_height
 
 player_name_and_score_pos = 35
 player_score_pos = 70
+
 # Files
 
 install_dir = os.path.dirname(__file__)
@@ -44,7 +45,7 @@ road_glob = os.path.join(install_dir, '../res/bg/bg*.png')
 cars_dir = os.path.join(install_dir, '../res/cars')
 dashboard_png = os.path.join(install_dir, '../res/dashboard/dashboard.png')
 splash_png = os.path.join(install_dir, '../res/splash/splash_screen.png')
-end_png = os.path.join(install_dir, '../res/end/final_flag.png')
+end_line_png = os.path.join(install_dir, '../res/end/final_flag.png')
 
 # Player
 

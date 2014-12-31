@@ -51,8 +51,16 @@ class Game(component.Component):
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
         self.draw(self.surface)
+        if info["timeleft"] <= 5:
+            self.draw_finish_line(5 - info["timeleft"])
         if info['started']:
             self.drive()
+
+    def draw_finish_line(self, lane):
+        finish_line = pygame.image.load(config.end_line_png)
+        self.surface.blit(finish_line, (0, config.dashboard_height + 10 +
+                        (lane * config.row_height)))
+        pygame.display.flip()
 
     def draw(self, surface):
         surface.fill(config.background_color)
@@ -110,5 +118,5 @@ class Game(component.Component):
         reactor.stop()
 
     def client_update(self, info):
-        #print 'client_update', info
+        # print 'client_update', info
         self.update(info)
