@@ -131,7 +131,7 @@ class Game(object):
                 if player.position.x > 0:
                     player.position.x -= 1
             elif player.action == actions.RIGHT:
-                if player.position.x < config.max_players - 1:
+                if player.position.x < config.matrix_width - 1:
                     player.position.x += 1
 
             # Now check if player hit any obstacle
