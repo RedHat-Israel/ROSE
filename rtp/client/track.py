@@ -50,7 +50,7 @@ class Track(component.Component):
 
     # Track interface
 
-    def get_obstacle(self, x, y):
+    def get(self, x, y):
         """ Return the obstacle in position x, y """
         self._validate_pos(x, y)
         return self._matrix[y][x]

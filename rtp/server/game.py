@@ -137,7 +137,7 @@ class Game(object):
 
             # Now check if player hit any obstacle
 
-            obstacle = self.track.get_obstacle(player.x, player.y)
+            obstacle = self.track.get(player.x, player.y)
             if obstacle == obstacles.CRACK:
                 if player.action != actions.JUMP:
                     self.track.clear(player.x, player.y)
