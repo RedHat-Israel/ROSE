@@ -28,7 +28,7 @@ def generate_world(game):
             """ Return my car """
             return car
 
-        def get_obstacle(self, pos):
+        def get(self, pos):
             """
             Return the obstacle at position pos
 
@@ -37,6 +37,6 @@ def generate_world(game):
 
             Accessing a position out of the world bounds will raise IndexError exception.
             """
-            return game.track.get_obstacle(pos[0], pos[1])
+            return game.track.get(pos[0], pos[1])
 
     return World()

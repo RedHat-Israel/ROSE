@@ -21,9 +21,13 @@ class Track(object):
 
     # Track interface
 
-    def get_obstacle(self, x, y):
+    def get(self, x, y):
         """ Return the obstacle in position x, y """
         return self._matrix[y][x]
+
+    def set(self, x, y, obstacle):
+        """ Set obstacle in position x, y """
+        self._matrix[y][x] = obstacle
 
     def clear(self, x, y):
         """ Clear obstacle in position x, y """

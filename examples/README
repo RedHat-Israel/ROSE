@@ -38,17 +38,17 @@ In the next game iteration, your car will be at x, y - 1. world coordinates
 start at the top left of the screen. You would like to check if there is an
 obstacle at this location, and return the best action for this obstacle
 
-To check for obstacles, use the world.get_obstacle() function. This function
+To check for obstacles, use the world.get() function. This function
 accept a tuple (x, y) with the required location.
 
-    obstacle = world.get_obstacle((x, y - 1))
+    obstacle = world.get((x, y - 1))
 
 Note that if you try to access a position which is out of the racing track,
 this function will raise an IndexError. You must handle this exception when
 checking for obstacles:
 
     try:
-        obstacle = world.get_obstacle((x, y - 1))
+        obstacle = world.get((x, y - 1))
     except IndexError:
         # x, y - 1 is not a valid position
     else:
