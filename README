@@ -6,6 +6,7 @@ Requirements
 
 * python-twisted
 * pygame
+* py.test (for development)
 
 
 Running the game
@@ -34,7 +35,21 @@ would change game rate to 10 frames per second:
 
     ./rtp-admin <server-address> set-rate 10
 
+
 Creating a tarball
 ------------------
 
     python setup.py sdist
+
+
+Developing
+----------
+
+Before submitting patches, please run the tests:
+
+    py.test -v
+
+Checking coverage:
+
+    py.test --cov rtp --cov-report html
+    xdg-open htmlcov/index.html
