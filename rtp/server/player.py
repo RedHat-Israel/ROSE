@@ -1,4 +1,4 @@
-from rtp.common import actions, config, core
+from rtp.common import actions, config
 
 
 class Player(object):
@@ -7,7 +7,8 @@ class Player(object):
         self.name = name
         self.car = car
         self.lane = lane
-        self.position = None
+        self.x = None
+        self.y = None
         self.action = None
         self.response_time = None
         self.life = None
@@ -19,21 +20,20 @@ class Player(object):
         """ Go to the next game state """
 
     def reset(self):
-        # x: | |0| | |1 | |
-        # y: 2 / 3 of the track
-        self.position = core.Point(self.lane * 3 + 1,
-                                   config.matrix_height / 3 * 2)
+        self.x = self.lane * 3 + 1              # | |0| | |1 | |
+        self.y = config.matrix_height / 3 * 2   # 1/3 of track
         self.action = actions.NONE
         self.response_time = 1.0
         self.life = 0
 
     def __cmp__(self, other):
-        return cmp((self.position.y, -self.life), (other.position.y, -other.life))
+        return cmp((self.y, -self.life), (other.y, -other.life))
 
     def state(self):
         """ Return read only serialize-able state for sending to client """
         return {'name': self.name,
                 'car': self.car,
-                'position': [self.position.x, self.position.y],
+                'x': self.x,
+                'y': self.y,
                 'lane': self.lane,
                 'life': self.life}
