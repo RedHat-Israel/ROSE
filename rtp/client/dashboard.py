@@ -13,10 +13,13 @@ class Dashboard(component.Component):
     INFO_LEFT_MARGIN = 50
     INFO_OFFSET = 530
 
-    def init(self):
-        self.texture = pygame.image.load(config.dashboard_png)
+    def __init__(self):
+        self.texture = None
         self.players = {}
         self.timeleft = config.game_duration
+
+    def init(self):
+        self.texture = pygame.image.load(config.dashboard_png)
 
     def update(self, players, timeleft):
         self.timeleft = timeleft
