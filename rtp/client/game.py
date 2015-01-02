@@ -3,6 +3,7 @@ from twisted.internet import reactor
 from twisted.internet import task
 import pygame
 from rtp.common import config, message
+import finish
 import track
 import car
 import world
@@ -20,6 +21,7 @@ class Game(component.Component):
         self.name = name
         self.track = track.Track()
         self.dashboard = dashboard.Dashboard()
+        self.finish_line = finish.FinishLine()
         self.players = {}
         self.cars = [car.Car(1, 0, 4),
                      car.Car(2, 1, 4),
@@ -42,6 +44,7 @@ class Game(component.Component):
         self.dashboard.init()
         for car in self.cars:
             car.init()
+        self.finish_line.init()
         self.draw(self.surface)
 
     def update(self, info):
@@ -50,17 +53,10 @@ class Game(component.Component):
         self.dashboard.update(self.players, info["timeleft"])
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
+        self.finish_line.update(info)
         self.draw(self.surface)
-        if info["timeleft"] <= 5:
-            self.draw_finish_line(5 - info["timeleft"])
         if info['started']:
             self.drive()
-
-    def draw_finish_line(self, lane):
-        finish_line = pygame.image.load(config.end_line_png)
-        self.surface.blit(finish_line, (0, config.dashboard_height + 10 +
-                        (lane * config.row_height)))
-        pygame.display.flip()
 
     def draw(self, surface):
         surface.fill(config.background_color)
@@ -68,6 +64,7 @@ class Game(component.Component):
         self.dashboard.draw(surface)
         for player in self.players.itervalues():
             self.cars[player['car']].draw(surface)
+        self.finish_line.draw(surface)
         pygame.display.flip()
 
     # Driving

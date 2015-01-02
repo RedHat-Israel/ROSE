@@ -30,6 +30,11 @@ top_margin = 10
 dashboard_height = 150
 dashboard_top_margin = 35
 
+# Finish line
+
+# How many seconds to display the finish line (max matrix_height)
+finish_line_duration = 5
+
 # Window
 
 background_color = 0, 0, 0
@@ -46,7 +51,7 @@ road_glob = os.path.join(install_dir, '../res/bg/bg*.png')
 cars_dir = os.path.join(install_dir, '../res/cars')
 dashboard_png = os.path.join(install_dir, '../res/dashboard/dashboard.png')
 splash_png = os.path.join(install_dir, '../res/splash/splash_screen.png')
-end_line_png = os.path.join(install_dir, '../res/end/final_flag.png')
+finish_line_png = os.path.join(install_dir, '../res/end/final_flag.png')
 
 # Player
 
