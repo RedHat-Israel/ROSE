@@ -66,7 +66,8 @@ def process(players, track):
             elif player.x < config.matrix_width - 1:
                 player.x += 1
 
-        print 'process_actions: name=%s car=%s pos=%d,%d response_time=%0.6f life=%d' % (
-                player.name, player.car, player.x, player.y,
-                player.response_time, player.life)
+        print 'process_actions: name=%s lane=%d pos=%d,%d life=%d response_time=%0.6f' % (
+                player.name, player.lane, player.x, player.y, player.life,
+                player.response_time)
+
         positions.add((player.x, player.y))
