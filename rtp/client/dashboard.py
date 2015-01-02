@@ -27,7 +27,7 @@ class Dashboard(component.Component):
 
     def draw(self, surface):
         self._draw_timer(surface)
-        self._draw_name_and_score(surface)
+        self._draw_players_info(surface)
 
     def _draw_timer(self, surface):
         timer_font = pygame.font.SysFont(pygame.font.get_default_font(),
@@ -37,12 +37,12 @@ class Dashboard(component.Component):
         timer_x_pos = (config.windows_width / 2) - Dashboard.TIMER_X_OFFSET
         surface.blit(timer, (timer_x_pos, Dashboard.TIMER_Y_OFFSET))
 
-    def _draw_name_and_score(self, surface):
+    def _draw_players_info(self, surface):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
                                    Dashboard.NAMES_FONT_SIZE)
         for player in self.players.values():
-            name_and_score = "%(name)s : %(life)d" % player
-            text = font.render(str(name_and_score), 1,
+            players_info = "%(name)s : %(life)d" % player
+            text = font.render(str(players_info), 1,
                                Dashboard.NAMES_FONT_COLOR)
             x = (Dashboard.NAMES_START_POS +
                  player["lane"] * Dashboard.NAMES_OFFSET_BETWEEN_SCORES)
