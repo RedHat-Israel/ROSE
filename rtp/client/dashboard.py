@@ -46,4 +46,4 @@ class Dashboard(component.Component):
                                Dashboard.NAMES_FONT_COLOR)
             x = (Dashboard.NAMES_START_POS +
                  player["lane"] * Dashboard.NAMES_OFFSET_BETWEEN_SCORES)
-            surface.blit(text, (x, config.player_name_and_score_pos))
+            surface.blit(text, (x, config.dashboard_top_margin))

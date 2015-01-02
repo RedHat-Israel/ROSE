@@ -28,7 +28,7 @@ top_margin = 10
 # Dashboard
 
 dashboard_height = 150
-player_name_and_score_pos = 35
+dashboard_top_margin = 35
 
 # Window
 
