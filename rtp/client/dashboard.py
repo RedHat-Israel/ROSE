@@ -13,30 +13,24 @@ class Dashboard(component.Component):
     NAMES_FONT_SIZE = 50
     NAMES_START_POS = 50
     NAMES_OFFSET_BETWEEN_SCORES = 530
-    TIMER_X_TWO_DIGEST_OFFSET = 27
-    TIMER_X_ONE_DIGEST_OFFSET = 15
+    TIMER_X_OFFSET = 27
     TIMER_Y_OFFSET = 48
 
     def init(self):
         self.texture = pygame.image.load(config.dashboard_png)
         self.players = {}
-        self.timer = str(config.game_duration)
+        self.timeleft = config.game_duration
 
     def update(self, players, timeleft):
-        self.timer = str(timeleft)
+        self.timeleft = timeleft
         self.players = players
 
     def draw(self, surface):
         timer_font = pygame.font.SysFont(pygame.font.get_default_font(),
                                          Dashboard.TIMER_FONT_SIZE)
-        timer = timer_font.render(self.timer, 1, Dashboard.TIMER_FONT_COLOR)
-        if int(self.timer) >= 10:
-            timer_x_pos = (config.windows_width / 2) - \
-                    Dashboard.TIMER_X_TWO_DIGEST_OFFSET
-        else:
-            timer_x_pos = (config.windows_width / 2) - \
-                    Dashboard.TIMER_X_ONE_DIGEST_OFFSET
-
+        timer = timer_font.render("%02d" % self.timeleft, 1,
+                                  Dashboard.TIMER_FONT_COLOR)
+        timer_x_pos = (config.windows_width / 2) - Dashboard.TIMER_X_OFFSET
         surface.blit(timer, (timer_x_pos, Dashboard.TIMER_Y_OFFSET))
         self.draw_name_and_score(surface)
 
