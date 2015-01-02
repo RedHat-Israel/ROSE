@@ -9,8 +9,6 @@ class Dashboard(component.Component):
 
     TEXT_COLOR = (153, 153, 153)
     TIMER_FONT_SIZE = 70
-    TIMER_X_OFFSET = 27
-    TIMER_Y_OFFSET = 48
     INFO_FONT_SIZE = 50
     INFO_LEFT_MARGIN = 50
     INFO_OFFSET = 530
@@ -32,8 +30,9 @@ class Dashboard(component.Component):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
                                    self.TIMER_FONT_SIZE)
         text = font.render("%02d" % self.timeleft, 1, self.TEXT_COLOR)
-        x = (config.windows_width / 2) - self.TIMER_X_OFFSET
-        surface.blit(text, (x, self.TIMER_Y_OFFSET))
+        x = config.windows_width / 2 - text.get_width() / 2
+        y = config.dashboard_height / 2 - text.get_height() / 2
+        surface.blit(text, (x, y))
 
     def _draw_players_info(self, surface):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
