@@ -50,3 +50,4 @@ end_line_png = os.path.join(install_dir, '../res/end/final_flag.png')
 # Player
 
 max_players = 2
+cells_per_player = matrix_width / max_players

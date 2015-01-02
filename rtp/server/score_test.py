@@ -264,94 +264,67 @@ class TestCollisions(object):
         players = {self.player1.name: self.player1, self.player2.name: self.player2}
         score.process(players, self.track)
 
-    def test_leading_player(self):
-        # Player 1 in 3,5
-        self.player1.x = 3
+    def test_player_in_lane_wins(self):
+        # Player 1 in its lane at 1,5
+        self.player1.x = 1
         self.player1.y = 5
         self.player1.life = 0
         self.player1.action = actions.NONE
-        # Player will pick the penguin in 3,6 and move up to 3,5
-        self.track.set(3, 6, obstacles.PENGUIN)
-        self.player2.x = 3
+        # Player 2 is not in its lane, trying to pick penguin at 1,6
+        self.track.set(1, 6, obstacles.PENGUIN)
+        self.player2.x = 1
         self.player2.y = 6
         self.player2.life = 0
         self.player2.action = actions.PICKUP
         self.process()
-        # Player 1 win because its y value is lower
-        assert self.player1.x == 3
+        # Player 1 win because it is in lane
+        assert self.player1.x == 1
         assert self.player1.y == 5
         assert self.player1.life == 0
         # Player 2 got more life but move back
-        assert self.player2.x == 3
+        assert self.player2.x == 1
         assert self.player2.y == 6
         assert self.player2.life == 1
 
-    def test_faster_player(self):
-        # Player 1 in 3,6
-        self.player1.x = 3
-        self.player1.y = 6
-        self.player1.life = 0
-        self.player1.action = actions.NONE
-        self.player1.response_time = 0.1
-        # Player 2 move from 4,6 to 3,6
-        self.player2.x = 4
-        self.player2.y = 6
-        self.player2.life = 0
-        self.player2.action = actions.LEFT
-        self.player2.response_time = 0.2
-        self.process()
-        # Player 1 win because its response time is lower
-        assert self.player1.x == 3
-        assert self.player1.y == 6
-        assert self.player1.life == 0
-        # Player 2 moved back
-        assert self.player2.x == 3
-        assert self.player2.y == 7
-        assert self.player2.life == 0
-
     def test_move_left(self):
-        # Player 1 in 4,8
-        self.player1.x = 4
+        # Player 1 in its lane at 1,8
+        self.player1.x = 1
         self.player1.y = 8
         self.player1.life = 0
         self.player1.action = actions.NONE
-        self.player1.response_time = 0.1
-        # Player 2 move from 3,8 to 4,8
-        self.player2.x = 3
+        # Player 2 trying to move to 1,8
+        self.player2.x = 0
         self.player2.y = 8
         self.player2.life = 0
         self.player2.action = actions.RIGHT
-        self.player2.response_time = 0.2
         self.process()
-        # Player 1 win because its response time is lower
-        assert self.player1.x == 4
+        # Player 1 win because it is in own lane
+        assert self.player1.x == 1
         assert self.player1.y == 8
         assert self.player1.life == 0
-        # Player 2 moved left, becuaus it is in the last row
-        assert self.player2.x == 3
+        # Player 2 moved left, first free cell
+        assert self.player2.x == 0
         assert self.player2.y == 8
         # TODO: decrease life?
         assert self.player2.life == 0
 
     def test_move_right(self):
-        # Player 1 in 0,8
+        # Player 1 in its lane at 0,8
         self.player1.x = 0
         self.player1.y = 8
         self.player1.life = 0
         self.player1.action = actions.NONE
-        self.player1.response_time = 0.1
         # Player 2 move from 1,8 to 0,8
         self.player2.x = 1
         self.player2.y = 8
         self.player2.life = 0
         self.player2.action = actions.LEFT
-        self.player2.response_time = 0.2
         self.process()
-        # Player 1 win because its response time is lower
+        # Player 1 win because it is in own lane
         assert self.player1.x == 0
         assert self.player1.y == 8
         assert self.player1.life == 0
-        # Player 2 moved right, becuaus it is in the last row and first cell
+        # Player 2 moved right, no other possible cell
         assert self.player2.x == 1
         assert self.player2.y == 8
         # TODO: decrease life?

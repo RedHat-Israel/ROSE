@@ -9,10 +9,9 @@ def process(players, track):
     players: dict of player.Player objects
     track: track.Track object
     """
-    # Process first the leading drivers, preferring those with faster
-    # response time.
+    # Process first the player driving in its own lane
     sorted_players = sorted(players.itervalues(),
-                     key=lambda p: (p.y , p.response_time))
+                            key=lambda p: 0 if p.in_lane() else 1)
     positions = set()
 
     for player in sorted_players:
@@ -59,7 +58,7 @@ def process(players, track):
         # Fix up collisions
 
         if (player.x, player.y) in positions:
-            print 'fix up collisions for player', player.name
+            print 'player %s collision at %d,%d' % (player.name, player.x, player.y)
             if player.y < config.matrix_height - 1:
                 player.y += 1
             elif player.x > 0:
