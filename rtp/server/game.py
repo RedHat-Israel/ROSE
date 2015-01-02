@@ -96,13 +96,13 @@ class Game(object):
         print
 
     def loop(self):
-        self._duration -= 1
-        if self._duration < 0:
-            self.stop()
-            return
         self.track.update()
         score.process(self.players, self.track)
         self.update_players()
+        if self._duration > 0:
+            self._duration -= 1
+        else:
+            self.stop()
 
     def update_players(self):
         msg = message.Message('update', self.state())
