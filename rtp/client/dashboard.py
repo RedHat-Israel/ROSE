@@ -7,14 +7,13 @@ import component
 
 class Dashboard(component.Component):
 
-    TIMER_FONT_COLOR = (153, 153, 153)
-    NAMES_FONT_COLOR = (153, 153, 153)
+    TEXT_COLOR = (153, 153, 153)
     TIMER_FONT_SIZE = 70
-    NAMES_FONT_SIZE = 50
-    NAMES_START_POS = 50
-    NAMES_OFFSET_BETWEEN_SCORES = 530
     TIMER_X_OFFSET = 27
     TIMER_Y_OFFSET = 48
+    INFO_FONT_SIZE = 50
+    INFO_LEFT_MARGIN = 50
+    INFO_OFFSET = 530
 
     def init(self):
         self.texture = pygame.image.load(config.dashboard_png)
@@ -30,20 +29,17 @@ class Dashboard(component.Component):
         self._draw_players_info(surface)
 
     def _draw_timer(self, surface):
-        timer_font = pygame.font.SysFont(pygame.font.get_default_font(),
-                                         self.TIMER_FONT_SIZE)
-        timer = timer_font.render("%02d" % self.timeleft, 1,
-                                  self.TIMER_FONT_COLOR)
-        timer_x_pos = (config.windows_width / 2) - self.TIMER_X_OFFSET
-        surface.blit(timer, (timer_x_pos, self.TIMER_Y_OFFSET))
+        font = pygame.font.SysFont(pygame.font.get_default_font(),
+                                   self.TIMER_FONT_SIZE)
+        text = font.render("%02d" % self.timeleft, 1, self.TEXT_COLOR)
+        x = (config.windows_width / 2) - self.TIMER_X_OFFSET
+        surface.blit(text, (x, self.TIMER_Y_OFFSET))
 
     def _draw_players_info(self, surface):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
-                                   self.NAMES_FONT_SIZE)
+                                   self.INFO_FONT_SIZE)
         for player in self.players.values():
-            players_info = "%(name)s : %(life)d" % player
-            text = font.render(str(players_info), 1,
-                               self.NAMES_FONT_COLOR)
-            x = (self.NAMES_START_POS +
-                 player["lane"] * self.NAMES_OFFSET_BETWEEN_SCORES)
+            info = "%(name)s : %(life)d" % player
+            text = font.render(info, 1, self.TEXT_COLOR)
+            x = self.INFO_LEFT_MARGIN + player["lane"] * self.INFO_OFFSET
             surface.blit(text, (x, config.dashboard_top_margin))
