@@ -1,6 +1,6 @@
 """ Score logic """
 
-from rtp.common import actions, config, obstacles
+from rose.common import actions, config, obstacles
 
 def process(players, track):
     """

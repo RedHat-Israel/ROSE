@@ -3,7 +3,7 @@
 import sys
 import os
 import xmlrpclib
-from rtp.common import config
+from rose.common import config
 
 class Client(object):
 

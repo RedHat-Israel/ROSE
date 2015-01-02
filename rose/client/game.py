@@ -2,10 +2,11 @@ import time
 from twisted.internet import reactor
 from twisted.internet import task
 import pygame
-from rtp.common import config, message
-import finish
+
+from rose.common import config, message
 import track
 import car
+import finish
 import world
 import dashboard
 import component

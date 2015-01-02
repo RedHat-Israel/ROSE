@@ -14,26 +14,26 @@ Running the game
 
 Start the server on some machine:
 
-    ./rtp-server
+    ./rose-server
 
 Start up to 2 clients:
 
-    ./rtp-client mydriver.py
+    ./rose-client mydriver.py
 
 For drive modules, see the examples direcotory.
 
-To start a race, use rtp-admin tool on any machine:
+To start a race, use rose-admin tool on any machine:
 
-    ./rtp-admin <server-address> start
+    ./rose-admin <server-address> start
 
-To stop a race, use rtp-admin tool on any machine:
+To stop a race, use rose-admin tool on any machine:
 
-    ./rtp-admin <server-address> stop
+    ./rose-admin <server-address> stop
 
 To modify the game rate, you can use set-rate command. The following command
 would change game rate to 10 frames per second:
 
-    ./rtp-admin <server-address> set-rate 10
+    ./rose-admin <server-address> set-rate 10
 
 
 Creating a tarball
@@ -51,5 +51,5 @@ Before submitting patches, please run the tests:
 
 Checking coverage:
 
-    py.test --cov rtp --cov-report html
+    py.test --cov rose --cov-report html
     xdg-open htmlcov/index.html

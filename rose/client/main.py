@@ -3,7 +3,7 @@ import sys
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 
-from rtp.common import config, message
+from rose.common import config, message
 import game
 
 
@@ -67,7 +67,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 def main():
     if len(sys.argv) < 2:
-        print 'usage: rtp-client drive-module'
+        print 'usage: rose-client drive-module'
         sys.exit(2)
 
     with open(sys.argv[1]) as f:

@@ -1,6 +1,6 @@
 import glob
 import pygame
-from rtp.common import config, obstacles
+from rose.common import config, obstacles
 import component
 
 
