@@ -29,7 +29,6 @@ top_margin = 10
 
 dashboard_height = 150
 player_name_and_score_pos = 35
-player_score_pos = 70
 
 # Window
 
