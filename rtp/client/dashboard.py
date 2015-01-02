@@ -23,6 +23,7 @@ class Dashboard(component.Component):
         self.players = players
 
     def draw(self, surface):
+        surface.blit(self.texture, (0, 0))
         self._draw_timer(surface)
         self._draw_players_info(surface)
 
