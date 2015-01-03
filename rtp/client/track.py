@@ -11,7 +11,6 @@ class Track(component.Component):
                         for x in range(config.matrix_height)]
         self._road_textures = None
         self._obstacle_textures = None
-        self._dashboard = None
 
     # Component interface
 
@@ -22,7 +21,6 @@ class Track(component.Component):
                                sorted(glob.glob(config.road_glob))]
         self._obstacle_textures = [pygame.image.load(path) for path in
                                    sorted(glob.glob(config.obstacles_glob))]
-        self._dashboard = pygame.image.load(config.dashboard_png)
 
     def update(self, info):
         self._matrix = info['track']
@@ -32,9 +30,6 @@ class Track(component.Component):
             self._road_textures.insert(0, last)
 
     def draw(self, surface):
-        # draw dashboard
-        surface.blit(self._dashboard, (0, 0))
-
         # draw road background:
         for i in range(config.matrix_height):
             surface.blit(self._road_textures[i % len(self._road_textures)],

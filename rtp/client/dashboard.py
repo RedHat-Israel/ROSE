@@ -7,40 +7,42 @@ import component
 
 class Dashboard(component.Component):
 
-    TIMER_FONT_COLOR = (153, 153, 153)
-    NAMES_FONT_COLOR = (153, 153, 153)
+    TEXT_COLOR = (153, 153, 153)
     TIMER_FONT_SIZE = 70
-    NAMES_FONT_SIZE = 50
-    NAMES_START_POS = 50
-    NAMES_OFFSET_BETWEEN_SCORES = 530
-    TIMER_X_OFFSET = 27
-    TIMER_Y_OFFSET = 48
+    INFO_FONT_SIZE = 50
+    INFO_LEFT_MARGIN = 50
+    INFO_OFFSET = 530
+
+    def __init__(self):
+        self.texture = None
+        self.players = {}
+        self.timeleft = config.game_duration
 
     def init(self):
         self.texture = pygame.image.load(config.dashboard_png)
-        self.players = {}
-        self.timeleft = config.game_duration
 
     def update(self, players, timeleft):
         self.timeleft = timeleft
         self.players = players
 
     def draw(self, surface):
-        timer_font = pygame.font.SysFont(pygame.font.get_default_font(),
-                                         Dashboard.TIMER_FONT_SIZE)
-        timer = timer_font.render("%02d" % self.timeleft, 1,
-                                  Dashboard.TIMER_FONT_COLOR)
-        timer_x_pos = (config.windows_width / 2) - Dashboard.TIMER_X_OFFSET
-        surface.blit(timer, (timer_x_pos, Dashboard.TIMER_Y_OFFSET))
-        self.draw_name_and_score(surface)
+        surface.blit(self.texture, (0, 0))
+        self._draw_timer(surface)
+        self._draw_players_info(surface)
 
-    def draw_name_and_score(self, surface):
+    def _draw_timer(self, surface):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
-                                   Dashboard.NAMES_FONT_SIZE)
+                                   self.TIMER_FONT_SIZE)
+        text = font.render("%02d" % self.timeleft, 1, self.TEXT_COLOR)
+        x = config.windows_width / 2 - text.get_width() / 2
+        y = config.dashboard_height / 2 - text.get_height() / 2
+        surface.blit(text, (x, y))
+
+    def _draw_players_info(self, surface):
+        font = pygame.font.SysFont(pygame.font.get_default_font(),
+                                   self.INFO_FONT_SIZE)
         for player in self.players.values():
-            name_and_score = "%(name)s : %(life)d" % player
-            text = font.render(str(name_and_score), 1,
-                               Dashboard.NAMES_FONT_COLOR)
-            x = (Dashboard.NAMES_START_POS +
-                 player["lane"] * Dashboard.NAMES_OFFSET_BETWEEN_SCORES)
-            surface.blit(text, (x, config.player_name_and_score_pos))
+            info = "%(name)s : %(life)d" % player
+            text = font.render(info, 1, self.TEXT_COLOR)
+            x = self.INFO_LEFT_MARGIN + player["lane"] * self.INFO_OFFSET
+            surface.blit(text, (x, config.dashboard_top_margin))

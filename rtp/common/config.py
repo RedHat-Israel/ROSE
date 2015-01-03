@@ -24,7 +24,11 @@ row_height = 65
 cell_width = 130
 left_margin = 95
 top_margin = 10
+
+# Dashboard
+
 dashboard_height = 150
+dashboard_top_margin = 35
 
 # Window
 
@@ -33,9 +37,6 @@ window_caption = "ROSE Project"
 windows_width = cell_width*(matrix_width+1)
 windows_height = (row_height * matrix_height)+dashboard_height
 window_size = windows_width, windows_height
-
-player_name_and_score_pos = 35
-player_score_pos = 70
 
 # Files
 
