@@ -38,15 +38,15 @@ class Dashboard(component.Component):
                     Dashboard.TIMER_X_ONE_DIGEST_OFFSET
 
         surface.blit(timer, (timer_x_pos, Dashboard.TIMER_Y_OFFSET))
-        self.draw_name_and_score(surface, (Dashboard.NAMES_START_POS,
-                                 config.player_name_and_score_pos))
+        self.draw_name_and_score(surface)
 
-    def draw_name_and_score(self, surface, (x, y)):
+    def draw_name_and_score(self, surface):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
                                    Dashboard.NAMES_FONT_SIZE)
         for player in self.players.values():
             name_and_score = "%(name)s : %(life)d" % player
             text = font.render(str(name_and_score), 1,
                                Dashboard.NAMES_FONT_COLOR)
-            surface.blit(text, (x, y))
-            x += Dashboard.NAMES_OFFSET_BETWEEN_SCORES
+            x = (Dashboard.NAMES_START_POS +
+                 player["lane"] * Dashboard.NAMES_OFFSET_BETWEEN_SCORES)
+            surface.blit(text, (x, config.player_name_and_score_pos))
