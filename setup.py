@@ -1,6 +1,6 @@
 from distutils.core import setup
 
-setup(name='ROSE Project',
+setup(name='rose-project',
       version='0.1',
       license="GNU GPLv2+",
       description="game",
