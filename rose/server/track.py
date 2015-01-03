@@ -40,8 +40,17 @@ class Track(object):
     # Private
 
     def _generate_row(self):
-        """ Generates new row with obstacles """
-        cell = random.randrange(config.matrix_width)
+        """
+        Generates new row with obstacles
+
+        Try to create fair but random obstacle stream. Each player get the same
+        obstacles, but in different cells.
+        """
         row = [obstacles.NONE] * config.matrix_width
-        row[cell] = obstacles.get_random_obstacle()
+        obstacle = obstacles.get_random_obstacle()
+        for lane in range(config.max_players):
+            low = lane * config.cells_per_player
+            high = low + config.cells_per_player
+            cell = random.choice(range(low, high))
+            row[cell] = obstacle
         return row

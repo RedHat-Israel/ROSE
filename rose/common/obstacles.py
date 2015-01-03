@@ -2,8 +2,7 @@
 
 import random
 
-NONE = -1
-ALL = CRACK, TRASH, PENGUIN, BIKE, WATER, BARRIER = tuple(range(6))
+ALL = NONE, CRACK, TRASH, PENGUIN, BIKE, WATER, BARRIER = tuple(range(-1, 6))
 
 
 def get_random_obstacle():
