@@ -22,7 +22,7 @@ class Game(object):
         self.free_lanes = set(range(config.max_players))
         self._rate = config.game_rate
         self.started = False
-        self._duration = config.game_duration
+        self.timeleft = config.game_duration
 
     @property
     def rate(self):
@@ -43,7 +43,7 @@ class Game(object):
         self.track.reset()
         for player in self.players.values():
             player.reset()
-        self._duration = config.game_duration
+        self.timeleft = config.game_duration
         self.looper.start(1.0 / self._rate)
         self.started = True
 
@@ -99,8 +99,8 @@ class Game(object):
         self.track.update()
         score.process(self.players, self.track)
         self.update_players()
-        if self._duration > 0:
-            self._duration -= 1
+        if self.timeleft > 0:
+            self.timeleft -= 1
         else:
             self.stop()
 
@@ -112,7 +112,7 @@ class Game(object):
         return {'started': self.started,
                 'track': self.track.state(),
                 'players': self.players_state(),
-                'timeleft': self._duration}
+                'timeleft': self.timeleft}
 
     def players_state(self):
         return dict((name, player.state()) for name, player in
