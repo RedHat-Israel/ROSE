@@ -2,7 +2,7 @@ import random
 import operator
 from twisted.internet import reactor, task
 
-from rtp.common import actions, config, error, message, obstacles
+from rose.common import actions, config, error, message, obstacles
 import track
 import player
 import score

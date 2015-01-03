@@ -1,5 +1,5 @@
 import random
-from rtp.common import config, obstacles
+from rose.common import config, obstacles
 
 
 class Track(object):

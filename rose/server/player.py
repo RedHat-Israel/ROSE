@@ -1,4 +1,4 @@
-from rtp.common import actions, config
+from rose.common import actions, config
 
 
 class Player(object):

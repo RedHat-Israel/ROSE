@@ -1,7 +1,7 @@
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 from twisted.web import server, resource, xmlrpc
-from rtp.common import config, error, message
+from rose.common import config, error, message
 import game
 
 

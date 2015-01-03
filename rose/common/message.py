@@ -1,5 +1,5 @@
 import json
-from rtp.common import error
+from rose.common import error
 
 def parse(line):
     try:

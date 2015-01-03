@@ -1,4 +1,4 @@
-from rtp.common import actions, config, obstacles
+from rose.common import actions, config, obstacles
 import track
 import player
 import score

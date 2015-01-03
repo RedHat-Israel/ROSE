@@ -1,7 +1,7 @@
 __author__ = 'talayan'
 
 import pygame
-from rtp.common import config
+from rose.common import config
 import component
 
 
