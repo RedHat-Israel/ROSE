@@ -9,15 +9,11 @@ def process(players, track):
     players: dict of player.Player objects
     track: track.Track object
     """
-    # Process first the player driving in its own lane
-    sorted_players = sorted(players.itervalues(),
-                            key=lambda p: 0 if p.in_lane() else 1)
-    positions = set()
 
-    for player in sorted_players:
+    # First handle right and left actions, since they may change in_lane
+    # status, used for resolving collisions.
 
-        # First move playe, keeping inside the track
-
+    for player in players.itervalues():
         if player.action == actions.LEFT:
             if player.x > 0:
                 player.x -= 1
@@ -25,8 +21,13 @@ def process(players, track):
             if player.x < config.matrix_width - 1:
                 player.x += 1
 
-        # Now check if player hit any obstacle
+    # Now handle obstacles, preferring players in their own lane.
 
+    sorted_players = sorted(players.itervalues(),
+                            key=lambda p: 0 if p.in_lane() else 1)
+    positions = set()
+
+    for player in sorted_players:
         obstacle = track.get(player.x, player.y)
         if obstacle == obstacles.CRACK:
             if player.action != actions.JUMP:

@@ -286,6 +286,27 @@ class TestCollisions(object):
         assert self.player2.y == 6
         assert self.player2.life == 1
 
+    def test_after_turn(self):
+        # Player 1 in its lane at 2,5
+        self.player1.x = 2
+        self.player1.y = 5
+        self.player1.life = 0
+        self.player1.action = actions.NONE
+        # Player 2 in its lane, but after turning left, will not be in his lane.
+        self.player2.x = 3
+        self.player2.y = 5
+        self.player2.life = 0
+        self.player2.action = actions.LEFT
+        self.process()
+        # Player 1 win because it is in lane
+        assert self.player1.x == 2
+        assert self.player1.y == 5
+        assert self.player1.life == 0
+        # Player 2 got more life but move back
+        assert self.player2.x == 2
+        assert self.player2.y == 6
+        assert self.player2.life == 0
+
     def test_move_left(self):
         # Player 1 in its lane at 1,8
         self.player1.x = 1
