@@ -12,6 +12,7 @@ class Player(object):
         self.action = None
         self.response_time = None
         self.life = None
+        self.score = None
         self.reset()
 
     # Game state interface
@@ -25,6 +26,7 @@ class Player(object):
         self.action = actions.NONE
         self.response_time = 1.0
         self.life = 0
+        self.score = 0
 
     def in_lane(self):
         min_x = self.lane * config.cells_per_player
@@ -41,4 +43,5 @@ class Player(object):
                 'x': self.x,
                 'y': self.y,
                 'lane': self.lane,
+                'score': self.score,
                 'life': self.life}
