@@ -15,6 +15,7 @@ def process(players, track):
 
     for player in players.itervalues():
         if player.action == actions.LEFT:
+            # the left player should be start on x=0, and right in the middle
             if player.x > 0:
                 player.x -= 1
         elif player.action == actions.RIGHT:
@@ -28,7 +29,6 @@ def process(players, track):
     positions = set()
 
     for player in sorted_players:
-        player.score += config.move_forward
         obstacle = track.get(player.x, player.y)
         if obstacle == obstacles.CRACK:
             if player.action != actions.JUMP:
@@ -36,7 +36,8 @@ def process(players, track):
                 player.y += 1
                 player.score += config.move_backward
             else:
-                player.score += config.jump
+                player.score += config.jump + config.move_forward
+
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
@@ -49,14 +50,14 @@ def process(players, track):
                 player.y += 1
                 player.score += config.move_backward
             else:
-                player.score += config.brake
+                player.score += config.brake + config.move_forward
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.y -= 1
-                player.life += 1
-                player.score += config.move_forward
+                player.score += config.score_penguin_catch + config.move_forward
         elif obstacle == obstacles.NONE:
+            player.score += config.move_forward
             if player.action in (actions.JUMP, actions.BRAKE, actions.PICKUP):
                 player.score += config.unnecessary_action
 
@@ -79,8 +80,8 @@ def process(players, track):
             elif player.x < config.matrix_width - 1:
                 player.x += 1
 
-        print 'process_actions: name=%s lane=%d pos=%d,%d life=%d response_time=%0.6f' % (
-                player.name, player.lane, player.x, player.y, player.life,
+        print 'process_actions: name=%s lane=%d pos=%d,%d score=%d response_time=%0.6f' % (
+                player.name, player.lane, player.x, player.y, player.score,
                 player.response_time)
 
         positions.add((player.x, player.y))

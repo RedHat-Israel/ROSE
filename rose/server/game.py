@@ -92,8 +92,8 @@ class Game(object):
         print
         print 'Stats'
         for i, p in enumerate(sorted(self.players.values())):
-            print '%d  %10s  row:%d  life:%d  score:%d' % (
-                i+1, p.name, p.y, p.life, p.score
+            print '%d  %10s  row:%d  score:%d' % (
+                i+1, p.name, p.y, p.score
             )
         print
 

@@ -11,7 +11,6 @@ class Player(object):
         self.y = None
         self.action = None
         self.response_time = None
-        self.life = None
         self.score = None
         self.reset()
 
@@ -25,7 +24,6 @@ class Player(object):
         self.y = config.matrix_height / 3 * 2             # 1/3 of track
         self.action = actions.NONE
         self.response_time = 1.0
-        self.life = 0
         self.score = 0
 
     def in_lane(self):
@@ -34,7 +32,7 @@ class Player(object):
         return min_x <= self.x < next_x
 
     def __cmp__(self, other):
-        return cmp((self.y, -self.life), (other.y, -other.life))
+        return cmp(self.score, other.score)
 
     def state(self):
         """ Return read only serialize-able state for sending to client """
@@ -43,5 +41,4 @@ class Player(object):
                 'x': self.x,
                 'y': self.y,
                 'lane': self.lane,
-                'score': self.score,
-                'life': self.life}
+                'score': self.score}

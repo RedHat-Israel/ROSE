@@ -17,7 +17,7 @@ class SinglePlayerTest(object):
         self.player = player.Player("A", car=0, lane=0)
         self.x = self.player.x
         self.y = self.player.y
-        self.life = self.player.life
+        self.score = self.player.score
         self.track.set(self.x, self.y, self.obstacle)
 
     def process(self):
@@ -26,22 +26,22 @@ class SinglePlayerTest(object):
     def assert_keep_player(self):
         assert self.player.x == self.x
         assert self.player.y == self.y
-        assert self.player.life == self.life
+        assert self.player.score == self.score
 
     def assert_move_right(self):
         assert self.player.x == self.x + 1
         assert self.player.y == self.y
-        assert self.player.life == self.life
+        assert self.player.score == self.score
 
     def assert_move_left(self):
         assert self.player.x == self.x - 1
         assert self.player.y == self.y
-        assert self.player.life == self.life
+        assert self.player.score == self.score
 
     def assert_move_back(self):
         assert self.player.x == self.x
         assert self.player.y == self.y + 1
-        assert self.player.life == self.life
+        assert self.player.score == self.score
 
     def assert_keep_obstacle(self):
         assert self.track.get(self.x, self.y) == self.obstacle
@@ -78,7 +78,7 @@ class TestPenguin(SinglePlayerTest):
     """
     Handling penguins
 
-    If player pick the penguin, it move forward and get more life. Otherwise
+    If player pick the penguin, it move forward and get more score. Otherwise
     the penguin is skipped and can be picked by other players.
     """
 
@@ -87,10 +87,10 @@ class TestPenguin(SinglePlayerTest):
     def test_pickup(self):
         self.player.action = actions.PICKUP
         self.process()
-        # Player move up and get more life
+        # Player move up and get more score
         assert self.player.x == self.x
         assert self.player.y == self.y - 1
-        assert self.player.life == self.life + 1
+        assert self.player.score == self.score + config.score_penguin_catch + config.move_forward
         self.assert_remove_obstacle()
 
     def test_right(self):
@@ -206,7 +206,7 @@ class TestLimits(SinglePlayerTest):
     obstacle = obstacles.NONE
 
     def test_left(self):
-        # TODO: decrease life? move back?
+        # TODO: decrease score? move back?
         self.x = self.player.x = 0
         self.player.action = actions.LEFT
         self.process()
@@ -214,7 +214,7 @@ class TestLimits(SinglePlayerTest):
         self.assert_keep_obstacle()
 
     def test_right(self):
-        # TODO: decrease life? move back?
+        # TODO: decrease score? move back?
         self.x = self.player.x = config.matrix_width - 1
         self.player.action = actions.RIGHT
         self.process()
@@ -227,14 +227,14 @@ class TestLimits(SinglePlayerTest):
         self.obstacle = obstacles.PENGUIN
         self.track.set(self.x, self.y, self.obstacle)
         self.process()
-        # Player keep position but get more life
+        # Player keep position but get more score
         assert self.player.x == self.x
         assert self.player.y == self.y
-        assert self.player.life == self.life + 1
+        assert self.player.score == self.score + config.score_penguin_catch
         self.assert_remove_obstacle()
 
     def test_back(self):
-        # TODO: always decrease life
+        # TODO: always decrease score
         self.y = self.player.y = config.matrix_height - 1
         self.player.action = actions.NONE
         self.obstacle = obstacles.TRASH
@@ -268,85 +268,85 @@ class TestCollisions(object):
         # Player 1 in its lane at 1,5
         self.player1.x = 1
         self.player1.y = 5
-        self.player1.life = 0
+        self.player1.score = 0
         self.player1.action = actions.NONE
         # Player 2 is not in its lane, trying to pick penguin at 1,6
         self.track.set(1, 6, obstacles.PENGUIN)
         self.player2.x = 1
         self.player2.y = 6
-        self.player2.life = 0
+        self.player2.score = 0
         self.player2.action = actions.PICKUP
         self.process()
         # Player 1 win because it is in lane
         assert self.player1.x == 1
         assert self.player1.y == 5
-        assert self.player1.life == 0
-        # Player 2 got more life but move back
+        assert self.player1.score == config.move_forward
+        # Player 2 got more score but move back
         assert self.player2.x == 1
         assert self.player2.y == 6
-        assert self.player2.life == 1
+        assert self.player2.score == config.move_forward + config.score_penguin_catch
 
     def test_after_turn(self):
         # Player 1 in its lane at 2,5
         self.player1.x = 2
         self.player1.y = 5
-        self.player1.life = 0
+        self.player1.score = 0
         self.player1.action = actions.NONE
         # Player 2 in its lane, but after turning left, will not be in his lane.
         self.player2.x = 3
         self.player2.y = 5
-        self.player2.life = 0
+        self.player2.score = 0
         self.player2.action = actions.LEFT
         self.process()
         # Player 1 win because it is in lane
         assert self.player1.x == 2
         assert self.player1.y == 5
-        assert self.player1.life == 0
-        # Player 2 got more life but move back
+        assert self.player1.score == config.move_forward
+        # Player 2 got more score but move back
         assert self.player2.x == 2
         assert self.player2.y == 6
-        assert self.player2.life == 0
+        assert self.player2.score == config.move_backward
 
     def test_move_left(self):
         # Player 1 in its lane at 1,8
         self.player1.x = 1
         self.player1.y = 8
-        self.player1.life = 0
+        self.player1.score = 0
         self.player1.action = actions.NONE
         # Player 2 trying to move to 1,8
         self.player2.x = 0
         self.player2.y = 8
-        self.player2.life = 0
+        self.player2.score = 0
         self.player2.action = actions.RIGHT
         self.process()
         # Player 1 win because it is in own lane
         assert self.player1.x == 1
         assert self.player1.y == 8
-        assert self.player1.life == 0
+        assert self.player1.score == config.move_forward
         # Player 2 moved left, first free cell
         assert self.player2.x == 0
         assert self.player2.y == 8
-        # TODO: decrease life?
-        assert self.player2.life == 0
+        # TODO: decrease score?
+        assert self.player2.score == config.move_backward
 
     def test_move_right(self):
         # Player 1 in its lane at 0,8
         self.player1.x = 0
         self.player1.y = 8
-        self.player1.life = 0
+        self.player1.score = 0
         self.player1.action = actions.NONE
         # Player 2 move from 1,8 to 0,8
         self.player2.x = 1
         self.player2.y = 8
-        self.player2.life = 0
+        self.player2.score = 0
         self.player2.action = actions.LEFT
         self.process()
         # Player 1 win because it is in own lane
         assert self.player1.x == 0
         assert self.player1.y == 8
-        assert self.player1.life == 0
+        assert self.player1.score == config.move_forward
         # Player 2 moved right, no other possible cell
         assert self.player2.x == 1
         assert self.player2.y == 8
-        # TODO: decrease life?
-        assert self.player2.life == 0
+        # TODO: decrease score?
+        assert self.player2.score == config.move_backward
