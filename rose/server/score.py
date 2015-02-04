@@ -28,25 +28,37 @@ def process(players, track):
     positions = set()
 
     for player in sorted_players:
+        player.score += config.move_forward
         obstacle = track.get(player.x, player.y)
         if obstacle == obstacles.CRACK:
             if player.action != actions.JUMP:
                 track.clear(player.x, player.y)
                 player.y += 1
+                player.score += config.move_backward
+            else:
+                player.score += config.jump
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
             track.clear(player.x, player.y)
             player.y += 1
+            player.score += config.move_backward
         elif obstacle == obstacles.WATER:
             if player.action != actions.BRAKE:
                 track.clear(player.x, player.y)
                 player.y += 1
+                player.score += config.move_backward
+            else:
+                player.score += config.brake
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.y -= 1
                 player.life += 1
+                player.score += config.move_forward
+        elif obstacle == obstacles.NONE:
+            if player.action in (actions.JUMP, actions.BRAKE, actions.PICKUP):
+                player.score += config.unnecessary_action
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same

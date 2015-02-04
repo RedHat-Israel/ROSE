@@ -57,3 +57,11 @@ finish_line_png = os.path.join(install_dir, '../res/end/final_flag.png')
 
 max_players = 2
 cells_per_player = matrix_width / max_players
+
+# Score Points
+
+move_forward = 10
+move_backward = -10
+jump = 5
+brake = 4
+unnecessary_action = -3

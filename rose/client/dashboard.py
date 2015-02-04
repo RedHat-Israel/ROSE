@@ -42,7 +42,7 @@ class Dashboard(component.Component):
         font = pygame.font.SysFont(pygame.font.get_default_font(),
                                    self.INFO_FONT_SIZE)
         for player in self.players.values():
-            info = "%(name)s : %(life)d" % player
+            info = "%(name)s: %(score)d" % (player)
             text = font.render(info, 1, self.TEXT_COLOR)
             x = self.INFO_LEFT_MARGIN + player["lane"] * self.INFO_OFFSET
             surface.blit(text, (x, config.dashboard_top_margin))
