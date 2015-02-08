@@ -85,5 +85,16 @@ them:
                         the obstacle. Any other action will cause you to
                         move backward.
 
+SCORE POINTS :
+===================
+
+MOVE FORWARD : 10
+MOVE BACKWARD : -10
+JUMP : 5
+BRAKE : 4
+UNNECESSARY ACTION = -3
+SCORE PENGUIN CATCH = 7
+
+
 Please check and test drive the examples drivers modules in this directory.
 Then go ahead and write the fastest driver!
