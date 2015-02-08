@@ -65,3 +65,4 @@ move_backward = -10
 jump = 5
 brake = 4
 unnecessary_action = -3
+score_penguin_catch = 7
