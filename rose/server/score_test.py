@@ -23,10 +23,10 @@ class SinglePlayerTest(object):
     def process(self):
         score.process({self.player.name: self.player}, self.track)
 
-    def assert_keep_player(self):
+    def assert_score(self, score):
         assert self.player.x == self.x
         assert self.player.y == self.y
-        assert self.player.score == self.score
+        assert self.player.score == score
 
     def assert_move_right(self):
         assert self.player.x == self.x + 1
@@ -41,7 +41,7 @@ class SinglePlayerTest(object):
     def assert_move_back(self):
         assert self.player.x == self.x
         assert self.player.y == self.y + 1
-        assert self.player.score == self.score
+        assert self.player.score == self.score + config.score_move_backward
 
     def assert_keep_obstacle(self):
         assert self.track.get(self.x, self.y) == self.obstacle
@@ -70,7 +70,7 @@ class TestNoObstacle(SinglePlayerTest):
         for action in FORWARD_ACTIONS:
             self.player.action = action
             self.process()
-            self.assert_keep_player()
+            self.assert_score(self.score)
             self.assert_keep_obstacle()
 
 
@@ -90,7 +90,7 @@ class TestPenguin(SinglePlayerTest):
         # Player move up and get more score
         assert self.player.x == self.x
         assert self.player.y == self.y - 1
-        assert self.player.score == self.score + config.score_penguin_catch + config.score_move_forward
+        assert self.player.score == self.score + config.score_move_forward
         self.assert_remove_obstacle()
 
     def test_right(self):
@@ -109,7 +109,7 @@ class TestPenguin(SinglePlayerTest):
         for action in [a for a in FORWARD_ACTIONS if a != actions.PICKUP]:
             self.player.action = action
             self.process()
-            self.assert_keep_player()
+            self.assert_score(self.score)
             self.assert_keep_obstacle()
 
 
@@ -123,11 +123,12 @@ class MagicActionTest(SinglePlayerTest):
 
     # Must be defined in subclass
     action = None
+    magic_score = None
 
     def test_magic_action(self):
         self.player.action = self.action
         self.process()
-        self.assert_keep_player()
+        self.assert_score(self.score + self.magic_score)
         self.assert_keep_obstacle()
 
     def test_other_action(self):
@@ -151,11 +152,13 @@ class MagicActionTest(SinglePlayerTest):
 
 
 class TestCrack(MagicActionTest):
+    magic_score = config.score_jump
     obstacle = obstacles.CRACK
     action = actions.JUMP
 
 
 class TestWater(MagicActionTest):
+    magic_score = config.score_brake
     obstacle = obstacles.WATER
     action = actions.BRAKE
 
@@ -210,7 +213,7 @@ class TestLimits(SinglePlayerTest):
         self.x = self.player.x = 0
         self.player.action = actions.LEFT
         self.process()
-        self.assert_keep_player()
+        self.assert_score(self.score)
         self.assert_keep_obstacle()
 
     def test_right(self):
@@ -218,7 +221,7 @@ class TestLimits(SinglePlayerTest):
         self.x = self.player.x = config.matrix_width - 1
         self.player.action = actions.RIGHT
         self.process()
-        self.assert_keep_player()
+        self.assert_score(self.score)
         self.assert_keep_obstacle()
 
     def test_forward(self):
@@ -230,7 +233,7 @@ class TestLimits(SinglePlayerTest):
         # Player keep position but get more score
         assert self.player.x == self.x
         assert self.player.y == self.y
-        assert self.player.score == self.score + config.score_penguin_catch
+        assert self.player.score == self.score + config.score_move_forward
         self.assert_remove_obstacle()
 
     def test_back(self):
@@ -240,7 +243,7 @@ class TestLimits(SinglePlayerTest):
         self.obstacle = obstacles.TRASH
         self.track.set(self.x, self.y, self.obstacle)
         self.process()
-        self.assert_keep_player()
+        self.assert_score(self.score + config.score_move_backward)
         self.assert_remove_obstacle()
 
 
@@ -280,11 +283,11 @@ class TestCollisions(object):
         # Player 1 win because it is in lane
         assert self.player1.x == 1
         assert self.player1.y == 5
-        assert self.player1.score == config.score_move_forward
+        assert self.player1.score == self.player1.score
         # Player 2 got more score but move back
         assert self.player2.x == 1
         assert self.player2.y == 6
-        assert self.player2.score == config.score_move_forward + config.score_penguin_catch
+        assert self.player2.score == 0 + config.score_move_forward + config.score_move_backward
 
     def test_after_turn(self):
         # Player 1 in its lane at 2,5
@@ -301,11 +304,11 @@ class TestCollisions(object):
         # Player 1 win because it is in lane
         assert self.player1.x == 2
         assert self.player1.y == 5
-        assert self.player1.score == config.score_move_forward
+        assert self.player1.score == self.player1.score
         # Player 2 got more score but move back
         assert self.player2.x == 2
         assert self.player2.y == 6
-        assert self.player2.score == config.score_move_backward
+        assert self.player2.score == 0 + config.score_move_backward
 
     def test_move_left(self):
         # Player 1 in its lane at 1,8
@@ -322,7 +325,7 @@ class TestCollisions(object):
         # Player 1 win because it is in own lane
         assert self.player1.x == 1
         assert self.player1.y == 8
-        assert self.player1.score == config.move_forward
+        assert self.player1.score == 0
         # Player 2 moved left, first free cell
         assert self.player2.x == 0
         assert self.player2.y == 8
@@ -344,7 +347,7 @@ class TestCollisions(object):
         # Player 1 win because it is in own lane
         assert self.player1.x == 0
         assert self.player1.y == 8
-        assert self.player1.score == config.score_move_forward
+        assert self.player1.score == 0
         # Player 2 moved right, no other possible cell
         assert self.player2.x == 1
         assert self.player2.y == 8
