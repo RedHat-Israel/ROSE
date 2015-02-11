@@ -54,11 +54,7 @@ def process(players, track):
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.y -= 1
-                player.score += config.score_penguin_catch
-        elif obstacle == obstacles.NONE:
-            player.score += config.score_move_forward
-            if player.action in (actions.JUMP, actions.BRAKE, actions.PICKUP):
-                player.score += config.score_unnecessary_action
+                player.score += config.score_move_forward
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same
@@ -72,6 +68,7 @@ def process(players, track):
 
         if (player.x, player.y) in positions:
             print 'player %s collision at %d,%d' % (player.name, player.x, player.y)
+            player.score += config.score_move_backward
             if player.y < config.matrix_height - 1:
                 player.y += 1
             elif player.x > 0:
