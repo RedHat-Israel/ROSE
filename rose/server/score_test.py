@@ -90,7 +90,7 @@ class TestPenguin(SinglePlayerTest):
         # Player move up and get more score
         assert self.player.x == self.x
         assert self.player.y == self.y - 1
-        assert self.player.score == self.score + config.score_penguin_catch + config.move_forward
+        assert self.player.score == self.score + config.score_penguin_catch + config.score_move_forward
         self.assert_remove_obstacle()
 
     def test_right(self):
@@ -280,11 +280,11 @@ class TestCollisions(object):
         # Player 1 win because it is in lane
         assert self.player1.x == 1
         assert self.player1.y == 5
-        assert self.player1.score == config.move_forward
+        assert self.player1.score == config.score_move_forward
         # Player 2 got more score but move back
         assert self.player2.x == 1
         assert self.player2.y == 6
-        assert self.player2.score == config.move_forward + config.score_penguin_catch
+        assert self.player2.score == config.score_move_forward + config.score_penguin_catch
 
     def test_after_turn(self):
         # Player 1 in its lane at 2,5
@@ -301,11 +301,11 @@ class TestCollisions(object):
         # Player 1 win because it is in lane
         assert self.player1.x == 2
         assert self.player1.y == 5
-        assert self.player1.score == config.move_forward
+        assert self.player1.score == config.score_move_forward
         # Player 2 got more score but move back
         assert self.player2.x == 2
         assert self.player2.y == 6
-        assert self.player2.score == config.move_backward
+        assert self.player2.score == config.score_move_backward
 
     def test_move_left(self):
         # Player 1 in its lane at 1,8
@@ -327,7 +327,7 @@ class TestCollisions(object):
         assert self.player2.x == 0
         assert self.player2.y == 8
         # TODO: decrease score?
-        assert self.player2.score == config.move_backward
+        assert self.player2.score == config.score_move_backward
 
     def test_move_right(self):
         # Player 1 in its lane at 0,8
@@ -344,9 +344,9 @@ class TestCollisions(object):
         # Player 1 win because it is in own lane
         assert self.player1.x == 0
         assert self.player1.y == 8
-        assert self.player1.score == config.move_forward
+        assert self.player1.score == config.score_move_forward
         # Player 2 moved right, no other possible cell
         assert self.player2.x == 1
         assert self.player2.y == 8
         # TODO: decrease score?
-        assert self.player2.score == config.move_backward
+        assert self.player2.score == config.score_move_backward

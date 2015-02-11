@@ -15,7 +15,6 @@ def process(players, track):
 
     for player in players.itervalues():
         if player.action == actions.LEFT:
-            # the left player should be start on x=0, and right in the middle
             if player.x > 0:
                 player.x -= 1
         elif player.action == actions.RIGHT:
@@ -34,32 +33,32 @@ def process(players, track):
             if player.action != actions.JUMP:
                 track.clear(player.x, player.y)
                 player.y += 1
-                player.score += config.move_backward
+                player.score += config.score_move_backward
             else:
-                player.score += config.jump + config.move_forward
+                player.score += config.score_jump
 
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
             track.clear(player.x, player.y)
             player.y += 1
-            player.score += config.move_backward
+            player.score += config.score_move_backward
         elif obstacle == obstacles.WATER:
             if player.action != actions.BRAKE:
                 track.clear(player.x, player.y)
                 player.y += 1
-                player.score += config.move_backward
+                player.score += config.score_move_backward
             else:
-                player.score += config.brake + config.move_forward
+                player.score += config.score_brake
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.y -= 1
-                player.score += config.score_penguin_catch + config.move_forward
+                player.score += config.score_penguin_catch
         elif obstacle == obstacles.NONE:
-            player.score += config.move_forward
+            player.score += config.score_move_forward
             if player.action in (actions.JUMP, actions.BRAKE, actions.PICKUP):
-                player.score += config.unnecessary_action
+                player.score += config.score_unnecessary_action
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same
