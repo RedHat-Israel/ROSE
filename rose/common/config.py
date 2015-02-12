@@ -60,9 +60,7 @@ cells_per_player = matrix_width / max_players
 
 # Score Points
 
-move_forward = 10
-move_backward = -10
-jump = 5
-brake = 4
-unnecessary_action = -3
-score_penguin_catch = 7
+score_move_forward = 10
+score_move_backward = -10
+score_jump = 5
+score_brake = 4
