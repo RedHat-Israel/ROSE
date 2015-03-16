@@ -28,6 +28,7 @@ def process(players, track):
     positions = set()
 
     for player in sorted_players:
+        player.score += config.score_move_forward
         obstacle = track.get(player.x, player.y)
         if obstacle == obstacles.CRACK:
             if player.action != actions.JUMP:
@@ -59,7 +60,7 @@ def process(players, track):
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same
         # location.
-        player.y = min(config.matrix_height - 1, max(0, player.y))
+        player.y = min(config.matrix_height - 1, max(2, player.y))
 
         # Finally forget action
         player.action = actions.NONE
