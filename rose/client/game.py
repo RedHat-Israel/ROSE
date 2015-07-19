@@ -40,7 +40,11 @@ class Game(component.Component):
     # Component interface
 
     def init(self):
+        if config.play_sound:
+            pygame.mixer.music.load(config.soundfile)
+            pygame.mixer.music.play(-1)
         pygame.display.set_caption(config.window_caption + ' - ' + self.name)
+
         self.track.init()
         self.dashboard.init()
         for car in self.cars:
