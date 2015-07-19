@@ -15,6 +15,7 @@ game_duration = 60
 frame_rate = 30
 number_of_cars = 4
 car_jitter = 10
+play_sound = True
 
 # Matrix
 
