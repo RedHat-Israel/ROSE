@@ -95,7 +95,7 @@ them:
                         return actions.RIGHT or actions.LEFT if you like to
                         bypass the obstacle. Any other action will cause you to
                         move backward.
-                        Score: 5 for BRAKE, 0 for LEFT/RIGHT otherwise -10
+                        Score: 5 for JUMP, 0 for LEFT/RIGHT otherwise -10
 
 * obstacles.TRASH       you must return actions.RIGHT or actions.LEFT to bypass
                         the obstacle. Any other action will cause you to
