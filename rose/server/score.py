@@ -34,27 +34,37 @@ def process(players, track):
             if player.action != actions.JUMP:
                 track.clear(player.x, player.y)
                 player.y += 1
-                player.score += config.score_move_backward
+                # if player failed and not in lane
+                add_score = config.score_move_backward if player.in_lane() else config.score_move_backward * 2
             else:
-                player.score += config.score_jump
+                # if player succeed and not in lane
+                add_score = config.score_jump if player.in_lane() else config.score_jump / 2
+            player.score += add_score
 
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
             track.clear(player.x, player.y)
             player.y += 1
-            player.score += config.score_move_backward
+            # if player failed
+            add_score = config.score_move_backward if player.in_lane() else config.score_move_backward * 2
+            player.score += add_score
         elif obstacle == obstacles.WATER:
             if player.action != actions.BRAKE:
                 track.clear(player.x, player.y)
                 player.y += 1
-                player.score += config.score_move_backward
+                # if player failed
+                add_score = config.score_move_backward if player.in_lane() else config.score_move_backward * 2        
             else:
-                player.score += config.score_brake
+                # if player succeed
+                add_score = config.score_brake if player.in_lane() else config.score_brake / 2
+            player.score += add_score
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.y -= 1
+                # if action == pickup but no in lane
+                add_score = config.score_move_forward if player.in_lane() else config.score_move_forward / 2
                 player.score += config.score_move_forward
 
         # Here we can end the game when player gets out of

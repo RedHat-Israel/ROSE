@@ -9,6 +9,7 @@ web_port = 8880
 
 game_rate = 1.0
 game_duration = 60
+game_mode = "random"
 
 # Client
 

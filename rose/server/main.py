@@ -100,6 +100,11 @@ class XMLRPC(xmlrpc.XMLRPC):
     def xmlrpc_set_rate(self, rate):
         self.game.rate = rate
 
+    def xmlrpc_set_mode(self, mode):
+        config.game_mode = mode
+        print(config.game_mode)
+
+
 def main():
     g = game.Game()
     reactor.listenTCP(config.game_port, Server(g))

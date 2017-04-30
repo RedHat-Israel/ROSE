@@ -49,6 +49,14 @@ class Client(object):
         rate = float(self.args[3])
         self.server.set_rate(rate)
 
+    def do_set_mode(self):
+        if len(self.args) < 4:
+            self.usage("MODE required")
+        mode = self.args[3]
+        if mode not in ('random', 'equal'):
+            self.usage("must be either - random , equal")
+        self.server.set_mode(mode)
+
     def commands(self):
         return sorted(getattr(self, name).__doc__
                       for name in dir(self)
