@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>ROSE Game</title>
+  </head>
+
+  <body>
+    <h1>ROSE Game</h1>
+
+    <form id="control">
+      <button id="start" disabled>Start</button>
+      <button id="stop" disabled>Stop</button>
+    </form>
+
+    <div id="status"></div>
+
+    <div id="dashboard">
+      <h2 id="lane0"></h2>
+      <h2 id="timeleft"></h2>
+      <h2 id="lane1"></h2>
+    </div>
+
+    <script src="jquery-3.2.1.min.js"></script>
+
+    <script>
+    $(document).ready(function() {
+
+      var updater = setInterval(update, 1000);
+
+      function update() {
+        $.get("admin", null, "application/json")
+          .done(function(state) {
+            // Hide players in case a player disconnected
+            $("#lane0").hide();
+            $("#lane1").hide();
+            // Update and show players
+            for (n in state.players) {
+              var p = state.players[n];
+              $("#lane" + p.lane)
+                .text(p.name + ": " + p.score)
+                .show();
+            }
+            $("#timeleft").text(state.timeleft)
+            if (state.started) {
+              $("#status").html("Running");
+              $("#start").attr("disabled", "disabled");
+              $("#stop").removeAttr("disabled");
+            } else {
+              $("#status").html("Stopped");
+              $("#start").removeAttr("disabled");
+              $("#stop").attr("disabled", "disabled");
+            }
+          })
+          .fail(function() {
+            $("#status").html("Server error");
+          })
+      }
+
+      function start() {
+        $("#status").html("Starting");
+        $("#start").attr("disabled", "disabled");
+        $.post("admin", {running: 1})
+          .done(function() {
+            $("#status").html("Running");
+            $("#stop").removeAttr("disabled")
+          })
+          .fail(function() {
+            $("#start").removeAttr("disabled")
+            $("#status").html("Error starting");
+          })
+      }
+
+      function stop() {
+        $("#status").html("Stopping...");
+        $("#stop").attr("disabled", "disabled");
+        $.post("admin", {running: 0})
+          .done(function() {
+            $("#status").html("Stopped");
+            $("#start").removeAttr("disabled")
+          })
+          .fail(function() {
+            $("#stop").removeAttr("disabled")
+            $("#status").html("Error stopping");
+          })
+      }
+
+      $("#start").click(function(event) {
+        event.preventDefault();
+        start();
+      });
+
+      $("#stop").click(function(event) {
+        event.preventDefault();
+        stop();
+      });
+
+      update();
+
+    });
+    </script>
+  </body>
+</html>

@@ -1,6 +1,7 @@
+import json
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
-from twisted.web import server, resource, xmlrpc
+from twisted.web import http, resource, server, static, xmlrpc
 from rose.common import config, error, message
 import game
 
@@ -100,10 +101,32 @@ class XMLRPC(xmlrpc.XMLRPC):
     def xmlrpc_set_rate(self, rate):
         self.game.rate = rate
 
+class WebAdmin(resource.Resource):
+
+    def __init__(self, game):
+        self.game = game
+        resource.Resource.__init__(self)
+
+    def render_GET(self, request):
+        request.setHeader(b"content-type", b"application/json")
+        return json.dumps(self.game.state())
+
+    def render_POST(self, request):
+        running = request.args.get("running", [None])[0]
+        if running == "1":
+            self.game.start()
+        elif running == "0":
+            if self.game.started:
+                self.game.stop()
+        else:
+            request.setResponseCode(http.BAD_REQUEST)
+        return ""
+
 def main():
     g = game.Game()
     reactor.listenTCP(config.game_port, Server(g))
-    root = resource.Resource()
+    root = static.File(config.web_root)
+    root.putChild('admin', WebAdmin(g))
     root.putChild('rpc2', XMLRPC(g))
     site = server.Site(root)
     reactor.listenTCP(config.web_port, site)
