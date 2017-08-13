@@ -54,6 +54,11 @@ dashboard_png = os.path.join(install_dir, '../res/dashboard/dashboard.png')
 splash_png = os.path.join(install_dir, '../res/splash/splash_screen.png')
 finish_line_png = os.path.join(install_dir, '../res/end/final_flag.png')
 soundfile = os.path.join(install_dir, '../res/soundtrack/Nyan_Cat.ogg')
+
+# Web interface
+
+web_root = os.path.join(install_dir, "../web")
+
 # Player
 
 max_players = 2
