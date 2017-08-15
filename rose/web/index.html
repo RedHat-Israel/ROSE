@@ -11,6 +11,11 @@
     <form id="control">
       <button id="start" disabled>Start</button>
       <button id="stop" disabled>Stop</button>
+      <div>
+        <button id="dec_rate" disabled>-</button>
+        <span id="rate"></span><span> FPS</span>
+        <button id="inc_rate" disabled>+</button>
+      </div>
     </form>
 
     <div id="status"></div>
@@ -27,6 +32,7 @@
     $(document).ready(function() {
 
       var updater = setInterval(update, 1000);
+      var rates = [0.5, 1.0, 2.0, 5.0, 10.0];
 
       function update() {
         $.get("admin", null, "application/json")
@@ -51,6 +57,8 @@
               $("#start").removeAttr("disabled");
               $("#stop").attr("disabled", "disabled");
             }
+            $("#rate").text(state.rate);
+            validate_rate_control();
           })
           .fail(function() {
             $("#status").html("Server error");
@@ -85,6 +93,63 @@
           })
       }
 
+      function parse_rate() {
+        return parseFloat($("#rate").text());
+      }
+
+      function disable_rate_control() {
+        $("#dec_rate").attr("disabled", "disabled")
+        $("#inc_rate").attr("disabled", "disabled")
+      }
+
+      function validate_rate_control() {
+        var value = parse_rate();
+        if (value == rates[0]) {
+          $("#dec_rate").attr("disabled", "disabled")
+        } else {
+          $("#dec_rate").removeAttr("disabled")
+        }
+        if (value == rates[rates.length-1]) {
+          $("#inc_rate").attr("disabled", "disabled")
+        } else {
+          $("#inc_rate").removeAttr("disabled")
+        }
+      }
+
+      function decrease_rate() {
+        var curr = parse_rate();
+        for (i = rates.length - 1; i >= 0; i--) {
+          if (rates[i] < curr) {
+            set_rate(rates[i]);
+            break;
+          }
+        }
+      }
+
+      function increase_rate() {
+        var curr = parse_rate();
+        for (i = 0; i < rates.length; i++) {
+          if (rates[i] > curr) {
+            set_rate(rates[i]);
+            break;
+          }
+        }
+      }
+
+      function set_rate(value) {
+        disable_rate_control();
+        $.post("admin", {rate: value})
+          .fail(function() {
+            $("#status").text("Error setting rate");
+          })
+          .done(function() {
+            $("#rate").text(value);
+          })
+          .always(function() {
+            validate_rate_control()
+          })
+      }
+
       $("#start").click(function(event) {
         event.preventDefault();
         start();
@@ -93,6 +158,16 @@
       $("#stop").click(function(event) {
         event.preventDefault();
         stop();
+      });
+
+      $("#dec_rate").click(function(event) {
+        event.preventDefault();
+        decrease_rate();
+      });
+
+      $("#inc_rate").click(function(event) {
+        event.preventDefault();
+        increase_rate();
       });
 
       update();
