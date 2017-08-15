@@ -122,6 +122,7 @@ class WebAdmin(resource.Resource):
                     self.game.stop()
             else:
                 request.setResponseCode(http.BAD_REQUEST)
+                return b"Invalid running value %r, expected (1, 0)" % value
         return ""
 
 def main():
