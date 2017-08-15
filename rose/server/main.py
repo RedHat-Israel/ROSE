@@ -113,14 +113,15 @@ class WebAdmin(resource.Resource):
         return json.dumps(self.game.state())
 
     def render_POST(self, request):
-        running = request.args.get("running", [None])[0]
-        if running == "1":
-            self.game.start()
-        elif running == "0":
-            if self.game.started:
-                self.game.stop()
-        else:
-            request.setResponseCode(http.BAD_REQUEST)
+        if "running" in request.args:
+            value = request.args["running"][0]
+            if value == "1":
+                self.game.start()
+            elif value == "0":
+                if self.game.started:
+                    self.game.stop()
+            else:
+                request.setResponseCode(http.BAD_REQUEST)
         return ""
 
 def main():
