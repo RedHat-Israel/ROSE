@@ -114,7 +114,8 @@ class Game(object):
         return {'started': self.started,
                 'track': self.track.state(),
                 'players': self.players_state(),
-                'timeleft': self.timeleft}
+                'timeleft': self.timeleft,
+                'rate': self.rate}
 
     def players_state(self):
         return dict((name, player.state()) for name, player in
