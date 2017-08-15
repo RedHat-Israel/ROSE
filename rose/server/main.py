@@ -122,6 +122,13 @@ class WebAdmin(resource.Resource):
             else:
                 request.setResponseCode(http.BAD_REQUEST)
                 return b"Invalid running value %r, expected (1, 0)" % value
+        if "rate" in request.args:
+            value = request.args["rate"][0]
+            try:
+                self.game.rate = float(value)
+            except ValueError:
+                request.setResponseCode(http.BAD_REQUEST)
+                return b"Invalid rate value %r, expected number" % value
         return ""
 
 def main():
