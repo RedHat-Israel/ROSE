@@ -9,72 +9,94 @@ ROSE.game = function() {
     function update() {
         $.get("admin", null, "application/json")
             .done(function(state) {
-                // Hide players in case a player disconnected
-                $("#lane0").hide();
-                $("#lane1").hide();
-                // Update and show players
-                for (n in state.players) {
-                    var p = state.players[n];
-                    $("#lane" + p.lane)
-                        .text(p.name + ": " + p.score)
-                        .show();
-                }
-                $("#timeleft").text(state.timeleft)
-                if (state.started) {
-                    $("#status").html("Running");
-                    $("#start").attr("disabled", "disabled");
-                    $("#stop").removeAttr("disabled");
-                } else {
-                    $("#status").html("Stopped");
-                    $("#start").removeAttr("disabled");
-                    $("#stop").attr("disabled", "disabled");
-                }
-                $("#rate").text(state.rate);
-                validate_rate_control();
+                update_control(state.started);
+                update_rate(state.rate)
+                update_status(state.started ? "Running" : "Stopped");
+                update_dashboard(state.players, state.timeleft);
             })
             .fail(function() {
-                $("#status").html("Server error");
+                update_status("Server error");
             })
     }
 
     function start() {
-        $("#status").html("Starting");
-        $("#start").attr("disabled", "disabled");
+        update_status("Starting");
+        disable_control();
         $.post("admin", {running: 1})
             .done(function() {
-                $("#status").html("Running");
-                $("#stop").removeAttr("disabled")
+                update_control(true);
+                update_status("Running");
             })
             .fail(function() {
-                $("#start").removeAttr("disabled")
-                $("#status").html("Error starting");
+                update_control(false);
+                update_status("Error statrting");
             })
     }
 
     function stop() {
-        $("#status").html("Stopping...");
-        $("#stop").attr("disabled", "disabled");
+        update_status("Stopping");
+        disable_control();
         $.post("admin", {running: 0})
             .done(function() {
-                $("#status").html("Stopped");
-                $("#start").removeAttr("disabled")
+                update_control(false);
+                update_status("Stopped");
             })
             .fail(function() {
-                $("#stop").removeAttr("disabled")
-                $("#status").html("Error stopping");
+                update_control(true);
+                update_status("Error stopping");
             })
+    }
+
+    function update_control(running) {
+        if (running) {
+            $("#start").attr("disabled", "disabled");
+            $("#stop").removeAttr("disabled");
+        } else {
+            $("#start").removeAttr("disabled");
+            $("#stop").attr("disabled", "disabled");
+        }
+    }
+
+    function disable_control() {
+        $("#start").attr("disabled", "disabled");
+        $("#stop").attr("disabled", "disabled");
+    }
+
+    function update_dashboard(players, timeleft) {
+        // Hide players in case a player disconnected
+        $("#lane0").hide();
+        $("#lane1").hide();
+
+        // Update and show players
+        for (n in players) {
+            var p = players[n];
+            $("#lane" + p.lane)
+                .text(p.name + ": " + p.score)
+                .show();
+        }
+
+        $("#timeleft").text(timeleft)
+    }
+
+    function update_status(value) {
+        $("#status").text(value);
+    }
+
+    function update_rate(value) {
+        $("#rate").text(value);
+        validate_rate();
     }
 
     function parse_rate() {
         return parseFloat($("#rate").text());
     }
 
-    function disable_rate_control() {
+    function disable_rate() {
         $("#dec_rate").attr("disabled", "disabled")
         $("#inc_rate").attr("disabled", "disabled")
     }
 
-    function validate_rate_control() {
+    function validate_rate() {
         var value = parse_rate();
         if (value == rates[0]) {
             $("#dec_rate").attr("disabled", "disabled")
@@ -109,16 +131,14 @@ ROSE.game = function() {
     }
 
     function set_rate(value) {
-        disable_rate_control();
+        disable_rate();
         $.post("admin", {rate: value})
-            .fail(function() {
-                $("#status").text("Error setting rate");
-            })
             .done(function() {
-                $("#rate").text(value);
+                update_rate(value);
             })
-            .always(function() {
-                validate_rate_control()
+            .fail(function() {
+                update_status("Error setting rate");
+                validate_rate()
             })
     }
 
