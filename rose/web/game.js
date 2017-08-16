@@ -3,7 +3,6 @@ if (typeof(ROSE) === "undefined") {
 }
 
 ROSE.game = function() {
-    var updater = null;
     var rates = [0.5, 1.0, 2.0, 5.0, 10.0];
 
     function update() {
@@ -163,7 +162,7 @@ ROSE.game = function() {
             increase_rate();
         });
 
-        updater = setInterval(update, 1000);
+        setInterval(update, 1000);
         update();
     }
 
