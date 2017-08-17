@@ -1,0 +1,46 @@
+body {
+    font-family: sans-serif;
+    background: #444;
+    color: #ccc;
+    margin: 0;
+}
+
+#content {
+    margin: 0 auto;
+    width: 910px;
+}
+
+#control {
+    position: relative;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+#control button {
+    font-size: inherit;
+    font-weight: bold;
+    padding: 0 20px;
+}
+
+#status {
+    margin: 0 10px;
+}
+
+#rate_ctl {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+#rate_ctl button {
+    width: 30px;
+    padding: 0;
+}
+
+#rate_ctl label {
+    margin: 0 10px;
+}
+
+#game {
+    border: 2px #333 solid;
+}

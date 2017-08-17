@@ -4,14 +4,20 @@ if (typeof(ROSE) === "undefined") {
 
 ROSE.game = function() {
     var rates = [0.5, 1.0, 2.0, 5.0, 10.0];
+    var context = null;
+    var dashboard = null;
 
     function update() {
         $.get("admin", null, "application/json")
             .done(function(state) {
+                // Update
                 update_control(state.started);
                 update_rate(state.rate)
                 update_status(state.started ? "Running" : "Stopped");
-                update_dashboard(state.players, state.timeleft);
+                dashboard.update(state.players, state.timeleft);
+
+                // Draw
+                dashboard.draw(context);
             })
             .fail(function() {
                 update_status("Server error");
@@ -59,22 +65,6 @@ ROSE.game = function() {
     function disable_control() {
         $("#start").attr("disabled", "disabled");
         $("#stop").attr("disabled", "disabled");
-    }
-
-    function update_dashboard(players, timeleft) {
-        // Hide players in case a player disconnected
-        $("#lane0").hide();
-        $("#lane1").hide();
-
-        // Update and show players
-        for (n in players) {
-            var p = players[n];
-            $("#lane" + p.lane)
-                .text(p.name + ": " + p.score)
-                .show();
-        }
-
-        $("#timeleft").text(timeleft)
     }
 
     function update_status(value) {
@@ -162,8 +152,11 @@ ROSE.game = function() {
             increase_rate();
         });
 
+        context = $("#game").get(0).getContext("2d");
+        dashboard = new ROSE.Dashboard();
+
+        // TODO: wait until all images loaded.
         setInterval(update, 1000);
-        update();
     }
 
     // exports
@@ -172,3 +165,41 @@ ROSE.game = function() {
     };
 
 }();
+
+ROSE.Dashboard = function() {
+    this.players = null;
+    this.timeleft = null;
+    this.texture = new Image();
+    this.texture.src = "res/dashboard/dashboard.png";
+}
+
+ROSE.Dashboard.prototype.update = function(players, timeleft) {
+    this.players = players;
+    this.timeleft = timeleft;
+}
+
+ROSE.Dashboard.prototype.draw = function(ctx) {
+    ctx.drawImage(this.texture, 0, 0);
+
+    var text = this.timeleft.toString()
+    if (this.timeleft < 10) {
+        text = "0" + text;
+    }
+
+    ctx.fillStyle = "rgb(153, 153, 153)";
+    ctx.textBaseline = "middle";
+
+    ctx.font = "bold 48px sans-serif";
+    ctx.textAlign = "center";
+
+    ctx.fillText(text, this.texture.width / 2, this.texture.height / 2);
+
+    ctx.font = "bold 36px sans-serif";
+    ctx.textAlign = "left";
+
+    for (n in this.players) {
+        var player = this.players[n];
+        var text = player.name + ": " + player.score;
+        ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
+    }
+}
