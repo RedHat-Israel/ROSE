@@ -22,10 +22,6 @@ body {
     padding: 0 20px;
 }
 
-#status {
-    margin: 0 10px;
-}
-
 #rate_ctl {
     position: absolute;
     top: 0;

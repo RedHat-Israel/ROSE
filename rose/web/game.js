@@ -3,7 +3,8 @@ if (typeof(ROSE) === "undefined") {
 }
 
 ROSE.game = function() {
-    var rates = [0.5, 1.0, 2.0, 5.0, 10.0];
+    var controller = null;
+    var rate = null;
     var context = null;
     var dashboard = null;
 
@@ -11,147 +12,21 @@ ROSE.game = function() {
         $.get("admin", null, "application/json")
             .done(function(state) {
                 // Update
-                update_control(state.started);
-                update_rate(state.rate)
-                update_status(state.started ? "Running" : "Stopped");
+                controller.update(state.started);
+                rate.update(state.rate);
                 dashboard.update(state.players, state.timeleft);
 
                 // Draw
                 dashboard.draw(context);
             })
-            .fail(function() {
-                update_status("Server error");
-            })
-    }
-
-    function start() {
-        update_status("Starting");
-        disable_control();
-        $.post("admin", {running: 1})
-            .done(function() {
-                update_control(true);
-                update_status("Running");
-            })
-            .fail(function() {
-                update_control(false);
-                update_status("Error statrting");
-            })
-    }
-
-    function stop() {
-        update_status("Stopping");
-        disable_control();
-        $.post("admin", {running: 0})
-            .done(function() {
-                update_control(false);
-                update_status("Stopped");
-            })
-            .fail(function() {
-                update_control(true);
-                update_status("Error stopping");
-            })
-    }
-
-    function update_control(running) {
-        if (running) {
-            $("#start").attr("disabled", "disabled");
-            $("#stop").removeAttr("disabled");
-        } else {
-            $("#start").removeAttr("disabled");
-            $("#stop").attr("disabled", "disabled");
-        }
-    }
-
-    function disable_control() {
-        $("#start").attr("disabled", "disabled");
-        $("#stop").attr("disabled", "disabled");
-    }
-
-    function update_status(value) {
-        $("#status").text(value);
-    }
-
-    function update_rate(value) {
-        $("#rate").text(value);
-        validate_rate();
-    }
-
-    function parse_rate() {
-        return parseFloat($("#rate").text());
-    }
-
-    function disable_rate() {
-        $("#dec_rate").attr("disabled", "disabled")
-        $("#inc_rate").attr("disabled", "disabled")
-    }
-
-    function validate_rate() {
-        var value = parse_rate();
-        if (value == rates[0]) {
-            $("#dec_rate").attr("disabled", "disabled")
-        } else {
-            $("#dec_rate").removeAttr("disabled")
-        }
-        if (value == rates[rates.length-1]) {
-            $("#inc_rate").attr("disabled", "disabled")
-        } else {
-            $("#inc_rate").removeAttr("disabled")
-        }
-    }
-
-    function decrease_rate() {
-        var curr = parse_rate();
-        for (i = rates.length - 1; i >= 0; i--) {
-            if (rates[i] < curr) {
-                set_rate(rates[i]);
-                break;
-            }
-        }
-    }
-
-    function increase_rate() {
-        var curr = parse_rate();
-        for (i = 0; i < rates.length; i++) {
-            if (rates[i] > curr) {
-                set_rate(rates[i]);
-                break;
-            }
-        }
-    }
-
-    function set_rate(value) {
-        disable_rate();
-        $.post("admin", {rate: value})
-            .done(function() {
-                update_rate(value);
-            })
-            .fail(function() {
-                update_status("Error setting rate");
-                validate_rate()
+            .fail(function(xhr) {
+                console.log("Error updating: " + xhr.responseText);
             })
     }
 
     function ready() {
-        $("#start").click(function(event) {
-            event.preventDefault();
-            start();
-        });
-
-        $("#stop").click(function(event) {
-            event.preventDefault();
-            stop();
-        });
-
-        $("#dec_rate").click(function(event) {
-            event.preventDefault();
-            decrease_rate();
-        });
-
-        $("#inc_rate").click(function(event) {
-            event.preventDefault();
-            increase_rate();
-        });
-
+        controller = new ROSE.Controller();
+        rate = new ROSE.Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
         context = $("#game").get(0).getContext("2d");
         dashboard = new ROSE.Dashboard();
 
@@ -165,6 +40,136 @@ ROSE.game = function() {
     };
 
 }();
+
+ROSE.Controller = function() {
+    var self = this;
+    $("#start").click(function(event) {
+        event.preventDefault();
+        self.start();
+    });
+
+    $("#stop").click(function(event) {
+        event.preventDefault();
+        self.stop();
+    });
+}
+
+ROSE.Controller.prototype.start = function() {
+    var self = this;
+    self.disable();
+    $.post("admin", {running: 1})
+        .done(function() {
+            self.update(true);
+        })
+        .fail(function(xhr) {
+            self.update(false);
+            console.log("Error starting: " + xhr.responseText);
+        })
+}
+
+ROSE.Controller.prototype.stop = function() {
+    var self = this;
+    self.disable();
+    $.post("admin", {running: 0})
+        .done(function() {
+            self.update(false);
+        })
+        .fail(function(xhr) {
+            self.update(true);
+            console.log("Error stopping: " + xhr.responseText);
+        })
+}
+
+ROSE.Controller.prototype.update = function(running) {
+    if (running) {
+        $("#start").attr("disabled", "disabled");
+        $("#stop").removeAttr("disabled");
+    } else {
+        $("#start").removeAttr("disabled");
+        $("#stop").attr("disabled", "disabled");
+    }
+}
+
+ROSE.Controller.prototype.disable = function() {
+    $("#start").attr("disabled", "disabled");
+    $("#stop").attr("disabled", "disabled");
+}
+
+ROSE.Rate = function(values) {
+    this.values = values;
+    var self = this;
+
+    $("#dec_rate").click(function(event) {
+        event.preventDefault();
+        self.decrease();
+    });
+
+    $("#inc_rate").click(function(event) {
+        event.preventDefault();
+        self.increase();
+    });
+}
+
+ROSE.Rate.prototype.update = function(rate) {
+    $("#rate").text(rate);
+    this.validate();
+}
+
+ROSE.Rate.prototype.value = function() {
+    return parseFloat($("#rate").text());
+}
+
+ROSE.Rate.prototype.validate = function() {
+    var value = this.value();
+    if (value == this.values[0]) {
+        $("#dec_rate").attr("disabled", "disabled")
+    } else {
+        $("#dec_rate").removeAttr("disabled")
+    }
+    if (value == this.values[this.values.length-1]) {
+        $("#inc_rate").attr("disabled", "disabled")
+    } else {
+        $("#inc_rate").removeAttr("disabled")
+    }
+}
+
+ROSE.Rate.prototype.disable = function() {
+    $("#dec_rate").attr("disabled", "disabled")
+    $("#inc_rate").attr("disabled", "disabled")
+}
+
+ROSE.Rate.prototype.decrease = function() {
+    var curr = this.value();
+    for (i = this.values.length - 1; i >= 0; i--) {
+        if (this.values[i] < curr) {
+            this.post(this.values[i]);
+            break;
+        }
+    }
+}
+
+ROSE.Rate.prototype.increase = function() {
+    var curr = this.value();
+    for (i = 0; i < this.values.length; i++) {
+        if (this.values[i] > curr) {
+            this.post(this.values[i]);
+            break;
+        }
+    }
+}
+
+ROSE.Rate.prototype.post = function(value) {
+    var self = this;
+    self.disable();
+    $.post("admin", {rate: value})
+        .done(function() {
+            self.update(value);
+        })
+        .fail(function(xhr) {
+            self.validate();
+            console.log("Error changing rate: " + xhr.responseText);
+        })
+}
 
 ROSE.Dashboard = function() {
     this.players = null;
