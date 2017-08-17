@@ -7,6 +7,7 @@ ROSE.game = function() {
     var rate = null;
     var context = null;
     var dashboard = null;
+    var track = null;
 
     function update() {
         $.get("admin", null, "application/json")
@@ -14,10 +15,12 @@ ROSE.game = function() {
                 // Update
                 controller.update(state.started);
                 rate.update(state.rate);
-                dashboard.update(state.players, state.timeleft);
+                dashboard.update(state);
+                track.update(state);
 
                 // Draw
                 dashboard.draw(context);
+                track.draw(context);
             })
             .fail(function(xhr) {
                 console.log("Error updating: " + xhr.responseText);
@@ -35,6 +38,7 @@ ROSE.game = function() {
 
         context = $("#game").get(0).getContext("2d");
         dashboard = new ROSE.Dashboard(loader);
+        track = new ROSE.Track(loader);
     }
 
     // exports
@@ -183,9 +187,9 @@ ROSE.Dashboard = function(loader) {
     });
 }
 
-ROSE.Dashboard.prototype.update = function(players, timeleft) {
-    this.players = players;
-    this.timeleft = timeleft;
+ROSE.Dashboard.prototype.update = function(state) {
+    this.players = state.players;
+    this.timeleft = state.timeleft;
 }
 
 ROSE.Dashboard.prototype.draw = function(ctx) {
@@ -211,6 +215,40 @@ ROSE.Dashboard.prototype.draw = function(ctx) {
         var player = this.players[n];
         var text = player.name + ": " + player.score;
         ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
+    }
+}
+
+ROSE.Track = function(loader) {
+    this.track = null
+    this.textures = [null, null, null];
+    var self = this;
+
+    loader.load("res/bg/bg_1.png", function(img) {
+        self.textures[0] = img;
+    });
+    loader.load("res/bg/bg_2.png", function(img) {
+        self.textures[1] = img;
+    });
+    loader.load("res/bg/bg_3.png", function(img) {
+        self.textures[2] = img;
+    });
+}
+
+ROSE.Track.prototype.update = function(state) {
+    this.track = state.track;
+    if (state.started) {
+        // Simulate track movement
+        var last = this.textures.pop();
+        this.textures.unshift(last);
+    }
+}
+
+ROSE.Track.prototype.draw = function(ctx) {
+    var dashboard_height = 150;
+    var track_length = 9;
+    for (i = 0; i < track_length; i++) {
+        var img = this.textures[i % this.textures.length];
+        ctx.drawImage(img, 0, dashboard_height + (i * img.height));
     }
 }
 
