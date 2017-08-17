@@ -58,6 +58,7 @@ soundfile = os.path.join(install_dir, '../res/soundtrack/Nyan_Cat.ogg')
 # Web interface
 
 web_root = os.path.join(install_dir, "../web")
+res_root = os.path.join(install_dir, "../res")
 
 # Player
 

@@ -137,6 +137,7 @@ def main():
     reactor.listenTCP(config.game_port, Server(g))
     root = static.File(config.web_root)
     root.putChild('admin', WebAdmin(g))
+    root.putChild('res', static.File(config.res_root))
     root.putChild('rpc2', XMLRPC(g))
     site = server.Site(root)
     reactor.listenTCP(config.web_port, site)
