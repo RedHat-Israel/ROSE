@@ -27,11 +27,14 @@ ROSE.game = function() {
     function ready() {
         controller = new ROSE.Controller();
         rate = new ROSE.Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
-        context = $("#game").get(0).getContext("2d");
-        dashboard = new ROSE.Dashboard();
 
-        // TODO: wait until all images loaded.
-        setInterval(update, 1000);
+        var loader = new ROSE.ImageLoader(function() {
+            update();
+            setInterval(update, 1000);
+        });
+
+        context = $("#game").get(0).getContext("2d");
+        dashboard = new ROSE.Dashboard(loader);
     }
 
     // exports
@@ -171,11 +174,13 @@ ROSE.Rate.prototype.post = function(value) {
         })
 }
 
-ROSE.Dashboard = function() {
+ROSE.Dashboard = function(loader) {
     this.players = null;
     this.timeleft = null;
-    this.texture = new Image();
-    this.texture.src = "res/dashboard/dashboard.png";
+    var self = this;
+    loader.load("res/dashboard/dashboard.png", function(img) {
+        self.texture = img;
+    });
 }
 
 ROSE.Dashboard.prototype.update = function(players, timeleft) {
@@ -207,4 +212,23 @@ ROSE.Dashboard.prototype.draw = function(ctx) {
         var text = player.name + ": " + player.score;
         ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
     }
+}
+
+ROSE.ImageLoader = function(done) {
+    this.loading = 0;
+    this.done = done;
+}
+
+ROSE.ImageLoader.prototype.load = function(url, done) {
+    var img = new Image();
+    var self = this;
+    self.loading++;
+    $(img).on("load", function() {
+        done(img);
+        self.loading--;
+        if (self.loading == 0) {
+            self.done();
+        }
+    });
+    img.src = url;
 }
