@@ -14,7 +14,7 @@ class Game(object):
     """
 
     def __init__(self):
-        self.server = None
+        self.hub = None
         self.watcher = None
         self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
@@ -109,7 +109,7 @@ class Game(object):
 
     def update_clients(self):
         msg = message.Message('update', self.state())
-        self.server.broadcast(msg)
+        self.hub.broadcast(msg)
         self.watcher.broadcast(msg)
 
     def state(self):

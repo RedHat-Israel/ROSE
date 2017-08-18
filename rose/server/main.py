@@ -13,45 +13,10 @@ from rose.common import config, error, message
 import game
 
 
-class Player(basic.LineReceiver):
-
-    def __init__(self):
-        self.name = None
-
-    def connectionLost(self, reason):
-        self.factory.remove_player(self)
-
-    def lineReceived(self, line):
-        try:
-            msg = message.parse(line)
-            self.dispatch(msg)
-        except error.Error as e:
-            print "Error handling message: %s" % e
-            msg = message.Message('error', {'message': str(e)})
-            self.sendLine(str(msg))
-            self.transport.loseConnection()
-
-    def dispatch(self, msg):
-        if self.name is None:
-            # New player
-            if msg.action != 'join':
-                raise error.ActionForbidden(msg.action)
-            if 'name' not in msg.payload:
-                raise error.InvalidMessage("name required")
-            self.name = msg.payload['name']
-            self.factory.add_player(self)
-        else:
-            # Registered player
-            if msg.action == 'drive':
-                self.factory.drive_player(self, msg.payload)
-            else:
-                raise error.ActionForbidden(msg.action)
-
-class Server(protocol.ServerFactory):
-    protocol = Player
+class Hub(object):
 
     def __init__(self, game):
-        game.server = self
+        game.hub = self
         self.game = game
         self.players = set()
 
@@ -71,12 +36,57 @@ class Server(protocol.ServerFactory):
     def drive_player(self, player, info):
         self.game.drive_player(player.name, info)
 
-    # Game server interface
+    # Game hub interface
 
     def broadcast(self, msg):
         data = str(msg)
         for player in self.players:
             player.sendLine(data)
+
+class Player(basic.LineReceiver):
+
+    def __init__(self, hub):
+        self.hub = hub
+        self.name = None
+
+    def connectionLost(self, reason):
+        self.hub.remove_player(self)
+
+    def lineReceived(self, line):
+        try:
+            msg = message.parse(line)
+            self.dispatch(msg)
+        except error.Error as e:
+            print "Error handling message: %s" % e
+            msg = message.Message('error', {'message': str(e)})
+            self.sendLine(str(msg))
+            self.transport.loseConnection()
+
+    def dispatch(self, msg):
+        if self.name is None:
+            # New player
+            if msg.action != 'join':
+                raise error.ActionForbidden(msg.action)
+            if 'name' not in msg.payload:
+                raise error.InvalidMessage("name required")
+            self.name = msg.payload['name']
+            self.hub.add_player(self)
+        else:
+            # Registered player
+            if msg.action == 'drive':
+                self.hub.drive_player(self, msg.payload)
+            else:
+                raise error.ActionForbidden(msg.action)
+
+class PlayerFactory(protocol.ServerFactory):
+
+    def __init__(self, hub):
+        self.hub = hub
+
+    def buildProtocol(self, addr):
+        p  = Player(self.hub)
+        p.factory = self
+        return p
 
 class XMLRPC(xmlrpc.XMLRPC):
 
@@ -170,7 +180,8 @@ class WebAdmin(resource.Resource):
 
 def main():
     g = game.Game()
-    reactor.listenTCP(config.game_port, Server(g))
+    h = Hub(g)
+    reactor.listenTCP(config.game_port, PlayerFactory(h))
     root = static.File(config.web_root)
     root.putChild('admin', WebAdmin(g))
     root.putChild('res', static.File(config.res_root))
