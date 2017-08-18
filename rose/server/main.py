@@ -41,13 +41,15 @@ class Hub(object):
     def broadcast(self, msg):
         data = str(msg)
         for player in self.players:
-            player.sendLine(data)
+            player.send_message(data)
 
 class Player(basic.LineReceiver):
 
     def __init__(self, hub):
         self.hub = hub
         self.name = None
+
+    # LineReceiver interface
 
     def connectionLost(self, reason):
         self.hub.remove_player(self)
@@ -61,6 +63,13 @@ class Player(basic.LineReceiver):
             msg = message.Message('error', {'message': str(e)})
             self.sendLine(str(msg))
             self.transport.loseConnection()
+
+    # Hub client interface
+
+    def send_message(self, data):
+        self.sendLine(data)
+
+    # Disaptching messages
 
     def dispatch(self, msg):
         if self.name is None:
@@ -111,18 +120,25 @@ class XMLRPC(xmlrpc.XMLRPC):
 
 class Watcher(WebSocketServerProtocol):
 
+    # WebSocketServerProtocol interface
+
     def onConnect(self, request):
         print "watcher connected from %s" % request
         self.factory.add_watcher(self)
 
     def onOpen(self):
         msg = message.Message("update", self.factory.game_state())
-        self.sendMessage(str(msg), False)
+        self.send_message(str(msg))
 
     def onClose(self, wasClean, code, reason):
         print ("watcher closed (wasClean=%s, code=%s, reason=%s)"
                % (wasClean, code, reason))
         self.factory.remove_watcher(self)
+
+    # Hub client interface
+
+    def send_message(self, data):
+        self.sendMessage(data, False)
 
 class WatcherFactory(WebSocketServerFactory):
 
@@ -146,7 +162,7 @@ class WatcherFactory(WebSocketServerFactory):
     def broadcast(self, msg):
         data = str(msg)
         for w in self.watchers:
-            w.sendMessage(data, False)
+            w.send_message(data)
 
 class WebAdmin(resource.Resource):
 
