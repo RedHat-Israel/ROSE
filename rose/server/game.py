@@ -66,7 +66,7 @@ class Game(object):
         self.free_lanes.remove(lane)
         print 'add player:', name, 'lane:', lane, 'car:', car
         self.players[name] = player.Player(name, car, lane)
-        reactor.callLater(0, self.update_players)
+        reactor.callLater(0, self.update_clients)
 
     def remove_player(self, name):
         if name not in self.players:
@@ -75,7 +75,7 @@ class Game(object):
         self.free_cars.add(player.car)
         self.free_lanes.add(player.lane)
         print 'remove player:', name, 'lane:', player.lane, 'car:', player.car
-        reactor.callLater(0, self.update_players)
+        reactor.callLater(0, self.update_clients)
 
     def drive_player(self, name, info):
         print 'drive_player:', name, info
@@ -103,11 +103,11 @@ class Game(object):
         score.process(self.players, self.track)
         if self.timeleft == 0:
             self.stop()
-        self.update_players()
+        self.update_clients()
         if self.timeleft > 0:
             self.timeleft -= 1
 
-    def update_players(self):
+    def update_clients(self):
         msg = message.Message('update', self.state())
         self.server.broadcast(msg)
         self.watcher.broadcast(self.state())
