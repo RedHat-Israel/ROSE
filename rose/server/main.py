@@ -18,9 +18,6 @@ class Player(basic.LineReceiver):
     def __init__(self):
         self.name = None
 
-    def connectionMade(self):
-        self.factory.playerConnected(self)
-
     def connectionLost(self, reason):
         self.factory.playerDisconnected(self)
 
@@ -41,12 +38,8 @@ class Player(basic.LineReceiver):
                 raise error.ActionForbidden(msg.action)
             if 'name' not in msg.payload:
                 raise error.InvalidMessage("name required")
-            name = msg.payload['name']
-            # Will raise if there are too many players or this name is already
-            # taken, leaving me in non-registered state.
-            self.factory.registerPlayer(name)
-            # I was registered successfully
-            self.name = name
+            self.name = msg.payload['name']
+            self.factory.playerConnected(self)
         else:
             # Registered player
             if msg.action == 'start':
@@ -65,15 +58,15 @@ class Server(protocol.ServerFactory):
         self.players = set()
 
     def playerConnected(self, player):
+        # First add player, will raise if there are too many players or this
+        # name is already taken.
+        self.game.add_player(player.name)
         self.players.add(player)
 
     def playerDisconnected(self, player):
-        self.players.remove(player)
-        if player.name is not None:
+        if player in self.players:
+            self.players.remove(player)
             self.game.remove_player(player.name)
-
-    def registerPlayer(self, name):
-        self.game.add_player(name)
 
     def drivePlayer(self, name, info):
         self.game.drive_player(name, info)
@@ -85,8 +78,7 @@ class Server(protocol.ServerFactory):
     def broadcast(self, msg):
         data = str(msg)
         for player in self.players:
-            if player.name is not None:
-                player.sendLine(data)
+            player.sendLine(data)
 
 class XMLRPC(xmlrpc.XMLRPC):
 
