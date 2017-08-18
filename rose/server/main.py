@@ -2,6 +2,11 @@ import json
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 from twisted.web import http, resource, server, static, xmlrpc
+
+from autobahn.twisted.resource import WebSocketResource
+from autobahn.twisted.websocket import WebSocketServerFactory
+from autobahn.twisted.websocket import WebSocketServerProtocol
+
 from rose.common import config, error, message
 import game
 
@@ -102,6 +107,46 @@ class XMLRPC(xmlrpc.XMLRPC):
     def xmlrpc_set_rate(self, rate):
         self.game.rate = rate
 
+class Watcher(WebSocketServerProtocol):
+
+    def onConnect(self, request):
+        print "watcher connected from %s" % request
+        self.factory.add_watcher(self)
+
+    def onOpen(self):
+        msg = self.factory.game_state()
+        data = json.dumps(msg).encode("utf8")
+        self.sendMessage(data, False)
+
+    def onClose(self, wasClean, code, reason):
+        print ("watcher closed (wasClean=%s, code=%s, reason=%s)"
+               % (wasClean, code, reason))
+        self.factory.remove_watcher(self)
+
+class WatcherFactory(WebSocketServerFactory):
+
+    protocol = Watcher
+
+    def __init__(self, url, game):
+        WebSocketServerFactory.__init__(self, url)
+        game.watcher = self
+        self.game = game
+        self.watchers = set()
+
+    def add_watcher(self, w):
+        self.watchers.add(w)
+
+    def remove_watcher(self, w):
+        self.watchers.remove(w)
+
+    def game_state(self):
+        return self.game.state()
+
+    def broadcast(self, msg):
+        data = json.dumps(msg).encode("utf8")
+        for w in self.watchers:
+            w.sendMessage(data, False)
+
 class WebAdmin(resource.Resource):
 
     def __init__(self, game):
@@ -138,6 +183,8 @@ def main():
     root = static.File(config.web_root)
     root.putChild('admin', WebAdmin(g))
     root.putChild('res', static.File(config.res_root))
+    watcher = WatcherFactory(u"ws://127.0.0.1:%s" % config.web_port, g)
+    root.putChild("ws", WebSocketResource(watcher))
     root.putChild('rpc2', XMLRPC(g))
     site = server.Site(root)
     reactor.listenTCP(config.web_port, site)
