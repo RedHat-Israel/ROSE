@@ -116,9 +116,8 @@ class Watcher(WebSocketServerProtocol):
         self.factory.add_watcher(self)
 
     def onOpen(self):
-        msg = self.factory.game_state()
-        data = json.dumps(msg).encode("utf8")
-        self.sendMessage(data, False)
+        msg = message.Message("update", self.factory.game_state())
+        self.sendMessage(str(msg), False)
 
     def onClose(self, wasClean, code, reason):
         print ("watcher closed (wasClean=%s, code=%s, reason=%s)"
@@ -145,7 +144,7 @@ class WatcherFactory(WebSocketServerFactory):
         return self.game.state()
 
     def broadcast(self, msg):
-        data = json.dumps(msg).encode("utf8")
+        data = str(msg)
         for w in self.watchers:
             w.sendMessage(data, False)
 

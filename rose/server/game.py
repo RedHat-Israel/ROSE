@@ -110,7 +110,7 @@ class Game(object):
     def update_clients(self):
         msg = message.Message('update', self.state())
         self.server.broadcast(msg)
-        self.watcher.broadcast(self.state())
+        self.watcher.broadcast(msg)
 
     def state(self):
         return {'started': self.started,

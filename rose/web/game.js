@@ -27,9 +27,14 @@ ROSE.game = function() {
             setTimeout(connect, reconnect_msec);
         };
 
-        sock.onmessage = function(msg) {
-            console.log("Received message: " + msg);
-            var state = JSON.parse(msg.data);
+        sock.onmessage = function(m) {
+            var msg = JSON.parse(m.data);
+            if (msg.action !== "update") {
+                console.log("Ignoring unknown message: " + m.data);
+                return;
+            }
+
+            var state = msg.payload;
 
             // Update
             controller.update(state.started);
