@@ -1,3 +1,4 @@
+autobahn
 pygame
 pytest
 pytest-coverage

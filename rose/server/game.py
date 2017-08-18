@@ -15,6 +15,7 @@ class Game(object):
 
     def __init__(self):
         self.server = None
+        self.watcher = None
         self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
@@ -100,15 +101,16 @@ class Game(object):
     def loop(self):
         self.track.update()
         score.process(self.players, self.track)
+        if self.timeleft == 0:
+            self.stop()
         self.update_players()
         if self.timeleft > 0:
             self.timeleft -= 1
-        else:
-            self.stop()
 
     def update_players(self):
         msg = message.Message('update', self.state())
         self.server.broadcast(msg)
+        self.watcher.broadcast(self.state())
 
     def state(self):
         return {'started': self.started,

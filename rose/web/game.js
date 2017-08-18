@@ -3,28 +3,44 @@ if (typeof(ROSE) === "undefined") {
 }
 
 ROSE.game = function() {
+    var sock = null;
+    var reconnect_msec = 500;
     var controller = null;
     var rate = null;
     var context = null;
     var dashboard = null;
     var track = null;
 
-    function update() {
-        $.get("admin", null, "application/json")
-            .done(function(state) {
-                // Update
-                controller.update(state.started);
-                rate.update(state.rate);
-                dashboard.update(state);
-                track.update(state);
+    function connect() {
+        var wsuri = "ws://" + window.location.hostname + ":8880/ws";
+        sock = new WebSocket(wsuri);
 
-                // Draw
-                dashboard.draw(context);
-                track.draw(context);
-            })
-            .fail(function(xhr) {
-                console.log("Error updating: " + xhr.responseText);
-            })
+        sock.onopen = function() {
+            console.log("Connected to " + wsuri);
+        };
+
+        sock.onclose = function(e) {
+            console.log("Disconnected wasClean=" + e.wasClean + ", code=" +
+                        e.code + ", reason='" + e.reason + "')");
+            sock = null;
+            console.log("Reconnecting in " + reconnect_msec + " milliseconds");
+            setTimeout(connect, reconnect_msec);
+        };
+
+        sock.onmessage = function(msg) {
+            console.log("Received message: " + msg);
+            var state = JSON.parse(msg.data);
+
+            // Update
+            controller.update(state.started);
+            rate.update(state.rate);
+            dashboard.update(state);
+            track.update(state);
+
+            // Draw
+            dashboard.draw(context);
+            track.draw(context);
+        };
     }
 
     function ready() {
@@ -32,8 +48,7 @@ ROSE.game = function() {
         rate = new ROSE.Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
 
         var loader = new ROSE.ImageLoader(function() {
-            update();
-            setInterval(update, 1000);
+            connect();
         });
 
         context = $("#game").get(0).getContext("2d");
