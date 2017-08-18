@@ -42,9 +42,7 @@ class Player(basic.LineReceiver):
             self.factory.add_player(self)
         else:
             # Registered player
-            if msg.action == 'start':
-                self.factory.start()
-            elif msg.action == 'drive':
+            if msg.action == 'drive':
                 self.factory.drive_player(self, msg.payload)
             else:
                 raise error.ActionForbidden(msg.action)
@@ -72,10 +70,6 @@ class Server(protocol.ServerFactory):
 
     def drive_player(self, player, info):
         self.game.drive_player(player.name, info)
-
-    def start(self):
-        if not self.game.started:
-            self.game.start()
 
     # Game server interface
 
