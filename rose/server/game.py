@@ -15,7 +15,6 @@ class Game(object):
 
     def __init__(self):
         self.hub = None
-        self.watcher = None
         self.track = track.Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
@@ -110,7 +109,6 @@ class Game(object):
     def update_clients(self):
         msg = message.Message('update', self.state())
         self.hub.broadcast(msg)
-        self.watcher.broadcast(msg)
 
     def state(self):
         return {'started': self.started,

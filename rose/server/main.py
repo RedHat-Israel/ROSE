@@ -18,7 +18,7 @@ class Hub(object):
     def __init__(self, game):
         game.hub = self
         self.game = game
-        self.players = set()
+        self.clients = set()
 
     # Player client interface
 
@@ -26,22 +26,32 @@ class Hub(object):
         # First add player, will raise if there are too many players or this
         # name is already taken.
         self.game.add_player(player.name)
-        self.players.add(player)
+        self.clients.add(player)
 
     def remove_player(self, player):
-        if player in self.players:
-            self.players.remove(player)
+        if player in self.clients:
+            self.clients.remove(player)
             self.game.remove_player(player.name)
 
     def drive_player(self, player, info):
         self.game.drive_player(player.name, info)
 
+    # Watcher client interface
+
+    def add_watcher(self, watcher):
+        self.clients.add(watcher)
+        msg = message.Message("update", self.game.state())
+        watcher.send_message(str(msg))
+
+    def remove_watcher(self, watcher):
+        self.clients.discard(watcher)
+
     # Game hub interface
 
     def broadcast(self, msg):
         data = str(msg)
-        for player in self.players:
-            player.send_message(data)
+        for client in self.clients:
+            client.send_message(data)
 
 class Player(basic.LineReceiver):
 
@@ -120,20 +130,22 @@ class XMLRPC(xmlrpc.XMLRPC):
 
 class Watcher(WebSocketServerProtocol):
 
+    def __init__(self, hub):
+        self.hub = hub
+        WebSocketServerProtocol.__init__(self)
+
     # WebSocketServerProtocol interface
 
     def onConnect(self, request):
         print "watcher connected from %s" % request
-        self.factory.add_watcher(self)
 
     def onOpen(self):
-        msg = message.Message("update", self.factory.game_state())
-        self.send_message(str(msg))
+        self.hub.add_watcher(self)
 
     def onClose(self, wasClean, code, reason):
         print ("watcher closed (wasClean=%s, code=%s, reason=%s)"
                % (wasClean, code, reason))
-        self.factory.remove_watcher(self)
+        self.hub.remove_watcher(self)
 
     # Hub client interface
 
@@ -142,27 +154,14 @@ class Watcher(WebSocketServerProtocol):
 
 class WatcherFactory(WebSocketServerFactory):
 
-    protocol = Watcher
-
-    def __init__(self, url, game):
+    def __init__(self, url, hub):
+        self.hub = hub
         WebSocketServerFactory.__init__(self, url)
-        game.watcher = self
-        self.game = game
-        self.watchers = set()
 
-    def add_watcher(self, w):
-        self.watchers.add(w)
-
-    def remove_watcher(self, w):
-        self.watchers.remove(w)
-
-    def game_state(self):
-        return self.game.state()
-
-    def broadcast(self, msg):
-        data = str(msg)
-        for w in self.watchers:
-            w.send_message(data)
+    def buildProtocol(self, addr):
+        p = Watcher(self.hub)
+        p.factory = self
+        return p
 
 class WebAdmin(resource.Resource):
 
@@ -202,7 +201,7 @@ def main():
     root.putChild('admin', WebAdmin(g))
     root.putChild('res', static.File(config.res_root))
     wsuri = u"ws://%s:%s" % (socket.gethostname(), config.web_port)
-    watcher = WatcherFactory(wsuri, g)
+    watcher = WatcherFactory(wsuri, h)
     root.putChild("ws", WebSocketResource(watcher))
     root.putChild('rpc2', XMLRPC(g))
     site = server.Site(root)
