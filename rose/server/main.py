@@ -107,27 +107,6 @@ class PlayerFactory(protocol.ServerFactory):
         p.factory = self
         return p
 
-class XMLRPC(xmlrpc.XMLRPC):
-
-    def __init__(self, game):
-        self.game = game
-        xmlrpc.XMLRPC.__init__(self, allowNone=True)
-
-    def xmlrpc_start(self):
-        try:
-            self.game.start()
-        except error.GameAlreadyStarted as e:
-            raise xmlrpc.Fault(1, str(e))
-
-    def xmlrpc_stop(self):
-        try:
-            self.game.stop()
-        except error.GameNotStarted as e:
-            raise xmlrpc.Fault(1, str(e))
-
-    def xmlrpc_set_rate(self, rate):
-        self.game.rate = rate
-
 class Watcher(WebSocketServerProtocol):
 
     def __init__(self, hub):
@@ -162,6 +141,27 @@ class WatcherFactory(WebSocketServerFactory):
         p = Watcher(self.hub)
         p.factory = self
         return p
+
+class CliAdmin(xmlrpc.XMLRPC):
+
+    def __init__(self, game):
+        self.game = game
+        xmlrpc.XMLRPC.__init__(self, allowNone=True)
+
+    def xmlrpc_start(self):
+        try:
+            self.game.start()
+        except error.GameAlreadyStarted as e:
+            raise xmlrpc.Fault(1, str(e))
+
+    def xmlrpc_stop(self):
+        try:
+            self.game.stop()
+        except error.GameNotStarted as e:
+            raise xmlrpc.Fault(1, str(e))
+
+    def xmlrpc_set_rate(self, rate):
+        self.game.rate = rate
 
 class WebAdmin(resource.Resource):
 
@@ -198,12 +198,12 @@ def main():
     h = Hub(g)
     reactor.listenTCP(config.game_port, PlayerFactory(h))
     root = static.File(config.web_root)
-    root.putChild('admin', WebAdmin(g))
-    root.putChild('res', static.File(config.res_root))
     wsuri = u"ws://%s:%s" % (socket.gethostname(), config.web_port)
     watcher = WatcherFactory(wsuri, h)
     root.putChild("ws", WebSocketResource(watcher))
-    root.putChild('rpc2', XMLRPC(g))
+    root.putChild('res', static.File(config.res_root))
+    root.putChild('admin', WebAdmin(g))
+    root.putChild('rpc2', CliAdmin(g))
     site = server.Site(root)
     reactor.listenTCP(config.web_port, site)
     reactor.run()
