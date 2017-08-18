@@ -1,4 +1,6 @@
 import json
+import socket
+
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 from twisted.web import http, resource, server, static, xmlrpc
@@ -183,7 +185,8 @@ def main():
     root = static.File(config.web_root)
     root.putChild('admin', WebAdmin(g))
     root.putChild('res', static.File(config.res_root))
-    watcher = WatcherFactory(u"ws://127.0.0.1:%s" % config.web_port, g)
+    wsuri = u"ws://%s:%s" % (socket.gethostname(), config.web_port)
+    watcher = WatcherFactory(wsuri, g)
     root.putChild("ws", WebSocketResource(watcher))
     root.putChild('rpc2', XMLRPC(g))
     site = server.Site(root)
