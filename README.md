@@ -18,11 +18,19 @@ Start the server on some machine:
 
     ./rose-server
 
+Open a browser at http://<server-address>:8880 to view and control the game.
+
 Start up to 2 clients:
 
     ./rose-client mydriver.py
 
 For drive modules, see the examples direcotory.
+
+
+Command line interface
+----------------------
+
+You can control the game from the command line using the rose-admin tool.
 
 To start a race, use rose-admin tool on any machine:
 
