@@ -19,7 +19,7 @@ class Player(basic.LineReceiver):
         self.name = None
 
     def connectionLost(self, reason):
-        self.factory.playerDisconnected(self)
+        self.factory.remove_player(self)
 
     def lineReceived(self, line):
         try:
@@ -39,13 +39,13 @@ class Player(basic.LineReceiver):
             if 'name' not in msg.payload:
                 raise error.InvalidMessage("name required")
             self.name = msg.payload['name']
-            self.factory.playerConnected(self)
+            self.factory.add_player(self)
         else:
             # Registered player
             if msg.action == 'start':
                 self.factory.start()
             elif msg.action == 'drive':
-                self.factory.drivePlayer(self.name, msg.payload)
+                self.factory.drive_player(self, msg.payload)
             else:
                 raise error.ActionForbidden(msg.action)
 
@@ -57,23 +57,27 @@ class Server(protocol.ServerFactory):
         self.game = game
         self.players = set()
 
-    def playerConnected(self, player):
+    # Player client interface
+
+    def add_player(self, player):
         # First add player, will raise if there are too many players or this
         # name is already taken.
         self.game.add_player(player.name)
         self.players.add(player)
 
-    def playerDisconnected(self, player):
+    def remove_player(self, player):
         if player in self.players:
             self.players.remove(player)
             self.game.remove_player(player.name)
 
-    def drivePlayer(self, name, info):
-        self.game.drive_player(name, info)
+    def drive_player(self, player, info):
+        self.game.drive_player(player.name, info)
 
     def start(self):
         if not self.game.started:
             self.game.start()
+
+    # Game server interface
 
     def broadcast(self, msg):
         data = str(msg)
