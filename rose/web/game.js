@@ -2,53 +2,42 @@ if (typeof(ROSE) === "undefined") {
     ROSE = {};
 }
 
-ROSE.game = function() {
-    var client = null;
-    var controller = null;
-    var rate = null;
-    var context = null;
-    var dashboard = null;
-    var track = null;
+ROSE.ready = function() {
+    ROSE.app = new ROSE.Application();
+}
 
-    function onmessage(m) {
-        var msg = JSON.parse(m.data);
-        if (msg.action !== "update") {
-            console.log("Ignoring unknown message: " + m.data);
-            return;
-        }
+ROSE.Application = function() {
+    this.controller = new ROSE.Controller();
+    this.rate = new ROSE.Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
 
-        var state = msg.payload;
+    var loader = new ROSE.ImageLoader(function() {
+        this.client = new ROSE.Client(this.onmessage.bind(this), 2000);
+    }.bind(this));
 
-        // Update
-        controller.update(state.started);
-        rate.update(state.rate);
-        dashboard.update(state);
-        track.update(state);
+    this.context = $("#game").get(0).getContext("2d");
+    this.dashboard = new ROSE.Dashboard(loader);
+    this.track = new ROSE.Track(loader);
+}
 
-        // Draw
-        dashboard.draw(context);
-        track.draw(context);
+ROSE.Application.prototype.onmessage = function(m) {
+    var msg = JSON.parse(m.data);
+    if (msg.action !== "update") {
+        console.log("Ignoring unknown message: " + m.data);
+        return;
     }
 
-    function ready() {
-        controller = new ROSE.Controller();
-        rate = new ROSE.Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
+    var state = msg.payload;
 
-        var loader = new ROSE.ImageLoader(function() {
-            client = new ROSE.Client(onmessage, 2000);
-        });
+    // Update
+    this.controller.update(state.started);
+    this.rate.update(state.rate);
+    this.dashboard.update(state);
+    this.track.update(state);
 
-        context = $("#game").get(0).getContext("2d");
-        dashboard = new ROSE.Dashboard(loader);
-        track = new ROSE.Track(loader);
-    }
-
-    // exports
-    return {
-        ready: ready
-    };
-
-}();
+    // Draw
+    this.dashboard.draw(this.context);
+    this.track.draw(this.context);
+}
 
 ROSE.Client = function(onmessage, reconnect_msec) {
     this.onmessage = onmessage;
