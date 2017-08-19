@@ -36,6 +36,8 @@ class Game(object):
             if self.started:
                 self.looper.stop()
                 self.looper.start(1.0 / self._rate)
+            else:
+                self.update_clients()
 
     def start(self):
         if self.started:
