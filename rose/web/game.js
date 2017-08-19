@@ -125,11 +125,17 @@ var ROSE = (function() {
 
     function Rate(values) {
         this.values = values;
+        this.rate = null;
         var self = this;
 
         $("#dec_rate").click(function(event) {
             event.preventDefault();
             self.decrease();
+        });
+
+        $("#cur_rate").click(function(event) {
+            event.preventDefault();
+            self.post(1);
         });
 
         $("#inc_rate").click(function(event) {
@@ -139,22 +145,19 @@ var ROSE = (function() {
     }
 
     Rate.prototype.update = function(rate) {
-        $("#rate").text(rate);
+        this.rate = rate;
+        $("#cur_rate").text(rate + " FPS");
         this.validate();
     }
 
-    Rate.prototype.value = function() {
-        return parseFloat($("#rate").text());
-    }
-
     Rate.prototype.validate = function() {
-        var value = this.value();
-        if (value == this.values[0]) {
+        if (this.rate == this.values[0]) {
             $("#dec_rate").attr("disabled", "disabled")
         } else {
             $("#dec_rate").removeAttr("disabled")
         }
-        if (value == this.values[this.values.length-1]) {
+        $("#cur_rate").removeAttr("disabled");
+        if (this.rate == this.values[this.values.length-1]) {
             $("#inc_rate").attr("disabled", "disabled")
         } else {
             $("#inc_rate").removeAttr("disabled")
@@ -162,15 +165,13 @@ var ROSE = (function() {
     }
 
     Rate.prototype.disable = function() {
-        $("#dec_rate").attr("disabled", "disabled")
-        $("#inc_rate").attr("disabled", "disabled")
+        $("#rate_ctl button").attr("disabled", "disabled");
     }
 
     Rate.prototype.decrease = function() {
-        var curr = this.value();
         var i;
         for (i = this.values.length - 1; i >= 0; i--) {
-            if (this.values[i] < curr) {
+            if (this.values[i] < this.rate) {
                 this.post(this.values[i]);
                 break;
             }
@@ -178,10 +179,9 @@ var ROSE = (function() {
     }
 
     Rate.prototype.increase = function() {
-        var curr = this.value();
         var i;
         for (i = 0; i < this.values.length; i++) {
-            if (this.values[i] > curr) {
+            if (this.values[i] > this.rate) {
                 this.post(this.values[i]);
                 break;
             }

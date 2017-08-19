@@ -17,9 +17,28 @@ body {
 }
 
 #control button {
-    font-size: inherit;
+    font-family: helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 24px;
     font-weight: bold;
-    padding: 0 20px;
+    border: 1px solid #666;
+    color: #ccc;
+    background-color: #333;
+}
+
+#control button:disabled, #control button:disabled:hover {
+    color: #666;
+    background-color: #333;
+}
+
+#control button:hover {
+    background-color: #222;
+}
+
+#start, #stop {
+    width: 120px;
+    padding: 8px 24px;
+    margin: 0;
 }
 
 #rate_ctl {
@@ -28,15 +47,33 @@ body {
     right: 0;
 }
 
-#rate_ctl button {
-    width: 30px;
-    padding: 0;
-}
-
 #rate_ctl label {
     margin: 0 10px;
 }
 
+#rate_ctl .group {
+    display: inline-block;
+    font-size: 0;
+    border: 1px solid #666;
+}
+
+#rate_ctl button {
+    height: 40px;
+    padding: 0;
+    margin: 0;
+}
+
+#inc_rate, #dec_rate {
+    width: 50px;
+    border: 0;
+}
+
+#cur_rate {
+    width: 120px;
+    border-top: 0;
+    border-bottom: 0;
+}
+
 #game {
-    border: 2px #333 solid;
+    border: 1px #666 solid;
 }
