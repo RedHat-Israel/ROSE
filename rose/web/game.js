@@ -3,49 +3,31 @@ if (typeof(ROSE) === "undefined") {
 }
 
 ROSE.game = function() {
-    var sock = null;
-    var reconnect_msec = 500;
+    var client = null;
     var controller = null;
     var rate = null;
     var context = null;
     var dashboard = null;
     var track = null;
 
-    function connect() {
-        var wsuri = "ws://" + window.location.hostname + ":8880/ws";
-        sock = new WebSocket(wsuri);
+    function onmessage(m) {
+        var msg = JSON.parse(m.data);
+        if (msg.action !== "update") {
+            console.log("Ignoring unknown message: " + m.data);
+            return;
+        }
 
-        sock.onopen = function() {
-            console.log("Connected to " + wsuri);
-        };
+        var state = msg.payload;
 
-        sock.onclose = function(e) {
-            console.log("Disconnected wasClean=" + e.wasClean + ", code=" +
-                        e.code + ", reason='" + e.reason + "')");
-            sock = null;
-            console.log("Reconnecting in " + reconnect_msec + " milliseconds");
-            setTimeout(connect, reconnect_msec);
-        };
+        // Update
+        controller.update(state.started);
+        rate.update(state.rate);
+        dashboard.update(state);
+        track.update(state);
 
-        sock.onmessage = function(m) {
-            var msg = JSON.parse(m.data);
-            if (msg.action !== "update") {
-                console.log("Ignoring unknown message: " + m.data);
-                return;
-            }
-
-            var state = msg.payload;
-
-            // Update
-            controller.update(state.started);
-            rate.update(state.rate);
-            dashboard.update(state);
-            track.update(state);
-
-            // Draw
-            dashboard.draw(context);
-            track.draw(context);
-        };
+        // Draw
+        dashboard.draw(context);
+        track.draw(context);
     }
 
     function ready() {
@@ -53,7 +35,7 @@ ROSE.game = function() {
         rate = new ROSE.Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
 
         var loader = new ROSE.ImageLoader(function() {
-            connect();
+            client = new ROSE.Client(onmessage, 2000);
         });
 
         context = $("#game").get(0).getContext("2d");
@@ -67,6 +49,32 @@ ROSE.game = function() {
     };
 
 }();
+
+ROSE.Client = function(onmessage, reconnect_msec) {
+    this.onmessage = onmessage;
+    this.reconnect_msec = reconnect_msec;
+    this.socket = null;
+    this.connect();
+}
+
+ROSE.Client.prototype.connect = function() {
+    var wsuri = "ws://" + window.location.hostname + ":8880/ws";
+    console.log("Connecting to " + wsuri);
+    this.socket = new WebSocket(wsuri);
+    this.socket.onopen = function(e) {
+        console.log("Connected")
+    };
+    this.socket.onmessage = this.onmessage;
+    this.socket.onclose = this.onclose.bind(this);
+}
+
+ROSE.Client.prototype.onclose = function(e) {
+    console.log("Disconnected wasClean=" + e.wasClean + ", code=" +
+        e.code + ", reason='" + e.reason + "')");
+    this.socket = null;
+    console.log("Reconnecting in " + this.reconnect_msec + " milliseconds");
+    setTimeout(this.connect.bind(this), this.reconnect_msec);
+}
 
 ROSE.Controller = function() {
     var self = this;
