@@ -1,4 +1,5 @@
 var ROSE = (function() {
+    "use strict";
 
     function App() {
         this.client = null;
@@ -167,6 +168,7 @@ var ROSE = (function() {
 
     Rate.prototype.decrease = function() {
         var curr = this.value();
+        var i;
         for (i = this.values.length - 1; i >= 0; i--) {
             if (this.values[i] < curr) {
                 this.post(this.values[i]);
@@ -177,6 +179,7 @@ var ROSE = (function() {
 
     Rate.prototype.increase = function() {
         var curr = this.value();
+        var i;
         for (i = 0; i < this.values.length; i++) {
             if (this.values[i] > curr) {
                 this.post(this.values[i]);
@@ -231,8 +234,9 @@ var ROSE = (function() {
         ctx.font = "bold 36px sans-serif";
         ctx.textAlign = "left";
 
-        for (n in this.players) {
-            var player = this.players[n];
+        var name;
+        for (name in this.players) {
+            var player = this.players[name];
             var text = player.name + ": " + player.score;
             ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
         }
@@ -266,6 +270,7 @@ var ROSE = (function() {
     Track.prototype.draw = function(ctx) {
         var dashboard_height = 150;
         var track_length = 9;
+        var i;
         for (i = 0; i < track_length; i++) {
             var img = this.textures[i % this.textures.length];
             ctx.drawImage(img, 0, dashboard_height + (i * img.height));
