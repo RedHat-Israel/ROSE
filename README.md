@@ -1,5 +1,8 @@
 # ROSE Project
 
+[![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
+
+
 ## Requirements
 
 To install the requirements, run:
