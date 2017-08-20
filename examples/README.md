@@ -1,10 +1,12 @@
-How to write a driver module
-============================
+# How to write a driver module
+
 
 First, you should import the obstacles and actions modules from rose.common
 package:
 
-    from rose.common import obstacles, actions
+```python
+from rose.common import obstacles, actions
+```
 
 The obstacles modules is needed for detecting obstacles on the racing track.
 The actions module is needed for the drive function.
@@ -12,12 +14,16 @@ The actions module is needed for the drive function.
 Define the server_address variable - this is the IP address (10.1.2.3) or a
 fully qualified domain name (dhcp-10-231) of the game server.
 
-    server_address = "10.1.2.3"
+```python
+server_address = "10.1.2.3"
+```
 
 Define the driver_name variable - this string is rendered bellow your car on
 everyone screen.
 
-    driver_name = "Michael Schumacher"
+```python
+driver_name = "Michael Schumacher"
+```
 
 Write a drive function. This function accepts a world object, which you can use
 to find obstacles, and must return one of the actions constants in the actions
@@ -25,15 +31,18 @@ module.
 
 Here is the simplest possible drive function:
 
-    def drive(world):
-        return actions.NONE
+```python
+def drive(world):
+    return actions.NONE
+```
 
 To find your car position, you can access the car.x and car.y of the world
 object:
 
-    x = world.car.x
-    y = world.car.y
-
+```python
+x = world.car.x
+y = world.car.y
+```
 In the next game iteration, your car will be at x, y - 1. world coordinates
 start at the top left of the screen. You would like to check if there is an
 obstacle at this location, and return the best action for this obstacle
@@ -41,24 +50,28 @@ obstacle at this location, and return the best action for this obstacle
 To check for obstacles, use the world.get() function. This function
 accept a tuple (x, y) with the required location.
 
-    obstacle = world.get((x, y - 1))
-
+```python
+obstacle = world.get((x, y - 1))
+```
 Note that if you try to access a position which is out of the racing track,
 this function will raise an IndexError. You must handle this exception when
 checking for obstacles:
 
-    try:
-        obstacle = world.get((x, y - 1))
-    except IndexError:
-        # x, y - 1 is not a valid position
-    else:
-        # Choose the best action for obstacle
+```python
+try:
+    obstacle = world.get((x, y - 1))
+except IndexError:
+    # x, y - 1 is not a valid position
+else:
+    # Choose the best action for obstacle
+```
 
 The game have 2 lanes each has 3 routes in which you can drive.
 On game start, each car starts at the center route of its lane 
 The car can pass to other lane, but will be punished for collisions 
 with the lane owner.
 
+```
 <------ Car#1 lane ------><------ Car#2 lane ---->
 
 |       |       |       |X|       |       |      |
@@ -73,41 +86,42 @@ with the lane owner.
 |       | car#1 |       |X|       | Car#2 |      |
 |       |       |       |X|       |       |      |
 |       |       |       |X|       |       |      |
+```
 
 Here are the possible obstacles and the action you should take when hitting
 them:
 
-* obstacles.NONE        there is no obstacle at this position. You can return any
+- obstacles.NONE        there is no obstacle at this position. You can return any
                         action.
                         Score : 0
 
-* obstacles.PENGUIN     return actions.PICKUP and move 1 step forward. You will
+- obstacles.PENGUIN     return actions.PICKUP and move 1 step forward. You will
                         not move backward if you do not pick up the penguin.
                         Score : 10 for PICKUP otherwise 0
 
-* obstacles.WATER       return actions.BRAKE if you want to continue forward.
+- obstacles.WATER       return actions.BRAKE if you want to continue forward.
                         return actions.RIGHT or actions.LEFT if you like to
                         bypass the obstacle. Any other action will cause you to
                         move backward.
                         Score: 4 for BRAKE, 0 for LEFT/RIGHT otherwise -10
 
-* obstacles.CRACK       return actions.JUMP if you want to continue forward
+- obstacles.CRACK       return actions.JUMP if you want to continue forward
                         return actions.RIGHT or actions.LEFT if you like to
                         bypass the obstacle. Any other action will cause you to
                         move backward.
                         Score: 5 for JUMP, 0 for LEFT/RIGHT otherwise -10
 
-* obstacles.TRASH       you must return actions.RIGHT or actions.LEFT to bypass
+- obstacles.TRASH       you must return actions.RIGHT or actions.LEFT to bypass
                         the obstacle. Any other action will cause you to
                         move backward.
                         Score: 0 for LEFT/RIGHT otherwise -10
 
-* obstacles.BIKE        you must return actions.RIGHT or actions.LEFT to bypass
+- obstacles.BIKE        you must return actions.RIGHT or actions.LEFT to bypass
                         the obstacle. Any other action will cause you to
                         move backward.
                         Score: 0 for LEFT/RIGHT otherwise -10
 
-* obstacles.BARRIER     you must return actions.RIGHT or actions.LEFT to bypass
+- obstacles.BARRIER     you must return actions.RIGHT or actions.LEFT to bypass
                         the obstacle. Any other action will cause you to
                         move backward.
                         Score: 0 for LEFT/RIGHT otherwise -10
