@@ -11,6 +11,11 @@
     <form id="control">
       <button id="start" disabled>Start</button>
       <button id="stop" disabled>Stop</button>
+      <div>
+        <button id="dec_rate" disabled>-</button>
+        <span id="rate"></span><span> FPS</span>
+        <button id="inc_rate" disabled>+</button>
+      </div>
     </form>
 
     <div id="status"></div>
@@ -22,82 +27,10 @@
     </div>
 
     <script src="jquery-3.2.1.min.js"></script>
+    <script src="game.js"></script>
 
     <script>
-    $(document).ready(function() {
-
-      var updater = setInterval(update, 1000);
-
-      function update() {
-        $.get("admin", null, "application/json")
-          .done(function(state) {
-            // Hide players in case a player disconnected
-            $("#lane0").hide();
-            $("#lane1").hide();
-            // Update and show players
-            for (n in state.players) {
-              var p = state.players[n];
-              $("#lane" + p.lane)
-                .text(p.name + ": " + p.score)
-                .show();
-            }
-            $("#timeleft").text(state.timeleft)
-            if (state.started) {
-              $("#status").html("Running");
-              $("#start").attr("disabled", "disabled");
-              $("#stop").removeAttr("disabled");
-            } else {
-              $("#status").html("Stopped");
-              $("#start").removeAttr("disabled");
-              $("#stop").attr("disabled", "disabled");
-            }
-          })
-          .fail(function() {
-            $("#status").html("Server error");
-          })
-      }
-
-      function start() {
-        $("#status").html("Starting");
-        $("#start").attr("disabled", "disabled");
-        $.post("admin", {running: 1})
-          .done(function() {
-            $("#status").html("Running");
-            $("#stop").removeAttr("disabled")
-          })
-          .fail(function() {
-            $("#start").removeAttr("disabled")
-            $("#status").html("Error starting");
-          })
-      }
-
-      function stop() {
-        $("#status").html("Stopping...");
-        $("#stop").attr("disabled", "disabled");
-        $.post("admin", {running: 0})
-          .done(function() {
-            $("#status").html("Stopped");
-            $("#start").removeAttr("disabled")
-          })
-          .fail(function() {
-            $("#stop").removeAttr("disabled")
-            $("#status").html("Error stopping");
-          })
-      }
-
-      $("#start").click(function(event) {
-        event.preventDefault();
-        start();
-      });
-
-      $("#stop").click(function(event) {
-        event.preventDefault();
-        stop();
-      });
-
-      update();
-
-    });
+      $(document).ready(ROSE.game.ready);
     </script>
   </body>
 </html>
