@@ -1,0 +1,5 @@
+pygame
+pytest
+pytest-coverage
+pytest-timeout
+twisted
