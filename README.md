@@ -1,16 +1,13 @@
-ROSE Project
-==================
+# ROSE Project
 
-Requirements
-------------
+## Requirements
 
-* python-twisted
-* pygame
-* py.test (for development)
+- python-twisted
+-  pygame
+- py.test (for development)
 
 
-Running the game
-----------------
+## Running the game
 
 Start the server on some machine:
 
@@ -36,14 +33,12 @@ would change game rate to 10 frames per second:
     ./rose-admin <server-address> set-rate 10
 
 
-Creating a tarball
-------------------
+## Creating a tarball
 
     python setup.py sdist
 
 
-Developing
-----------
+## Developing
 
 Before submitting patches, please run the tests:
 
