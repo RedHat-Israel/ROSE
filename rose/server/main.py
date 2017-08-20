@@ -22,6 +22,7 @@ class Player(basic.LineReceiver):
             msg = message.parse(line)
             self.dispatch(msg)
         except error.Error as e:
+            print "Error handling message: %s" % e
             msg = message.Message('error', {'message': str(e)})
             self.sendLine(str(msg))
             self.transport.loseConnection()
