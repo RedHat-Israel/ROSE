@@ -44,9 +44,9 @@ would change game rate to 10 frames per second:
 
 Before submitting patches, please run the tests:
 
-    py.test -v
+    pytest
 
-Checking coverage:
+Creating coverage report in html format:
 
-    py.test --cov rose --cov-report html
+    pytest --cov-report html
     xdg-open htmlcov/index.html
