@@ -2,9 +2,11 @@
 
 ## Requirements
 
-- python-twisted
--  pygame
-- py.test (for development)
+To install the requirements, run:
+
+    pip install -r requirements.txt
+
+You can also install packages from your distribution.
 
 
 ## Running the game
