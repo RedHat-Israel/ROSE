@@ -1,3 +1,4 @@
+import argparse
 import imp
 import logging
 import os.path
@@ -95,15 +96,27 @@ def load_driver_module(file_path):
 
 def main():
     logging.basicConfig(level=logging.INFO)
-    if len(sys.argv) < 2:
-        log.info('usage: rose-client drive-module')
-        sys.exit(2)
+    parser = argparse.ArgumentParser(description="ROSE Client")
+    parser.add_argument("driver_file", help="The path to the driver file")
+    parser.add_argument("--server-address", dest="server_address",
+                        help="The server FQDN/IP address to connect to."
+                        " If not specified, localhost will be used.")
+    args = parser.parse_args()
+
     try:
-        driver_mod = load_driver_module(sys.argv[1])
+        driver_mod = load_driver_module(args.driver_file)
     except ImportError as e:
-        log.error("error loading driver module %r: %s", sys.argv[1], e)
+        log.error("error loading driver module %r: %s", args.driver_file, e)
         sys.exit(2)
 
-    reactor.connectTCP(driver_mod.server_address, config.game_port,
+    server_address = "127.0.0.1"
+    if args.server_address:
+        server_address = args.server_address
+
+    reactor.connectTCP(server_address, config.game_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
+
+    url = "http://%s:%d" % (server_address, config.web_port)
+    log.info("Game URL: %s" % url)
+
     reactor.run()

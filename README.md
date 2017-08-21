@@ -55,6 +55,10 @@ Start up two clients:
 
     ./rose-client mydriver.py
 
+The server FQDN/IP address can be specified that way:
+
+    ./rose-client --server-address example.com mydriver.py
+
 For driver modules, see the examples directory.
 
 

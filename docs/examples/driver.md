@@ -14,11 +14,6 @@ package:
 The obstacles modules is needed for detecting obstacles on the racing track.
 The actions module is needed for the drive function.
 
-Define the server_address variable - this is the IP address (10.1.2.3) or a
-fully qualified domain name (dhcp-10-231) of the game server.
-
-    server_address = "10.1.2.3"
-
 Define the driver_name variable - this string is rendered below your car on
 everyone's screen.
 
