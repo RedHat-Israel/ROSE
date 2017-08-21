@@ -75,8 +75,7 @@ class TestNoObstacle(SinglePlayerTest):
         for action in FORWARD_ACTIONS:
             self.player.action = action
             self.process()
-            # TODO FIX
-            # self.assert_score(self.score)
+            self.assert_score(self.score)
             self.assert_keep_obstacle()
 
 
@@ -116,8 +115,7 @@ class TestPenguin(SinglePlayerTest):
         for action in [a for a in FORWARD_ACTIONS if a != actions.PICKUP]:
             self.player.action = action
             self.process()
-            # TODO fix
-            # self.assert_score(self.score)
+            self.assert_score(self.score)
             self.assert_keep_obstacle()
 
 
@@ -143,8 +141,7 @@ class MagicActionTest(SinglePlayerTest):
         for action in [a for a in FORWARD_ACTIONS if a != self.action]:
             self.player.action = action
             self.process()
-            # TODO: fix test
-            # self.assert_move_back()
+            self.assert_move_back()
             self.assert_remove_obstacle()
 
     def test_right(self):
@@ -196,8 +193,7 @@ class TurnTest(SinglePlayerTest):
             self.player.action = action
             self.process()
             # TODO: decrease points on redundant action?
-            # fix test
-            # self.assert_move_back_no_punish()
+            self.assert_move_back_no_punish()
             self.assert_remove_obstacle()
 
 
