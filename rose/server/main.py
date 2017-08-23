@@ -1,4 +1,3 @@
-import json
 import socket
 
 from twisted.internet import reactor, protocol
@@ -168,10 +167,6 @@ class WebAdmin(resource.Resource):
     def __init__(self, game):
         self.game = game
         resource.Resource.__init__(self)
-
-    def render_GET(self, request):
-        request.setHeader(b"content-type", b"application/json")
-        return json.dumps(self.game.state())
 
     def render_POST(self, request):
         if "running" in request.args:
