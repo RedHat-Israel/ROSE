@@ -20,7 +20,7 @@ class Hub(object):
         self.game = game
         self.clients = set()
 
-    # Player client interface
+    # PlayerProtocol hub interface
 
     def add_player(self, player):
         # First add player, will raise if there are too many players or this
@@ -36,7 +36,7 @@ class Hub(object):
     def drive_player(self, player, info):
         self.game.drive_player(player.name, info)
 
-    # Watcher client interface
+    # WatcherProtocol hub interface
 
     def add_watcher(self, watcher):
         self.clients.add(watcher)
@@ -53,7 +53,7 @@ class Hub(object):
         for client in self.clients:
             client.send_message(data)
 
-class Player(basic.LineReceiver):
+class PlayerProtocol(basic.LineReceiver):
 
     def __init__(self, hub):
         self.hub = hub
@@ -103,11 +103,11 @@ class PlayerFactory(protocol.ServerFactory):
         self.hub = hub
 
     def buildProtocol(self, addr):
-        p  = Player(self.hub)
+        p  = PlayerProtocol(self.hub)
         p.factory = self
         return p
 
-class Watcher(WebSocketServerProtocol):
+class WatcherProtocol(WebSocketServerProtocol):
 
     def __init__(self, hub):
         self.hub = hub
@@ -138,7 +138,7 @@ class WatcherFactory(WebSocketServerFactory):
         WebSocketServerFactory.__init__(self, url)
 
     def buildProtocol(self, addr):
-        p = Watcher(self.hub)
+        p = WatcherProtocol(self.hub)
         p.factory = self
         return p
 
