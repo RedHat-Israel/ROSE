@@ -54,7 +54,7 @@ class Game(component.Component):
 
     def update(self, info):
         self.track.update(info)
-        self.players = info['players']
+        self.players = {p["name"]: p for p in info['players']}
         self.dashboard.update(self.players, info["timeleft"])
         for player in self.players.itervalues():
             self.cars[player['car']].update(player)
