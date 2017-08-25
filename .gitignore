@@ -1,3 +1,9 @@
-
+# Python
 *.pyc
+
+# Editors
 .idea
+
+# Coverage
+.coverage
+htmlcov/
