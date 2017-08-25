@@ -113,11 +113,6 @@ class Game(object):
     def state(self):
         return {'started': self.started,
                 'track': self.track.state(),
-                'players': self.players_state(),
+                'players': [p.state() for p in self.players.values()],
                 'timeleft': self.timeleft,
                 'rate': self.rate}
-
-    def players_state(self):
-        return dict((name, player.state()) for name, player in
-                    self.players.iteritems())
-
