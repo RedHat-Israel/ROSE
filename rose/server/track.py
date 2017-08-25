@@ -17,7 +17,12 @@ class Track(object):
 
     def state(self):
         """ Return read only serialize-able state for sending to client """
-        return tuple(tuple(row) for row in self._matrix)
+        items = []
+        for y, row in enumerate(self._matrix):
+            for x, obs in enumerate(row):
+                if obs != obstacles.NONE:
+                    items.append({"name": obs, "x": x, "y": y})
+        return items
 
     # Track interface
 
