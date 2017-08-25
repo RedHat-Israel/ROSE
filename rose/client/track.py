@@ -8,8 +8,7 @@ import component
 class Track(component.Component):
 
     def __init__(self):
-        self._matrix = [[obstacles.NONE] * config.matrix_width
-                        for x in range(config.matrix_height)]
+        self._track = {}
         self._road_textures = None
         self._obstacle_textures = None
 
@@ -26,7 +25,7 @@ class Track(component.Component):
             self._obstacle_textures[name] = pygame.image.load(path)
 
     def update(self, info):
-        self._matrix = info['track']
+        self._track = {(obs["x"], obs["y"]): obs["name"] for obs in info["track"]}
         if info['started']:
             # Simulate track movement
             last = self._road_textures.pop()
@@ -39,19 +38,17 @@ class Track(component.Component):
                         (0, config.dashboard_height + (i * config.row_height)))
 
         # Draw obstacles on top of road:
-        for y, row in enumerate(self._matrix):
-            for x, obs in enumerate(row):
-                if obs != obstacles.NONE:
-                    texture = self._obstacle_textures[obs]
-                    coordinates = self._get_surface_coordinates(x, y)
-                    surface.blit(texture, coordinates)
+        for (x, y), obs in self._track.iteritems():
+            texture = self._obstacle_textures[obs]
+            coordinates = self._get_surface_coordinates(x, y)
+            surface.blit(texture, coordinates)
 
     # Track interface
 
     def get(self, x, y):
         """ Return the obstacle in position x, y """
         self._validate_pos(x, y)
-        return self._matrix[y][x]
+        return self._track.get((x, y), obstacles.NONE)
 
     # Private
 
