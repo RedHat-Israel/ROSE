@@ -1,3 +1,10 @@
 """ Driving actions """
 
-ALL = NONE, RIGHT, LEFT, PICKUP, JUMP, BRAKE = tuple(range(6))
+NONE    = "none"
+RIGHT   = "right"
+LEFT    = "left"
+PICKUP  = "pickup"
+JUMP    = "jump"
+BRAKE   = "brake"
+
+ALL = (NONE, RIGHT, LEFT, PICKUP, JUMP, BRAKE)
