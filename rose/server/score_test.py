@@ -2,6 +2,8 @@ from rose.common import actions, config, obstacles
 import track
 import player
 import score
+import pytest
+
 
 FORWARD_ACTIONS = [a for a in actions.ALL
                    if a not in (actions.RIGHT, actions.LEFT)]
@@ -71,12 +73,12 @@ class TestNoObstacle(SinglePlayerTest):
         self.assert_move_left()
         self.assert_keep_obstacle()
 
-    def test_forward(self):
-        for action in FORWARD_ACTIONS:
-            self.player.action = action
-            self.process()
-            self.assert_score(self.score)
-            self.assert_keep_obstacle()
+    @pytest.mark.parametrize("action", FORWARD_ACTIONS)
+    def test_forward(self, action):
+        self.player.action = action
+        self.process()
+        self.assert_score(self.score)
+        self.assert_keep_obstacle()
 
 
 class TestPenguin(SinglePlayerTest):
@@ -111,12 +113,13 @@ class TestPenguin(SinglePlayerTest):
         self.assert_keep_obstacle()
 
 
-    def test_other(self):
-        for action in [a for a in FORWARD_ACTIONS if a != actions.PICKUP]:
-            self.player.action = action
-            self.process()
-            self.assert_score(self.score)
-            self.assert_keep_obstacle()
+    @pytest.mark.parametrize(
+        "action", [a for a in FORWARD_ACTIONS if a != actions.PICKUP])
+    def test_other(self, action):
+        self.player.action = action
+        self.process()
+        self.assert_score(self.score)
+        self.assert_keep_obstacle()
 
 
 class MagicActionTest(SinglePlayerTest):
@@ -131,16 +134,14 @@ class MagicActionTest(SinglePlayerTest):
     action = None
     magic_score = None
 
-    def test_magic_action(self):
-        self.player.action = self.action
+    @pytest.mark.parametrize("action", FORWARD_ACTIONS)
+    def test_forward(self, action):
+        self.player.action = action
         self.process()
-        self.assert_score(self.score + self.magic_score)
-        self.assert_keep_obstacle()
-
-    def test_other_action(self):
-        for action in [a for a in FORWARD_ACTIONS if a != self.action]:
-            self.player.action = action
-            self.process()
+        if action == self.action:
+            self.assert_score(self.score + self.magic_score)
+            self.assert_keep_obstacle()
+        else:
             self.assert_move_back()
             self.assert_remove_obstacle()
 
@@ -188,13 +189,13 @@ class TurnTest(SinglePlayerTest):
         self.assert_move_left()
         self.assert_keep_obstacle()
 
-    def test_other(self):
-        for action in FORWARD_ACTIONS:
-            self.player.action = action
-            self.process()
-            # TODO: decrease points on redundant action?
-            self.assert_move_back_no_punish()
-            self.assert_remove_obstacle()
+    @pytest.mark.parametrize("action", FORWARD_ACTIONS)
+    def test_other(self, action):
+        self.player.action = action
+        self.process()
+        # TODO: decrease points on redundant action?
+        self.assert_move_back_no_punish()
+        self.assert_remove_obstacle()
 
 
 class TestTrash(TurnTest):
