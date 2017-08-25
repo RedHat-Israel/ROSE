@@ -1,4 +1,5 @@
 import glob
+import os
 import pygame
 from rose.common import config, obstacles
 import component
@@ -19,8 +20,10 @@ class Track(component.Component):
         # texture in the correct order.
         self._road_textures = [pygame.image.load(path) for path in
                                sorted(glob.glob(config.road_glob))]
-        self._obstacle_textures = [pygame.image.load(path) for path in
-                                   sorted(glob.glob(config.obstacles_glob))]
+        self._obstacle_textures = {}
+        for name in obstacles.ALL[1:]:
+            path = os.path.join(config.obstacles_dir, name + ".png")
+            self._obstacle_textures[name] = pygame.image.load(path)
 
     def update(self, info):
         self._matrix = info['track']
@@ -37,9 +40,9 @@ class Track(component.Component):
 
         # Draw obstacles on top of road:
         for y, row in enumerate(self._matrix):
-            for x, cell in enumerate(row):
-                if cell != obstacles.NONE:
-                    texture = self._obstacle_textures[cell]
+            for x, obs in enumerate(row):
+                if obs != obstacles.NONE:
+                    texture = self._obstacle_textures[obs]
                     coordinates = self._get_surface_coordinates(x, y)
                     surface.blit(texture, coordinates)
 
