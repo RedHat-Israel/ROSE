@@ -47,7 +47,7 @@ window_size = windows_width, windows_height
 # Files
 
 install_dir = os.path.dirname(__file__)
-obstacles_glob = os.path.join(install_dir, '../res/obstacles/obstacle*.png')
+obstacles_dir = os.path.join(install_dir, '../res/obstacles')
 road_glob = os.path.join(install_dir, '../res/bg/bg*.png')
 cars_dir = os.path.join(install_dir, '../res/cars')
 dashboard_png = os.path.join(install_dir, '../res/dashboard/dashboard.png')
