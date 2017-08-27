@@ -234,9 +234,9 @@ var ROSE = (function() {
         ctx.font = "bold 36px sans-serif";
         ctx.textAlign = "left";
 
-        var name;
-        for (name in this.players) {
-            var player = this.players[name];
+        var i;
+        for (i = 0; i < this.players.length; i++) {
+            var player = this.players[i];
             var text = player.name + ": " + player.score;
             ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
         }
