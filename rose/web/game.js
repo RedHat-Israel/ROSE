@@ -9,6 +9,7 @@ var ROSE = (function() {
         this.dashboard = null;
         this.track = null;
         this.obstacles = null;
+        this.cars = null;
     }
 
     App.prototype.ready = function() {
@@ -23,6 +24,7 @@ var ROSE = (function() {
         this.dashboard = new Dashboard(loader);
         this.track = new Track(loader);
         this.obstacles = new Obstacles(loader);
+        this.cars = new Cars(loader);
     }
 
     App.prototype.onmessage = function(m) {
@@ -40,12 +42,24 @@ var ROSE = (function() {
         this.dashboard.update(state);
         this.track.update(state);
         this.obstacles.update(state);
+        this.cars.update(state);
 
         // Draw
         this.dashboard.draw(this.context);
         this.track.draw(this.context);
         this.obstacles.draw(this.context);
+        this.cars.draw(this.context);
     }
+
+    function Config() {
+    }
+
+    Config.dashboard_height = 150;
+    Config.left_margin = 95;
+    Config.cell_width = 130;
+    Config.top_margin = 10;
+    Config.row_height = 65;
+    Config.track_length = 9;
 
     function Client(onmessage, reconnect_msec) {
         this.onmessage = onmessage;
@@ -276,18 +290,45 @@ var ROSE = (function() {
     }
 
     Obstacles.prototype.draw = function(ctx) {
-        //TODO move to constants
-        var dashboard_height = 150;
-        var left_margin = 95;
-        var cell_width = 130;
-        var top_margin = 10;
-        var row_height = 65;
         var i;
         for (i = 0; i < this.track.length; i++) {
             var obstacle = this.track[i];
             var img = this.textures[obstacle["name"]];
-            var x = left_margin + obstacle["x"] * cell_width;
-            var y = dashboard_height + top_margin + obstacle["y"] * row_height;
+            var x = Config.left_margin + obstacle["x"] * Config.cell_width;
+            var y = Config.dashboard_height + Config.top_margin + obstacle["y"] * Config.row_height;
+            ctx.drawImage(img, x, y);
+        }
+    }
+
+    function Cars(loader) {
+        this.players = null;
+        this.textures = [null, null, null, null];
+        var self = this;
+        loader.load("res/cars/car1.png", function(img) {
+            self.textures[0] = img;
+        });
+        loader.load("res/cars/car2.png", function(img) {
+            self.textures[1] = img;
+        });
+        loader.load("res/cars/car3.png", function(img) {
+            self.textures[2] = img;
+        });
+        loader.load("res/cars/car4.png", function(img) {
+            self.textures[3] = img;
+        });
+    }
+
+    Cars.prototype.update = function(state) {
+        this.players = state.players;
+    }
+
+    Cars.prototype.draw = function(ctx) {
+        var i;
+        for (i = 0; i < this.players.length; i++) {
+            var player = this.players[i];
+            var img = this.textures[player["car"]];
+            var x = Config.left_margin + player["x"] * Config.cell_width;
+            var y = Config.dashboard_height + player["y"] * Config.row_height;
             ctx.drawImage(img, x, y);
         }
     }
@@ -318,12 +359,10 @@ var ROSE = (function() {
     }
 
     Track.prototype.draw = function(ctx) {
-        var dashboard_height = 150;
-        var track_length = 9;
         var i;
-        for (i = 0; i < track_length; i++) {
+        for (i = 0; i < Config.track_length; i++) {
             var img = this.textures[i % this.textures.length];
-            ctx.drawImage(img, 0, dashboard_height + (i * img.height));
+            ctx.drawImage(img, 0, Config.dashboard_height + (i * img.height));
         }
     }
 
