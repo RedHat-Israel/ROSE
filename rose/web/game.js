@@ -8,6 +8,7 @@ var ROSE = (function() {
         this.context = null;
         this.dashboard = null;
         this.track = null;
+        this.obstacles = null;
     }
 
     App.prototype.ready = function() {
@@ -21,6 +22,7 @@ var ROSE = (function() {
         this.context = $("#game").get(0).getContext("2d");
         this.dashboard = new Dashboard(loader);
         this.track = new Track(loader);
+        this.obstacles = new Obstacles(loader);
     }
 
     App.prototype.onmessage = function(m) {
@@ -37,10 +39,12 @@ var ROSE = (function() {
         this.rate.update(state.rate);
         this.dashboard.update(state);
         this.track.update(state);
+        this.obstacles.update(state);
 
         // Draw
         this.dashboard.draw(this.context);
         this.track.draw(this.context);
+        this.obstacles.draw(this.context);
     }
 
     function Client(onmessage, reconnect_msec) {
@@ -239,6 +243,52 @@ var ROSE = (function() {
             var player = this.players[i];
             var text = player.name + ": " + player.score;
             ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
+        }
+    }
+
+    function Obstacles(loader) {
+        this.track = null;
+        this.textures = {};
+        var self = this;
+
+        loader.load("res/obstacles/barrier.png", function(img) {
+            self.textures["barrier"] = img;
+        });
+        loader.load("res/obstacles/bike.png", function(img) {
+            self.textures["bike"] = img;
+        });
+        loader.load("res/obstacles/crack.png", function(img) {
+            self.textures["crack"] = img;
+        });
+        loader.load("res/obstacles/penguin.png", function(img) {
+            self.textures["penguin"] = img;
+        });
+        loader.load("res/obstacles/trash.png", function(img) {
+            self.textures["trash"] = img;
+        });
+        loader.load("res/obstacles/water.png", function(img) {
+            self.textures["water"] = img;
+        });
+    }
+
+    Obstacles.prototype.update = function(state) {
+        this.track = state.track;
+    }
+
+    Obstacles.prototype.draw = function(ctx) {
+        //TODO move to constants
+        var dashboard_height = 150;
+        var left_margin = 95;
+        var cell_width = 130;
+        var top_margin = 10;
+        var row_height = 65;
+        var i;
+        for (i = 0; i < this.track.length; i++) {
+            var obstacle = this.track[i];
+            var img = this.textures[obstacle["name"]];
+            var x = left_margin + obstacle["x"] * cell_width;
+            var y = dashboard_height + top_margin + obstacle["y"] * row_height;
+            ctx.drawImage(img, x, y);
         }
     }
 
