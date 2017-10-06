@@ -51,15 +51,14 @@ var ROSE = (function() {
         this.cars.draw(this.context);
     }
 
-    function Config() {
-    }
-
-    Config.dashboard_height = 150;
-    Config.left_margin = 95;
-    Config.cell_width = 130;
-    Config.top_margin = 10;
-    Config.row_height = 65;
-    Config.track_length = 9;
+    var Config = {
+        dashboard_height: 150,
+        left_margin: 95,
+        cell_width: 130,
+        top_margin: 10,
+        row_height: 65,
+        track_length: 9
+    };
 
     function Client(onmessage, reconnect_msec) {
         this.onmessage = onmessage;
