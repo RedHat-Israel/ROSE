@@ -10,6 +10,7 @@ var ROSE = (function() {
         this.track = null;
         this.obstacles = null;
         this.cars = null;
+        this.finish_line = null;
     }
 
     App.prototype.ready = function() {
@@ -25,6 +26,7 @@ var ROSE = (function() {
         this.track = new Track(loader);
         this.obstacles = new Obstacles(loader);
         this.cars = new Cars(loader);
+        this.finish_line = new FinishLine(loader);
     }
 
     App.prototype.onmessage = function(m) {
@@ -43,12 +45,14 @@ var ROSE = (function() {
         this.track.update(state);
         this.obstacles.update(state);
         this.cars.update(state);
+        this.finish_line.update(state);
 
         // Draw
         this.dashboard.draw(this.context);
         this.track.draw(this.context);
         this.obstacles.draw(this.context);
         this.cars.draw(this.context);
+        this.finish_line.draw(this.context);
     }
 
     var Config = {
@@ -57,7 +61,8 @@ var ROSE = (function() {
         cell_width: 130,
         top_margin: 10,
         row_height: 65,
-        track_length: 9
+        track_length: 9,
+        finish_line_duration: 5
     };
 
     function Client(onmessage, reconnect_msec) {
@@ -330,6 +335,30 @@ var ROSE = (function() {
             var y = Config.dashboard_height + player["y"] * Config.row_height;
             ctx.drawImage(img, x, y);
         }
+    }
+
+    function FinishLine(loader) {
+        this.texture = null;
+        this.timeleft = null;
+        var self = this;
+        loader.load("res/end/final_flag.png", function(img) {
+            self.texture = img;
+        });
+    }
+
+    FinishLine.prototype.update = function(state) {
+        this.timeleft = Math.max(state.timeleft, 0);
+    }
+
+    FinishLine.prototype.draw = function(ctx) {
+        if (this.timeleft > Config.finish_line_duration) {
+            return;
+        }
+        // Start at row 0, then move down until row finish_line_duration
+        var row = Config.finish_line_duration - this.timeleft;
+        var y = Config.dashboard_height + Config.row_height * row;
+        ctx.drawImage(this.texture, 0, y);
+
     }
 
     function Track(loader) {
