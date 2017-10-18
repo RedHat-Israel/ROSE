@@ -327,6 +327,10 @@ var ROSE = (function() {
     }
 
     Cars.prototype.draw = function(ctx) {
+        ctx.fillStyle = "rgb(0, 0, 0)";
+        ctx.textBaseline = "top";
+        ctx.font = "bold 15px sans-serif";
+        ctx.textAlign = "center";
         var i;
         for (i = 0; i < this.players.length; i++) {
             var player = this.players[i];
@@ -334,6 +338,9 @@ var ROSE = (function() {
             var x = Config.left_margin + player["x"] * Config.cell_width;
             var y = Config.dashboard_height + player["y"] * Config.row_height;
             ctx.drawImage(img, x, y);
+            var car_center = x + (img.width / 2);
+            var car_bottom = y + img.height;
+            ctx.fillText(player.name, car_center, car_bottom + 5);
         }
     }
 
