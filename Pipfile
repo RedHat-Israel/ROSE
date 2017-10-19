@@ -8,15 +8,14 @@ name = "pypi"
 [dev-packages]
 
 pytest = "*"
+pytest-coverage = "*"
+pytest-timeout = "*"
 
 
 [packages]
 
 autobahn = "*"
 pygame = "*"
-pytest = "*"
-pytest-coverage = "*"
-pytest-timeout = "*"
 twisted = "*"
 
 
