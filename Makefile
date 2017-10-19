@@ -6,10 +6,10 @@ test: pytest.ini
 	pytest
 
 admin: rose-admin
-	rose-admin
+	pipenv run ./rose-admin
 
 server: rose-server
-	rose-server
+	pipenv run ./rose-server
 
 client: rose-client
-	rose-client
+	pipenv run ./rose-client
