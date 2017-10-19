@@ -27,7 +27,11 @@ See [examples/README](examples/README) for explanation on how to write a driver 
 
 ## Requirements
 
-To install the requirements, run:
+To install the dependencies, run:
+
+    pipenv install
+
+Or in the old-fashioned way
 
     pip install -r requirements.txt
 
