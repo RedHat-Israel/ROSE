@@ -268,7 +268,7 @@ class TestCollisions(object):
     """
 
     def setup_method(self, m):
-        self.track = track.Track()
+        self.track = Track()
         self.player1 = Player("A", car=0, lane=0)
         self.player2 = Player("B", car=0, lane=1)
 
