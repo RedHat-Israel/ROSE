@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
 
 This project is a game that has been developed in order to help teach kids python.
-The students need to code the behavior of the car to achieve the best score.
+The students need to code the behavior of a car to achieve the best score.
 
 Here is video of a race (running code from students):
 
@@ -12,15 +12,16 @@ Here is video of a race (running code from students):
 alt="ROSE Race Car Game" width="860" height="720" border="10" /></a>
 
 In this game, two race cars compete to achieve the most points.
-The race car have to recognize the race track, the obstacles, and the bonus areas;
-calculate the best path to take to avoid the pitfalls; and collect bonus points.
+The race cars have to recognize the race track, the obstacles, and the bonus areas.
+They need to calculate the best path to take to avoid the pitfalls.
+The participants will also have opportunities to collect bonus points.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse would be used.
  
 In order to control the car movements, the students needs to implement a 'driver'.
-This code is controlling the car and will decide what will be the next action of the car.
+This code, when ran, will control the car and will hold the logic to take the appropriate action based on each different type of obstacle encountered.
 
-For each type of obstacles there is a different action, and different points.
+For each type of obstacle there is a different action, and different points.
 
 See [examples/README](examples/README) for explanation on how to write a driver module.
 
@@ -31,7 +32,7 @@ To install the dependencies, run:
 
     pipenv install
 
-Or in the old-fashioned way
+Or the old-fashioned way
 
     pip install -r requirements.txt
 
@@ -46,7 +47,7 @@ Start the server on some machine:
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
-Start up to 2 clients:
+Start up two clients:
 
     ./rose-client mydriver.py
 
