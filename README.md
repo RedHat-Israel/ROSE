@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
 
-This project is a game that has been developed in order to help teaching kids python.
+This project is a game that has been developed in order to help teach kids python.
 The students need to code the behavior of the car to achieve the best score.
 
 Here is video of a race (running code from students):
