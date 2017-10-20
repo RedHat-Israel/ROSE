@@ -34,6 +34,8 @@ def process(players, track):
             if player.action != actions.JUMP:
                 track.clear(player.x, player.y)
                 player.y += 1
+                if not player.in_lane():
+                    player.y += 1
                 player.score += config.score_move_backward
             else:
                 player.score += config.score_jump
@@ -48,6 +50,8 @@ def process(players, track):
             if player.action != actions.BRAKE:
                 track.clear(player.x, player.y)
                 player.y += 1
+                if not player.in_lane():
+                    player.y += 1
                 player.score += config.score_move_backward
             else:
                 player.score += config.score_brake
@@ -55,7 +59,10 @@ def process(players, track):
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.y -= 1
-                player.score += config.score_move_forward
+                if not player.in_lane():
+                    player.score += config.score_move_forward_punish
+                else:
+                    player.score += config.score_move_forward
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same
