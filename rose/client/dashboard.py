@@ -2,10 +2,10 @@ __author__ = 'talayan'
 
 import pygame
 from rose.common import config
-import component
+from .component import Component
 
 
-class Dashboard(component.Component):
+class Dashboard(Component):
 
     TEXT_COLOR = (153, 153, 153)
     TIMER_FONT_SIZE = 70

@@ -4,8 +4,7 @@ from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 
 from rose.common import config, message
-import game
-
+from .game import Game
 
 class Client(basic.LineReceiver):
 
@@ -35,7 +34,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     maxDelay = 2
 
     def __init__(self, name, drive_func):
-        self.game = game.Game(self, name, drive_func)
+        self.game = Game(self, name, drive_func)
         self.client = None
 
     # Client events

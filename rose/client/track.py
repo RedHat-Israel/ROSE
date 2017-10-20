@@ -2,10 +2,10 @@ import glob
 import os
 import pygame
 from rose.common import config, obstacles
-import component
+from .component import Component
 
 
-class Track(component.Component):
+class Track(Component):
 
     def __init__(self):
         self._track = {}

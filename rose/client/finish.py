@@ -1,9 +1,9 @@
 import pygame
 from rose.common import config
-import component
+from .component import Component
 
 
-class FinishLine(component.Component):
+class FinishLine(Component):
 
     def __init__(self):
         self.texture = None

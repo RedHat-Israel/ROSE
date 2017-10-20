@@ -2,10 +2,10 @@ __author__ = 'emesika'
 
 import pygame
 from rose.common import config
-import component
+from .component import Component
 
 
-class Splash(component.Component):
+class Splash(Component):
     def init(self):
         self.texture = pygame.image.load(config.splash_png)
 
