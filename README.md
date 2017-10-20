@@ -2,17 +2,18 @@
 
 [![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
 
-This project is a game that has been developed in order to help teaching kids python.
-The students need to code the behavior of the car to achieve the best score.
+This project is a game that has been developed in order to help teach kids python.
+The students need to code the behavior of the car in order to achieve the best score.
 
-Here is video of a race (running code from students):
+Here is video of a race by running code from students:
+(Click on it to play the video)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=BEV-CcqTOnw
 " target="_blank"><img src="rose-video-preview.png"
 alt="ROSE Race Car Game" width="860" height="720" border="10" /></a>
 
 In this game, two race cars compete to achieve the most points.
-The race car have to recognize the race track, the obstacles, and the bonus areas;
+The race car has to recognize the race track, the obstacles, and the bonus areas;
 calculate the best path to take to avoid the pitfalls; and collect bonus points.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse would be used.
