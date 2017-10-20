@@ -1,4 +1,4 @@
-import component
+from . import component
 
 
 class Car(component.Component):

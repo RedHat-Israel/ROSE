@@ -7,7 +7,7 @@ from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 
 from rose.common import config, message
-import game
+from . import game
 
 log = logging.getLogger('main')
 

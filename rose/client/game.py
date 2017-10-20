@@ -3,10 +3,10 @@ import time
 from twisted.internet import reactor
 
 from rose.common import message
-import track
-import car
-import world
-import component
+from . import track
+from . import car
+from . import world
+from . import component
 
 author = 'gickowic'
 log = logging.getLogger('game')
