@@ -14,8 +14,8 @@ fully qualified domain name (dhcp-10-231) of the game server.
 
     server_address = "10.1.2.3"
 
-Define the driver_name variable - this string is rendered bellow your car on
-everyone screen.
+Define the driver_name variable - this string is rendered below your car on
+everyone's screen.
 
     driver_name = "Michael Schumacher"
 
@@ -34,9 +34,9 @@ object:
     x = world.car.x
     y = world.car.y
 
-In the next game iteration, your car will be at x, y - 1. world coordinates
+In the next game iteration, your car will be at x, y - 1. World coordinates
 start at the top left of the screen. You would like to check if there is an
-obstacle at this location, and return the best action for this obstacle
+obstacle at this location, and return the best action for this obstacle.
 
 To check for obstacles, use the world.get() function. This function
 accept a tuple (x, y) with the required location.
@@ -54,8 +54,8 @@ checking for obstacles:
     else:
         # Choose the best action for obstacle
 
-The game have 2 lanes each has 3 routes in which you can drive.
-On game start, each car starts at the center route of its lane 
+The game has 2 lanes and each lane has 3 routes in which you can drive.
+On game start, each car starts at the center route of its lane.
 The car can pass to other lane, but will be punished for collisions 
 with the lane owner.
 
