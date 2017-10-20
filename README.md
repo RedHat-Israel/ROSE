@@ -5,7 +5,7 @@
 This project is a game that has been developed in order to help teach kids python.
 The students need to code the behavior of the car in order to achieve the best score.
 
-Here is video of a race by running code from students:
+Here is video of a race, using drivers coded by students:<br/>
 (Click on it to play the video)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=BEV-CcqTOnw
