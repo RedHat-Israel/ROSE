@@ -1,7 +1,7 @@
 from rose.common import actions, config, obstacles
-import track
-import player
-import score
+from .track import Track
+from .player import Player
+from .score import process
 import pytest
 
 
@@ -15,15 +15,15 @@ class SinglePlayerTest(object):
     obstacle = None
 
     def setup_method(self, m):
-        self.track = track.Track()
-        self.player = player.Player("A", car=0, lane=0)
+        self.track = Track()
+        self.player = Player("A", car=0, lane=0)
         self.x = self.player.x
         self.y = self.player.y
         self.score = self.player.score
         self.track.set(self.x, self.y, self.obstacle)
 
     def process(self):
-        score.process({self.player.name: self.player}, self.track)
+        process({self.player.name: self.player}, self.track)
 
     def assert_score(self, score):
         assert self.player.x == self.x
@@ -269,8 +269,8 @@ class TestCollisions(object):
 
     def setup_method(self, m):
         self.track = track.Track()
-        self.player1 = player.Player("A", car=0, lane=0)
-        self.player2 = player.Player("B", car=0, lane=1)
+        self.player1 = Player("A", car=0, lane=0)
+        self.player2 = Player("B", car=0, lane=1)
 
     def process(self):
         players = {self.player1.name: self.player1, self.player2.name: self.player2}

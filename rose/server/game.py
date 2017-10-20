@@ -3,8 +3,8 @@ import operator
 from twisted.internet import reactor, task
 
 from rose.common import actions, config, error, message, obstacles
-import track
-import player
+from .track import Track
+from .player import Player
 import score
 
 
@@ -15,7 +15,7 @@ class Game(object):
 
     def __init__(self):
         self.hub = None
-        self.track = track.Track()
+        self.track = Track()
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.number_of_cars))
@@ -67,7 +67,7 @@ class Game(object):
         lane = random.choice(tuple(self.free_lanes))
         self.free_lanes.remove(lane)
         print 'add player:', name, 'lane:', lane, 'car:', car
-        self.players[name] = player.Player(name, car, lane)
+        self.players[name] = Player(name, car, lane)
         reactor.callLater(0, self.update_clients)
 
     def remove_player(self, name):
