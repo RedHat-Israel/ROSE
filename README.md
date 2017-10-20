@@ -18,7 +18,7 @@ calculate the best path to take to avoid the pitfalls; and collect bonus points.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse would be used.
  
-In order to control the car movements, the students needs to implement a 'driver'.
+In order to control the car movements, the students need to implement a 'driver'.
 This code is controlling the car and will decide what will be the next action of the car.
 
 For each type of obstacles there is a different action, and different points.
@@ -67,7 +67,7 @@ To stop a race, use rose-admin tool on any machine:
 
     ./rose-admin <server-address> stop
 
-To modify the game rate, you can use set-rate command. The following command
+To modify the game rate, you can use `set-rate` command. The following command
 would change game rate to 10 frames per second:
 
     ./rose-admin <server-address> set-rate 10
@@ -84,7 +84,7 @@ Before submitting patches, please run the tests:
 
     pytest
 
-Creating coverage report in html format:
+To create coverage report in html format:
 
     pytest --cov-report html
     xdg-open htmlcov/index.html
