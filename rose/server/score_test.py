@@ -1,7 +1,7 @@
 from rose.common import actions, config, obstacles
 from .track import Track
 from .player import Player
-from .score import process
+import score
 import pytest
 
 
@@ -23,7 +23,7 @@ class SinglePlayerTest(object):
         self.track.set(self.x, self.y, self.obstacle)
 
     def process(self):
-        process({self.player.name: self.player}, self.track)
+        score.process({self.player.name: self.player}, self.track)
 
     def assert_score(self, score):
         assert self.player.x == self.x
