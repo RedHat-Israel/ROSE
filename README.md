@@ -18,10 +18,10 @@ calculate the best path to take to avoid the pitfalls; and collect bonus points.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse would be used.
  
-In order to control the car movements, the students needs to implement a 'driver'.
+In order to control the car movements, the student needs to implement a 'driver'.
 This code is controlling the car and will decide what will be the next action of the car.
 
-For each type of obstacles there is a different action, and different points.
+For each type of obstacle, there is a different action, and different points.
 
 See [examples/README](examples/README) for explanation on how to write a driver module.
 
@@ -80,7 +80,7 @@ would change game rate to 10 frames per second:
 
 ## Developing
 
-Before submitting patches, please run the tests:
+Before submitting the patches, please run the tests:
 
     pytest
 
