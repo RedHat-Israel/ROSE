@@ -73,8 +73,7 @@ class Game(component.Component):
         log.info('client failed: %s', reason.getErrorMessage())
 
     def client_error(self, error):
-        log.info('client error: %sp', error.get('message'))
-        log.info('client error: %sp', error.get('message'))
+        log.info('client error: %s', error.get('message'))
         reactor.stop()
 
     def client_update(self, info):

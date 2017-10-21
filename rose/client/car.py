@@ -1,9 +1,4 @@
-import logging
-import random
-import os
-from rose.common import config
 import component
-
 
 class Car(component.Component):
 
