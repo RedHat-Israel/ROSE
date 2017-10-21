@@ -1,4 +1,5 @@
 import socket
+import logging
 
 from twisted.internet import reactor
 from twisted.web import server, static
@@ -8,8 +9,12 @@ from autobahn.twisted.resource import WebSocketResource
 from rose.common import config
 from . import game, net
 
+log = logging.getLogger('main')
+
 
 def main():
+    logging.basicConfig(level=logging.INFO)
+    log.info('starting server')
     g = game.Game()
     h = net.Hub(g)
     reactor.listenTCP(config.game_port, net.PlayerFactory(h))
