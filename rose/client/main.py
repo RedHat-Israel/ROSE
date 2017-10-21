@@ -72,7 +72,8 @@ def main():
         print 'usage: rose-client drive-module'
         sys.exit(2)
 
-    d = import_module(splitext(sys.argv[1])[0])
+    module_name = splitext(sys.argv[1])[0]
+    d = import_module(module_name)
 
     reactor.connectTCP(d.server_address, config.game_port,
                        ClientFactory(d.driver_name, d.drive))
