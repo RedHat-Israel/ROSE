@@ -4,30 +4,25 @@ from twisted.internet import task
 import pygame
 
 from rose.common import config, message
-from .track import Track
-from .car import Car
-from .finish import Finish
-import world
-from .dashboard import Dashboard
-from .component import Component
+from . import track, car, component, dashboard, finish, world
 
 author = 'gickowic'
 
 
-class Game(Component):
+class Game(component.Component):
 
     def __init__(self, client, name, drive_func):
         self.client = client
         self.drive_func = drive_func
         self.name = name
-        self.track = Track()
-        self.dashboard = Dashboard()
-        self.finish_line = FinishLine()
+        self.track = track.Track()
+        self.dashboard = dashboard.Dashboard()
+        self.finish_line = finish.FinishLine()
         self.players = {}
-        self.cars = [Car(1, 0, 4),
-                     Car(2, 1, 4),
-                     Car(3, 2, 4),
-                     Car(4, 3, 4)]
+        self.cars = [car.Car(1, 0, 4),
+                     car.Car(2, 1, 4),
+                     car.Car(3, 2, 4),
+                     car.Car(4, 3, 4)]
         self.world = world.generate_world(self)
         pygame.init()
         self.surface = pygame.display.set_mode(config.window_size)

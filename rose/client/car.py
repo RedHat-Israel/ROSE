@@ -1,10 +1,10 @@
-from random import randrange
+import random
 import pygame
 import os
 from rose.common import config
-from .component import Component
+from . import component
 
-class Car(Component):
+class Car(component.Component):
 
     def __init__(self, id, x, y):
         self.id = id
@@ -25,8 +25,8 @@ class Car(Component):
     def draw(self, surface):
         x = config.left_margin + self.x * config.cell_width
         y = config.dashboard_height + self.y * config.row_height
-        x += randrange(config.car_jitter) - config.car_jitter/2
-        y += randrange(config.car_jitter) - config.car_jitter/2
+        x += random.randrange(config.car_jitter) - config.car_jitter/2
+        y += random.randrange(config.car_jitter) - config.car_jitter/2
         surface.blit(self.texture, (x, y))
         self.draw_label(surface, (x, y))
 

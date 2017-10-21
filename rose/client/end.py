@@ -2,10 +2,10 @@ __author__ = 'emesika'
 
 import pygame
 from rose.common import config
-from .component import Component
+from . import component
 
 
-class End(Component):
+class End(component.Component):
     def init(self):
         self.texture = pygame.image.load(config.end_png)
 
