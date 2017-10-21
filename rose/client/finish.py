@@ -1,6 +1,6 @@
 import pygame
 from rose.common import config
-import component
+from . import component
 
 
 class FinishLine(component.Component):

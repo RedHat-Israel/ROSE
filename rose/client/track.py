@@ -2,7 +2,7 @@ import glob
 import os
 import pygame
 from rose.common import config, obstacles
-import component
+from . import component
 
 
 class Track(component.Component):

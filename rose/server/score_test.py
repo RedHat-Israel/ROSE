@@ -1,7 +1,5 @@
 from rose.common import actions, config, obstacles
-import track
-import player
-import score
+from . import track, player, score
 import pytest
 
 

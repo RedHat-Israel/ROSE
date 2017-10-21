@@ -2,7 +2,7 @@ import random
 import pygame
 import os
 from rose.common import config
-import component
+from . import component
 
 class Car(component.Component):
 

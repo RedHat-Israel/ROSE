@@ -4,12 +4,7 @@ from twisted.internet import task
 import pygame
 
 from rose.common import config, message
-import track
-import car
-import finish
-import world
-import dashboard
-import component
+from . import track, car, component, dashboard, finish, world
 
 author = 'gickowic'
 

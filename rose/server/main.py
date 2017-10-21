@@ -9,13 +9,14 @@ from rose.common import config
 from . import game, net
 
 
+
 def main():
     g = game.Game()
     h = net.Hub(g)
     reactor.listenTCP(config.game_port, net.PlayerFactory(h))
     root = static.File(config.web_root)
     wsuri = u"ws://%s:%s" % (socket.gethostname(), config.web_port)
-    watcher = net.WatcherFactory(wsuri, h)
+    watcher = WatcherFactory(wsuri, h)
     root.putChild("ws", WebSocketResource(watcher))
     root.putChild('res', static.File(config.res_root))
     root.putChild('admin', net.WebAdmin(g))

@@ -2,7 +2,7 @@ __author__ = 'emesika'
 
 import pygame
 from rose.common import config
-import component
+from . import component
 
 
 class Splash(component.Component):

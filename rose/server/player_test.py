@@ -1,4 +1,4 @@
-import player
+from . import player
 
 def test_in_lane():
     p = player.Player("A", car=0, lane=0)
