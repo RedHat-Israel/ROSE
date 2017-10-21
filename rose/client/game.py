@@ -1,7 +1,7 @@
 import time
 from twisted.internet import reactor
 
-from rose.common import config, message
+from rose.common import message
 import track
 import car
 import world
