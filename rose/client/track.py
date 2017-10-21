@@ -1,5 +1,3 @@
-import glob
-import os
 from rose.common import config, obstacles
 import component
 

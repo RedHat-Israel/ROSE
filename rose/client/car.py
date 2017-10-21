@@ -1,6 +1,3 @@
-import random
-import os
-from rose.common import config
 import component
 
 class Car(component.Component):
@@ -9,7 +6,6 @@ class Car(component.Component):
         self.id = id
         self.x = None
         self.y = None
-        self.texture = None
         self.name = None
 
     def update(self, info):
