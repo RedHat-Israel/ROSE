@@ -2,7 +2,7 @@ import component
 
 class Car(component.Component):
 
-    def __init__(self, id, x, y):
+    def __init__(self, id):
         self.id = id
         self.x = None
         self.y = None

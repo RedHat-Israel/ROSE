@@ -69,7 +69,6 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 
 def main():
-
     logging.basicConfig(level=logging.INFO)
     if len(sys.argv) < 2:
         log.info('usage: rose-client drive-module')
