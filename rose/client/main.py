@@ -1,6 +1,6 @@
+import imp
+import os.path
 import sys
-from os.path import splitext
-from importlib import import_module
 
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
