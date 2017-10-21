@@ -1,0 +1,6 @@
+{
+  "name": "ROSE",
+  "description": "This project is a game that has been developed in order to help teach kids python. The students need to code the behavior of the car in order to achieve the best score.",
+  "repository": "https://github.com/RedHat-Israel/ROSE",
+  "keywords": ["race", "game", "python"]
+}

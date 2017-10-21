@@ -25,6 +25,8 @@ For each type of obstacles there is a different action, and different points.
 
 See [examples/README](examples/README) for explanation on how to write a driver module.
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 
 ## Requirements
 
