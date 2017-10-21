@@ -18,10 +18,10 @@ class Game(component.Component):
         self.name = name
         self.track = track.Track()
         self.players = {}
-        self.cars = [car.Car(1, 0, 4),
-                     car.Car(2, 1, 4),
-                     car.Car(3, 2, 4),
-                     car.Car(4, 3, 4)]
+        self.cars = [car.Car(1),
+                     car.Car(2),
+                     car.Car(3),
+                     car.Car(4)]
         self.world = world.generate_world(self)
 
     # Component interface
