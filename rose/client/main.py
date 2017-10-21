@@ -66,24 +66,38 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     def send_message(self, msg):
         self.client.sendLine(str(msg))
 
+def load_driver_module(file_path):
+    """
+    Try to load the driver module from file
+
+    :param file_path: The path to the driver module
+    :type file_path: str
+    :rtype: module | None
+    :return: driver module if found, None otherwise
+    """
+    module_path, file_suffix = os.path.splitext(file_path)
+    module_name = os.path.basename(module_path)
+    module_dir = os.path.dirname(file_path)
+    fp, pathname, description = imp.find_module(module_name, [module_dir])
+
+    try:
+        return imp.load_module(module_name, fp, pathname, description)
+    finally:
+        # Since we may exit via an exception, close fp explicitly.
+        if fp:
+            fp.close()
+
 
 def main():
     if len(sys.argv) < 2:
         print 'usage: rose-client drive-module'
         sys.exit(2)
 
-    file_name = sys.argv[1]
-    module_path, file_suffix = os.path.splitext(file_name)
-    module_name = os.path.basename(module_path)
+    driver_mod = load_driver_module(sys.argv[1])
 
-    if file_suffix not in (".py", ".pyc"):
+    if driver_mod is None:
         print "driver file must be either .py or .pyc"
         sys.exit(3)
-
-    if file_suffix == ".py":
-        driver_mod = imp.load_source(module_name, file_name)
-    else:
-        driver_mod = imp.load_compiled(module_name, file_name)
 
     reactor.connectTCP(driver_mod.server_address, config.game_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
