@@ -73,8 +73,8 @@ def main():
         sys.exit(2)
 
     module_name = splitext(sys.argv[1])[0]
-    d = import_module(module_name)
+    driver_mod = import_module(module_name)
 
-    reactor.connectTCP(d.server_address, config.game_port,
-                       ClientFactory(d.driver_name, d.drive))
+    reactor.connectTCP(driver_mod.server_address, config.game_port,
+                       ClientFactory(driver_mod.driver_name, driver_mod.drive))
     reactor.run()
