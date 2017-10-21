@@ -1,4 +1,6 @@
 import sys
+from os.path import splitext
+from importlib import import_module
 
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
@@ -70,10 +72,8 @@ def main():
         print 'usage: rose-client drive-module'
         sys.exit(2)
 
-    with open(sys.argv[1]) as f:
-        d = {}
-        exec f in d, d
+    d = import_module(splitext(sys.argv[1])[0])
 
-    reactor.connectTCP(d['server_address'], config.game_port,
-                       ClientFactory(d['driver_name'], d['drive']))
+    reactor.connectTCP(d.server_address, config.game_port,
+                       ClientFactory(d.driver_name, d.drive))
     reactor.run()
