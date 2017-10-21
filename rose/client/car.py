@@ -11,7 +11,6 @@ class Car(component.Component):
         self.id = id
         self.x = None
         self.y = None
-        self.texture = None
         self.name = None
 
     def update(self, info):
