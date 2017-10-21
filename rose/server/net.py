@@ -9,7 +9,6 @@ from autobahn.twisted.websocket import WebSocketServerProtocol
 
 from rose.common import error, message
 
-
 class Hub(object):
 
     def __init__(self, game):
