@@ -72,8 +72,18 @@ def main():
         print 'usage: rose-client drive-module'
         sys.exit(2)
 
-    module_name = splitext(sys.argv[1])[0]
-    driver_mod = import_module(module_name)
+    file_name = sys.argv[1]
+    module_path, file_suffix = os.path.splitext(file_name)
+    module_name = os.path.basename(module_path)
+
+    if file_suffix not in (".py", ".pyc"):
+        print "driver file must be either .py or .pyc"
+        sys.exit(3)
+
+    if file_suffix == ".py":
+        driver_mod = imp.load_source(module_name, file_name)
+    else:
+        driver_mod = imp.load_compiled(module_name, file_name)
 
     reactor.connectTCP(driver_mod.server_address, config.game_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
