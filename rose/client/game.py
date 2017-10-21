@@ -1,3 +1,4 @@
+import logging
 import time
 from twisted.internet import reactor
 
@@ -8,6 +9,7 @@ import world
 import component
 
 author = 'gickowic'
+log = logging.getLogger('game')
 
 
 class Game(component.Component):
@@ -60,18 +62,18 @@ class Game(component.Component):
     # Handling client events
 
     def client_connected(self):
-        print 'client connected: joining as', self.name
+        log.info('client connected: joining as', self.name)
         msg = message.Message('join', {"name": self.name})
         self.client.send_message(msg)
 
     def client_disconnected(self, reason):
-        print 'client disconnected:', reason.getErrorMessage()
+        log.info('client disconnected:', reason.getErrorMessage())
 
     def client_failed(self, reason):
-        print 'client failed:', reason.getErrorMessage()
+        log.info('client failed:', reason.getErrorMessage())
 
     def client_error(self, error):
-        print 'client error:', error.get('message')
+        log.info('client error:', error.get('message'))
         reactor.stop()
 
     def client_update(self, info):

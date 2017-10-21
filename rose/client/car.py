@@ -1,7 +1,10 @@
+import logging
 import random
 import os
 from rose.common import config
 import component
+
+log = logging.getLogger('car')
 
 class Car(component.Component):
 

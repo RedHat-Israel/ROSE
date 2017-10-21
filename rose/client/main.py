@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from twisted.internet import reactor, protocol
@@ -6,6 +7,7 @@ from twisted.protocols import basic
 from rose.common import config, message
 import game
 
+log = logging.getLogger('main')
 
 class Client(basic.LineReceiver):
 
@@ -25,7 +27,7 @@ class Client(basic.LineReceiver):
         elif msg.action == 'error':
             self.factory.error(msg.payload)
         else:
-            print 'Unexpected message:', msg.action, msg.payload
+            log.info('Unexpected message:', msg.action, msg.payload)
 
 
 class ClientFactory(protocol.ReconnectingClientFactory):
@@ -67,7 +69,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 def main():
     if len(sys.argv) < 2:
-        print 'usage: rose-client drive-module'
+        log.info('usage: rose-client drive-module')
         sys.exit(2)
 
     with open(sys.argv[1]) as f:

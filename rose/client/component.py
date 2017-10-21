@@ -1,3 +1,7 @@
+import logging
+
+log = logging.getLogger('Component')
+
 class Component(object):
     """ Component intarface """
 
