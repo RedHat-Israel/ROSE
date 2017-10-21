@@ -1,10 +1,6 @@
-import glob
-import logging
-import os
 from rose.common import config, obstacles
 import component
 
-log = logging.getLogger('main')
 
 class Track(component.Component):
 

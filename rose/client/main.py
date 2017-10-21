@@ -9,6 +9,7 @@ import game
 
 log = logging.getLogger('main')
 
+
 class Client(basic.LineReceiver):
 
     def connectionMade(self):
@@ -27,7 +28,7 @@ class Client(basic.LineReceiver):
         elif msg.action == 'error':
             self.factory.error(msg.payload)
         else:
-            log.info('Unexpected message:', msg.action, msg.payload)
+            log.info('Unexpected message: %s %s', msg.action, msg.payload)
 
 
 class ClientFactory(protocol.ReconnectingClientFactory):
@@ -68,6 +69,8 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 
 def main():
+
+    logging.basicConfig(level=logging.INFO)
     if len(sys.argv) < 2:
         log.info('usage: rose-client drive-module')
         sys.exit(2)
