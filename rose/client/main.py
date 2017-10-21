@@ -96,7 +96,7 @@ def main():
     driver_mod = load_driver_module(sys.argv[1])
 
     if driver_mod is None:
-        print "driver file must be either .py or .pyc"
+        print "Couldn't load driver file"
         sys.exit(3)
 
     reactor.connectTCP(driver_mod.server_address, config.game_port,
