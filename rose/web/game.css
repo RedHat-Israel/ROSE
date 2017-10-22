@@ -48,7 +48,7 @@ body {
     transform: translateX(-50%);
 }
 
-img {
+#toggle_mute img {
     vertical-align: middle;
 }
 
