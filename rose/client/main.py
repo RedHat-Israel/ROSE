@@ -68,18 +68,19 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 def load_driver_module(file_path):
     """
-    Try to load the driver module from file
+    Title Try to load the driver module from file
 
-    :param file_path: The path to the driver module
-    :type file_path: str
-    :rtype: module | None
-    :return: driver module if found, None otherwise
+    Arguments:
+      file_path (str): The path to the driver module
+
+    Returns:
+        Driver module (module)
+
+    Raises:
+        ImportError if the module cannot be loaded
     """
-    module_path, file_suffix = os.path.splitext(file_path)
-    module_name = os.path.basename(module_path)
-    module_dir = os.path.dirname(file_path)
+    module_dir, module_name = os.path.split(os.path.splitext(file_path)[0])
     fp, pathname, description = imp.find_module(module_name, [module_dir])
-
     try:
         return imp.load_module(module_name, fp, pathname, description)
     finally:
@@ -92,12 +93,11 @@ def main():
     if len(sys.argv) < 2:
         print 'usage: rose-client drive-module'
         sys.exit(2)
-
-    driver_mod = load_driver_module(sys.argv[1])
-
-    if driver_mod is None:
+    try:
+        driver_mod = load_driver_module(sys.argv[1])
+    except ImportError:
         print "Couldn't load driver file"
-        sys.exit(3)
+        sys.exit(2)
 
     reactor.connectTCP(driver_mod.server_address, config.game_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
