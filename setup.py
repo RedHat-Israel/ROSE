@@ -9,4 +9,4 @@ setup(name='rose-project',
       author='Yaniv Bronhaim',
       author_email='ybronhei@redhat.com',
       url="https://github.com/emesika/RaananaTiraProject",
-      scripts=["rose-client", "rose-server", "rose-admin"],)
+      scripts=["rose-client", "rose-server", "rose-admin", "requirements.txt"],)
