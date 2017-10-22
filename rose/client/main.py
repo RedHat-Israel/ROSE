@@ -69,6 +69,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     def send_message(self, msg):
         self.client.sendLine(str(msg))
 
+
 def load_driver_module(file_path):
     """
     Title Try to load the driver module from file
