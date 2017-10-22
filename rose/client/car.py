@@ -1,5 +1,6 @@
 import component
 
+
 class Car(component.Component):
 
     def __init__(self, id):

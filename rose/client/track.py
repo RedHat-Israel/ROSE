@@ -10,7 +10,8 @@ class Track(component.Component):
     # Component interface
 
     def update(self, info):
-        self._track = {(obs["x"], obs["y"]): obs["name"] for obs in info["track"]}
+        self._track = {(obs["x"], obs["y"]): obs["name"]
+                       for obs in info["track"]}
 
     # Track interface
 
