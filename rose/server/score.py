@@ -2,6 +2,7 @@
 
 from rose.common import actions, config, obstacles
 
+
 def process(players, track):
     """
     Evaluate players actions and update player state and track

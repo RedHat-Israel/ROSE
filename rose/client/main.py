@@ -1,4 +1,5 @@
 import imp
+import logging
 import os.path
 import sys
 
@@ -7,6 +8,8 @@ from twisted.protocols import basic
 
 from rose.common import config, message
 import game
+
+log = logging.getLogger('main')
 
 
 class Client(basic.LineReceiver):
@@ -27,7 +30,7 @@ class Client(basic.LineReceiver):
         elif msg.action == 'error':
             self.factory.error(msg.payload)
         else:
-            print 'Unexpected message:', msg.action, msg.payload
+            log.info('Unexpected message: %s %s', msg.action, msg.payload)
 
 
 class ClientFactory(protocol.ReconnectingClientFactory):
@@ -90,8 +93,9 @@ def load_driver_module(file_path):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO)
     if len(sys.argv) < 2:
-        print 'usage: rose-client drive-module'
+        log.info('usage: rose-client drive-module')
         sys.exit(2)
     try:
         driver_mod = load_driver_module(sys.argv[1])
