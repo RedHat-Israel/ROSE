@@ -94,7 +94,7 @@ class Game(object):
     def print_stats(self):
         print
         print 'Stats'
-        for i, p in enumerate(sorted(self.players.values())):
+        for i, p in enumerate(sorted(self.players.values(), reverse=True)):
             print '%d  %10s  row:%d  score:%d' % (
                 i+1, p.name, p.y, p.score
             )
