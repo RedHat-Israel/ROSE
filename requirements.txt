@@ -1,4 +1,5 @@
 autobahn
+flake8
 pytest
 pytest-coverage
 pytest-timeout

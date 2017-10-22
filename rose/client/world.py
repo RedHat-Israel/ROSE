@@ -1,5 +1,6 @@
 """ The world """
 
+
 def generate_world(game):
     """
     Creates a world object
@@ -35,7 +36,8 @@ def generate_world(game):
             Arguments:
               pos: 2 tuple (x, y) using game logical units
 
-            Accessing a position out of the world bounds will raise IndexError exception.
+            Accessing a position out of the world bounds
+            will raise IndexError exception.
             """
             return game.track.get(pos[0], pos[1])
 

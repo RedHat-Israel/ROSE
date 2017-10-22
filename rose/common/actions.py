@@ -1,10 +1,10 @@
 """ Driving actions """
 
-NONE    = "none"
-RIGHT   = "right"
-LEFT    = "left"
-PICKUP  = "pickup"
-JUMP    = "jump"
-BRAKE   = "brake"
+NONE    = "none"    # NOQA
+RIGHT   = "right"   # NOQA
+LEFT    = "left"    # NOQA
+PICKUP  = "pickup"  # NOQA
+JUMP    = "jump"    # NOQA
+BRAKE   = "brake"   # NOQA
 
 ALL = (NONE, RIGHT, LEFT, PICKUP, JUMP, BRAKE)

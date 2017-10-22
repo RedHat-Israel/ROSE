@@ -2,6 +2,7 @@
 
 from rose.common import actions, config, obstacles
 
+
 def process(players, track):
     """
     Evaluate players actions and update player state and track
@@ -68,7 +69,7 @@ def process(players, track):
         # Fix up collisions
 
         if (player.x, player.y) in positions:
-            print 'player %s collision at %d,%d' % (player.name, player.x, player.y)
+            print 'player %s collision at %d,%d' % (player.name, player.x, player.y)  # NOQA
             player.score += config.score_move_backward
             if player.y < config.matrix_height - 1:
                 player.y += 1
@@ -77,7 +78,7 @@ def process(players, track):
             elif player.x < config.matrix_width - 1:
                 player.x += 1
 
-        print 'process_actions: name=%s lane=%d pos=%d,%d score=%d response_time=%0.6f' % (
+        print 'process_actions: name=%s lane=%d pos=%d,%d score=%d response_time=%0.6f' % (  # NOQA
                 player.name, player.lane, player.x, player.y, player.score,
                 player.response_time)
 
