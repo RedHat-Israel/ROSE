@@ -1,6 +1,4 @@
-import socket
-
-from twisted.internet import reactor, protocol
+from twisted.internet import protocol
 from twisted.protocols import basic
 from twisted.web import http, resource, xmlrpc
 
@@ -50,6 +48,7 @@ class Hub(object):
         for client in self.clients:
             client.send_message(data)
 
+
 class PlayerProtocol(basic.LineReceiver):
 
     def __init__(self, hub):
@@ -94,15 +93,17 @@ class PlayerProtocol(basic.LineReceiver):
             else:
                 raise error.ActionForbidden(msg.action)
 
+
 class PlayerFactory(protocol.ServerFactory):
 
     def __init__(self, hub):
         self.hub = hub
 
     def buildProtocol(self, addr):
-        p  = PlayerProtocol(self.hub)
+        p = PlayerProtocol(self.hub)
         p.factory = self
         return p
+
 
 class WatcherProtocol(WebSocketServerProtocol):
 
@@ -128,6 +129,7 @@ class WatcherProtocol(WebSocketServerProtocol):
     def send_message(self, data):
         self.sendMessage(data, False)
 
+
 class WatcherFactory(WebSocketServerFactory):
 
     def __init__(self, url, hub):
@@ -138,6 +140,7 @@ class WatcherFactory(WebSocketServerFactory):
         p = WatcherProtocol(self.hub)
         p.factory = self
         return p
+
 
 class CliAdmin(xmlrpc.XMLRPC):
 
@@ -159,6 +162,7 @@ class CliAdmin(xmlrpc.XMLRPC):
 
     def xmlrpc_set_rate(self, rate):
         self.game.rate = rate
+
 
 class WebAdmin(resource.Resource):
 

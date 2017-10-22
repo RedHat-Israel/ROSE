@@ -1,8 +1,7 @@
 import random
-import operator
 from twisted.internet import reactor, task
 
-from rose.common import actions, config, error, message, obstacles
+from rose.common import actions, config, error, message
 import track
 import player
 import score
@@ -43,8 +42,8 @@ class Game(object):
         if self.started:
             raise error.GameAlreadyStarted()
         self.track.reset()
-        for player in self.players.values():
-            player.reset()
+        for actor in self.players.values():
+            actor.reset()
         self.timeleft = config.game_duration
         self.started = True
         self.looper.start(1.0 / self._rate)
