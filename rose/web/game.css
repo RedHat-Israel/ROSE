@@ -41,6 +41,17 @@ body {
     margin: 0;
 }
 
+#toggle_mute {
+    padding: 8px 8px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+img {
+    vertical-align: middle;
+}
+
 #rate_ctl {
     position: absolute;
     top: 0;
