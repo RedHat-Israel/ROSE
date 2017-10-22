@@ -17,16 +17,21 @@ var ROSE = (function() {
         this.controller = new Controller();
         this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
 
-        var loader = new ImageLoader(function() {
+        var imageLoader = new ImageLoader(function() {
             this.client = new Client(this.onmessage.bind(this), 2000);
         }.bind(this));
 
+        var soundLoader = new SoundLoader(function() {});
+        soundLoader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
+            sound.play();
+        });
+
         this.context = $("#game").get(0).getContext("2d");
-        this.dashboard = new Dashboard(loader);
-        this.track = new Track(loader);
-        this.obstacles = new Obstacles(loader);
-        this.cars = new Cars(loader);
-        this.finish_line = new FinishLine(loader);
+        this.dashboard = new Dashboard(imageLoader);
+        this.track = new Track(imageLoader);
+        this.obstacles = new Obstacles(imageLoader);
+        this.cars = new Cars(imageLoader);
+        this.finish_line = new FinishLine(imageLoader);
     }
 
     App.prototype.onmessage = function(m) {
@@ -417,6 +422,25 @@ var ROSE = (function() {
             }
         });
         img.src = url;
+    }
+
+    function SoundLoader(done) {
+        this.loading = 0;
+        this.done = done;
+    }
+
+    SoundLoader.prototype.load = function(url, done) {
+        var audio = new Audio();
+        var self = this;
+        self.loading++;
+        $(audio).on('canplaythrough', function () {
+            done(audio);
+            self.loading--;
+            if (self.loading == 0) {
+                self.done();
+            }
+        });
+        audio.src = url;
     }
 
     return new App();
