@@ -72,7 +72,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 def load_driver_module(file_path):
     """
-    Title Try to load the driver module from file
+    Load the driver module from file
 
     Arguments:
       file_path (str): The path to the driver module
