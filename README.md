@@ -80,8 +80,17 @@ would change game rate to 10 frames per second:
 
 ## Developing
 
+To install development requirements:
+
+    pipenv install --dev
+
+To open a shell for development, use:
+
+    pipenv shell
+
 Before submitting patches, please run the tests:
 
+    flake8
     pytest
 
 To create coverage report in html format:
