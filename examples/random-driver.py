@@ -7,8 +7,23 @@ very good driver but the implementation is very elegant.
 import random
 from rose.common import obstacles, actions
 
+attribute = [
+    "Furious",
+    "Big",
+    "Rolling"
+]
+
+names = [
+    "Mike",
+    "Sally",
+    "Jackson",
+    "Sam",
+    "Jane",
+    "Bruce"
+]
+
 server_address = "localhost"
-driver_name = "Random Driver"
+driver_name = "{0} {1}".format(random.choice(attribute), random.choice(names))
 
 def drive(world):
     return random.choice(actions.ALL)
