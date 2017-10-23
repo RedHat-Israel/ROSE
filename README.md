@@ -28,7 +28,11 @@ See [examples/README](examples/README) for explanation on how to write a driver 
 
 ## Requirements
 
-To install the dependencies, run:
+Installing dependencies using Makefile,
+
+    make init
+
+Alternatively, To install the dependencies, run:
 
     pipenv install
 
@@ -41,13 +45,22 @@ You can also install packages from your distribution.
 
 ## Running the game
 
-Start the server on some machine:
+Run the game using Makefile with the command,
+
+	    make server
+  
+
+Alternatively, Start the server on some machine:
 
     ./rose-server
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 Start up to 2 clients:
+
+	    make client
+    
+Or alternatively,
 
     ./rose-client mydriver.py
 
@@ -58,6 +71,9 @@ Command line interface
 ----------------------
 
 You can control the game from the command line using the rose-admin tool.
+	
+    make admin
+
 
 To start a race, use rose-admin tool on any machine:
 
@@ -81,6 +97,10 @@ would change game rate to 10 frames per second:
 ## Developing
 
 Before submitting patches, please run the tests:
+
+	make test
+
+Or alternatively,
 
     pytest
 
