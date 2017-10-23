@@ -100,8 +100,8 @@ def main():
         sys.exit(2)
     try:
         driver_mod = load_driver_module(sys.argv[1])
-    except ImportError:
-        print "Couldn't load driver file"
+    except ImportError as e:
+        print "error loading driver module %r: %s" % (sys.argv[1], e)
         sys.exit(2)
 
     reactor.connectTCP(driver_mod.server_address, config.game_port,
