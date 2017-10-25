@@ -97,10 +97,11 @@ class Game(object):
         self.players[name].response_time = info.get('response_time', 1.0)
 
     def print_stats(self):
-        string = 'Stats' + os.linesep
+        lines = ['Stats:']
         for i, p in enumerate(sorted(self.players.values())):
-            string += '%d  %10s  row:%d  score:%d'.format(i + 1, p.name, p.y, p.score)
-        log.info(string)
+            line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
+            lines.append(line)
+        log.info("%s", os.linesep.join(lines))
 
     def loop(self):
         self.track.update()
