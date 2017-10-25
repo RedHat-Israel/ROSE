@@ -11,6 +11,7 @@ from . import game, net
 
 log = logging.getLogger('main')
 
+
 def main():
     logging.basicConfig(level=logging.INFO)
     log.info('starting server')

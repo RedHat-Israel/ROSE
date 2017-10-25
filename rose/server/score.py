@@ -3,7 +3,7 @@ import logging
 
 from rose.common import actions, config, obstacles
 
-log = logging.getLogger()
+log = logging.getLogger('score')
 
 
 def process(players, track):

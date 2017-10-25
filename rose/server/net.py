@@ -52,7 +52,6 @@ class Hub(object):
         for client in self.clients:
             client.send_message(data)
 
-
 class PlayerProtocol(basic.LineReceiver):
 
     def __init__(self, hub):
@@ -69,7 +68,7 @@ class PlayerProtocol(basic.LineReceiver):
             msg = message.parse(line)
             self.dispatch(msg)
         except error.Error as e:
-            log.info("Error handling message: %s", e)
+            log.warning("Error handling message: %s", e)
             msg = message.Message('error', {'message': str(e)})
             self.sendLine(str(msg))
             self.transport.loseConnection()
@@ -107,7 +106,6 @@ class PlayerFactory(protocol.ServerFactory):
         p = PlayerProtocol(self.hub)
         p.factory = self
         return p
-
 
 class WatcherProtocol(WebSocketServerProtocol):
 

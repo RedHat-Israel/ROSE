@@ -1,6 +1,8 @@
 import random
-from twisted.internet import reactor, task
 import logging
+import os
+
+from twisted.internet import reactor, task
 
 from rose.common import actions, config, error, message, obstacles  # NOQA
 import track
@@ -68,7 +70,7 @@ class Game(object):
         self.free_cars.remove(car)
         lane = random.choice(tuple(self.free_lanes))
         self.free_lanes.remove(lane)
-        log.info('add player: %r lane: %r, car: %r', name, lane, car)
+        log.info('add player: %r, lane: %r, car: %r', name, lane, car)
         self.players[name] = player.Player(name, car, lane)
         reactor.callLater(0, self.update_clients)
 
@@ -79,7 +81,7 @@ class Game(object):
         self.free_cars.add(player.car)
         self.free_lanes.add(player.lane)
         log.info('remove player: %r, lane: %r, car: %r',
-              name, player.lane, player.car)
+                 name, player.lane, player.car)
         reactor.callLater(0, self.update_clients)
 
     def drive_player(self, name, info):
@@ -95,9 +97,10 @@ class Game(object):
         self.players[name].response_time = info.get('response_time', 1.0)
 
     def print_stats(self):
-        log.info('Stats')
+        string = 'Stats' + os.linesep
         for i, p in enumerate(sorted(self.players.values())):
-            log.info('%d  %10s  row:%d  score:%d', i + 1, p.name, p.y, p.score)
+            string += '%d  %10s  row:%d  score:%d'.format(i + 1, p.name, p.y, p.score)
+        log.info(string)
 
     def loop(self):
         self.track.update()
