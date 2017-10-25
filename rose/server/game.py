@@ -5,9 +5,9 @@ import os
 from twisted.internet import reactor, task
 
 from rose.common import actions, config, error, message, obstacles  # NOQA
-import track
-import player
-import score
+from . import track
+from . import player
+from . import score
 
 log = logging.getLogger('game')
 
