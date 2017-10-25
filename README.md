@@ -80,6 +80,8 @@ would change game rate to 10 frames per second:
 
 ## Developing
 
+Should you want to contribute to the project, please read the [Code of Conduct](docs/code-of-conduct.md).
+
 To install development requirements:
 
     pipenv install --dev
