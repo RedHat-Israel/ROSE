@@ -1,8 +1,7 @@
 import random
-import operator
 from twisted.internet import reactor, task
 
-from rose.common import actions, config, error, message, obstacles
+from rose.common import actions, config, error, message, obstacles  # NOQA
 import track
 import player
 import score
@@ -43,8 +42,8 @@ class Game(object):
         if self.started:
             raise error.GameAlreadyStarted()
         self.track.reset()
-        for player in self.players.values():
-            player.reset()
+        for p in self.players.values():
+            p.reset()
         self.timeleft = config.game_duration
         self.started = True
         self.looper.start(1.0 / self._rate)
@@ -94,7 +93,7 @@ class Game(object):
     def print_stats(self):
         print
         print 'Stats'
-        for i, p in enumerate(sorted(self.players.values())):
+        for i, p in enumerate(sorted(self.players.values(), reverse=True)):
             print '%d  %10s  row:%d  score:%d' % (
                 i+1, p.name, p.y, p.score
             )
