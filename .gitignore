@@ -9,3 +9,4 @@
 htmlcov/
 
 Pipfile.lock
+requirements.txt
