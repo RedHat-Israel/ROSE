@@ -1,11 +1,19 @@
+import subprocess
+import sys
 from distutils.core import setup
-from subprocess import call
+
+
+DATA_FILES = []
 
 
 def generate_requirements():
     with open('requirements.txt', 'w') as f:
-        call(['pipenv', 'lock', '--requirements'], stdout=f)
+        subprocess.check_call(['pipenv', 'lock', '--requirements'], stdout=f)
     return 'requirements.txt'
+
+
+if 'sdist' in sys.argv:
+    DATA_FILES.append(('requirements.txt', generate_requirements()))
 
 
 setup(name='rose-project',
@@ -18,4 +26,4 @@ setup(name='rose-project',
       author_email='ybronhei@redhat.com',
       url="https://github.com/emesika/RaananaTiraProject",
       scripts=["rose-client", "rose-server", "rose-admin"],
-      data_files=[('requirements.txt', [generate_requirements()]), ])
+      data_files=DATA_FILES)
