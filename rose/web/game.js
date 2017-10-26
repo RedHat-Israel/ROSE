@@ -17,21 +17,21 @@ var ROSE = (function() {
         this.controller = new Controller();
         this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
 
-        var imageLoader = new ImageLoader(function() {
+        var image_loader = new ImageLoader(function() {
             this.client = new Client(this.onmessage.bind(this), 2000);
         }.bind(this));
 
-        var soundLoader = new SoundLoader(function() {});
-        soundLoader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
+        var sound_loader = new SoundLoader(function() {});
+        sound_loader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
             sound.play();
         });
 
         this.context = $("#game").get(0).getContext("2d");
-        this.dashboard = new Dashboard(imageLoader);
-        this.track = new Track(imageLoader);
-        this.obstacles = new Obstacles(imageLoader);
-        this.cars = new Cars(imageLoader);
-        this.finish_line = new FinishLine(imageLoader);
+        this.dashboard = new Dashboard(image_loader);
+        this.track = new Track(image_loader);
+        this.obstacles = new Obstacles(image_loader);
+        this.cars = new Cars(image_loader);
+        this.finish_line = new FinishLine(image_loader);
     }
 
     App.prototype.onmessage = function(m) {
