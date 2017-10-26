@@ -22,6 +22,9 @@ var ROSE = (function() {
         }.bind(this));
 
         var soundLoader = new SoundLoader(function() {});
+        soundLoader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
+            sound.play();
+        });
 
         this.context = $("#game").get(0).getContext("2d");
         this.dashboard = new Dashboard(imageLoader);
@@ -29,7 +32,6 @@ var ROSE = (function() {
         this.obstacles = new Obstacles(imageLoader);
         this.cars = new Cars(imageLoader);
         this.finish_line = new FinishLine(imageLoader);
-        this.sound_controller = new SoundController(soundLoader);
     }
 
     App.prototype.onmessage = function(m) {
@@ -401,38 +403,6 @@ var ROSE = (function() {
             var img = this.textures[i % this.textures.length];
             ctx.drawImage(img, 0, Config.dashboard_height + (i * img.height));
         }
-    }
-
-    function SoundController(loader) {
-        this.loader = loader;
-
-        var localStorageMute = localStorage.getItem('muted');
-        this.muted = (typeof localStorageMute !== 'undefined') ? localStorageMute == "true" : false;
-
-        var icons = {
-            false: "res/icons/mute.svg",
-            true: "res/icons/unmute.svg"
-        };
-
-        var self = this;
-
-        $("#toggle_mute img").attr('src', icons[this.muted]);
-
-        loader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
-            sound.muted = self.muted;
-            sound.loop = true;
-            sound.play();
-            self.sound = sound;
-        });
-
-        $("#toggle_mute").click(function(event) {
-            event.preventDefault();
-
-            self.muted = !self.muted;
-            $(this).children('img').attr('src', icons[self.muted]);
-            self.sound.muted = self.muted;
-            localStorage.setItem('muted', self.muted);
-        });
     }
 
     function ImageLoader(done) {
