@@ -17,18 +17,21 @@ var ROSE = (function() {
         this.controller = new Controller();
         this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
 
-        var image_loader = new ImageLoader(function() {
+        var imageLoader = new ImageLoader(function() {
             this.client = new Client(this.onmessage.bind(this), 2000);
         }.bind(this));
-        var sound_loader = new SoundLoader(function() {});
+
+        var soundLoader = new SoundLoader(function() {});
+        soundLoader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
+            sound.play();
+        });
 
         this.context = $("#game").get(0).getContext("2d");
-        this.dashboard = new Dashboard(image_loader);
-        this.track = new Track(image_loader);
-        this.obstacles = new Obstacles(image_loader);
-        this.cars = new Cars(image_loader);
-        this.finish_line = new FinishLine(image_loader);
-        this.sound_controller = new SoundController(sound_loader);
+        this.dashboard = new Dashboard(imageLoader);
+        this.track = new Track(imageLoader);
+        this.obstacles = new Obstacles(imageLoader);
+        this.cars = new Cars(imageLoader);
+        this.finish_line = new FinishLine(imageLoader);
     }
 
     App.prototype.onmessage = function(m) {
@@ -399,28 +402,6 @@ var ROSE = (function() {
         for (i = 0; i < Config.track_length; i++) {
             var img = this.textures[i % this.textures.length];
             ctx.drawImage(img, 0, Config.dashboard_height + (i * img.height));
-        }
-    }
-
-    function SoundController(loader) {
-        this.loader = loader;
-        this.sounds = [null];
-        var self = this;
-
-        loader.load("res/soundtrack/Nyan_Cat.ogg", function (sound) {
-            sound.loop = true;
-            self.sounds[0] = sound;
-            self.toggle_sound(0);
-        });
-    }
-
-    SoundController.prototype.toggle_sound = function(sound_id) {
-        var sound = this.sounds[sound_id];
-
-        if (sound.paused) {
-            sound.play();
-        } else {
-            sound.pause();
         }
     }
 
