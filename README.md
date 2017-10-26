@@ -28,10 +28,10 @@ See [examples/README](examples/README) for explanation on how to write a driver 
 
 ## Talks and presentations
 
-- [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) Fred and Ori talk from
-  PyCon Israel 2017
-- [Read](http://ap.hamakor.org.il/2017/tracks.html#main-f1015) Fred and Ori
-  presentation from August Penguin 2017
+- [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) Fred Rolland and
+  Ori Rabin talk at PyCon Israel 2017
+- [Read](http://ap.hamakor.org.il/2017/tracks.html#main-f1015) Fred
+  Rolland and Ori Rabin presentation at August Penguin 2017
 
 
 ## Requirements
