@@ -1,5 +1,5 @@
 import json
-from rose.common import error
+from . import error
 
 
 def parse(line):
