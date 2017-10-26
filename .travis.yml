@@ -5,7 +5,7 @@ python:
 
 install:
     - pip install pipenv
-    - pipenv install -d --system
+    - pipenv install --dev --system
 
 script:
     - flake8
