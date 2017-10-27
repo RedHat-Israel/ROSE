@@ -2,8 +2,12 @@
 
 import sys
 import os
+import logging
 import xmlrpclib
 from rose.common import config
+
+log = logging.getLogger('admin')
+
 
 class Client(object):
 
@@ -31,7 +35,7 @@ class Client(object):
         try:
             method()
         except Exception as e:
-            print e
+            log.warning(e)
             sys.exit(1)
 
     def do_start(self):
