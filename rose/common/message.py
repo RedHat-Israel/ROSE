@@ -1,5 +1,6 @@
 import json
-from rose.common import error
+from . import error
+
 
 def parse(line):
     try:
@@ -10,6 +11,7 @@ def parse(line):
         raise error.InvalidMessage("action required")
     return Message(d['action'], d.get('payload'))
 
+
 class Message(object):
 
     def __init__(self, action, payload=None):
@@ -19,4 +21,3 @@ class Message(object):
     def __str__(self):
         d = {'action': self.action, 'payload': self.payload}
         return json.dumps(d)
-

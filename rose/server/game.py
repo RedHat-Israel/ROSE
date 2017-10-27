@@ -1,11 +1,15 @@
 import random
-import operator
+import logging
+import os
+
 from twisted.internet import reactor, task
 
-from rose.common import actions, config, error, message, obstacles
-import track
-import player
-import score
+from rose.common import actions, config, error, message, obstacles  # NOQA
+from . import track
+from . import player
+from . import score
+
+log = logging.getLogger('game')
 
 
 class Game(object):
@@ -31,7 +35,7 @@ class Game(object):
     @rate.setter
     def rate(self, value):
         if value != self._rate:
-            print 'change game rate to %d frames per second' % value
+            log.info('change game rate to %d frames per second', value)
             self._rate = value
             if self.started:
                 self.looper.stop()
@@ -43,8 +47,8 @@ class Game(object):
         if self.started:
             raise error.GameAlreadyStarted()
         self.track.reset()
-        for player in self.players.values():
-            player.reset()
+        for p in self.players.values():
+            p.reset()
         self.timeleft = config.game_duration
         self.started = True
         self.looper.start(1.0 / self._rate)
@@ -66,7 +70,7 @@ class Game(object):
         self.free_cars.remove(car)
         lane = random.choice(tuple(self.free_lanes))
         self.free_lanes.remove(lane)
-        print 'add player:', name, 'lane:', lane, 'car:', car
+        log.info('add player: %r, lane: %r, car: %r', name, lane, car)
         self.players[name] = player.Player(name, car, lane)
         reactor.callLater(0, self.update_clients)
 
@@ -76,11 +80,12 @@ class Game(object):
         player = self.players.pop(name)
         self.free_cars.add(player.car)
         self.free_lanes.add(player.lane)
-        print 'remove player:', name, 'lane:', player.lane, 'car:', player.car
+        log.info('remove player: %r, lane: %r, car: %r',
+                 name, player.lane, player.car)
         reactor.callLater(0, self.update_clients)
 
     def drive_player(self, name, info):
-        print 'drive_player:', name, info
+        log.info('drive_player: %r %r', name, info)
         if name not in self.players:
             raise error.NoSuchPlayer(name)
         if 'action' not in info:
@@ -92,13 +97,11 @@ class Game(object):
         self.players[name].response_time = info.get('response_time', 1.0)
 
     def print_stats(self):
-        print
-        print 'Stats'
-        for i, p in enumerate(sorted(self.players.values())):
-            print '%d  %10s  row:%d  score:%d' % (
-                i+1, p.name, p.y, p.score
-            )
-        print
+        lines = ['Stats:']
+        for i, p in enumerate(sorted(self.players.values(), reverse=True)):
+            line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
+            lines.append(line)
+        log.info("%s", os.linesep.join(lines))
 
     def loop(self):
         self.track.update()

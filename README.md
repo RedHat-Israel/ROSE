@@ -3,9 +3,10 @@
 [![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
 
 This project is a game that has been developed in order to help teach kids python.
-The students need to code the behavior of the car to achieve the best score.
+The students need to code the behavior of a car to achieve the best score.
 
 Here is a video of a race (running code from students):
+(Click on the screenshot to play the video)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=BEV-CcqTOnw
 " target="_blank"><img src="rose-video-preview.jpg"
@@ -20,9 +21,17 @@ from the students. No joystick or mouse would be used.
 In order to control the car movements, the students need to implement a 'driver'.
 This code is controlling the car and will decide what will be the next action of the car.
 
-For each type of obstacles there is a different action, and different points.
+For each type of obstacle there is a different action, and different points.
 
 See [examples/README](examples/README) for an explanation on how to write a driver module.
+
+
+## Talks and presentations
+
+- [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) [Fred Rolland](https://github.com/rollandf)
+  and [Ori Rabin](https://github.com/orrabin) talk at PyCon Israel 2017
+- [Read](http://ap.hamakor.org.il/2017/tracks.html#main-f1015) [Fred Rolland](https://github.com/rollandf)
+  and [Ori Rabin](https://github.com/orrabin) presentation at August Penguin 2017
 
 
 ## Requirements
@@ -46,7 +55,7 @@ Start the server on some machine:
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
-Start up to 2 clients:
+Start up two clients:
 
     ./rose-client mydriver.py
 
@@ -79,11 +88,22 @@ would change the game rate to 10 frames per second:
 
 ## Developing
 
+Should you want to contribute to the project, please read the [Code of Conduct](docs/code-of-conduct.md).
+
+To install development requirements:
+
+    pipenv install --dev
+
+To open a shell for development, use:
+
+    pipenv shell
+
 Before submitting patches, please run the tests:
 
+    flake8
     pytest
 
-Creating coverage report in html format:
+To create coverage report in html format:
 
     pytest --cov-report html
     xdg-open htmlcov/index.html
