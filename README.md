@@ -26,6 +26,14 @@ For each type of obstacle there is a different action, and different points.
 See [examples/README](examples/README) for explanation on how to write a driver module.
 
 
+## Talks and presentations
+
+- [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) [Fred Rolland](https://github.com/rollandf)
+  and [Ori Rabin](https://github.com/orrabin) talk at PyCon Israel 2017
+- [Read](http://ap.hamakor.org.il/2017/tracks.html#main-f1015) [Fred Rolland](https://github.com/rollandf)
+  and [Ori Rabin](https://github.com/orrabin) presentation at August Penguin 2017
+
+
 ## Requirements
 
 To install the dependencies, run:
