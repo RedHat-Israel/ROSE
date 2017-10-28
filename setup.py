@@ -1,5 +1,4 @@
 import subprocess
-import sys
 from distutils.core import setup
 from distutils.command import sdist
 
