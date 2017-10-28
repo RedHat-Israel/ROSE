@@ -11,7 +11,8 @@ class rose_sdist(sdist.sdist):
 
     def generate_files(self):
         with open('requirements.txt', 'w') as f:
-            subprocess.check_call(['pipenv', 'lock', '--requirements'], stdout=f)
+            subprocess.check_call(['pipenv', 'lock', '--requirements'],
+                                  stdout=f)
 
 
 setup(name='rose-project',
