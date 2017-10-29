@@ -10,6 +10,8 @@ class rose_sdist(sdist.sdist):
 
     def generate_files(self):
         with open('requirements.txt', 'w') as f:
+            f.write("# Generated automatically from Pipfile - do not edit!\n")
+            f.flush()
             subprocess.check_call(['pipenv', 'lock', '--requirements'],
                                   stdout=f)
 
