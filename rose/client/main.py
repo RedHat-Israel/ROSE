@@ -1,10 +1,15 @@
+import imp
+import logging
+import os.path
 import sys
 
 from twisted.internet import reactor, protocol
 from twisted.protocols import basic
 
 from rose.common import config, message
-import game
+from . import game
+
+log = logging.getLogger('main')
 
 
 class Client(basic.LineReceiver):
@@ -25,7 +30,7 @@ class Client(basic.LineReceiver):
         elif msg.action == 'error':
             self.factory.error(msg.payload)
         else:
-            print 'Unexpected message:', msg.action, msg.payload
+            log.info('Unexpected message: %s %s', msg.action, msg.payload)
 
 
 class ClientFactory(protocol.ReconnectingClientFactory):
@@ -65,15 +70,40 @@ class ClientFactory(protocol.ReconnectingClientFactory):
         self.client.sendLine(str(msg))
 
 
+def load_driver_module(file_path):
+    """
+    Load the driver module from file
+
+    Arguments:
+      file_path (str): The path to the driver module
+
+    Returns:
+        Driver module (module)
+
+    Raises:
+        ImportError if the module cannot be loaded
+    """
+    module_dir, module_name = os.path.split(os.path.splitext(file_path)[0])
+    fp, pathname, description = imp.find_module(module_name, [module_dir])
+    try:
+        return imp.load_module(module_name, fp, pathname, description)
+    finally:
+        # Since we may exit via an exception, close fp explicitly.
+        if fp:
+            fp.close()
+
+
 def main():
+    logging.basicConfig(level=logging.INFO)
     if len(sys.argv) < 2:
-        print 'usage: rose-client drive-module'
+        log.info('usage: rose-client drive-module')
+        sys.exit(2)
+    try:
+        driver_mod = load_driver_module(sys.argv[1])
+    except ImportError as e:
+        log.error("error loading driver module %r: %s", sys.argv[1], e)
         sys.exit(2)
 
-    with open(sys.argv[1]) as f:
-        d = {}
-        exec f in d, d
-
-    reactor.connectTCP(d['server_address'], config.game_port,
-                       ClientFactory(d['driver_name'], d['drive']))
+    reactor.connectTCP(driver_mod.server_address, config.game_port,
+                       ClientFactory(driver_mod.driver_name, driver_mod.drive))
     reactor.run()

@@ -1,7 +1,7 @@
 from rose.common import actions, config, obstacles
-import track
-import player
-import score
+from . import track
+from . import player
+from . import score
 import pytest
 
 
@@ -111,7 +111,6 @@ class TestPenguin(SinglePlayerTest):
         self.process()
         self.assert_move_left()
         self.assert_keep_obstacle()
-
 
     @pytest.mark.parametrize(
         "action", [a for a in FORWARD_ACTIONS if a != actions.PICKUP])
@@ -273,7 +272,8 @@ class TestCollisions(object):
         self.player2 = player.Player("B", car=0, lane=1)
 
     def process(self):
-        players = {self.player1.name: self.player1, self.player2.name: self.player2}
+        players = {self.player1.name: self.player1,
+                   self.player2.name: self.player2}
         score.process(players, self.track)
 
     def test_player_in_lane_wins(self):
@@ -304,7 +304,7 @@ class TestCollisions(object):
         self.player1.y = 5
         self.player1.score = 0
         self.player1.action = actions.NONE
-        # Player 2 in its lane, but after turning left, will not be in his lane.
+        # Player 2 in its lane, but after turning left will not be in his lane.
         self.player2.x = 3
         self.player2.y = 5
         self.player2.score = 0
