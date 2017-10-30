@@ -40,10 +40,6 @@ To install the dependencies, run:
 
     pipenv install
 
-Or in the old-fashioned way:
-
-    pip install -r requirements.txt
-
 You can also install packages from your distribution.
 
 

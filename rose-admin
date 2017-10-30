@@ -2,8 +2,12 @@
 
 import sys
 import os
+import logging
 import xmlrpclib
 from rose.common import config
+
+log = logging.getLogger('admin')
+
 
 class Client(object):
 
@@ -12,6 +16,7 @@ class Client(object):
         self.server = None
 
     def run(self):
+        logging.basicConfig(level=logging.INFO)
         if len(self.args) < 2:
             self.usage('server-address required')
 
@@ -31,7 +36,7 @@ class Client(object):
         try:
             method()
         except Exception as e:
-            print e
+            log.error("Error running: %s, %s", verb, e)
             sys.exit(1)
 
     def do_start(self):
@@ -56,10 +61,10 @@ class Client(object):
 
     def usage(self, msg=None):
         if msg:
-            print msg
+            log.info(msg)
         basename = os.path.basename(self.args[0])
         commands = '|'.join(self.commands())
-        print 'Usage: %s <server-address> [%s]' % (basename, commands)
+        log.info('Usage: %s <server-address> [%s]', basename, commands)
         sys.exit(2)
 
 if __name__ == '__main__':
