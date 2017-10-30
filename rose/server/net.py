@@ -1,6 +1,6 @@
-import socket
+import logging
 
-from twisted.internet import reactor, protocol
+from twisted.internet import protocol
 from twisted.protocols import basic
 from twisted.web import http, resource, xmlrpc
 
@@ -8,6 +8,8 @@ from autobahn.twisted.websocket import WebSocketServerFactory
 from autobahn.twisted.websocket import WebSocketServerProtocol
 
 from rose.common import error, message
+
+log = logging.getLogger('net')
 
 
 class Hub(object):
@@ -50,6 +52,7 @@ class Hub(object):
         for client in self.clients:
             client.send_message(data)
 
+
 class PlayerProtocol(basic.LineReceiver):
 
     def __init__(self, hub):
@@ -66,7 +69,7 @@ class PlayerProtocol(basic.LineReceiver):
             msg = message.parse(line)
             self.dispatch(msg)
         except error.Error as e:
-            print "Error handling message: %s" % e
+            log.warning("Error handling message: %s", e)
             msg = message.Message('error', {'message': str(e)})
             self.sendLine(str(msg))
             self.transport.loseConnection()
@@ -94,15 +97,17 @@ class PlayerProtocol(basic.LineReceiver):
             else:
                 raise error.ActionForbidden(msg.action)
 
+
 class PlayerFactory(protocol.ServerFactory):
 
     def __init__(self, hub):
         self.hub = hub
 
     def buildProtocol(self, addr):
-        p  = PlayerProtocol(self.hub)
+        p = PlayerProtocol(self.hub)
         p.factory = self
         return p
+
 
 class WatcherProtocol(WebSocketServerProtocol):
 
@@ -113,20 +118,21 @@ class WatcherProtocol(WebSocketServerProtocol):
     # WebSocketServerProtocol interface
 
     def onConnect(self, request):
-        print "watcher connected from %s" % request
+        log.info("watcher connected from %s", request)
 
     def onOpen(self):
         self.hub.add_watcher(self)
 
     def onClose(self, wasClean, code, reason):
-        print ("watcher closed (wasClean=%s, code=%s, reason=%s)"
-               % (wasClean, code, reason))
+        log.info("watcher closed (wasClean=%s, code=%s, reason=%s)",
+                 wasClean, code, reason)
         self.hub.remove_watcher(self)
 
     # Hub client interface
 
     def send_message(self, data):
         self.sendMessage(data, False)
+
 
 class WatcherFactory(WebSocketServerFactory):
 
@@ -138,6 +144,7 @@ class WatcherFactory(WebSocketServerFactory):
         p = WatcherProtocol(self.hub)
         p.factory = self
         return p
+
 
 class CliAdmin(xmlrpc.XMLRPC):
 
@@ -159,6 +166,7 @@ class CliAdmin(xmlrpc.XMLRPC):
 
     def xmlrpc_set_rate(self, rate):
         self.game.rate = rate
+
 
 class WebAdmin(resource.Resource):
 

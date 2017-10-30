@@ -2,13 +2,13 @@
 
 import random
 
-NONE    = ""
-CRACK   = "crack"
-TRASH   = "trash"
-PENGUIN = "penguin"
-BIKE    = "bike"
-WATER   = "water"
-BARRIER = "barrier"
+NONE    = ""         # NOQA
+CRACK   = "crack"    # NOQA
+TRASH   = "trash"    # NOQA
+PENGUIN = "penguin"  # NOQA
+BIKE    = "bike"     # NOQA
+WATER   = "water"    # NOQA
+BARRIER = "barrier"  # NOQA
 
 ALL = (NONE, CRACK, TRASH, PENGUIN, BIKE, WATER, BARRIER)
 
