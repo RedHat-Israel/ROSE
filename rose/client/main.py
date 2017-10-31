@@ -97,10 +97,14 @@ def load_driver_module(file_path):
 def main():
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(description="ROSE Client")
-    parser.add_argument("driver_file", help="The path to the driver file")
-    parser.add_argument("--server-address", dest="server_address",
-                        help="The server FQDN/IP address to connect to."
-                        " If not specified, localhost will be used.")
+    parser.add_argument("--server-address", "-s", dest="server_address",
+                        default="localhost",
+                        help="The server address to connect to."
+                             " For example: '10.20.30.44' or 'my-server.com'."
+                             " If not specified, localhost will be used.")
+    parser.add_argument("driver_file",
+                        help="The path to the driver python module")
+
     args = parser.parse_args()
 
     try:
@@ -109,14 +113,10 @@ def main():
         log.error("error loading driver module %r: %s", args.driver_file, e)
         sys.exit(2)
 
-    server_address = "127.0.0.1"
-    if args.server_address:
-        server_address = args.server_address
-
-    reactor.connectTCP(server_address, config.game_port,
+    reactor.connectTCP(args.server_address, config.game_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
 
-    url = "http://%s:%d" % (server_address, config.web_port)
-    log.info("Game URL: %s" % url)
+    url = "http://%s:%d" % (args.server_address, config.web_port)
+    log.info("Please open %s to watch the game." % url)
 
     reactor.run()
