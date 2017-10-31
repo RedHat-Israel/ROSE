@@ -9,6 +9,8 @@ from autobahn.twisted.websocket import WebSocketServerProtocol
 
 from rose.common import error, message
 
+FORMAT = '%(asctime)-15s %(levelname)s [%(name)-8s] %(message)s (%(funcName)s:%(lineno)d)'
+logging.basicConfig(format=FORMAT)
 log = logging.getLogger('net')
 
 
