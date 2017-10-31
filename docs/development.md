@@ -27,6 +27,10 @@ Start up to 2 clients:
 
     ./rose-client mydriver.py
 
+The server address can be specified that way (Replace '10.20.30.44' with your server address):
+
+    ./rose-client -s 10.20.30.44 mydriver.py
+
 For driver modules, see the examples directory.
 
 

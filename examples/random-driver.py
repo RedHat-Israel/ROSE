@@ -7,7 +7,6 @@ very good driver but the implementation is very elegant.
 import random
 from rose.common import obstacles, actions  # NOQA
 
-server_address = "localhost"
 driver_name = "Random Driver"
 
 
