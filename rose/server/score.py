@@ -3,6 +3,8 @@ import logging
 
 from rose.common import actions, config, obstacles
 
+FORMAT = '%(asctime)-15s %(levelname)s [%(name)-8s] %(message)s (%(funcName)s:%(lineno)d)'
+logging.basicConfig(format=FORMAT)
 log = logging.getLogger('score')
 
 
