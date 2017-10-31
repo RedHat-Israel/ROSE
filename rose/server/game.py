@@ -9,6 +9,8 @@ from . import track
 from . import player
 from . import score
 
+FORMAT = '%(asctime)-15s %(levelname)s [%(name)-8s] %(message)s (%(funcName)s:%(lineno)d)'
+logging.basicConfig(format=FORMAT)
 log = logging.getLogger('game')
 
 
