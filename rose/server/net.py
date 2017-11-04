@@ -7,7 +7,7 @@ from twisted.web import http, resource, xmlrpc
 from autobahn.twisted.websocket import WebSocketServerFactory
 from autobahn.twisted.websocket import WebSocketServerProtocol
 
-from rose.common import error, message, config
+from rose.common import error, message
 
 log = logging.getLogger('net')
 
