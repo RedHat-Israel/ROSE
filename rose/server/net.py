@@ -7,10 +7,9 @@ from twisted.web import http, resource, xmlrpc
 from autobahn.twisted.websocket import WebSocketServerFactory
 from autobahn.twisted.websocket import WebSocketServerProtocol
 
-from rose.common import error, message
+from rose.common import error, message, config
 
-FORMAT = '%(asctime)-15s %(levelname)s [%(name)-8s] %(message)s (%(funcName)s:%(lineno)d)'
-logging.basicConfig(format=FORMAT)
+logging.basicConfig(format=config.logger_format)
 log = logging.getLogger('net')
 
 

@@ -9,8 +9,7 @@ from autobahn.twisted.resource import WebSocketResource
 from rose.common import config
 from . import game, net
 
-FORMAT = '%(asctime)-15s %(levelname)s [%(name)-8s] %(message)s (%(funcName)s:%(lineno)d)'
-logging.basicConfig(format=FORMAT)
+logging.basicConfig(format=config.logger_format)
 log = logging.getLogger('main')
 
 
