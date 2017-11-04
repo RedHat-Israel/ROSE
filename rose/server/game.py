@@ -9,7 +9,6 @@ from . import track
 from . import player
 from . import score
 
-logging.basicConfig(format=config.logger_format)
 log = logging.getLogger('game')
 
 

@@ -95,7 +95,7 @@ def load_driver_module(file_path):
 
 
 def main():
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format=config.logger_format)
     parser = argparse.ArgumentParser(description="ROSE Client")
     parser.add_argument("--server-address", "-s", dest="server_address",
                         default="localhost",

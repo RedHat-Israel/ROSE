@@ -9,12 +9,11 @@ from autobahn.twisted.resource import WebSocketResource
 from rose.common import config
 from . import game, net
 
-logging.basicConfig(format=config.logger_format)
 log = logging.getLogger('main')
 
 
 def main():
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format=config.logger_format)
     log.info('starting server')
     g = game.Game()
     h = net.Hub(g)

@@ -9,7 +9,6 @@ from autobahn.twisted.websocket import WebSocketServerProtocol
 
 from rose.common import error, message, config
 
-logging.basicConfig(format=config.logger_format)
 log = logging.getLogger('net')
 
 

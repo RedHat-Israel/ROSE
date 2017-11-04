@@ -3,7 +3,6 @@ import logging
 
 from rose.common import actions, config, obstacles
 
-logging.basicConfig(format=config.logger_format)
 log = logging.getLogger('score')
 
 
