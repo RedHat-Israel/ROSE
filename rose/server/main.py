@@ -13,7 +13,7 @@ log = logging.getLogger('main')
 
 
 def main():
-    logging.basicConfig(level=logging.INFO)
+    logging.basicConfig(level=logging.INFO, format=config.logger_format)
     log.info('starting server')
     g = game.Game()
     h = net.Hub(g)

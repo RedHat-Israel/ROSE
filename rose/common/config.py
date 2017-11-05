@@ -40,3 +40,6 @@ score_move_forward = 10
 score_move_backward = -10
 score_jump = 5
 score_brake = 4
+
+logger_format = '%(asctime)-15s %(levelname)s ' \
+                + '[%(name)-8s] %(message)s (%(funcName)s:%(lineno)d)'
