@@ -28,6 +28,9 @@ See [examples/README](examples/README) for an explanation on how to write a driv
 
 ## Talks and presentations
 
+- [Read](http://schd.ws/hosted_files/osseu17/b9/BringingPeopleTogetherWithOpenSource.pdf)
+  [Fred Rolland](https://github.com/rollandf) and [Ori Rabin](https://github.com/orrabin)'s presentation
+  at [Open Source Summit Europe 2017](http://events.linuxfoundation.org/events/archive/2017/open-source-summit-europe-/)
 - [Read](http://ap.hamakor.org.il/2017/tracks.html#main-f1015) [Fred Rolland](https://github.com/rollandf)
   and [Ori Rabin](https://github.com/orrabin)'s presentation at
   [August Penguin 2017](http://ap.hamakor.org.il/2017/)
