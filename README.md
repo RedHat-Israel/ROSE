@@ -29,9 +29,11 @@ See [examples/README](examples/README) for an explanation on how to write a driv
 ## Talks and presentations
 
 - [Read](http://ap.hamakor.org.il/2017/tracks.html#main-f1015) [Fred Rolland](https://github.com/rollandf)
-  and [Ori Rabin](https://github.com/orrabin)'s presentation at August Penguin 2017
+  and [Ori Rabin](https://github.com/orrabin)'s presentation at
+  [August Penguin 2017](http://ap.hamakor.org.il/2017/)
 - [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) [Fred Rolland](https://github.com/rollandf)
-  and [Ori Rabin](https://github.com/orrabin)'s talk at PyCon Israel 2017
+  and [Ori Rabin](https://github.com/orrabin)'s talk at
+  [PyCon Israel 2017](http://il.pycon.org/2017/)
 
 
 ## Requirements
