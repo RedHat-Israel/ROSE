@@ -46,6 +46,8 @@ class Game(object):
     def start(self):
         if self.started:
             raise error.GameAlreadyStarted()
+        if not self.players:
+            raise error.ActionForbidden("start a game with no players.")
         self.track.reset()
         for p in self.players.values():
             p.reset()
@@ -82,7 +84,11 @@ class Game(object):
         self.free_lanes.add(player.lane)
         log.info('remove player: %r, lane: %r, car: %r',
                  name, player.lane, player.car)
-        reactor.callLater(0, self.update_clients)
+        if not self.players and self.started:
+            log.info('Stopping game. No players connected.')
+            self.stop()
+        else:
+            reactor.callLater(0, self.update_clients)
 
     def drive_player(self, name, info):
         log.info('drive_player: %r %r', name, info)
