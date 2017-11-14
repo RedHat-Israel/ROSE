@@ -44,7 +44,7 @@ var ROSE = (function() {
         var state = msg.payload;
 
         // Update
-        this.controller.update(state.started);
+        this.controller.update(state);
         this.rate.update(state.rate);
         this.dashboard.update(state);
         this.track.update(state);
@@ -135,11 +135,18 @@ var ROSE = (function() {
             })
     }
 
-    Controller.prototype.update = function(running) {
-        if (running) {
+    Controller.prototype.update = function(state) {
+        if(state.players.length == 0){
+            $("#info").text("No players connected")
+            $("#start").attr("disabled", "disabled");
+            $("#stop").attr("disabled", "disabled");
+        }
+        else if (state.started) {
+            $("#info").text("")
             $("#start").attr("disabled", "disabled");
             $("#stop").removeAttr("disabled");
         } else {
+            $("#info").text("")
             $("#start").removeAttr("disabled");
             $("#stop").attr("disabled", "disabled");
         }
