@@ -28,7 +28,7 @@ See [examples/README](examples/README) for an explanation on how to write a driv
 
 ## Talks and presentations
 
-- [Read](http://www.pc.co.il/news/252820/) an interview with Miki Keneth
+- [Read](http://www.pc.co.il/news/252820/) an interview with Miki Kenneth
   on [People and Computers](http://www.pc.co.il)
 - [Read](http://schd.ws/hosted_files/osseu17/b9/BringingPeopleTogetherWithOpenSource.pdf)
   [Fred Rolland](https://github.com/rollandf) and [Ori Rabin](https://github.com/orrabin)'s presentation
