@@ -29,7 +29,7 @@ This code is controlling the car and will decide what will be the next action of
 
 For each type of obstacles there is a different action, and different points.
 
-See [docs/materials](docs/materials.md) for our course materials.
+See [materials](materials.md) for our course materials.
 
 See [examples/driver](examples/driver.md) for explanation on how to write a driver module.
 

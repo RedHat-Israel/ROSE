@@ -11,7 +11,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <html>
 <style>
 .vertical-menu {
-    width: 240px;
+    width: 290px;
 }
 
 .vertical-menu a {
@@ -33,8 +33,8 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <body>
 
 <div class="vertical-menu">
-  <a href="/index" class="header">ROSE Project</a>
-  <a href="/materials" class="header">Course Materials</a>
+  <a href="index.md" class="header">ROSE Project</a>
+  <a href="materials.md" class="header">Course Materials</a>
   <a href="#">1. Meet Linux</a>
   <a href="#">2. Variables and Simple Data Types</a>
   <a href="#">3. Control Structures</a>
