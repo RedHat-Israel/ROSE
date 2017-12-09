@@ -35,7 +35,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <body>
 
 <div class="vertical-menu">
-  <a href="meet_linux.html">1. Meet Linux</a>
+  <a href="#">1. Meet Linux</a>
   <a href="#">2. Variables and Data Types</a>
   <a href="#">3. Control Structures</a>
   <a href="#">4. Compound Data Types</a>
@@ -46,7 +46,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 
 <div class="holder">
     <p>
-    hello world!
+    this is the meet_linux page!
     </p>
 </div>
 </body>
