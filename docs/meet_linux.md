@@ -8,7 +8,6 @@ description: This project is a game that has been developed in order to help tea
 
 Here you may find ROSE course materials, presentations and home work exercises sectioned by subjects:
 
-<!DOCTYPE html>
 <html>
 <style>
 .vertical-menu {
@@ -38,7 +37,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <body>
 
 <div class="vertical-menu">
-    <a href="meet_linux.md">1. Meet Linux</a>
+    <a href="meet_linux.html">1. Meet Linux</a>
     <a href="#">2. Variables and Data Types</a>
     <a href="#">3. Control Structures</a>
     <a href="#">4. Compound Data Types</a>
