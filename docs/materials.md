@@ -11,11 +11,12 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <html>
 <style>
 .vertical-menu {
-    width: 290px;
+    width: 270px;
+    position: fixed;
 }
 
 .vertical-menu a {
-    color: black;
+    color: #34689C;
     display: block;
     padding: 12px;
     text-decoration: none;
@@ -24,19 +25,12 @@ Here you may find ROSE course materials, presentations and home work exercises s
 .vertical-menu a:hover {
     background-color: #ccc;
 }
-
-.vertical-menu a.header {
-    color: #159957;
-    font-size: 18px;
-}
 </style>
 <body>
 
 <div class="vertical-menu">
-  <a href="index.md" class="header">ROSE Project</a>
-  <a href="materials.md" class="header">Course Materials</a>
   <a href="#">1. Meet Linux</a>
-  <a href="#">2. Variables and Simple Data Types</a>
+  <a href="#">2. Variables and Data Types</a>
   <a href="#">3. Control Structures</a>
   <a href="#">4. Compound Data Types</a>
   <a href="#">5. Object Orientation</a>
@@ -46,3 +40,5 @@ Here you may find ROSE course materials, presentations and home work exercises s
 
 </body>
 </html>
+
+[Back to front ROSE page](index.md)
