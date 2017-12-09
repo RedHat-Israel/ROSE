@@ -8,6 +8,7 @@ description: This project is a game that has been developed in order to help tea
 
 Here you may find ROSE course materials, presentations and home work exercises sectioned by subjects:
 
+<!DOCTYPE html>
 <html>
 <style>
 .vertical-menu {
