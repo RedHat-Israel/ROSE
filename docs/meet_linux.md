@@ -11,10 +11,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <html>
 <style>
 .vertical-menu {
-    float: left;
     width: 270px;
-    position: fixed;
-    height: 100%;
 }
 
 .vertical-menu a {
@@ -31,7 +28,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 .holder {
 	margin-left: 270px;
 	padding-left: 20px;
-	margin-top: 10px;
+	margin-top: -320px;
 }
 </style>
 <body>
@@ -47,7 +44,8 @@ Here you may find ROSE course materials, presentations and home work exercises s
 </div>
 
 <div class="holder">
-    this is the meet_linux page!
+    this is the meet_linux page! </br>
+    bla bla bla bla 
 </div>
 
 </body>
