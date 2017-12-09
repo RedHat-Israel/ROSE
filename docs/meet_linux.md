@@ -3,14 +3,10 @@ title: ROSE Project
 tagline: Materials
 description: This project is a game that has been developed in order to help teach kids Python
 ---
-
-# Course Materials
-
-Here you may find ROSE course materials, presentations and home work exercises sectioned by subjects:
-
 <html>
 <style>
 .vertical-menu {
+    float: left;
     width: 270px;
 }
 
@@ -28,7 +24,6 @@ Here you may find ROSE course materials, presentations and home work exercises s
 .holder {
 	margin-left: 270px;
 	padding-left: 20px;
-	margin-top: -320px;
 }
 </style>
 <body>
@@ -44,8 +39,9 @@ Here you may find ROSE course materials, presentations and home work exercises s
 </div>
 
 <div class="holder">
-    this is the meet_linux page! </br>
-    bla bla bla bla 
+    this is the meet_linux page!<br>
+    bla bla <br>
+    bla
 </div>
 
 </body>
