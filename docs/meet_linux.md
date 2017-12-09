@@ -39,9 +39,28 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
+    <h2 style="color:#159957;">Meet Linux</h2>
     this is the meet_linux page!<br>
     bla bla <br>
-    bla
+    bla<br>
+    a<br>
+    b<br>
+    c<br>
+    a<br>
+    b<br>
+    c<br>
+    a<br>
+    b<br>
+    c<br>
+    a<br>
+    b<br>
+    c<br>
+    a<br>
+    b<br>
+    c<br>
+    a<br>
+    b<br>
+    c<br>
 </div>
 
 </body>

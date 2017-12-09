@@ -11,7 +11,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <html>
 <style>
 .vertical-menu {
-    width: 270px;
+    width: 260px;
 }
 
 .vertical-menu a {
