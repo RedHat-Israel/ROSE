@@ -1,6 +1,6 @@
 ---
 title: ROSE Project
-tagline: 
+tagline:
 description: This project is a game that has been developed in order to help teach kids Python
 ---
 
@@ -23,13 +23,14 @@ The race car has to recognize the race track, the obstacles, and the bonus areas
 calculate the best path to take to avoid the pitfalls; and collect bonus points.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse would be used.
- 
+
 In order to control the car movements, the students need to implement a 'driver'.
 This code is controlling the car and will decide what will be the next action of the car.
 
 For each type of obstacles there is a different action, and different points.
 
-See [examples/driver](examples/driver) for explanation on how to write a driver module.
+See [docs/materials](docs/materials.md) for our course materials.
 
-See [development](development) for details on getting started
+See [examples/driver](examples/driver.md) for explanation on how to write a driver module.
 
+See [development](development.md) for details on getting started
