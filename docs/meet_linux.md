@@ -11,8 +11,10 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <html>
 <style>
 .vertical-menu {
+    float: left;
     width: 270px;
     position: fixed;
+    height: 100%;
 }
 
 .vertical-menu a {
@@ -27,7 +29,7 @@ Here you may find ROSE course materials, presentations and home work exercises s
 }
 
 .holder {
-	margin-left: 240px;
+	margin-left: 270px;
 	padding-left: 20px;
 	margin-top: 10px;
 }
@@ -35,19 +37,18 @@ Here you may find ROSE course materials, presentations and home work exercises s
 <body>
 
 <div class="vertical-menu">
-  <a href="#">1. Meet Linux</a>
-  <a href="#">2. Variables and Data Types</a>
-  <a href="#">3. Control Structures</a>
-  <a href="#">4. Compound Data Types</a>
-  <a href="#">5. Object Orientation</a>
-  <a href="#">6. Exceptions</a>
-  <a href="#">7. Functions and Functional Programming</a>
+    <a href="meet_linux.md">1. Meet Linux</a>
+    <a href="#">2. Variables and Data Types</a>
+    <a href="#">3. Control Structures</a>
+    <a href="#">4. Compound Data Types</a>
+    <a href="#">5. Object Orientation</a>
+    <a href="#">6. Exceptions</a>
+    <a href="#">7. Functions and Functional Programming</a>
 </div>
 
 <div class="holder">
-    <p>
     this is the meet_linux page!
-    </p>
 </div>
+
 </body>
 </html>
