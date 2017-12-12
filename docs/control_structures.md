@@ -39,23 +39,10 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;">Meet Linux</h1>
-    <iframe src="https://nirs.github.io/slowfs-qecamp" width="750" height="550"></iframe>
-    <br><br>this is the meet_linux page!<br>
-    bla bla <br>
-    bla<br>
-    b<br>
-    c<br>
-    a<br>
-    b<br>
-    c<br>
-    a<br>
-    b<br>
-    c<br>
-    a<br>
-    b<br>
-    c<br>
-    a<br>
+    <h1 style="color:#159957;">Control Structures</h1>
+    <iframe src="https://sleviim.github.io/ROSE/course_materials/slides-control_structures.html#/"
+    width="750" height="550"></iframe>
+    <br><br>this is the Control Structures page!<br>
 </div>
 
 </body>
