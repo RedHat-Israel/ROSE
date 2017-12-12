@@ -39,7 +39,7 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h2 style="color:#159957;">Meet Linux</h2>
+    <h1 style="color:#159957;">Meet Linux</h1>
     <iframe src="https://nirs.github.io/slowfs-qecamp" width="600" height="400"></iframe>
     <br><br>this is the meet_linux page!<br>
     bla bla <br>
