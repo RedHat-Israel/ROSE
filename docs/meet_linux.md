@@ -56,7 +56,6 @@ description: This project is a game that has been developed in order to help tea
     b<br>
     c<br>
     a<br>
-
 </div>
 
 </body>
