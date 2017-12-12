@@ -40,7 +40,7 @@ description: This project is a game that has been developed in order to help tea
 
 <div class="holder">
     <h1 style="color:#159957;">Control Structures</h1>
-    <iframe src="http://redhat.slides.com/shanileviim/control_structures/fullscreen?token=6KwmW86S"
+    <iframe src="https://sleviim.github.io/ROSE/course_materials/slides-control_structures.html#/"
     width="600" height="400"></iframe>
     <br><br>this is the Control Structures page!<br>
 </div>
