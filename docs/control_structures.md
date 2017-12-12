@@ -23,7 +23,7 @@ description: This project is a game that has been developed in order to help tea
 
 .holder {
 	margin-left: 260px;
-	padding-left: 20px;
+	padding-left: 50px;
 }
 </style>
 <body>
@@ -41,7 +41,7 @@ description: This project is a game that has been developed in order to help tea
 <div class="holder">
     <h1 style="color:#159957;">Control Structures</h1>
     <iframe src="https://sleviim.github.io/ROSE/course_materials/slides-control_structures.html#/"
-    width="600" height="400"></iframe>
+    width="750" height="550"></iframe>
     <br><br>this is the Control Structures page!<br>
 </div>
 
