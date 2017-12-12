@@ -40,19 +40,10 @@ description: This project is a game that has been developed in order to help tea
 
 <div class="holder">
     <h2 style="color:#159957;">Meet Linux</h2>
-    <iframe src="https://nirs.github.io/slowfs-qecamp"></iframe> 
+    <iframe src="https://nirs.github.io/slowfs-qecamp" width="600" height="400"></iframe>
     <br><br>this is the meet_linux page!<br>
     bla bla <br>
     bla<br>
-    <div class="reveal">
-        <div class="slides">
-        	<section>Single Horizontal Slide</section>
-        	<section>
-        		<section>Vertical Slide 1</section>
-        		<section>Vertical Slide 2</section>
-        	</section>
-        </div>
-    </div>
     b<br>
     c<br>
     a<br>
