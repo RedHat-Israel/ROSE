@@ -31,7 +31,7 @@ description: This project is a game that has been developed in order to help tea
 <div class="vertical-menu">
     <a href="meet_linux.html">1. Meet Linux</a>
     <a href="#">2. Variables and Data Types</a>
-    <a href="#">3. Control Structures</a>
+    <a href="control_structures.html">3. Control Structures</a>
     <a href="#">4. Compound Data Types</a>
     <a href="#">5. Object Orientation</a>
     <a href="#">6. Exceptions</a>
