@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Control Structures</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="media/presentations.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+
+    <style>
+      .reveal .slide spre { width: 100% }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="reveal">
+      <div class="slides">
+
+        <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+            <h1 style="width: 806px; color: rgb(255, 255, 255); z-index: 10"><b>Control<br>
+                Structures</b></h1>
+        </section>
+
+        <section>
+
+            <section>
+            <h1><b>
+                <span style="font-size:1em;">If Statements</span>
+            </h1></b>
+            </section>
+
+            <section>
+                <div style="width: 903px; height: 220px">
+                    <h3><b>Reminder: Boolean<br> Operators<br></b></h3>
+                </div>
+                <div style="width: 950px; font-size: 30px">
+                    <table width="800px" style="background-color: rgb(5, 39, 70); color: rgb(255, 255, 255);">
+                      <tr>
+                        <th><em>Expression</em></th>
+                        <th><em>Function</em></th>
+                      </tr>
+                      <tr>
+                        <td><</td>
+                        <td>less than</td>
+                      </tr>
+                      <tr>
+                        <td><=</td>
+                        <td>less than or equal to</td>
+                      </tr>
+                      <tr>
+                        <td>></td>
+                        <td>greater than</td>
+                      </tr>
+                      <tr>
+                        <td>>=</td>
+                        <td>greater than or equal to</td>
+                      </tr>
+                      <tr>
+                        <td>!=</td>
+                        <td>not equal to</td>
+                      </tr>
+                      <tr>
+                        <td>==</td>
+                        <td>equal to</td>
+                      </tr>
+                  </table>
+                </div>
+            </section>
+
+            <section>
+                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                    <h3><b>Blocks</b></h3>
+                </div>
+                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                      <li>All control structures (if, for / while, functions) content must be in a block.</li>
+                      <li>Block are determined by indentation.</li>
+                      <li>You can use either Tab or some spaces to indent.</li>
+                </ul>
+                <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+if 4 < 5:
+    print("Yes, It is true!")
+                    </code></pre>
+            </section>
+
+            <section>
+                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                    <h3><b>Simple If</b></h3>
+                </div>
+                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                      <li>The general Python syntax for a simple if statement is:</li>
+                      <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+if condition:
+    doing-this-intended-block
+    it-can-take-more-than-one-line
+                          </code></pre>
+                      <li>If the condition is true:<b>do</b> the intended block</li>
+                      <li>If the condition is not true: <b>skip</b> the intended block</li>
+                      <pre style="width: 753px" class="fragment"><code data-trim data-noescape class="hljs">
+# What will be printed here?
+age = 13
+if age > 20:
+    print('You are too old!')
+print('You are young!')
+                     </code></pre>
+                      <pre style="width: 753px" class="fragment"><code data-trim data-noescape class="hljs">
+# And now?
+age = 13
+if age < 20:
+    print('You are too old!')
+    print('You are young!')
+                      </code></pre>
+                </ul>
+            </section>
+
+                        <section>
+                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                    <h3><b>if-else Statements</b></h3>
+                </div>
+                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                      <li>What if the boolean expression is 'False' and not 'True'?</li>
+                      <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+if condition:
+  doing-this-block-if-condition-is-true
+else:
+  doing-this-block-if-condition-is-false
+                          </code></pre>
+                      <li>'else' simply tells the computer what to do if the conditions of 'if' aren't met</li>
+                      <pre style="width: 753px" class="fragment"><code data-trim data-noescape class="hljs">
+# Example:
+
+today = "Tuesday"
+if today == "Sunday":
+  print "Yay! Today we have ROSE!"
+else:
+  print "No ROSE for today :("
+                     </code></pre>
+                </ul>
+            </section>
+
+            <section>
+                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                    <h3><b>if-elif-else Statements</b></h3>
+                </div>
+                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                      <li>Sometimes we have to check multiple conditions.</li>
+                      <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+if condition1:
+    run-block-for-true-condition-1
+elif condition2:
+    run-block-for-true-condition-2
+elif condition3:
+    run-block-for-true-condition-3
+else:
+    run-block-for-all-conditions-were-false
+                          </code></pre>
+                      <li>'elif' block actually combines 'else' and 'if' block.</li>
+                       <li>This is what 'elif' uses for!</li>
+                </ul>
+            </section>
+
+            <section>
+                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                    <h3><b>Let's Practice together!</b></h3>
+                </div>
+                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                      <li>Write a program that defines parameter 'a'.</li>
+                      <li>The program checks if 'a' is positive, negative or equal zero and prints a proper message. </li>
+                </ul>
+                <img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png"/>
+            </section>
+
+        </section>
+
+        <section>
+            <h1><b>
+                <span style="font-size:1em; val">Loops and Tuples</span>
+            </h1></b>
+        </section>
+
+        <section>
+            <h1><b>
+                <span style="font-size:1em; val">For loop</span>
+            </h1></b>
+        </section>
+
+        <section>
+            <h1><b>
+                <span style="font-size:1em; val">While Loop</span>
+            </h1></b>
+        </section>
+
+        <section>
+            <h1><b>
+                <span style="font-size:1em; val">Functions</span>
+            </h1></b>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="reveal/lib/js/head.min.js"></script>
+    <script src="reveal/js/reveal.js"></script>
+
+    <script>
+      // More info https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        slideNumber: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [
+          { src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'reveal/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'reveal/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+
+  </body>
+</html>
