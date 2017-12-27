@@ -39,10 +39,10 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;">Control Structures</h1>
+    <h1 style="color:#159957;"><a href="https://redhat-israel.github.io/ROSE/course_materials/control_structures.html#" target="_blank" style="color: #159957">Control Structures</a></h1>
     <iframe src="https://redhat-israel.github.io/ROSE/course_materials/control_structures.html#/"
     width="750" height="550"></iframe>
-    <br><br>this is the Control Structures page!<br>
+    <br><br>
 </div>
 
 </body>
