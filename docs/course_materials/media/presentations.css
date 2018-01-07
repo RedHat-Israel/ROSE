@@ -20,6 +20,20 @@ body {
     background: radial-gradient(center, circle cover, #6699cc 0%, #1c1e20 100%);
     background-color: #2b2b2b; }
 
+.slide_header {
+  width: 953px;
+  height: 300px;
+  left: 79px;
+  top: 26px;
+  height: auto;
+}
+
+.slide_main_title {
+  width: 806px;
+  color: rgb(255, 255, 255);
+  z-index: 10;
+}
+
 .reveal {
   font-family: "Lato", sans-serif;
   font-size: 40px;
@@ -107,7 +121,10 @@ body {
   list-style-type: decimal; }
 
 .reveal ul {
-  list-style-type: disc; }
+  list-style-type: disc;
+  color: rgb(255, 255, 255);
+  font-size: 30px;
+  width: 753px; }
 
 .reveal ul ul {
   list-style-type: square; }
@@ -148,14 +165,14 @@ body {
 .reveal pre {
   display: block;
   position: relative;
-  width: 90%;
   margin: 20px auto;
   text-align: left;
   font-size: 0.55em;
   font-family: monospace;
   line-height: 1.2em;
   word-wrap: break-word;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+  width: 753px; }
 
 .reveal code {
   font-family: monospace;
@@ -173,7 +190,11 @@ body {
   border-collapse: collapse;
   border-width: 3px;
   table-layout: fixed;
-  border-spacing: 0; }
+  border-spacing: 0;
+  width: 800px;
+  background-color: rgb(5, 39, 70);
+  color: rgb(255, 255, 255);
+ }
 
 .reveal table th {
   font-weight: bold;
