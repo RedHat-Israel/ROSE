@@ -39,8 +39,8 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;"><a href="https://redhat-israel.github.io/ROSE/course_materials/meet_linux.html#" target="_blank" style="color: #159957">Control Structures</a></h1>
-    <iframe src="https://redhat-israel.github.io/ROSE/course_materials/meet_linux.html#/"
+    <h1 style="color:#159957;"><a href="course_materials/meet_linux.html#" target="_blank" style="color: #159957">Meet Linux</a></h1>
+    <iframe src="course_materials/meet_linux.html#/"
     width="750" height="550"></iframe>
     <br><br>
 </div>
