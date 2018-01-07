@@ -198,15 +198,150 @@ else:
       </section>
 
       <section>
-        <h1><b>
+        <section>
+          <h1><b>
                 <span>While Loop</span>
             </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Simple While Loop</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+while True:
+    name = raw_input("Enter your name: ")
+    print("Hello %s!!" %name)
+                </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Break and Continue</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+SECRET = 'xyzzy'
+
+while True:
+    password = raw_input("Please enter your password: ")
+    if not password:
+        continue
+    elif password == SECRET:
+        break
+
+    print("Wrong password!")
+
+print("Welcome!")
+          </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>While with condition</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+step = 0
+while step < 10:
+    print(step)
+    step = step + 1
+print("Finished!!")
+          </code></pre>
+        </section>
       </section>
 
       <section>
-        <h1><b>
-                <span>For Loop</span>
-            </h1></b>
+        <section>
+          <h1><b>
+            <span>For Loop</span>
+          </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>For loop on a String</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+for c in 'Hello World!':
+    print(c)
+H
+e
+l
+l
+o
+
+W
+o
+r
+l
+d
+!
+          </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>For loop on a list</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+airports=["TLV","SOF","MUC"]
+for name in airports:
+    print(name)
+TLV
+SOF
+MUC
+          </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>For loop using range</b></h3>
+          </div>
+          <ul>
+            <li>range(n) produces [0, 1, ..., n-1]</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+# Print "Hello" 5 times
+for x in range(5):
+    print("Hello!")
+          </code></pre>
+          <ul>
+            <li>range(i, j) produces [i, i+1, ..., j-1]</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+# Start from 2 until 6
+# (2,3,4,5,6)
+for x in range(2,7):
+    print(x)
+          </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>For loop using range</b></h3>
+          </div>
+          <ul>
+            <li>range(i, j, k) produces [i, i+k, ..., m]</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+# Start from 0 until 21, increased by 3
+# (0,3,6,9,12,5,18,21)
+for x in range(0,22,3):
+    print(x)
+          </code></pre>
+          <pre><code data-trim data-noescape class="hljs">
+# Start from 10 until 0, decreased by 1
+# (10,9,8,7,6,5,4,3,2,1)
+for x in range(10,0,-1):
+    print(x)
+          </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Nested Loop</b></h3>
+          </div>
+          <ul>
+            <li>A loop inside another loop</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+for i in range(10):
+    for j in range(10):
+        print(i, j)
+          </code></pre>
+        </section>
+
       </section>
 
       <section>
