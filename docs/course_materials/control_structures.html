@@ -34,24 +34,24 @@
       <div class="slides">
 
         <section data-background-size="cover" data-background-image="media/rose_background.jpg">
-            <h1 style="width: 806px; color: rgb(255, 255, 255); z-index: 10"><b>Control<br>
-                Structures</b></h1>
+            <h1 class="slide_main_title">
+              <b>Control<br>Structures</b></h1>
         </section>
 
         <section>
 
             <section>
             <h1><b>
-                <span style="font-size:1em;">If Statements</span>
+                <span>If Statements</span>
             </h1></b>
             </section>
 
             <section>
-                <div style="width: 903px; height: 220px">
+                <div class="slide_header">
                     <h3><b>Reminder: Boolean<br> Operators<br></b></h3>
                 </div>
                 <div style="width: 950px; font-size: 30px">
-                    <table width="800px" style="background-color: rgb(5, 39, 70); color: rgb(255, 255, 255);">
+                    <table>
                       <tr>
                         <th><em>Expression</em></th>
                         <th><em>Function</em></th>
@@ -85,64 +85,69 @@
             </section>
 
             <section>
-                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                <div class="slide_header">
                     <h3><b>Blocks</b></h3>
                 </div>
-                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                <ul>
                       <li>All control structures (if, for / while, functions) content must be in a block.</li>
                       <li>Block are determined by indentation.</li>
                       <li>You can use either Tab or some spaces to indent.</li>
                 </ul>
-                <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+                <pre><code data-trim data-noescape class="hljs">
 if 4 < 5:
     print("Yes, It is true!")
                     </code></pre>
             </section>
 
             <section>
-                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                <div class="slide_header">
                     <h3><b>Simple If</b></h3>
                 </div>
-                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                <ul>
                       <li>The general Python syntax for a simple if statement is:</li>
-                      <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+                </ul>
+                      <pre><code data-trim data-noescape class="hljs">
 if condition:
     doing-this-intended-block
     it-can-take-more-than-one-line
-                          </code></pre>
+                      </code></pre>
+                      <ul>
                       <li>If the condition is true: <b>do</b> the intended block</li>
                       <li>If the condition is not true: <b>skip</b> the intended block</li>
-                      <pre style="width: 753px" class="fragment"><code data-trim data-noescape class="hljs">
+                      </ul>
+                      <pre class="fragment"><code data-trim data-noescape class="hljs">
 # What will be printed here?
 age = 13
 if age > 20:
     print("You are too old!")
 print('You are young!')
                      </code></pre>
-                      <pre style="width: 753px" class="fragment"><code data-trim data-noescape class="hljs">
+                      <pre class="fragment"><code data-trim data-noescape class="hljs">
 # And now?
 age = 13
 if age < 20:
     print("You are too old!")
     print("You are young!")
                       </code></pre>
-                </ul>
             </section>
 
                         <section>
-                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                <div class="slide_header">
                     <h3><b>if-else Statements</b></h3>
                 </div>
-                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                <ul>
                       <li>What if the boolean expression is 'False' and not 'True'?</li>
-                      <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+                </ul>
+                      <pre><code data-trim data-noescape class="hljs">
 if condition:
   doing-this-block-if-condition-is-true
 else:
   doing-this-block-if-condition-is-false
                           </code></pre>
+                      <ul>
                       <li>'else' simply tells the computer what to do if the conditions of 'if' aren't met</li>
-                      <pre style="width: 753px" class="fragment"><code data-trim data-noescape class="hljs">
+                      </ul>
+                      <pre class="fragment"><code data-trim data-noescape class="hljs">
 # Example:
 
 today = "Tuesday"
@@ -151,16 +156,15 @@ if today == "Sunday":
 else:
   print ("No ROSE for today...")
                      </code></pre>
-                </ul>
             </section>
-
             <section>
-                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                <div class="slide_header">
                     <h3><b>if-elif-else Statements</b></h3>
                 </div>
-                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                <ul>
                       <li>Sometimes we have to check multiple conditions.</li>
-                      <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+                </ul>
+                      <pre><code data-trim data-noescape class="hljs">
 if condition1:
     run-block-for-true-condition-1
 elif condition2:
@@ -170,16 +174,17 @@ elif condition3:
 else:
     run-block-for-all-conditions-were-false
                           </code></pre>
+                      <ul>
                       <li>'elif' block actually combines 'else' and 'if' block.</li>
                        <li>This is what 'elif' uses for!</li>
-                </ul>
+                     </ul>
             </section>
 
             <section>
-                <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+                <div class="slide_header">
                     <h3><b>Let's Practice together!</b></h3>
                 </div>
-                <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                <ul>
                       <li>Write a program that defines parameter 'a'.</li>
                       <li>The program checks if 'a' is positive, negative or equal zero and prints a proper message. </li>
                 </ul>
@@ -190,57 +195,57 @@ else:
 
         <section>
             <h1><b>
-                <span style="font-size:1em; val">While Loop</span>
+                <span>While Loop</span>
             </h1></b>
         </section>
 
         <section>
             <h1><b>
-                <span style="font-size:1em; val">For Loop</span>
+                <span>For Loop</span>
             </h1></b>
         </section>
 
         <section>
           <section>
             <h1><b>
-                <span style="font-size:1em; val">Functions</span>
+                <span>Functions</span>
             </h1></b>
           </section>
           <section>
-              <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+              <div class="slide_header">
                   <h3><b>Functions</b></h3>
               </div>
-              <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+              <ul>
                 <li>Functions are chunks of code that tell python to do something</li>
                 <li>The reason to use functions is usability and code clearness</li>
                 <li>For complex programs, functions are essential</li>
                 <br>
                 <li>A function has:</li>
-                  <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+                  <ul>
                     <li>A name</li>
                     <li>Parameters</li>
                     <li>A body</li>
                   </ul>
               </ul>
-              <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+              <pre><code data-trim data-noescape class="hljs">
 def print_name(my_name):
     print("Hello %s" %my_name)
 print_name("Joe")
                   </code></pre>
           </section>
           <section>
-              <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+              <div class="slide_header">
                   <h3><b>Multiple Parameters</b></h3>
               </div>
-              <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+              <ul>
                 <li>A function can have any number of parameters</li>
               </ul>
-              <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+              <pre><code data-trim data-noescape class="hljs">
 def print_name(first_name, last_name):
     print("Hello %s %s" %(first_name, last_name))
 print_name("Joe", "Cocker")
                   </code></pre>
-              <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+              <pre><code data-trim data-noescape class="hljs">
 first="Joe"
 last="Cocker"
 print_name(first, last)
@@ -248,23 +253,23 @@ print_name(first, last)
           </section>
 
           <section>
-              <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+              <div class="slide_header">
                   <h3><b>Variables Scope</b></h3>
               </div>
-              <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+              <ul>
                 <li>When a function finish running all it s variables are vanished</li>
               </ul>
-              <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+              <pre><code data-trim data-noescape class="hljs">
 def scope():
     a=10
     print(a)
 scope()
 print(a)   #ERROR
               </code></pre>
-              <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+              <ul>
                 <li>If we have defined a variable in the program and the function redefined it, then the value in the function is used in the function scope</li>
               </ul>
-              <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+              <pre><code data-trim data-noescape class="hljs">
 a=5
 def scope():
     a=10
@@ -275,16 +280,16 @@ print(a)   # 5
           </section>
 
           <section>
-            <div style="width: 953px; height: 300px; left: 79px; top: 26px; height: auto;">
+            <div class="slide_header">
               <h3><b>Summary</b></h3>
             </div>
-              <pre style="width: 753px"><code data-trim data-noescape class="hljs">
+              <pre><code data-trim data-noescape class="hljs">
 def increment(x):
     return x + 1
 result = increment(3)
 print result
                 </code></pre>
-              <ul style="color: rgb(255, 255, 255); font-size: 30px; width: 753px; ">
+              <ul>
               <li>Colon(:)indicates start of a block</li>
               <li>Following lines are indented</li>
               <li>Function declaration does not specify return type</li>
