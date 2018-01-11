@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Variables and Data Types</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="reveal/css/reveal.css">
+  <link rel="stylesheet" href="media/presentations.css" id="theme">
+  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <style>
+    .reveal .slide spre {
+      width: 100%
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+        <h1 class="slide_main_title"><b>Variables and Data Types</b></h1>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+                <span>Variables</span>
+            </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Assignment</b></h3>
+          </div>
+          <ul>
+            <li>Variables in Python can hold values</li>
+            <li>This is done using the assignment operator (=)</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+a = 100
+print(a) # 100
+
+b = 200
+print(b) # 200
+
+c = a + b
+print(c) # 300
+
+d = c
+print(d) # 300
+                    </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Reassigning</b></h3>
+          </div>
+          <ul>
+            <li>You can modify the values in any variable by reassigning the value</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+a = 10
+print(a) # 10
+
+a = 20
+print(a) # 20
+
+a = 5.5
+print(a) # 5.5
+                  </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Augmented Assignment</b></h3>
+          </div>
+          <ul>
+            <li>You can add to a variable using: a += 20</li>
+            <li>This the same as: a = a + 20</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+a = 50
+print(a) # 50
+
+a += 20
+print(a) # 70
+                </code></pre>
+          <ul>
+            <li>Other operations are also available:</li>
+            <li>-=, *=, /=, //=, %= and **=</li>
+          </ul>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Name Errors</b></h3>
+          </div>
+          <ul>
+            <li>Getting the value of a variable that does not exist will produce an error.</li>
+            <li>Each variable must be assigned before it is accessed.</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+a = 50
+print(a) # 50
+
+print(b) # NameError: name 'b' is not defined
+              </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Multiple Assignments</b></h3>
+          </div>
+          <ul>
+            <li>Multiple assignments can be made in a single statement</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+a, b, c = 5, 3.2, "Hello"
+</code></pre>
+          <ul>
+            <li>Assigning the same value to multiple variables</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+x = y = z = "same"
+</code></pre>
+        </section>
+
+      </section>
+      <section>
+        <section>
+          <h1><b>
+                <span>Arithmetic Operators</span>
+            </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Mathematics operations</b></h3>
+          </div>
+          <ul>
+            <li>Same rules as in simple math including order of operations and parenthesis</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
+          </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Operators</b></h3>
+          </div>
+          <div style="width: 950px; font-size: 20px">
+            <table>
+              <tr>
+                <th><em>Operator</em></th>
+                <th><em>Function</em></th>
+                <th><em>Example</em></th>
+              </tr>
+              <tr>
+                <td>+</td>
+                <td>Add two operands or unary plus</td>
+                <td>x + y<br>+2</td>
+              </tr>
+              <tr>
+                <td>-</td>
+                <td>Subtract right operand from the left or unary minus</td>
+                <td>x - y<br>-2</td>
+              </tr>
+              <tr>
+                <td>*</td>
+                <td>Multiply two operands</td>
+                <td>x * y</td>
+              </tr>
+              <tr>
+                <td>/</td>
+                <td>Divide left operand by the right one (always results into float)</td>
+                <td>x / y</td>
+              </tr>
+              <tr>
+                <td>%</td>
+                <td>Modulus - remainder of the division of left operand by the right</td>
+                <td>x % y<br>(remainder of x/y)</td>
+              </tr>
+              <tr>
+                <td>//</td>
+                <td>Floor division - division that results into whole number adjusted to the left in the number line</td>
+                <td>x // y<br></td>
+              </tr>
+              <tr>
+                <td>**</td>
+                <td>Exponent - left operand raised to the power of right</td>
+                <td>x ** y<br>(x to the power y)</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Examples</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+            x = 15
+            y = 4
+
+            print('x + y =',x+y) # Output: x + y = 19
+            print('x - y =',x-y) # Output: x - y = 11
+
+            print('x * y =',x*y) # Output: x * y = 60
+            print('x / y =',x/y) # Output: x / y = 3.75
+
+            print('x // y =',x//y) # Output: x // y = 3
+            print('x % y =',x%y) # Output: x % y = 3
+
+            print('x ** y =',x**y) # Output: x ** y = 50625
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+                <span>Numbers</span>
+            </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Number data types</b></h3>
+          </div>
+          <ul>
+            <li>Python supports integers, floating point numbers and complex numbers.</li>
+            <li>Integers and floating points are separated by the presence or absence of a decimal point:<br>5 is integer whereas 5.0 is a floating point number.</li>
+          </ul>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Type conversion</b></h3>
+          </div>
+          <ul>
+            <li>Operations between a float and an integer will result in a float</li>
+            <li>We can use functions like int() and float() to convert between types.<br>These functions can convert also from strings.</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+            >>> 1 + 2.0
+            3.0
+            >>> int(2.3)
+            2
+            >>> int(-2.8)
+            -2
+            >>> float(5)
+            5.0
+            >>> int("76")
+            76
+          </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+          <span>Booleans</span>
+      </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Booleans</b></h3>
+          </div>
+          <ul>
+            <li>Python boolean types literals are True and False.</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+      >>> if True:
+              print("Hi there!")
+      Hi there!
+
+      >>> if False:
+              print("You shouldn't see me")
+    </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Booleans and other types</b></h3>
+          </div>
+          <ul>
+            <li>The following act as False:</li>
+            <ul>
+              <li>None</li>
+              <li>0</li>
+              <li>[] (or any empty sequence, strings included)</li>
+            </ul>
+            <li>Everything else acts like True</li>
+          </ul>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Boolean Operations</b></h3>
+          </div>
+          <div style="width: 950px; font-size: 30px">
+            <table>
+              <tr>
+                <th><em>Operation</em></th>
+                <th><em>Result</em></th>
+              </tr>
+              <tr>
+                <td>x or y</td>
+                <td>if x is False, then y , else x</td>
+              </tr>
+              <tr>
+                <td>x and y</td>
+                <td>if x is False, then x, else y</td>
+              </tr>
+              <tr>
+                <td>not x</td>
+                <td>if x is False, then True, else False</td>
+              </tr>
+            </table>
+          </div>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+          <span>Strings</span>
+      </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Strings literals</b></h3>
+          </div>
+          <ul>
+            <li>The following strings literals are equivalent:</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+  "Hello World!"
+  'Hello World!'
+  """Hello World!"""
+  '''Hello World!'''
+    </code></pre>
+          <ul>
+            <li>Choose the quoting style that fits your need:</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+      "It's a very nice day."
+      'The sign says "Hello World!".'
+    </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Multi-line Strings</b></h3>
+          </div>
+          <ul>
+            <li>Triple quoting allows multi-line string:</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+      """Shopping List:
+      Cheese
+      Apples
+      Bread"""
+
+      '''ABC
+      DEF
+      GHI'''
+    </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>String literal escape sequences</b></h3>
+          </div>
+          <ul>
+            <li>\n :new line</li>
+            <li>\t :tab</li>
+            <li>\' and \" :quote and double quote</li>
+            <li>\\ :slash</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+      "I say \"Hello!\".\nYou say: \"Goodbye!\"."
+    </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+        <span>Common String Methods</span>
+    </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Checks</b></h3>
+          </div>
+          <ul>
+            <li>endswith, startswith</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+  'hello world'.startswith('he')  # -> True
+  </code></pre>
+          <ul>
+            <li>isalnum, isalpha, isdigit, islower, isupper, isspace</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+    '123'.isdigit()  # -> True
+    'Hello World'.islower()  # -> False
+  </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Searches</b></h3>
+          </div>
+          <ul>
+            <li>count</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+  'hello world'.count('l')  # -> 3
+  </code></pre>
+          <ul>
+            <li>find</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+    'hello world'.find('l')  # -> 2
+    'hello world'.find('t')  # -> -1
+  </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Manipulations</b></h3>
+          </div>
+          <ul>
+            <li>lower, upper , title , capitalize , swapcase</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+  'hello world'.title()  # -> 'Hello World'
+  'hello world'.capitalize()  # -> 'Hello world'
+  </code></pre>
+          <ul>
+            <li>replace</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+    'hello world'.replace('world', 'john')  # -> 'hello john'
+  </code></pre>
+          <ul>
+            <li>strip, rstrip, lstrip - removes spaces and new lines from the ends of a string:</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+    '     hello!    \n'.strip() # -> 'hello!'
+  </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>+ and *</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+    'hello ' + 'world'  # -> 'hello world'
+
+    'hello ' * 3  # -> 'hello hello hello '
+  </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+        <span>Interactive Input and String Formatting</span>
+    </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Interactive Input</b></h3>
+          </div>
+          <ul>
+            <li>In order to get an input:</li>
+            <ul>
+              <li>raw_input()</li>
+              <li>raw_input(prompt) : prints prompt before reading input</li>
+            </ul>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+age = raw_input('Enter your age: ')
+  </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Formatting</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+    >>> name = 'Tom'
+    >>> family_name = 'Sawyer'
+    >>> print('Hello %s!' % name)
+    >>> Hello Tom!
+    >>> print('Hello %s %s!' % (name, family_name))
+    >>> Hello Tom Sawyer!
+  </code></pre>
+        </section>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="reveal/lib/js/head.min.js"></script>
+  <script src="reveal/js/reveal.js"></script>
+
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      slideNumber: true,
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: 'reveal/lib/js/classList.js',
+          condition: function() {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: 'reveal/plugin/markdown/marked.js',
+          condition: function() {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'reveal/plugin/markdown/markdown.js',
+          condition: function() {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'reveal/plugin/highlight/highlight.js',
+          async: true,
+          callback: function() {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: 'reveal/plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: 'reveal/plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
+
+</body>
+
+</html>
