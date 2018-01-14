@@ -463,6 +463,62 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
       <section>
         <section>
           <h1><b>
+        <span>String Slicing</span>
+    </h1></b>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Slicing</b></h3>
+          </div>
+          <ul>
+            <li>Index with square brackets: s[1]</li>
+            <li>Negative indexing gets elements from the end: s[-1]</li>
+            <li>Slicing</li>
+            <ul>
+              <li>Basic syntax is s[start:end]: s[1:4]</li>
+              <li>Slicing from the beginning of the string: s[:5]</li>
+              <li>Slicing until the end of the string: s[3:]</li>
+              <li>Negative indexes can also be used in slices: s[-3:-1]</li>
+            </ul>
+          </ul>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Examples</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+            s = 'hello world'
+
+            # slicing (inclusive start, exclusive end)
+            s[1:4]  # -> 'ell'
+
+            # from start to index
+            s[:4]  # -> 'hell'
+
+            # from index to end
+            s[3:]  # -> 'lo world'
+  </code></pre>
+        </section>
+        <section>
+          <div class="slide_header">
+            <h3><b>Examples</b></h3>
+          </div>
+          <pre><code data-trim data-noescape class="hljs">
+            # can use negative indexes as well
+            s[2:-2]  # -> 'llo wor'
+
+            # jumps
+            s[::2]  # -> 'hlowrd'
+            s[1::2]  # -> 'el ol'
+
+            # negative jumps
+            s[::-1]  # -> 'dlrow olleh'
+  </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><b>
         <span>Interactive Input and String Formatting</span>
     </h1></b>
         </section>
