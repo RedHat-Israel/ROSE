@@ -20,14 +20,6 @@ body {
     background: radial-gradient(center, circle cover, #6699cc 0%, #1c1e20 100%);
     background-color: #2b2b2b; }
 
-.slide_header {
-  width: 953px;
-  height: 300px;
-  left: 79px;
-  top: 26px;
-  height: auto;
-}
-
 .slide_main_title {
   width: 806px;
   color: rgb(255, 255, 255);
