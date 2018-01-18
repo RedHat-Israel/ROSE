@@ -70,13 +70,16 @@ print(d) # 300
           </ul>
           <pre><code data-trim data-noescape class="hljs">
 a = 10
-print(a) # 10
+print(a)    # 10
 
 a = 20
-print(a) # 20
+print(a)    # 20
 
 a = 5.5
-print(a) # 5.5
+print(a)    # 5.5
+
+a = "Hello"
+print(a)    # Hello
                   </code></pre>
         </section>
         <section>
@@ -122,7 +125,7 @@ a, b, c = 5, 3.2, "Hello"
             <li>Assigning the same value to multiple variables</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-x = y = z = "same"
+x = y = z = 0
 </code></pre>
         </section>
 
@@ -253,12 +256,11 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
             <li>Python boolean types literals are True and False.</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-      >>> if True:
-              print("Hi there!")
-      Hi there!
-
-      >>> if False:
-              print("You shouldn't see me")
+      a = True
+      if a:
+         print("Hi there!")
+      if not a:
+         print("You shouldn't see me")
     </code></pre>
         </section>
         <section>
@@ -363,7 +365,8 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
             <li>endswith, startswith</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-  'hello world'.startswith('he')  # -> True
+  s = 'hello world'
+  s.startswith('he')  # -> True
   </code></pre>
           <ul>
             <li>isalnum, isalpha, isdigit, islower, isupper, isspace</li>
@@ -379,14 +382,16 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
             <li>count</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-  'hello world'.count('l')  # -> 3
+  s = 'hello world'
+  s.count('l')  # -> 3
   </code></pre>
           <ul>
             <li>find</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-    'hello world'.find('l')  # -> 2
-    'hello world'.find('t')  # -> -1
+    s = 'hello world'
+    s.find('l')  # -> 2
+    s.find('t')  # -> -1
   </code></pre>
         </section>
         <section>
@@ -395,20 +400,23 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
             <li>lower, upper , title , capitalize , swapcase</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-  'hello world'.title()  # -> 'Hello World'
-  'hello world'.capitalize()  # -> 'Hello world'
+  s = 'hello world'
+  s.title()  # -> 'Hello World'
+  s.capitalize()  # -> 'Hello world'
   </code></pre>
           <ul>
             <li>replace</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-    'hello world'.replace('world', 'john')  # -> 'hello john'
+    s = 'hello world'
+    s.replace('world', 'john')  # -> 'hello john'
   </code></pre>
           <ul>
             <li>strip, rstrip, lstrip - removes spaces and new lines from the ends of a string:</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-    '     hello!    \n'.strip() # -> 'hello!'
+          s = '     hello!    \n'
+          s.strip() # -> 'hello!'
   </code></pre>
         </section>
         <section>
@@ -443,31 +451,33 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
         <section>
           <h3><b>Examples</b></h3>
           <pre><code data-trim data-noescape class="hljs">
-            s = 'hello world'
+            s = 'Monty Python'
 
             # slicing (inclusive start, exclusive end)
-            s[1:4]  # -> 'ell'
+            s[1:4]  # -> 'ont'
 
             # from start to index
-            s[:4]  # -> 'hell'
+            s[:4]  # -> 'Mont'
 
             # from index to end
-            s[3:]  # -> 'lo world'
+            s[3:]  # -> 'ty Python'
   </code></pre>
+        <img width="750" height="190" style="" data-src="media/string-slicing.png" />
         </section>
         <section>
           <h3><b>Examples</b></h3>
           <pre><code data-trim data-noescape class="hljs">
             # can use negative indexes as well
-            s[2:-2]  # -> 'llo wor'
+            s[2:-2]  # -> 'nty Pyth'
 
             # jumps
-            s[::2]  # -> 'hlowrd'
-            s[1::2]  # -> 'el ol'
+            s[::2]  # -> 'MnyPto'
+            s[1::2]  # -> 'ot yhn'
 
             # negative jumps
-            s[::-1]  # -> 'dlrow olleh'
+            s[::-1]  # -> 'nohtyP ytnoM'
   </code></pre>
+  <img width="750" height="190" style="" data-src="media/string-slicing.png" />
         </section>
       </section>
       <section>
@@ -484,9 +494,11 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
               <li>raw_input()</li>
               <li>raw_input(prompt) : prints prompt before reading input</li>
             </ul>
+            <li>The result is of String type</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-age = raw_input('Enter your age: ')
+name = raw_input('Enter your name: ')
+age = int(raw_input('Enter your age: '))
   </code></pre>
         </section>
         <section>
