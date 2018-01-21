@@ -39,8 +39,8 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;"><a href="course_materials/control_structures.html#" target="_blank" style="color: #159957">Control Structures</a></h1>
-    <iframe src="course_materials/control_structures.html#/"
+    <h1 style="color:#159957;"><a href="course_materials/compound_data_types.html#" target="_blank" style="color: #159957">Compound Data Types</a></h1>
+    <iframe src="course_materials/compound_data_types.html#/"
     width="750" height="550"></iframe>
     <br><br>
 </div>
