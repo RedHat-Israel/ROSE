@@ -35,12 +35,13 @@ description: This project is a game that has been developed in order to help tea
     <a href="compound_data_types.html">4. Compound Data Types</a>
     <a href="#">5. Object Orientation</a>
     <a href="exceptions.html">6. Exceptions</a>
-    <a href="#">7. Functions and Functional Programming</a>
+    <a href="modules_packages.html">7. Modules and Packages</a>
+    <a href="#">8. Functions and Functional Programming</a>
 </div>
 
 <div class="holder">
     <h1 style="color:#159957;"><a href="course_materials/exceptions.html#" target="_blank" style="color: #159957">Exceptions</a></h1>
-    <iframe src="course_materials/variables_data_types.html#/"
+    <iframe src="course_materials/exceptions.html#/"
     width="750" height="550"></iframe>
     <br><br>
 </div>

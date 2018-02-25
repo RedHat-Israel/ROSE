@@ -35,7 +35,8 @@ description: This project is a game that has been developed in order to help tea
     <a href="compound_data_types.html">4. Compound Data Types</a>
     <a href="#">5. Object Orientation</a>
     <a href="exceptions.html">6. Exceptions</a>
-    <a href="#">7. Functions and Functional Programming</a>
+    <a href="modules_packages.html">7. Modules and Packages</a>
+    <a href="#">8. Functions and Functional Programming</a>
 </div>
 
 <div class="holder">
