@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Modules and Packages</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="reveal/css/reveal.css">
+  <link rel="stylesheet" href="media/presentations.css" id="theme">
+  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <style>
+    .reveal .slide spre {
+      width: 100%
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+        <h1 class="slide_main_title"><b>Modules and Packages</b></h1>
+      </section>
+      <section>
+        <section>
+          <h1><b>
+                <span>Modules and Packages</span>
+            </h1></b>
+        </section>
+        <section>
+          <h3><b>The 'import' statement</b></h3>
+          <ul>
+            <li>Allow use of other python files and libraries</li>
+            <li>Imports: import math</li>
+            <li>Named imports: import math as m</li>
+            <li>Specific imports: from math import pow</li>
+            <li>Import all: from math import * (dangerous! used only in very specific cases)</li>
+          </ul>
+        </section>
+        <section>
+          <h3><b>Example</b></h3>
+          <pre><code data-trim data-noescape class="hljs">
+import random
+print random.randint(0, 5)
+          </code></pre>
+        </section>
+        <section>
+          <h3><b>Modules</b></h3>
+          <pre><code data-trim data-noescape class="hljs">
+# utensils.py
+def eat_soup():
+    return 'spoon'
+
+# main.py (option 1)
+import utensils
+print(utensils.eat_soup())
+
+# main.py (option 2)
+from utensils import eat_soup
+print(eat_soup())
+          </code></pre>
+        </section>
+        <section>
+          <h3><b>Packages</b></h3>
+          <ul>
+            <li>Packages are namespaces which contain multiple packages and modules themselves</li>
+            <li>Packages are simply directories, but there is a twist: each package/directory MUST contain a special file called __init__.py</li>
+          </ul>
+        </section>
+        <section>
+          <h3><b>Example</b></h3>
+          <pre><code data-trim data-noescape class="hljs">
+# fruits/__init__.py
+# -- empty -- nothing here
+
+# fruits/apple.py
+def print_it():
+    print('apple')
+
+# main.py
+from fruits import apple
+apple.print_it()
+          </code></pre>
+        </section>
+      </section>
+    </div>
+  </div>
+
+  <script src="reveal/lib/js/head.min.js"></script>
+  <script src="reveal/js/reveal.js"></script>
+
+  <script>
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      center: true,
+      slideNumber: true,
+      transition: 'slide', // none/fade/slide/convex/concave/zoom
+      // More info https://github.com/hakimel/reveal.js#dependencies
+      dependencies: [{
+          src: 'reveal/lib/js/classList.js',
+          condition: function() {
+            return !document.body.classList;
+          }
+        },
+        {
+          src: 'reveal/plugin/markdown/marked.js',
+          condition: function() {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'reveal/plugin/markdown/markdown.js',
+          condition: function() {
+            return !!document.querySelector('[data-markdown]');
+          }
+        },
+        {
+          src: 'reveal/plugin/highlight/highlight.js',
+          async: true,
+          callback: function() {
+            hljs.initHighlightingOnLoad();
+          }
+        },
+        {
+          src: 'reveal/plugin/zoom-js/zoom.js',
+          async: true
+        },
+        {
+          src: 'reveal/plugin/notes/notes.js',
+          async: true
+        }
+      ]
+    });
+  </script>
+
+</body>
+
+</html>
