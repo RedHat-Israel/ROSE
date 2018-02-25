@@ -31,9 +31,9 @@ Here you may find ROSE course materials, presentations and home work exercises s
     <a href="meet_linux.html">1. Meet Linux</a>
     <a href="variables_data_types.html">2. Variables and Data Types</a>
     <a href="control_structures.html">3. Control Structures</a>
-    <a href="#">4. Compound Data Types</a>
+    <a href="compound_data_types.html">4. Compound Data Types</a>
     <a href="#">5. Object Orientation</a>
-    <a href="#">6. Exceptions</a>
+    <a href="exceptions.html">6. Exceptions</a>
     <a href="#">7. Functions and Functional Programming</a>
 </div>
 

@@ -34,7 +34,7 @@ description: This project is a game that has been developed in order to help tea
     <a href="control_structures.html">3. Control Structures</a>
     <a href="compound_data_types.html">4. Compound Data Types</a>
     <a href="#">5. Object Orientation</a>
-    <a href="#">6. Exceptions</a>
+    <a href="exceptions.html">6. Exceptions</a>
     <a href="#">7. Functions and Functional Programming</a>
 </div>
 
