@@ -52,6 +52,13 @@ class Hub(object):
         for client in self.clients:
             client.send_message(data)
 
+    def unicast(self, msg, name):
+        data = str(msg)
+        for client in self.clients:
+            if isinstance(client, PlayerProtocol):
+                if client.name == name:
+                    client.send_message(data)
+
 
 class PlayerProtocol(basic.LineReceiver):
 
@@ -192,4 +199,11 @@ class WebAdmin(resource.Resource):
             except ValueError:
                 request.setResponseCode(http.BAD_REQUEST)
                 return b"Invalid rate value %r, expected number" % value
+        if "bye" in request.args:
+            name = request.args["bye"][0]
+            try:
+                self.game.logout_player(name)
+            except error.ActionForbidden as e:
+                request.setResponseCode(http.BAD_REQUEST)
+                return b"Invalid logout request: %r" % e
         return ""

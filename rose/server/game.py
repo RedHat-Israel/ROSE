@@ -128,3 +128,10 @@ class Game(object):
                 'players': [p.state() for p in self.players.values()],
                 'timeleft': self.timeleft,
                 'rate': self.rate}
+
+    def logout_player(self, name):
+        if self.started:
+            raise error.ActionForbidden(
+                "Logout a player while the game is running.")
+        msg = message.Message('bye')
+        self.hub.unicast(msg, name)

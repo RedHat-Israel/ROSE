@@ -1,5 +1,6 @@
 import logging
 import time
+import os
 from twisted.internet import reactor
 
 from rose.common import message
@@ -75,6 +76,11 @@ class Game(component.Component):
     def client_error(self, error):
         log.info('client error: %s', error.get('message'))
         reactor.stop()
+
+    def client_bye(self):
+        log.info('client received "bye" message.')
+        reactor.stop()
+        os._exit(0)
 
     def client_update(self, info):
         # print 'client_update', info

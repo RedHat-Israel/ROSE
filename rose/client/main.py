@@ -30,6 +30,8 @@ class Client(basic.LineReceiver):
             self.factory.update(msg.payload)
         elif msg.action == 'error':
             self.factory.error(msg.payload)
+        elif msg.action == 'bye':
+            self.factory.bye()
         else:
             log.info('Unexpected message: %s %s', msg.action, msg.payload)
 
@@ -64,6 +66,9 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
     def update(self, info):
         self.game.client_update(info)
+
+    def bye(self):
+        self.game.client_bye()
 
     # Client interface
 
