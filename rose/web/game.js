@@ -27,7 +27,7 @@ var ROSE = (function() {
         });
 
         this.context = $("#game").get(0).getContext("2d");
-        this.dashboard = new Dashboard(image_loader);
+        this.dashboard = new Dashboard();
         this.track = new Track(image_loader);
         this.obstacles = new Obstacles(image_loader);
         this.cars = new Cars(image_loader);
@@ -61,7 +61,6 @@ var ROSE = (function() {
     }
 
     var Config = {
-        dashboard_height: 150,
         left_margin: 95,
         cell_width: 130,
         top_margin: 10,
@@ -235,13 +234,9 @@ var ROSE = (function() {
             })
     }
 
-    function Dashboard(loader) {
+    function Dashboard() {
         this.players = null;
         this.timeleft = null;
-        var self = this;
-        loader.load("res/dashboard/dashboard.png", function(img) {
-            self.texture = img;
-        });
     }
 
     Dashboard.prototype.update = function(state) {
@@ -250,29 +245,24 @@ var ROSE = (function() {
     }
 
     Dashboard.prototype.draw = function(ctx) {
-        ctx.drawImage(this.texture, 0, 0);
 
         var text = this.timeleft.toString()
         if (this.timeleft < 10) {
             text = "0" + text;
         }
-
-        ctx.fillStyle = "rgb(153, 153, 153)";
-        ctx.textBaseline = "middle";
-
-        ctx.font = "bold 48px sans-serif";
-        ctx.textAlign = "center";
-
-        ctx.fillText(text, this.texture.width / 2, this.texture.height / 2);
-
-        ctx.font = "bold 36px sans-serif";
-        ctx.textAlign = "left";
+        $("#time_left").text(text)
 
         var i;
         for (i = 0; i < this.players.length; i++) {
             var player = this.players[i];
-            var text = player.name + ": " + player.score;
-            ctx.fillText(text, 50 + player.lane * 530, this.texture.height / 2);
+            if (player.lane == 0) {
+                $("#left.player .name").text(player.name)
+                $("#left.player .score").text(player.score)
+            }
+            if (player.lane == 1) {
+                $("#right.player .name").text(player.name)
+                $("#right.player .score").text(player.score)
+            }
         }
     }
 
@@ -311,7 +301,7 @@ var ROSE = (function() {
             var obstacle = this.track[i];
             var img = this.textures[obstacle["name"]];
             var x = Config.left_margin + obstacle["x"] * Config.cell_width;
-            var y = Config.dashboard_height + Config.top_margin + obstacle["y"] * Config.row_height;
+            var y = Config.top_margin + obstacle["y"] * Config.row_height;
             ctx.drawImage(img, x, y);
         }
     }
@@ -348,7 +338,7 @@ var ROSE = (function() {
             var player = this.players[i];
             var img = this.textures[player["car"]];
             var x = Config.left_margin + player["x"] * Config.cell_width;
-            var y = Config.dashboard_height + player["y"] * Config.row_height;
+            var y = player["y"] * Config.row_height;
             ctx.drawImage(img, x, y);
             var car_center = x + (img.width / 2);
             var car_bottom = y + img.height;
@@ -375,7 +365,7 @@ var ROSE = (function() {
         }
         // Start at row 0, then move down until row finish_line_duration
         var row = Config.finish_line_duration - this.timeleft;
-        var y = Config.dashboard_height + Config.row_height * row;
+        var y = Config.row_height * row;
         ctx.drawImage(this.texture, 0, y);
     }
 
@@ -408,7 +398,7 @@ var ROSE = (function() {
         var i;
         for (i = 0; i < Config.track_length; i++) {
             var img = this.textures[i % this.textures.length];
-            ctx.drawImage(img, 0, Config.dashboard_height + (i * img.height));
+            ctx.drawImage(img, 0, i * img.height);
         }
     }
 
