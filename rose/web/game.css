@@ -74,6 +74,58 @@ body {
     border-bottom: 0;
 }
 
+#players {
+ background-image: url('../res/dashboard/dashboard.png');
+ width: 910px;
+ height: 150px;
+ font-weight: bold;
+ font-family: sans-serif;
+ color: rgb(153, 153, 153);
+ position: relative;
+}
+
+.player {
+ width: 350px;
+ height: 100px;
+ top: 20px;
+ position: absolute;
+}
+
+#left.player {
+ left: 10px;
+}
+
+#right.player {
+ right: 10px;
+}
+
+.player .name {
+    font-size: 30px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    position: absolute;
+    overflow: hidden;
+    top: 7px;
+}
+
+.score {
+    width: 100%;
+    text-align:center;
+    position: absolute;
+    font-size: 40px;
+    top: 50px;
+}
+
+#time_left {
+    width: 105px;
+    font-size: 50px;
+    text-align:center;
+    position: absolute;
+        top: 40px;
+        left: 400px;
+}
+
 #game {
     border: 1px #666 solid;
 }
