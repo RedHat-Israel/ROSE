@@ -69,8 +69,16 @@ write a python code that accepts
                  <address2>
 ```
 
-## String slicing
+## String methods
 
+Write a program that defines a string including phrase ("xy is not yx")
+
+1) Strips spaces and \n \t from start/end of the string
+2) prints how many 'x' are in it
+3) replaces xy with wz and prints it
+4) prints the string in reverse order
+
+## String slicing
 
 Put the following value into a variable named a_long_str
 
@@ -85,11 +93,22 @@ abcdefghijklmnopqrstuvwxyz
 # If Statements
 
 ## Age : older, younger or same
+
 Define two parameters: my_age, your_age.
 Write a program that will print the following messages according to the values in the parameters:
 - "You are older than me!!"
 - "You are younger than me!!"
 - "We are the same age!!"
+
+
+## Even or odd
+
+Use raw_input to get a number. Print "Even" if the number is even (divided by 2 without reminder) and "Odd" if the number is not even.
+
+Hint:
+a = 22
+a % 2 == 0   #(Even!!)
+True
 
 
 ## Less of Greater 1000
@@ -151,6 +170,15 @@ Example of a message in a secret language : "ep zpvs ipnfxpsl"
 
 Real message "do your homework"
 
+(Hint: use a dictionary)
+
+
+## List - less than 5
+
+Define a list :
+a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 0, 55, 2, 89]
+Make a new list that has all the elements less than 5 from the 'a' list in it
+Print out this new list.
 
 # For Loop
 
@@ -243,6 +271,7 @@ For example:
 
 
 ## Password
+
 The secret password is 'cheese'
 
 Write a Python program that asks the user for the password.
@@ -250,6 +279,28 @@ As long as the user enters the wrong password, print "Wrong password. Try again.
 
 If the user enters the right password, print "Right password. Welcome!" and finish the program
 
+## Print letter
+
+Write a Python program that asks the user for a number using a while loop.
+When the user enters '0' the program should exit.
+As long as the user enters a number the output should be 'a' times the number
+
+example output:
+
+$ python print_a.py
+Enter number: 4
+aaaa
+Enter number: 1
+a
+Enter number: 0
+$
+
+Hint:
+>>> print('a'*3)
+aaa
+
+Bonus:
+- what happens when you enter a string instead of a number (Enter number: 'a')?
 
 # Functions
 
