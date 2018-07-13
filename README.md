@@ -23,7 +23,7 @@ This code  controls the car and will decide what the next action of the car will
 
 For each type of obstacles there is a different action and different points assigned.
 
-See [examples/README](examples/README) for an explanation on how to write a driver module.
+See [examples/README.md](examples/README.md) for an explanation on how to write a driver module.
 
 
 ## Talks and presentations
