@@ -51,61 +51,61 @@ checking for obstacles:
 
 The game has 2 lanes and each lane has 3 routes in which you can drive.
 On game start, each car starts at the center route of its lane.
-The car can pass to other lane, but will be punished for collisions 
+The car can pass to other lane, but will be punished for collisions
 with the lane owner.
 
-<------ Car#1 lane ------><------ Car#2 lane ---->
+    <------ Car#1 lane ------><------ Car#2 lane ---->
 
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
-|       | car#1 |       |X|       | Car#2 |      |
-|       |       |       |X|       |       |      |
-|       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
+    |       | car#1 |       |X|       | Car#2 |      |
+    |       |       |       |X|       |       |      |
+    |       |       |       |X|       |       |      |
 
 Here are the possible obstacles and the action you should take when hitting
 them:
 
-* obstacles.NONE        there is no obstacle at this position. You can return any
+* `obstacles.NONE`      there is no obstacle at this position. You can return any
                         action.
                         Score : 0
 
-* obstacles.PENGUIN     return actions.PICKUP and move 1 step forward. You will
+* `obstacles.PENGUIN`   return `actions.PICKUP` and move 1 step forward. You will
                         not move backward if you do not pick up the penguin.
-                        Score : 10 for PICKUP otherwise 0
+                        Score : 10 for `PICKUP` otherwise 0
 
-* obstacles.WATER       return actions.BRAKE if you want to continue forward.
-                        return actions.RIGHT or actions.LEFT if you like to
+* `obstacles.WATER`     return `actions.BRAKE` if you want to continue forward.
+                        return `actions.RIGHT` or `actions.LEFT` if you like to
                         bypass the obstacle. Any other action will cause you to
                         move backward.
-                        Score: 4 for BRAKE, 0 for LEFT/RIGHT otherwise -10
+                        Score: 4 for `BRAKE`, 0 for `LEFT`/`RIGHT` otherwise -10
 
-* obstacles.CRACK       return actions.JUMP if you want to continue forward
-                        return actions.RIGHT or actions.LEFT if you like to
+* `obstacles.CRACK`     return `actions.JUMP` if you want to continue forward
+                        return `actions.RIGHT` or `actions.LEFT` if you like to
                         bypass the obstacle. Any other action will cause you to
                         move backward.
-                        Score: 5 for JUMP, 0 for LEFT/RIGHT otherwise -10
+                        Score: 5 for `JUMP`, 0 for `LEFT`/`RIGHT` otherwise -10
 
-* obstacles.TRASH       you must return actions.RIGHT or actions.LEFT to bypass
+* `obstacles.TRASH`     you must return `actions.RIGHT` or `actions.LEFT` to bypass
                         the obstacle. Any other action will cause you to
                         move backward.
-                        Score: 0 for LEFT/RIGHT otherwise -10
+                        Score: 0 for `LEFT`/`RIGHT` otherwise -10
 
-* obstacles.BIKE        you must return actions.RIGHT or actions.LEFT to bypass
+* `obstacles.BIKE`      you must return `actions.RIGHT` or `actions.LEFT` to bypass
                         the obstacle. Any other action will cause you to
                         move backward.
-                        Score: 0 for LEFT/RIGHT otherwise -10
+                        Score: 0 for `LEFT`/`RIGHT` otherwise -10
 
-* obstacles.BARRIER     you must return actions.RIGHT or actions.LEFT to bypass
+* `obstacles.BARRIER`   you must return `actions.RIGHT` or `actions.LEFT` to bypass
                         the obstacle. Any other action will cause you to
                         move backward.
-                        Score: 0 for LEFT/RIGHT otherwise -10
+                        Score: 0 for `LEFT`/`RIGHT` otherwise -10
 
 NOTE : If you are driving out of your lane and have a collision with the lane
        owner, you will punished by -10 points and be moved to other free place.
