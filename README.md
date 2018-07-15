@@ -17,7 +17,7 @@ The race car must recognize the race track, the obstacles, and the bonus areas;
 then calculate the best path where the pitfalls are avoided and all the bonus points are collected.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse shall be used.
- 
+
 In order to control the car movements, the students needs to implement a 'driver'.
 This code  controls the car and will decide what the next action of the car will be.
 
@@ -51,8 +51,11 @@ To install the dependencies, run:
 
 You can also install packages from your distribution.
 
+## Running the server
 
-## Running the game
+Open a pipenv shell that you'll use for the following commands:
+
+    pipenv shell
 
 Start the server on some machine:
 
@@ -60,7 +63,13 @@ Start the server on some machine:
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
-Start up two clients:
+## Running a driver
+
+Open a pipenv shell that you'll use for the following commands:
+
+    pipenv shell
+
+Start up the client, using your driver file:
 
     ./rose-client mydriver.py
 
@@ -68,8 +77,10 @@ The server address can be specified that way (Replace '10.20.30.44' with your se
 
     ./rose-client -s 10.20.30.44 mydriver.py
 
-For driver modules, see the examples directory.
+For driver modules, see the [examples](examples) directory.
 
+You can run the game with just 1 driver!
+To let 2 drivers compete, repeat these commands in 2 terminals.
 
 Command line interface
 ----------------------
