@@ -50,27 +50,37 @@ To install the dependencies, run:
     pipenv install
 
 You can also install packages from your distribution.
-In that case omit `pipenv run` from all command lines.
 
+## Running the server
 
-## Running the game
+Open a pipenv shell that you'll use for the following commands:
+
+    pipenv shell
 
 Start the server on some machine:
 
-    pipenv run ./rose-server
+    ./rose-server
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
-Start up two clients:
+## Running a driver
 
-    pipenv run ./rose-client mydriver.py
+Open a pipenv shell that you'll use for the following commands:
+
+    pipenv shell
+
+Start up the client, using your driver file:
+
+    ./rose-client mydriver.py
 
 The server address can be specified that way (Replace '10.20.30.44' with your server address):
 
-    pipenv run ./rose-client -s 10.20.30.44 mydriver.py
+    ./rose-client -s 10.20.30.44 mydriver.py
 
-For driver modules, see the examples directory.
+For driver modules, see the [examples](examples) directory.
 
+You can run the game with just 1 driver!
+To let 2 drivers compete, repeat these commands in 2 terminals.
 
 Command line interface
 ----------------------
@@ -79,16 +89,16 @@ You can control the game from the command line using the rose-admin tool.
 
 To start a race, use the rose-admin tool on any machine:
 
-    pipenv run ./rose-admin <server-address> start
+    ./rose-admin <server-address> start
 
 To stop a race, use the rose-admin tool on any machine:
 
-    pipenv run ./rose-admin <server-address> stop
+    ./rose-admin <server-address> stop
 
 To modify the game rate, you can use the "set-rate" command. The following command
 would change game rate to 10 frames per second:
 
-    pipenv run ./rose-admin <server-address> set-rate 10
+    ./rose-admin <server-address> set-rate 10
 
 
 ## Creating a tarball
