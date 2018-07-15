@@ -45,11 +45,18 @@ See [examples/README.md](examples/README.md) for an explanation on how to write 
 
 ## Requirements
 
-To install the dependencies, run:
+First we need to get pipenv installed. The best way is to install it for
+your user:
+
+    pip install --user pipenv
+
+Now we can use pipenv to install the rest of the dependencies, and
+create a virtual environment:
 
     pipenv install
 
-You can also install packages from your distribution.
+You can also install packages from your distribution, but they may be
+too old.
 
 ## Running the server
 
