@@ -17,7 +17,7 @@ The race car must recognize the race track, the obstacles, and the bonus areas;
 then calculate the best path where the pitfalls are avoided and all the bonus points are collected.
 The cars move autonomously on the screen within the race track game with no interference
 from the students. No joystick or mouse shall be used.
- 
+
 In order to control the car movements, the students needs to implement a 'driver'.
 This code  controls the car and will decide what the next action of the car will be.
 
@@ -50,23 +50,24 @@ To install the dependencies, run:
     pipenv install
 
 You can also install packages from your distribution.
+In that case omit `pipenv run` from all command lines.
 
 
 ## Running the game
 
 Start the server on some machine:
 
-    ./rose-server
+    pipenv run ./rose-server
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 Start up two clients:
 
-    ./rose-client mydriver.py
+    pipenv run ./rose-client mydriver.py
 
 The server address can be specified that way (Replace '10.20.30.44' with your server address):
 
-    ./rose-client -s 10.20.30.44 mydriver.py
+    pipenv run ./rose-client -s 10.20.30.44 mydriver.py
 
 For driver modules, see the examples directory.
 
@@ -78,16 +79,16 @@ You can control the game from the command line using the rose-admin tool.
 
 To start a race, use the rose-admin tool on any machine:
 
-    ./rose-admin <server-address> start
+    pipenv run ./rose-admin <server-address> start
 
 To stop a race, use the rose-admin tool on any machine:
 
-    ./rose-admin <server-address> stop
+    pipenv run ./rose-admin <server-address> stop
 
 To modify the game rate, you can use the "set-rate" command. The following command
 would change game rate to 10 frames per second:
 
-    ./rose-admin <server-address> set-rate 10
+    pipenv run ./rose-admin <server-address> set-rate 10
 
 
 ## Creating a tarball
