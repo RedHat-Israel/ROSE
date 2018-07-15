@@ -25,6 +25,10 @@ For each type of obstacles there is a different action and different points assi
 
 See [examples/README.md](examples/README.md) for an explanation on how to write a driver module.
 
+## GitHub pages
+
+Refer to our GitHub pages for the course materials and additional resources:
+[https://redhat-israel.github.io/ROSE/](https://redhat-israel.github.io/ROSE/)
 
 ## Talks and presentations
 
