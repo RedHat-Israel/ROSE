@@ -9,7 +9,7 @@ Here is a video of a race (running code from students):
 (Click on the screenshot to play the video)
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=BEV-CcqTOnw
-" target="_blank"><img src="rose-video-preview.jpg"
+" target="_blank"><img src="docs/rose-video-preview.jpg"
 alt="ROSE Race Car Game" width="860" height="720" border="10" /></a>
 
 In this game, two race cars compete to achieve the most points.
