@@ -94,6 +94,18 @@ For running the same track for all drivers (instead or random) start the server 
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
+### Running the server in Docker
+
+Build the Docker image:
+
+    docker build -t rose:server .
+
+Run the Docker image on port 8880:
+
+    docker run -it --rm -p 8880 rose:server
+
+Open a browser at http://\<server-address\>:8880 to view and control the game.
+
 ## Running a driver
 
 In a new window, open your virtual environment:
