@@ -21,10 +21,11 @@ var ROSE = (function() {
             this.client = new Client(this.onmessage.bind(this), 2000);
         }.bind(this));
 
-        var sound_loader = new SoundLoader(function() {});
-        sound_loader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
-            sound.play();
-        });
+        //Disabling sound until mute is possible in the UI
+        //var sound_loader = new SoundLoader(function() {});
+        //sound_loader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
+        //    sound.play();
+        //});
 
         this.context = $("#game").get(0).getContext("2d");
         this.dashboard = new Dashboard();
