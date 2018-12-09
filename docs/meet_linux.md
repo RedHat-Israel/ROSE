@@ -29,7 +29,7 @@ description: This project is a game that has been developed in order to help tea
 <body>
 
 <div class="vertical-menu">
-    <a href="meet_linux.html">1. Meet Linux</a>
+    <a href="linux_intro.html">1. Linux Introduction</a>
     <a href="variables_data_types.html">2. Variables and Data Types</a>
     <a href="control_structures.html">3. Control Structures</a>
     <a href="compound_data_types.html">4. Compound Data Types</a>
@@ -40,8 +40,8 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;"><a href="course_materials/meet_linux.html#" target="_blank" style="color: #159957">Meet Linux</a></h1>
-    <iframe src="course_materials/meet_linux.html#/"
+    <h1 style="color:#159957;"><a href="course_materials/linux_intro.html#" target="_blank" style="color: #159957">Meet Linux</a></h1>
+    <iframe src="course_materials/linux_intro.html#/"
     width="750" height="550"></iframe>
     <br><br>
 </div>
