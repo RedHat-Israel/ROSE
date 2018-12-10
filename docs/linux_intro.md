@@ -40,7 +40,7 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;"><a href="course_materials/linux_intro.html#" target="_blank" style="color: #159957">Meet Linux</a></h1>
+    <h1 style="color:#159957;"><a href="course_materials/linux_intro.html#" target="_blank" style="color: #159957">Linux Introduction</a></h1>
     <iframe src="course_materials/linux_intro.html#/"
     width="750" height="550"></iframe>
     <br><br>
