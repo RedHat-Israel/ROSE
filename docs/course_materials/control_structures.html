@@ -195,7 +195,7 @@ else:
           <h3><b>Simple While Loop</b></h3>
           <pre><code data-trim data-noescape class="hljs">
 while True:
-    name = raw_input("Enter your name: ")
+    name = input("Enter your name: ")
     print("Hello %s!!" %name)
                 </code></pre>
         </section>
@@ -205,7 +205,7 @@ while True:
 SECRET = 'xyzzy'
 
 while True:
-    password = raw_input("Please enter your password: ")
+    password = input("Please enter your password: ")
     if not password:
         continue
     elif password == SECRET:
@@ -390,7 +390,7 @@ print(a)   # 5
 def increment(x):
     return x + 1
 result = increment(3)
-print result
+print (result)
                 </code></pre>
           <ul>
             <li>Colon(:)indicates start of a block</li>

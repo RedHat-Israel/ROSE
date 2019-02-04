@@ -73,14 +73,14 @@ In order to run your driver, use:
 x = world.car.x
 y = world.car.y
 
-print "Current location is: (%d,%d)" % (x ,y)
+print ("Current location is: (%d,%d)" % (x ,y))
 ```
 
 ### Print the obstacle a head
 ```
 obstacle = world.get((x, y - 1))
 
-print obstacle
+print (obstacle)
 ```
 
 ### Restarting after exceptions
