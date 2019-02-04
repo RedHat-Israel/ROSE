@@ -103,7 +103,7 @@ Write a program that will print the following messages according to the values i
 
 ## Even or odd
 
-Use raw_input to get a number. Print "Even" if the number is even (divided by 2 without reminder) and "Odd" if the number is not even.
+Use 'input' to get a number. Print "Even" if the number is even (divided by 2 without reminder) and "Odd" if the number is not even.
 
 Hint:
 a = 22
