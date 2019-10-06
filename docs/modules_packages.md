@@ -36,7 +36,7 @@ description: This project is a game that has been developed in order to help tea
     <a href="#">5. Object Orientation</a>
     <a href="exceptions.html">6. Exceptions</a>
     <a href="modules_packages.html">7. Modules and Packages</a>
-    <a href="#">8. Functions and Functional Programming</a>
+    <a href="functions.html">8. Functions</a>
 </div>
 
 <div class="holder">
