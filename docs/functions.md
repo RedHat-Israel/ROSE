@@ -40,8 +40,8 @@ description: This project is a game that has been developed in order to help tea
 </div>
 
 <div class="holder">
-    <h1 style="color:#159957;"><a href="course_materials/exceptions.html#" target="_blank" style="color: #159957">Exceptions</a></h1>
-    <iframe src="course_materials/exceptions.html#/"
+    <h1 style="color:#159957;"><a href="course_materials/functions.html#" target="_blank" style="color: #159957">Functions</a></h1>
+    <iframe src="course_materials/functions.html#/"
     width="750" height="550"></iframe>
     <br><br>
 </div>
