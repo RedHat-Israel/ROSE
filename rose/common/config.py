@@ -27,7 +27,6 @@ install_dir = os.path.dirname(__file__)
 # Web interface
 
 web_root = os.path.join(install_dir, "../web")
-res_root = os.path.join(install_dir, "../res")
 
 # Player
 

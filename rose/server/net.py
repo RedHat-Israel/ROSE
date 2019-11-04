@@ -40,7 +40,7 @@ class Hub(object):
     def add_watcher(self, watcher):
         self.clients.add(watcher)
         msg = message.Message("update", self.game.state())
-        watcher.send_message(str(msg))
+        watcher.send_message(bytes(str(msg), 'utf-8'))
 
     def remove_watcher(self, watcher):
         self.clients.discard(watcher)
@@ -48,7 +48,7 @@ class Hub(object):
     # Game hub interface
 
     def broadcast(self, msg):
-        data = str(msg)
+        data = bytes(str(msg), 'utf-8')
         for client in self.clients:
             client.send_message(data)
 
@@ -71,7 +71,7 @@ class PlayerProtocol(basic.LineReceiver):
         except error.Error as e:
             log.warning("Error handling message: %s", e)
             msg = message.Message('error', {'message': str(e)})
-            self.sendLine(str(msg))
+            self.sendLine(bytes(str(msg), 'utf-8'))
             self.transport.loseConnection()
 
     # Hub client interface
@@ -112,8 +112,8 @@ class PlayerFactory(protocol.ServerFactory):
 class WatcherProtocol(WebSocketServerProtocol):
 
     def __init__(self, hub):
+        super().__init__()
         self.hub = hub
-        WebSocketServerProtocol.__init__(self)
 
     # WebSocketServerProtocol interface
 
@@ -129,6 +129,8 @@ class WatcherProtocol(WebSocketServerProtocol):
         self.hub.remove_watcher(self)
 
     # Hub client interface
+    def onMessage(self, payload, isBinary):
+        self.sendMessage(payload, isBinary)
 
     def send_message(self, data):
         self.sendMessage(data, False)
@@ -137,8 +139,9 @@ class WatcherProtocol(WebSocketServerProtocol):
 class WatcherFactory(WebSocketServerFactory):
 
     def __init__(self, url, hub):
+        super().__init__(url)
         self.hub = hub
-        WebSocketServerFactory.__init__(self, url)
+        #WebSocketServerFactory.__init__(self, url)
 
     def buildProtocol(self, addr):
         p = WatcherProtocol(self.hub)
@@ -172,24 +175,26 @@ class WebAdmin(resource.Resource):
 
     def __init__(self, game):
         self.game = game
-        resource.Resource.__init__(self)
+        super().__init__()
 
     def render_POST(self, request):
-        if "running" in request.args:
-            value = request.args["running"][0]
-            if value == "1":
+        if b"running" in request.args:
+            value = request.args[b"running"][0]
+            if value == b"1":
                 self.game.start()
-            elif value == "0":
+            elif value == b"0":
                 if self.game.started:
                     self.game.stop()
             else:
                 request.setResponseCode(http.BAD_REQUEST)
-                return b"Invalid running value %r, expected (1, 0)" % value
-        if "rate" in request.args:
-            value = request.args["rate"][0]
+                return bytes(f"Invalid running value {value}, expected (1, 0)", 'utf-8')
+                #return b"Invalid running value %r, expected (1, 0)" % value
+        if b"rate" in request.args:
+            value = request.args[b"rate"][0].decode()
             try:
                 self.game.rate = float(value)
             except ValueError:
                 request.setResponseCode(http.BAD_REQUEST)
-                return b"Invalid rate value %r, expected number" % value
-        return ""
+                return bytes(f"Invalid rate value {value}, expected number", 'utf-8')
+                #return b"Invalid rate value %r, expected number" % value
+        return b""

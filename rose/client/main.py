@@ -68,7 +68,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     # Client interface
 
     def send_message(self, msg):
-        self.client.sendLine(str(msg))
+        self.client.sendLine(bytes(str(msg), 'utf-8'))
 
 
 def load_driver_module(file_path):

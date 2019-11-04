@@ -31,7 +31,7 @@ class Game(component.Component):
     def update(self, info):
         self.track.update(info)
         self.players = {p["name"]: p for p in info['players']}
-        for player in self.players.itervalues():
+        for player in self.players.values():
             self.cars[player['car']].update(player)
         if info['started']:
             self.drive()
