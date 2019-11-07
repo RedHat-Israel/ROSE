@@ -35,6 +35,7 @@ class Game(object):
     @rate.setter
     def rate(self, value):
         if value != self._rate:
+            print (f"rate = {value}")
             log.info('change game rate to %d frames per second', value)
             self._rate = value
             if self.started:

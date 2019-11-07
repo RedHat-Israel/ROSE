@@ -9,7 +9,7 @@ name = "pypi"
 
 flake8 = "*"
 pytest = "*"
-pytest-coverage = "*"
+pytest-cov = "*"
 pytest-timeout = "*"
 
 
@@ -21,4 +21,4 @@ twisted = "*"
 
 [requires]
 
-python_version = "2.7"
+python_version = "3.*"

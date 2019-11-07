@@ -28,14 +28,20 @@ class Track(object):
 
     def get(self, x, y):
         """ Return the obstacle in position x, y """
+        x = int(x)
+        y = int(y)
         return self._matrix[y][x]
 
     def set(self, x, y, obstacle):
+        x = int(x)
+        y = int(y)
         """ Set obstacle in position x, y """
         self._matrix[y][x] = obstacle
 
     def clear(self, x, y):
         """ Clear obstacle in position x, y """
+        x = int(x)
+        y = int(y)
         self._matrix[y][x] = obstacles.NONE
 
     def reset(self):
@@ -54,8 +60,8 @@ class Track(object):
         row = [obstacles.NONE] * config.matrix_width
         obstacle = obstacles.get_random_obstacle()
         for lane in range(config.max_players):
-            low = lane * config.cells_per_player
-            high = low + config.cells_per_player
+            low = int(lane * config.cells_per_player)
+            high = int(low + config.cells_per_player)
             cell = random.choice(range(low, high))
             row[cell] = obstacle
         return row
