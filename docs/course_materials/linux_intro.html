@@ -176,6 +176,26 @@ $
       </section>
       <section>
         <section>
+          <h3><b>tree</b></h3>
+          <ul>
+            <li>List contents of directories in a tree-like format</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$tree
+.
+├── my_test
+│   └── dir2
+│       └── dir3
+│           └── dir4
+└── my_test2
+
+5 directories, 0 files
+$
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
           <h3><b>rmdir</b></h3>
           <ul>
             <li>Remove a directory from the current directory</li>
@@ -274,14 +294,48 @@ $
 $rm -r /home/student/backups/
 $
   </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>head</b></h3>
           <ul>
-            <li>Copy a directory and its files into a different directory</li>
+            <li>Print the first part of files</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
-$cp -r /home/student/my_homeworks/ backups/
-$
-</code></pre>
+$head -3 ~/.bashrc
+# .bashrc
 
+# Source global definitions
+$
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>tail</b></h3>
+          <ul>
+            <li>Print the last part of files</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$tail -3 ~/.bashrc
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+$
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>clear</b></h3>
+          <ul>
+            <li>clear the terminal screen</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$clear
+$
+      </code></pre>
         </section>
       </section>
       <section>
