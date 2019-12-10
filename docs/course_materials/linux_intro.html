@@ -298,6 +298,20 @@ $
       </section>
       <section>
         <section>
+          <h3><b>touch</b></h3>
+          <ul>
+            <li>Create new files</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$touch myfile1.txt myfile2.txt
+$ls
+myfile1.txt
+myfile2.txt
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
           <h3><b>head</b></h3>
           <ul>
             <li>Print the first part of files</li>
@@ -328,9 +342,21 @@ $
       </section>
       <section>
         <section>
+          <h3><b>diff</b></h3>
+          <ul>
+            <li>Compare files line by line</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$diff myfile1.txt myfile2.txt
+$
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
           <h3><b>clear</b></h3>
           <ul>
-            <li>clear the terminal screen</li>
+            <li>Clear the terminal screen</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs">
 $clear
@@ -365,6 +391,30 @@ pwd: pwd [-LP]
     Options:
       -L	print the value of $PWD
 ...
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>wget</b></h3>
+          <ul>
+            <li>Utility for non-interactive download of files from the Web</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$wget https://redhat-israel.github.io/ROSE/materials.html
+
+Resolving redhat-israel.github.io...
+Connecting to redhat-israel.github.io... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3094 (3.0K) [text/html]
+Saving to: ‘materials.html’
+
+materials.html  100%[===============>]   3.02K  --.-KB/s
+
+‘materials.html’ saved [3094/3094]
+
+$ls
+materials.html
       </code></pre>
         </section>
       </section>
