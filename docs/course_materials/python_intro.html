@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>Python Introduction</title>
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="stylesheet" href="reveal/css/reveal.css">
+  <link rel="stylesheet" href="media/presentations.css" id="theme">
+  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+
+  <style>
+    .reveal .slide spre {
+      width: 100%
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+        <h1 class="slide_main_title"><b>Python Introduction</b></h1>
+      </section>
+      <section>
+        <section>
+          <h3><b>What is Python?</b></h3>
+          <ul>
+            <li>A popular programming language.</li>
+            <li>It was written by Guido van Rossum in the 1990s.</li>
+            <img width="230" height="230" style="border:0px;background:none;box-shadow: none" align="right" data-src="media/python-icon.png"/>
+            <li>It is used for:</li>
+            <ul>
+              <li>Web development (server-side)</li>
+              <li>Software development</li>
+              <li>Mathematics</li>
+              <li>System scripting</li>
+            </ul>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>Why Python?</b></h3>
+          <ul>
+            <li>Works on different platforms (Windows, Mac, Linux etc).</li>
+            <li>Python code is easy to read and understand.</li>
+            <li>Most programming tasks are easier with Python than with any other programming language.</li>
+            <li>The program runs immediately by Python's interpreter,</br>so there's a fast feedback.</li>
+          </ul>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>How to run Python?</b></h3>
+          <ul>
+            <li>Interactive mode:</br>Open a terminal and type "python"</li>
+          <pre><code data-trim data-noescape class="hljs">
+$python
+Python 2.7.17 (default, Oct 21 2019, 17:20:57)
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+        </code></pre>
+        Use Ctrl+d for exit.</br></br>
+        Your code will be deleted once you close the session!
+        </ul>
+    </section>
+    </section>
+    <section>
+    <section>
+      <h3><b>How to run Python?</b></h3>
+        <ul>
+          <li>Script mode:</br>Use a file that contains Python code with .py extention</li>
+        </ul>
+        <pre><code data-trim data-noescape class="hljs">
+$python mycode.py
+      </code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><b>Exercise</b></h3>
+          <ul>
+            <li>Open your favorite code editor (gedit/vim/other)</li>
+            <li>Write in the following code:</br>
+            print("Hello World!")</li>
+            <li>Save the file and call it hello.py</li>
+            <li>Run it on the terminal:</li>
+          </ul>
+          <pre><code data-trim data-noescape class="hljs">
+$python hello.py
+Hello World!
+$
+        </code></pre>
+        </section>
+        </section>
+
+      <script src="reveal/lib/js/head.min.js"></script>
+      <script src="reveal/js/reveal.js"></script>
+
+      <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+          controls: true,
+          progress: true,
+          history: true,
+          center: true,
+          slideNumber: true,
+          transition: 'slide', // none/fade/slide/convex/concave/zoom
+          // More info https://github.com/hakimel/reveal.js#dependencies
+          dependencies: [{
+              src: 'reveal/lib/js/classList.js',
+              condition: function() {
+                return !document.body.classList;
+              }
+            },
+            {
+              src: 'reveal/plugin/markdown/marked.js',
+              condition: function() {
+                return !!document.querySelector('[data-markdown]');
+              }
+            },
+            {
+              src: 'reveal/plugin/markdown/markdown.js',
+              condition: function() {
+                return !!document.querySelector('[data-markdown]');
+              }
+            },
+            {
+              src: 'reveal/plugin/highlight/highlight.js',
+              async: true,
+              callback: function() {
+                hljs.initHighlightingOnLoad();
+              }
+            },
+            {
+              src: 'reveal/plugin/zoom-js/zoom.js',
+              async: true
+            },
+            {
+              src: 'reveal/plugin/notes/notes.js',
+              async: true
+            }
+          ]
+        });
+      </script>
+
+</body>
+
+</html>
