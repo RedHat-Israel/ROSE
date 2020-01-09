@@ -32,7 +32,7 @@ res_root = os.path.join(install_dir, "../res")
 # Player
 
 max_players = 2
-cells_per_player = matrix_width / max_players
+cells_per_player = matrix_width // max_players
 
 # Score Points
 

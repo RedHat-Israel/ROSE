@@ -71,13 +71,13 @@ class PlayerProtocol(basic.LineReceiver):
         except error.Error as e:
             log.warning("Error handling message: %s", e)
             msg = message.Message('error', {'message': str(e)})
-            self.sendLine(str(msg))
+            self.sendLine(str(msg).encode('utf-8'))
             self.transport.loseConnection()
 
     # Hub client interface
 
     def send_message(self, data):
-        self.sendLine(data)
+        self.sendLine(data.encode('utf-8'))
 
     # Disaptching messages
 
@@ -131,7 +131,7 @@ class WatcherProtocol(WebSocketServerProtocol):
     # Hub client interface
 
     def send_message(self, data):
-        self.sendMessage(data, False)
+        self.sendMessage(data.encode('utf-8'), False)
 
 
 class WatcherFactory(WebSocketServerFactory):
@@ -175,21 +175,21 @@ class WebAdmin(resource.Resource):
         resource.Resource.__init__(self)
 
     def render_POST(self, request):
-        if "running" in request.args:
-            value = request.args["running"][0]
-            if value == "1":
+        if b"running" in request.args:
+            value = request.args[b"running"][0]
+            if value == b"1":
                 self.game.start()
-            elif value == "0":
+            elif value == b"0":
                 if self.game.started:
                     self.game.stop()
             else:
                 request.setResponseCode(http.BAD_REQUEST)
                 return b"Invalid running value %r, expected (1, 0)" % value
-        if "rate" in request.args:
-            value = request.args["rate"][0]
+        if b"rate" in request.args:
+            value = request.args[b"rate"][0]
             try:
                 self.game.rate = float(value)
             except ValueError:
                 request.setResponseCode(http.BAD_REQUEST)
                 return b"Invalid rate value %r, expected number" % value
-        return ""
+        return b""
