@@ -2,130 +2,130 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Compound Data Types</title>
+    <title>Compound Data Types</title>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <link rel="stylesheet" href="reveal/css/reveal.css">
-  <link rel="stylesheet" href="media/presentations.css" id="theme">
-  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="media/presentations.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-  <style>
-    .reveal .slide spre {
-      width: 100%
-    }
-  </style>
+    <style>
+        .reveal .slide spre {
+            width: 100%
+        }
+
+    </style>
 </head>
 
 <body>
-
-  <div class="reveal">
-    <div class="slides">
-      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
-        <h1 class="slide_main_title"><b>Compound Data Types</b></h1>
-      </section>
-      <section>
-        <section>
-          <h1><b>
-                <span>List</span>
-            </h1></b>
-        </section>
-        <section>
-          <h3><b>Basics</b></h3>
-          <ul>
-            <li>An ordered collection of values</li>
-            <li>Create an empty list</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+    <div class="reveal">
+        <div class="slides">
+            <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+                <h1 class="slide_main_title"><b>Compound Data Types</b></h1>
+            </section>
+            <section>
+                <section>
+                    <h1><b>
+                            <span>List</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>Basics</b></h3>
+                    <ul>
+                        <li>An ordered collection of values</li>
+                        <li>Create an empty list</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 >>> l = list()
 >>> type(l)
 list
 >>> l = []
 >>> type(l)
 list
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Modifying</b></h3>
-          <ul>
-            <li>Appending values to the list:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Modifying</b></h3>
+                    <ul>
+                        <li>Appending values to the list:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l.append('apple')
 print(l)             # ['apple']
 l.append('orange')
 print(l)             # ['apple', 'orange']
-          </code></pre>
-          <ul>
-            <li>Creating a populated list:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Creating a populated list:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l = ["orange", "apple", "strawberry", "banana"]
 print(l)  # ["orange", "apple", "strawberry", "banana"]
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Modifying</b></h3>
-          <ul>
-            <li>Adding on a specific index:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Modifying</b></h3>
+                    <ul>
+                        <li>Adding on a specific index:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l.insert(3, 'melon')
 print(l)
 # ['orange', 'apple', 'strawberry', 'melon', 'banana']
-          </code></pre>
-          <ul>
-            <li>Deleting an item on a specific index:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Deleting an item on a specific index:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 del l[0]
 print(l)
 # ['apple', 'strawberry', 'melon', 'banana']
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Popping an element (remove it and return it's value):</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Popping an element (remove it and return it's value):</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 print(l.pop())  # 'banana'
 print(l)        # ['apple', 'strawberry', 'melon']
 print(l.pop(0)) # 'apple'
 print(l)        # ['strawberry', 'melon']
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>More actions</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>More actions</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 lst[i] = v    # Changes an element or slice by assigning
 lst.extend(l) # Adds items from iterable
 lst.remove(v) # Removes a specific value
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Sequence operations</b></h3>
-          <ul>
-            <li>All sequence operations are valid on lists:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Sequence operations</b></h3>
+                    <ul>
+                        <li>All sequence operations are valid on lists:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l = ['orange', 'apple', 'strawberry', 'banana']
 print(len(l))     # 4
-          </code></pre>
-          <ul>
-            <li>For loops through the list:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>For loops through the list:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 for x in l:
     print(x)
 
@@ -133,11 +133,11 @@ for x in l:
 # apple
 # strawberry
 # banana
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Retrieving elements by index, negative index, and slicing:</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Retrieving elements by index, negative index, and slicing:</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 print(l[0])     # 'orange'
 print(l[8])     # IndexError: list index out of range
 print(l[-1])    # 'banana'
@@ -145,59 +145,59 @@ print(l[1:3])   # ['apple', 'strawberry']
 
 l = [10, 20, 30, 40]
 print(l[::-1])  # [40, 30, 20, 10]
-          </code></pre>
-        </section>
-        <section>
-          <ul>
-            <li>The 'in' operator scans through all elements and return True or False:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <ul>
+                        <li>The 'in' operator scans through all elements and return True or False:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 if 'apple' in l:
     print("Yep")                # "Yep"
 if 'basketball' in l:
     print("You won't see me")
-          </code></pre>
-          <ul>
-            <li>Lists can be concatenated with + and multiplied by *:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Lists can be concatenated with + and multiplied by *:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l = [25, 3, 14] + [5, 4] + [101, 2]
 print(l)    # [25, 3, 14, 5, 4, 101, 2]
 
 l = ["foo", "bar"] * 3
 print(l)    # ['foo', 'bar', 'foo', 'bar', 'foo', 'bar']
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>In-place list operations</b></h3>
-          <ul>
-            <li>The .reverse() method changes a list in-place, and returns None:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>In-place list operations</b></h3>
+                    <ul>
+                        <li>The .reverse() method changes a list in-place, and returns None:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 fruit = ["orange", "apple", "strawberry"]
 fruit.reverse()
 print(fruit)  # ['strawberry', 'apple', 'orange']
-          </code></pre>
-        </section>
-        <section>
-          <ul>
-            <li>The .sort() method sorts elements in-place, and returns None:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <ul>
+                        <li>The .sort() method sorts elements in-place, and returns None:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 fruit = ["orange", "apple", "strawberry"]
 fruit.sort()
 print(fruit)  # ['apple', 'orange', 'strawberry']
 
 fruit.sort(reverse=True)
 print(fruit)  # ['strawberry', 'orange', 'apple']
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Lists and references</b></h3>
-          <ul>
-            <li>When using the assignment operator (=) on a list, a reference is created to the original list:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Lists and references</b></h3>
+                    <ul>
+                        <li>When using the assignment operator (=) on a list, a reference is created to the original list:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l = [5, 25, 100, 250, 1, 8]
 print(l)    # [5, 25, 100, 250, 1, 8]
 l2 = l
@@ -206,41 +206,40 @@ prtint(l2)  # [5, 25, 100, 250, 1, 8]
 l.append("Hi!")
 print(l)    # [5, 25, 100, 250, 1, 8, 'Hi!']
 prtint(l2)  # [5, 25, 100, 250, 1, 8, 'Hi!']
-          </code></pre>
-        </section>
-        <section>
-          <ul>
-            <li>l2 is not a copy of l, but a reference to the same list in python's memory.</li>
-            <li>To create a copy of the list, use the slicing operator ([:]) :</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <ul>
+                        <li>l2 is not a copy of l, but a reference to the same list in python's memory.</li>
+                        <li>To create a copy of the list, use the slicing operator ([:]) :</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 l3 = l[:]
 l3.append("World")
 print(l3)  # [5, 25, 100, 250, 1, 8, 'Hi!', 'World']
 prtint(l)  # [5, 25, 100, 250, 1, 8, 'Hi!']
-          </code></pre>
-        </section>
-
-      </section>
-      <section>
-        <section>
-          <h1><b>
-                <span>Tuple</span>
-            </h1></b>
-        </section>
-        <section>
-          <h3><b>Overview</b></h3>
-          <ul>
-            <li>Immutable: you cannot change its content</li>
-            <li>Tuples are used for grouping ordered data</li>
-            <li>Supports indexing and slicing syntax</li>
-            <li>Powerful assignment feature (packing/unpacking)</li>
-            <li>Creation is faster than a list</li>
-          </ul>
-        </section>
-        <section>
-          <h3><b>Creating a tuple</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1><b>
+                            <span>Tuple</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>Overview</b></h3>
+                    <ul>
+                        <li>Immutable: you cannot change its content</li>
+                        <li>Tuples are used for grouping ordered data</li>
+                        <li>Supports indexing and slicing syntax</li>
+                        <li>Powerful assignment feature (packing/unpacking)</li>
+                        <li>Creation is faster than a list</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><b>Creating a tuple</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
             >>> t = tuple()
             >>> type(t)
             tuple
@@ -256,27 +255,27 @@ prtint(l)  # [5, 25, 100, 250, 1, 8, 'Hi!']
             >>> t = tuple([1,2,'yo']) # casting
             >>> t
             (1, 2, 'yo')
-          </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h1><b>
-                <span>Dictionary</span>
-            </h1></b>
-        </section>
-        <section>
-          <h3><b>Basics</b></h3>
-          <ul>
-            <li>Dictionary is an unordered set of <key: value> pairs, where the keys are unique</li>
-            <li>dict() and {} are empty dictionaries</li>
-            <li>d[k] accesses the value mapped to k</li>
-            <li>d[k] = v updates the value mapped to k</li>
-          </ul>
-        </section>
-        <section>
-          <h3><b>Example</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1><b>
+                            <span>Dictionary</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>Basics</b></h3>
+                    <ul>
+                        <li>Dictionary is an unordered set of <key: value> pairs, where the keys are unique</li>
+                        <li>dict() and {} are empty dictionaries</li>
+                        <li>d[k] accesses the value mapped to k</li>
+                        <li>d[k] = v updates the value mapped to k</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><b>Example</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 sports = {'Ralph' : 'Football',
           'Michael' : 'Basketball',
           'Shirly' : 'Baseball'}
@@ -285,11 +284,11 @@ print(sports)
 #  'Shirly': 'Baseball'}
 
 print(sports['Michael'])   # Basketball
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Example</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Example</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 del sports['Michael']
 print(sports)
 # {'Ralph': 'Football', 'Shirly': 'Baseball'}
@@ -303,26 +302,26 @@ sports['Ralph'] = 'Soccer'
 print(sports)
 # {'Ralph': 'Soccer', 'Shirly': 'Baseball',
 #  'Fred': 'Dancing'}
-          </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h1><b>
-          <span>Set</span>
-      </h1></b>
-        </section>
-        <section>
-          <h3><b>Basics</b></h3>
-          <ul>
-            <li>List with no order (indexing), no duplicates</li>
-            <li>Empty set: set()</li>
-            <li>{1, 'blah', 5, -1}</li>
-          </ul>
-        </section>
-        <section>
-          <h3><b>Methods</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1><b>
+                            <span>Set</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>Basics</b></h3>
+                    <ul>
+                        <li>List with no order (indexing), no duplicates</li>
+                        <li>Empty set: set()</li>
+                        <li>{1, 'blah', 5, -1}</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><b>Methods</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 s.add(v) # adds a value to the set
 s.remove(v) # removes v or KeyError if v not in the set.
 s.discard(v) # removes v
@@ -330,63 +329,64 @@ s.difference(s2) or s - s2 # elements in s but not in s2
 s.union(s2) or s | s2 # elements in s or s2
 s.intersection(s2) or s & s2 # elements in both s and s2
 s.update(s2) or s = s | s2 # updates s with s2 values
-        </code></pre>
-        </section>
-      </section>
-      </section>
+                    </code></pre>
+                </section>
+            </section>
+            </section>
 
+        </div>
     </div>
-  </div>
 
-  <script src="reveal/lib/js/head.min.js"></script>
-  <script src="reveal/js/reveal.js"></script>
+    <script src="reveal/lib/js/head.min.js"></script>
+    <script src="reveal/js/reveal.js"></script>
 
-  <script>
-    // More info https://github.com/hakimel/reveal.js#configuration
-    Reveal.initialize({
-      controls: true,
-      progress: true,
-      history: true,
-      center: true,
-      slideNumber: true,
-      transition: 'slide', // none/fade/slide/convex/concave/zoom
-      // More info https://github.com/hakimel/reveal.js#dependencies
-      dependencies: [{
-          src: 'reveal/lib/js/classList.js',
-          condition: function() {
-            return !document.body.classList;
-          }
-        },
-        {
-          src: 'reveal/plugin/markdown/marked.js',
-          condition: function() {
-            return !!document.querySelector('[data-markdown]');
-          }
-        },
-        {
-          src: 'reveal/plugin/markdown/markdown.js',
-          condition: function() {
-            return !!document.querySelector('[data-markdown]');
-          }
-        },
-        {
-          src: 'reveal/plugin/highlight/highlight.js',
-          async: true,
-          callback: function() {
-            hljs.initHighlightingOnLoad();
-          }
-        },
-        {
-          src: 'reveal/plugin/zoom-js/zoom.js',
-          async: true
-        },
-        {
-          src: 'reveal/plugin/notes/notes.js',
-          async: true
-        }
-      ]
-    });
-  </script>
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [{
+                    src: 'reveal/lib/js/classList.js',
+                    condition: function() {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/marked.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/markdown.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: 'reveal/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: 'reveal/plugin/notes/notes.js',
+                    async: true
+                }
+            ]
+        });
+
+    </script>
 
 </body>
 

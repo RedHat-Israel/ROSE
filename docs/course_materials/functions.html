@@ -2,182 +2,185 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Functions</title>
+    <title>Functions</title>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <link rel="stylesheet" href="reveal/css/reveal.css">
-  <link rel="stylesheet" href="media/presentations.css" id="theme">
-  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="media/presentations.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
 
-  <style>
-    .reveal .slide spre {
-      width: 100%
-    }
-  </style>
+    </script>
+
+    <style>
+        .reveal .slide spre {
+            width: 100%
+        }
+
+    </style>
 </head>
 
 <body>
 
-  <div class="reveal">
-    <div class="slides">
+    <div class="reveal">
+        <div class="slides">
 
-      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
-        <h1 class="slide_main_title">
-              <b>Functions</b></h1>
-      </section>
-      <section>
-        <section>
-          <h1><b>
-                <span>Functions</span>
-            </h1></b>
-        </section>
-        <section>
-          <h3><b>Functions</b></h3>
-          <ul>
-            <li>Functions are chunks of code that tell python to do something</li>
-            <li>The reason to use functions is usability and code clearness</li>
-            <li>For complex programs, functions are essential</li>
-            <br>
-            <li>A function has:</li>
-            <ul>
-              <li>A name</li>
-              <li>Parameters</li>
-              <li>A body</li>
-            </ul>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+            <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+                <h1 class="slide_main_title">
+                    <b>Functions</b></h1>
+            </section>
+            <section>
+                <section>
+                    <h1><b>
+                            <span>Functions</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>Functions</b></h3>
+                    <ul>
+                        <li>Functions are chunks of code that tell python to do something</li>
+                        <li>The reason to use functions is usability and code clearness</li>
+                        <li>For complex programs, functions are essential</li>
+                        <br>
+                        <li>A function has:</li>
+                        <ul>
+                            <li>A name</li>
+                            <li>Parameters</li>
+                            <li>A body</li>
+                        </ul>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 def print_name(my_name):
     print("Hello %s" %my_name)
 print_name("Joe")
-                  </code></pre>
-        </section>
-        <section>
-          <h3><b>Multiple Parameters</b></h3>
-          <ul>
-            <li>A function can have any number of parameters</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Multiple Parameters</b></h3>
+                    <ul>
+                        <li>A function can have any number of parameters</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 def print_name(first_name, last_name):
     print("Hello %s %s" %(first_name, last_name))
 print_name("Joe", "Cocker")
-                  </code></pre>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs">
 first="Joe"
 last="Cocker"
 print_name(first, last)
-              </code></pre>
-        </section>
+                    </code></pre>
+                </section>
 
-        <section>
-          <h3><b>Variables Scope</b></h3>
-          <ul>
-            <li>When a function finish running all it s variables are vanished</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                <section>
+                    <h3><b>Variables Scope</b></h3>
+                    <ul>
+                        <li>When a function finish running all it s variables are vanished</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 def scope():
     a=10
     print(a)
 scope()
 print(a)   #ERROR
-              </code></pre>
-          <ul>
-            <li>If we have defined a variable in the program and the function redefined it, then the value in the function is used in the function scope</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>If we have defined a variable in the program and the function redefined it, then the value in the function is used in the function scope</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 a=5
 def scope():
     a=10
     print(a)
 scope()    # 10
 print(a)   # 5
-              </code></pre>
-        </section>
+                    </code></pre>
+                </section>
 
-        <section>
-          <h3><b>Summary</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                <section>
+                    <h3><b>Summary</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 def increment(x):
     return x + 1
 result = increment(3)
 print (result)
-                </code></pre>
-          <ul>
-            <li>Colon(:)indicates start of a block</li>
-            <li>Following lines are indented</li>
-            <li>Function declaration does not specify return type</li>
-            <li>All functions return a value (None if not specified)</li>
-            <li>A function can have multiple parameters</li>
-            <li>Parameter data types are not specified</li>
-            <li>Be aware of variables scope</li>
-          </ul>
-        </section>
-      </section>
+                    </code></pre>
+                    <ul>
+                        <li>Colon(:)indicates start of a block</li>
+                        <li>Following lines are indented</li>
+                        <li>Function declaration does not specify return type</li>
+                        <li>All functions return a value (None if not specified)</li>
+                        <li>A function can have multiple parameters</li>
+                        <li>Parameter data types are not specified</li>
+                        <li>Be aware of variables scope</li>
+                    </ul>
+                </section>
+            </section>
+        </div>
     </div>
-  </div>
 
-  <script src="reveal/lib/js/head.min.js"></script>
-  <script src="reveal/js/reveal.js"></script>
+    <script src="reveal/lib/js/head.min.js"></script>
+    <script src="reveal/js/reveal.js"></script>
 
-  <script>
-    // More info https://github.com/hakimel/reveal.js#configuration
-    Reveal.initialize({
-      controls: true,
-      progress: true,
-      history: true,
-      center: true,
-      slideNumber: true,
-      transition: 'slide', // none/fade/slide/convex/concave/zoom
-      // More info https://github.com/hakimel/reveal.js#dependencies
-      dependencies: [{
-          src: 'reveal/lib/js/classList.js',
-          condition: function() {
-            return !document.body.classList;
-          }
-        },
-        {
-          src: 'reveal/plugin/markdown/marked.js',
-          condition: function() {
-            return !!document.querySelector('[data-markdown]');
-          }
-        },
-        {
-          src: 'reveal/plugin/markdown/markdown.js',
-          condition: function() {
-            return !!document.querySelector('[data-markdown]');
-          }
-        },
-        {
-          src: 'reveal/plugin/highlight/highlight.js',
-          async: true,
-          callback: function() {
-            hljs.initHighlightingOnLoad();
-          }
-        },
-        {
-          src: 'reveal/plugin/zoom-js/zoom.js',
-          async: true
-        },
-        {
-          src: 'reveal/plugin/notes/notes.js',
-          async: true
-        }
-      ]
-    });
-  </script>
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [{
+                    src: 'reveal/lib/js/classList.js',
+                    condition: function() {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/marked.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/markdown.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: 'reveal/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: 'reveal/plugin/notes/notes.js',
+                    async: true
+                }
+            ]
+        });
+
+    </script>
 
 </body>
 
