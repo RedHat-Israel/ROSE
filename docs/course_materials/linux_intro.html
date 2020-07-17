@@ -2,36 +2,35 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Linux Introduction</title>
+    <title>Linux Introduction</title>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <link rel="stylesheet" href="reveal/css/reveal.css">
-  <link rel="stylesheet" href="media/presentations.css" id="theme">
-  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="media/presentations.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-  <style>
-    .reveal .slide spre {
-      width: 100%
-    }
-  </style>
+    <style>
+        .reveal .slide spre {
+            width: 100%
+        }
+    </style>
 </head>
 
 <body>
-
   <div class="reveal">
     <div class="slides">
       <section data-background-size="cover" data-background-image="media/rose_background.jpg">
@@ -77,10 +76,10 @@
             <li>Prints the current directory name</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs lang-python">
-$ pwd
-/home/student
-$
-        </code></pre>
+  $ pwd
+  /home/student
+  $
+          </code></pre>
         </section>
       </section>
       <section>
@@ -561,21 +560,20 @@ $
             <li>Utility for non-interactive download of files from the Web</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs lang-python">
-$ wget https://redhat-israel.github.io/ROSE/materials.html
+  $ wget https://redhat-israel.github.io/ROSE/materials.html
+  Resolving redhat-israel.github.io...
+  Connecting to redhat-israel.github.io... connected.
+  HTTP request sent, awaiting response... 200 OK
+  Length: 3094 (3.0K) [text/html]
+  Saving to: ‘materials.html’
 
-Resolving redhat-israel.github.io...
-Connecting to redhat-israel.github.io... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 3094 (3.0K) [text/html]
-Saving to: ‘materials.html’
+  materials.html  100%[===============>]   3.02K  --.-KB/s
 
-materials.html  100%[===============>]   3.02K  --.-KB/s
+  ‘materials.html’ saved [3094/3094]
 
-‘materials.html’ saved [3094/3094]
-
-$ ls
-materials.html
-    </code></pre>
+  $ ls
+  materials.html
+          </code></pre>
         </section>
         <section>
           <h3><b>Install a new software</b></h3>
@@ -583,27 +581,32 @@ materials.html
             <li>sudo dnf install</li>
           </ul>
           <pre><code data-trim data-noescape class="hljs lang-python">
-$ sudo dnf install sl
-Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:06:00 PM IST.
-Dependencies resolved.
-===============================================================================
-Package                              Arch
-===============================================================================
-Installing:
-sl
-...
-      </code></pre>
+  $ sudo dnf install sl
+  Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:06:00 PM IST.
+  Dependencies resolved.
+  ===============================================================================
+  Package                              Arch
+  ===============================================================================
+  Installing:
+  <<<<<<< HEAD
+  sl
+  ...
+          </code></pre>
           <pre><code data-trim data-noescape class="hljs lang-python">
-$sudo dnf install figlet
-Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
-Dependencies resolved.
-===============================================================================
-Package                              Arch
-===============================================================================
-Installing:
-figlet
-...
-    </code></pre>
+  sl
+  ...
+          </code></pre>
+          <pre><code data-trim data-noescape class="hljs">
+  $sudo dnf install figlet
+  Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
+  Dependencies resolved.
+  ===============================================================================
+  Package                              Arch
+  ===============================================================================
+  Installing:
+  figlet
+  ...
+          </code></pre>
         </section>
       </section>
     </section>
@@ -657,5 +660,61 @@ figlet
       </script>
     </div>
   </div>
+=======
+ figlet
+ ...
+                    </code></pre>
+                </section>
+            </section>
+            <script src="reveal/lib/js/head.min.js"></script>
+            <script src="reveal/js/reveal.js"></script>
+
+            <script>
+                // More info https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    slideNumber: true,
+                    transition: 'slide', // none/fade/slide/convex/concave/zoom
+                    // More info https://github.com/hakimel/reveal.js#dependencies
+                    dependencies: [{
+                            src: 'reveal/lib/js/classList.js',
+                            condition: function() {
+                                return !document.body.classList;
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/markdown/marked.js',
+                            condition: function() {
+                                return !!document.querySelector('[data-markdown]');
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/markdown/markdown.js',
+                            condition: function() {
+                                return !!document.querySelector('[data-markdown]');
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/highlight/highlight.js',
+                            async: true,
+                            callback: function() {
+                                hljs.initHighlightingOnLoad();
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/zoom-js/zoom.js',
+                            async: true
+                        },
+                        {
+                            src: 'reveal/plugin/notes/notes.js',
+                            async: true
+                        }
+                    ]
+                });
+            </script>
+>>>>>>> Use tabs on html tags formatting (#328)
 </body>
 </html>
