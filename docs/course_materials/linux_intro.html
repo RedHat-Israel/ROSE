@@ -2,166 +2,165 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Linux Introduction</title>
+    <title>Linux Introduction</title>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <link rel="stylesheet" href="reveal/css/reveal.css">
-  <link rel="stylesheet" href="media/presentations.css" id="theme">
-  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="media/presentations.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-  <style>
-    .reveal .slide spre {
-      width: 100%
-    }
-  </style>
+    <style>
+        .reveal .slide spre {
+            width: 100%
+        }
+    </style>
 </head>
 
 <body>
+    <div class="reveal">
+        <div class="slides">
 
-  <div class="reveal">
-    <div class="slides">
-
-      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
-        <h1 class="slide_main_title"><b>Linux Introduction</b></h1>
-      </section>
-      <section>
-        <section>
-          <h3><b>Open a terminal window</b></h3>
-          <ul>
-            <li>Open the search menu:</li>
-            <ul>
-              <li>Press the "Windows" key</li>
-              <li>Or move the mouse to the upper left corner of the screen</li>
-            </ul>
-            <li>Type "terminal" in the search bar</li>
-            <li>Click on the icon named "Terminal"</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+            <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+                <h1 class="slide_main_title"><b>Linux Introduction</b></h1>
+            </section>
+            <section>
+                <section>
+                    <h3><b>Open a terminal window</b></h3>
+                    <ul>
+                        <li>Open the search menu:</li>
+                        <ul>
+                            <li>Press the "Windows" key</li>
+                            <li>Or move the mouse to the upper left corner of the screen</li>
+                        </ul>
+                        <li>Type "terminal" in the search bar</li>
+                        <li>Click on the icon named "Terminal"</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $
-            </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>pwd</b></h3>
-          <ul>
-            <li>Prints the current directory name</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>pwd</b></h3>
+                    <ul>
+                        <li>Prints the current directory name</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $pwd
 /home/student
 $
-        </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>mkdir</b></h3>
-          <ul>
-            <li>Creates a directory in the current directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>mkdir</b></h3>
+                    <ul>
+                        <li>Creates a directory in the current directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $mkdir my_test
 $
-        </code></pre>
-          <ul>
-            <li>Creates a directory in a specific directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Creates a directory in a specific directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $mkdir /home/student/my_test2
 $
-        </code></pre>
-          <ul>
-            <li>Creates a directory and all parent directories if missing</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Creates a directory and all parent directories if missing</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $mkdir -p my_test/dir2/dir3/dir4
 $
-        </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>cd</b></h3>
-          <ul>
-            <li>Change the working directory to another directory existing in the current directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>cd</b></h3>
+                    <ul>
+                        <li>Change the working directory to another directory existing in the current directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $cd my_test
 $
-        </code></pre>
-          <ul>
-            <li>Change to a specific directory (Full path)</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Change to a specific directory (Full path)</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $cd /home/student/my_test2
 $
-        </code></pre>
-        </section>
-        <section>
-          <h3><b>cd</b></h3>
-          <ul>
-            <li>Change to user home directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>cd</b></h3>
+                    <ul>
+                        <li>Change to user home directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
   $cd
   $
-          </code></pre>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs">
   $cd ~
   $
-          </code></pre>
-          <ul>
-            <li>Change to parent directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Change to parent directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
   $cd ..
   $
-          </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>ls</b></h3>
-          <ul>
-            <li>List current directory content</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>ls</b></h3>
+                    <ul>
+                        <li>List current directory content</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
   $ls
   my_test
   my_test2
   $
-          </code></pre>
-          <ul>
-            <li>List specific directory content</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>List specific directory content</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
   $ls /home/student
   my_test
   my_test2
   $
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>ls -la</b></h3>
-          <ul>
-            <li>List current directory content with additional information and hidden files</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>ls -la</b></h3>
+                    <ul>
+                        <li>List current directory content with additional information and hidden files</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
   $ls -la
   total 12K
   drwxrwxr-x.  3 student student 4.0K Dec  9 22:57 .
@@ -171,16 +170,16 @@ $
   drwxrwxr-x.  2 student student 4.0K Dec  9 22:58 my_test2
 
   $
-          </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>tree</b></h3>
-          <ul>
-            <li>List contents of directories in a tree-like format</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>tree</b></h3>
+                    <ul>
+                        <li>List contents of directories in a tree-like format</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $tree
 .
 ├── my_test
@@ -191,35 +190,35 @@ $tree
 
 5 directories, 0 files
 $
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>rmdir</b></h3>
-          <ul>
-            <li>Remove a directory from the current directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>rmdir</b></h3>
+                    <ul>
+                        <li>Remove a directory from the current directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $rmdir my_test
 $
-      </code></pre>
-          <ul>
-            <li>Remove a directory and all parent directories</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Remove a directory and all parent directories</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $rmdir -p my_test/dir2/dir3/dir4
 $
-    </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>cat</b></h3>
-          <ul>
-            <li>Print the content of a file</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>cat</b></h3>
+                    <ul>
+                        <li>Print the content of a file</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $cat ~/.bashrc
 # .bashrc
 
@@ -228,149 +227,148 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 $
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>mv</b></h3>
-          <ul>
-            <li>Move a file to a different directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>mv</b></h3>
+                    <ul>
+                        <li>Move a file to a different directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $mv homework1.py /home/student/my_homeworks/
 $
-      </code></pre>
-          <ul>
-            <li>Change a file name</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Change a file name</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $mv homework1.py new_homework1.py
 $
-  </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>cp</b></h3>
-          <ul>
-            <li>Copy a file to a new file</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>cp</b></h3>
+                    <ul>
+                        <li>Copy a file to a new file</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $cp homework1.py homework1_backup.py
 $
-      </code></pre>
-          <ul>
-            <li>Copy a file to a different directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Copy a file to a different directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $cp homework1.py /home/student/my_homeworks/
 $
-  </code></pre>
-          <ul>
-            <li>Copy a directory and its files into a different directory</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Copy a directory and its files into a different directory</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $cp -r /home/student/my_homeworks/ backups/
 $
-</code></pre>
-
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>rm</b></h3>
-          <ul>
-            <li>Remove a file</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>rm</b></h3>
+                    <ul>
+                        <li>Remove a file</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $rm homework1_backup.py
 $
-      </code></pre>
-          <ul>
-            <li>Remove a directory and all its content</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>Remove a directory and all its content</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $rm -r /home/student/backups/
 $
-  </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>touch</b></h3>
-          <ul>
-            <li>Create new files</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>touch</b></h3>
+                    <ul>
+                        <li>Create new files</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $touch myfile1.txt myfile2.txt
 $ls
 myfile1.txt
 myfile2.txt
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>head</b></h3>
-          <ul>
-            <li>Print the first part of files</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>head</b></h3>
+                    <ul>
+                        <li>Print the first part of files</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $head -3 ~/.bashrc
 # .bashrc
 
 # Source global definitions
 $
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>tail</b></h3>
-          <ul>
-            <li>Print the last part of files</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>tail</b></h3>
+                    <ul>
+                        <li>Print the last part of files</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $tail -3 ~/.bashrc
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
 $
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>diff</b></h3>
-          <ul>
-            <li>Compare files line by line</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>diff</b></h3>
+                    <ul>
+                        <li>Compare files line by line</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $diff myfile1.txt myfile2.txt
 $
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>clear</b></h3>
-          <ul>
-            <li>Clear the terminal screen</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>clear</b></h3>
+                    <ul>
+                        <li>Clear the terminal screen</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $clear
 $
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>Getting more info on commands</b></h3>
-          <ul>
-            <li>man</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>Getting more info on commands</b></h3>
+                    <ul>
+                        <li>man</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $man pwd
 PWD(1)
 
@@ -379,11 +377,11 @@ NAME
 
 SYNOPSIS
        pwd [OPTION]...
-        </code></pre>
-          <ul>
-            <li>--help</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>--help</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $pwd --help
 pwd: pwd [-LP]
     Print the name of the current working directory.
@@ -391,16 +389,16 @@ pwd: pwd [-LP]
     Options:
       -L	print the value of $PWD
 ...
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>wget</b></h3>
-          <ul>
-            <li>Utility for non-interactive download of files from the Web</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>wget</b></h3>
+                    <ul>
+                        <li>Utility for non-interactive download of files from the Web</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $wget https://redhat-israel.github.io/ROSE/materials.html
 
 Resolving redhat-israel.github.io...
@@ -415,16 +413,16 @@ materials.html  100%[===============>]   3.02K  --.-KB/s
 
 $ls
 materials.html
-      </code></pre>
-        </section>
-      </section>
-      <section>
-        <section>
-          <h3><b>Install a new software</b></h3>
-          <ul>
-            <li>sudo dnf install</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>Install a new software</b></h3>
+                    <ul>
+                        <li>sudo dnf install</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 $sudo dnf install sl
 Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:06:00 PM IST.
 Dependencies resolved.
@@ -434,8 +432,8 @@ Dependencies resolved.
 Installing:
  sl
  ...
-        </code></pre>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs">
 $sudo dnf install figlet
 Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
 Dependencies resolved.
@@ -445,59 +443,58 @@ Dependencies resolved.
 Installing:
  figlet
  ...
-      </code></pre>
-        </section>
-      </section>
-      <script src="reveal/lib/js/head.min.js"></script>
-      <script src="reveal/js/reveal.js"></script>
+                    </code></pre>
+                </section>
+            </section>
+            <script src="reveal/lib/js/head.min.js"></script>
+            <script src="reveal/js/reveal.js"></script>
 
-      <script>
-        // More info https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-          controls: true,
-          progress: true,
-          history: true,
-          center: true,
-          slideNumber: true,
-          transition: 'slide', // none/fade/slide/convex/concave/zoom
-          // More info https://github.com/hakimel/reveal.js#dependencies
-          dependencies: [{
-              src: 'reveal/lib/js/classList.js',
-              condition: function() {
-                return !document.body.classList;
-              }
-            },
-            {
-              src: 'reveal/plugin/markdown/marked.js',
-              condition: function() {
-                return !!document.querySelector('[data-markdown]');
-              }
-            },
-            {
-              src: 'reveal/plugin/markdown/markdown.js',
-              condition: function() {
-                return !!document.querySelector('[data-markdown]');
-              }
-            },
-            {
-              src: 'reveal/plugin/highlight/highlight.js',
-              async: true,
-              callback: function() {
-                hljs.initHighlightingOnLoad();
-              }
-            },
-            {
-              src: 'reveal/plugin/zoom-js/zoom.js',
-              async: true
-            },
-            {
-              src: 'reveal/plugin/notes/notes.js',
-              async: true
-            }
-          ]
-        });
-      </script>
-
+            <script>
+                // More info https://github.com/hakimel/reveal.js#configuration
+                Reveal.initialize({
+                    controls: true,
+                    progress: true,
+                    history: true,
+                    center: true,
+                    slideNumber: true,
+                    transition: 'slide', // none/fade/slide/convex/concave/zoom
+                    // More info https://github.com/hakimel/reveal.js#dependencies
+                    dependencies: [{
+                            src: 'reveal/lib/js/classList.js',
+                            condition: function() {
+                                return !document.body.classList;
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/markdown/marked.js',
+                            condition: function() {
+                                return !!document.querySelector('[data-markdown]');
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/markdown/markdown.js',
+                            condition: function() {
+                                return !!document.querySelector('[data-markdown]');
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/highlight/highlight.js',
+                            async: true,
+                            callback: function() {
+                                hljs.initHighlightingOnLoad();
+                            }
+                        },
+                        {
+                            src: 'reveal/plugin/zoom-js/zoom.js',
+                            async: true
+                        },
+                        {
+                            src: 'reveal/plugin/notes/notes.js',
+                            async: true
+                        }
+                    ]
+                });
+            </script>
 </body>
 
 </html>

@@ -2,148 +2,150 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Control Structures</title>
+    <title>Control Structures</title>
 
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <link rel="stylesheet" href="reveal/css/reveal.css">
-  <link rel="stylesheet" href="media/presentations.css" id="theme">
-  <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
+    <link rel="stylesheet" href="reveal/css/reveal.css">
+    <link rel="stylesheet" href="media/presentations.css" id="theme">
+    <link rel="stylesheet" href="reveal/lib/css/zenburn.css">
 
-  <!-- Printing and PDF exports -->
-  <script>
-    var link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.type = 'text/css';
-    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-    document.getElementsByTagName('head')[0].appendChild(link);
-  </script>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
 
-  <style>
-    .reveal .slide spre {
-      width: 100%
-    }
-  </style>
+    </script>
+
+    <style>
+        .reveal .slide spre {
+            width: 100%
+        }
+
+    </style>
 </head>
 
 <body>
 
-  <div class="reveal">
-    <div class="slides">
+    <div class="reveal">
+        <div class="slides">
 
-      <section data-background-size="cover" data-background-image="media/rose_background.jpg">
-        <h1 class="slide_main_title">
-              <b>Control<br>Structures</b></h1>
-      </section>
+            <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+                <h1 class="slide_main_title">
+                    <b>Control<br>Structures</b></h1>
+            </section>
 
-      <section>
+            <section>
 
-        <section>
-          <h1><b>
-                <span>If Statements</span>
-            </h1></b>
-        </section>
+                <section>
+                    <h1><b>
+                            <span>If Statements</span>
+                    </h1></b>
+                </section>
 
-        <section>
-          <h3><b>Reminder: Boolean<br> Operators<br></b></h3>
-          <div style="width: 950px; font-size: 30px">
-            <table>
-              <tr>
-                <th><em>Expression</em></th>
-                <th><em>Function</em></th>
-              </tr>
-              <tr>
-                <td>
-                  <</td>
-                    <td>less than</td>
-              </tr>
-              <tr>
-                <td>
-                  <=</td>
-                    <td>less than or equal to</td>
-              </tr>
-              <tr>
-                <td>></td>
-                <td>greater than</td>
-              </tr>
-              <tr>
-                <td>>=</td>
-                <td>greater than or equal to</td>
-              </tr>
-              <tr>
-                <td>!=</td>
-                <td>not equal to</td>
-              </tr>
-              <tr>
-                <td>==</td>
-                <td>equal to</td>
-              </tr>
-            </table>
-          </div>
-        </section>
+                <section>
+                    <h3><b>Reminder: Boolean<br> Operators<br></b></h3>
+                    <div style="width: 950px; font-size: 30px">
+                        <table>
+                            <tr>
+                                <th><em>Expression</em></th>
+                                <th><em>Function</em></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <</td> <td>less than
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <=</td> <td>less than or equal to
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>></td>
+                                <td>greater than</td>
+                            </tr>
+                            <tr>
+                                <td>>=</td>
+                                <td>greater than or equal to</td>
+                            </tr>
+                            <tr>
+                                <td>!=</td>
+                                <td>not equal to</td>
+                            </tr>
+                            <tr>
+                                <td>==</td>
+                                <td>equal to</td>
+                            </tr>
+                        </table>
+                    </div>
+                </section>
 
-        <section>
-          <h3><b>Blocks</b></h3>
-          <ul>
-            <li>All control structures (if, for / while, functions) content must be in a block.</li>
-            <li>Block are determined by indentation.</li>
-            <li>You can use either Tab or some spaces to indent.</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                <section>
+                    <h3><b>Blocks</b></h3>
+                    <ul>
+                        <li>All control structures (if, for / while, functions) content must be in a block.</li>
+                        <li>Block are determined by indentation.</li>
+                        <li>You can use either Tab or some spaces to indent.</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 if 4 < 5:
     print("Yes, It is true!")
                     </code></pre>
-        </section>
+                </section>
 
-        <section>
-          <h3><b>Simple If</b></h3>
-          <ul>
-            <li>The general Python syntax for a simple if statement is:</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                <section>
+                    <h3><b>Simple If</b></h3>
+                    <ul>
+                        <li>The general Python syntax for a simple if statement is:</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 if condition:
     doing-this-intended-block
     it-can-take-more-than-one-line
-                      </code></pre>
-          <ul>
-            <li>If the condition is true: <b>do</b> the intended block</li>
-            <li>If the condition is not true: <b>skip</b> the intended block</li>
-          </ul>
-          <pre class="fragment"><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>If the condition is true: <b>do</b> the intended block</li>
+                        <li>If the condition is not true: <b>skip</b> the intended block</li>
+                    </ul>
+                    <pre class="fragment"><code data-trim data-noescape class="hljs">
 # What will be printed here?
 age = 13
 if age > 20:
     print("You are too old!")
 print('You are young!')
-                     </code></pre>
-          <pre class="fragment"><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <pre class="fragment"><code data-trim data-noescape class="hljs">
 # And now?
 age = 13
 if age < 20:
     print("You are too old!")
     print("You are young!")
-                      </code></pre>
-        </section>
+                    </code></pre>
+                </section>
 
-        <section>
-          <h3><b>if-else Statements</b></h3>
-          <ul>
-            <li>What if the boolean expression is 'False' and not 'True'?</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                <section>
+                    <h3><b>if-else Statements</b></h3>
+                    <ul>
+                        <li>What if the boolean expression is 'False' and not 'True'?</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 if condition:
   doing-this-block-if-condition-is-true
 else:
   doing-this-block-if-condition-is-false
-                          </code></pre>
-          <ul>
-            <li>'else' simply tells the computer what to do if the conditions of 'if' aren't met</li>
-          </ul>
-          <pre class="fragment"><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>'else' simply tells the computer what to do if the conditions of 'if' aren't met</li>
+                    </ul>
+                    <pre class="fragment"><code data-trim data-noescape class="hljs">
 # Example:
 
 today = "Tuesday"
@@ -152,13 +154,13 @@ if today == "Sunday":
 else:
   print ("No ROSE for today...")
                      </code></pre>
-        </section>
-        <section>
-          <h3><b>if-elif-else Statements</b></h3>
-          <ul>
-            <li>Sometimes we have to check multiple conditions.</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                </section>
+                <section>
+                    <h3><b>if-elif-else Statements</b></h3>
+                    <ul>
+                        <li>Sometimes we have to check multiple conditions.</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 if condition1:
     run-block-for-true-condition-1
 elif condition2:
@@ -167,41 +169,40 @@ elif condition3:
     run-block-for-true-condition-3
 else:
     run-block-for-all-conditions-were-false
-                          </code></pre>
-          <ul>
-            <li>'elif' block actually combines 'else' and 'if' block.</li>
-            <li>This is what 'elif' uses for!</li>
-          </ul>
-        </section>
+                    </code></pre>
+                    <ul>
+                        <li>'elif' block actually combines 'else' and 'if' block.</li>
+                        <li>This is what 'elif' uses for!</li>
+                    </ul>
+                </section>
 
-        <section>
-          <h3><b>Let's Practice together!</b></h3>
-          <ul>
-            <li>Write a program that defines parameter 'a'.</li>
-            <li>The program checks if 'a' is positive, negative or equal zero and prints a proper message. </li>
-          </ul>
-          <img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png" />
-        </section>
+                <section>
+                    <h3><b>Let's Practice together!</b></h3>
+                    <ul>
+                        <li>Write a program that defines parameter 'a'.</li>
+                        <li>The program checks if 'a' is positive, negative or equal zero and prints a proper message. </li>
+                    </ul>
+                    <img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png" />
+                </section>
+            </section>
 
-      </section>
-
-      <section>
-        <section>
-          <h1><b>
-                <span>While Loop</span>
-            </h1></b>
-        </section>
-        <section>
-          <h3><b>Simple While Loop</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+            <section>
+                <section>
+                    <h1><b>
+                            <span>While Loop</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>Simple While Loop</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 while True:
     name = input("Enter your name: ")
     print("Hello %s!!" %name)
-                </code></pre>
-        </section>
-        <section>
-          <h3><b>Break and Continue</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Break and Continue</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 SECRET = 'xyzzy'
 
 while True:
@@ -214,29 +215,29 @@ while True:
     print("Wrong password!")
 
 print("Welcome!")
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>While with condition</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>While with condition</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 step = 0
 while step < 10:
     print(step)
     step = step + 1
 print("Finished!!")
-          </code></pre>
-        </section>
-      </section>
+                    </code></pre>
+                </section>
+            </section>
 
-      <section>
-        <section>
-          <h1><b>
-            <span>For Loop</span>
-          </h1></b>
-        </section>
-        <section>
-          <h3><b>For loop on a String</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+            <section>
+                <section>
+                    <h1><b>
+                            <span>For Loop</span>
+                    </h1></b>
+                </section>
+                <section>
+                    <h3><b>For loop on a String</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 for c in 'Hello World!':
     print(c)
 H
@@ -251,122 +252,123 @@ r
 l
 d
 !
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>For loop on a list</b></h3>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>For loop on a list</b></h3>
+                    <pre><code data-trim data-noescape class="hljs">
 airports=["TLV","SOF","MUC"]
 for name in airports:
     print(name)
 TLV
 SOF
 MUC
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>For loop using range</b></h3>
-          <ul>
-            <li>range(n) produces [0, 1, ..., n-1]</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>For loop using range</b></h3>
+                    <ul>
+                        <li>range(n) produces [0, 1, ..., n-1]</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 # Print "Hello" 5 times
 for x in range(5):
     print("Hello!")
-          </code></pre>
-          <ul>
-            <li>range(i, j) produces [i, i+1, ..., j-1]</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <ul>
+                        <li>range(i, j) produces [i, i+1, ..., j-1]</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 # Start from 2 until 6
 # (2,3,4,5,6)
 for x in range(2,7):
     print(x)
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>For loop using range</b></h3>
-          <ul>
-            <li>range(i, j, k) produces [i, i+k, ..., m]</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>For loop using range</b></h3>
+                    <ul>
+                        <li>range(i, j, k) produces [i, i+k, ..., m]</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 # Start from 0 until 21, increased by 3
 # (0,3,6,9,12,5,18,21)
 for x in range(0,22,3):
     print(x)
-          </code></pre>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs">
 # Start from 10 until 0, decreased by 1
 # (10,9,8,7,6,5,4,3,2,1)
 for x in range(10,0,-1):
     print(x)
-          </code></pre>
-        </section>
-        <section>
-          <h3><b>Nested Loop</b></h3>
-          <ul>
-            <li>A loop inside another loop</li>
-          </ul>
-          <pre><code data-trim data-noescape class="hljs">
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Nested Loop</b></h3>
+                    <ul>
+                        <li>A loop inside another loop</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
 for i in range(10):
     for j in range(10):
         print(i, j)
-          </code></pre>
-        </section>
+                    </code></pre>
+                </section>
 
-      </section>
+            </section>
+        </div>
     </div>
-  </div>
 
-  <script src="reveal/lib/js/head.min.js"></script>
-  <script src="reveal/js/reveal.js"></script>
+    <script src="reveal/lib/js/head.min.js"></script>
+    <script src="reveal/js/reveal.js"></script>
 
-  <script>
-    // More info https://github.com/hakimel/reveal.js#configuration
-    Reveal.initialize({
-      controls: true,
-      progress: true,
-      history: true,
-      center: true,
-      slideNumber: true,
-      transition: 'slide', // none/fade/slide/convex/concave/zoom
-      // More info https://github.com/hakimel/reveal.js#dependencies
-      dependencies: [{
-          src: 'reveal/lib/js/classList.js',
-          condition: function() {
-            return !document.body.classList;
-          }
-        },
-        {
-          src: 'reveal/plugin/markdown/marked.js',
-          condition: function() {
-            return !!document.querySelector('[data-markdown]');
-          }
-        },
-        {
-          src: 'reveal/plugin/markdown/markdown.js',
-          condition: function() {
-            return !!document.querySelector('[data-markdown]');
-          }
-        },
-        {
-          src: 'reveal/plugin/highlight/highlight.js',
-          async: true,
-          callback: function() {
-            hljs.initHighlightingOnLoad();
-          }
-        },
-        {
-          src: 'reveal/plugin/zoom-js/zoom.js',
-          async: true
-        },
-        {
-          src: 'reveal/plugin/notes/notes.js',
-          async: true
-        }
-      ]
-    });
-  </script>
+    <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [{
+                    src: 'reveal/lib/js/classList.js',
+                    condition: function() {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/marked.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/markdown.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: 'reveal/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: 'reveal/plugin/notes/notes.js',
+                    async: true
+                }
+            ]
+        });
+
+    </script>
 
 </body>
 
