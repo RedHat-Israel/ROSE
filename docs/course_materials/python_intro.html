@@ -47,7 +47,7 @@
                         <li>A popular programming language.</li>
                         <li>It was written by Guido van Rossum in the 1990s.</li>
                         <img width="230" height="230" style="border:0px;background:none;box-shadow: none" align="right" data-src="media/python-icon.png" />
-                        <li>It is used for:</li>
+                        <li>It is using for:</li>
                         <ul>
                             <li>Web development (server-side)</li>
                             <li>Software development</li>
@@ -61,10 +61,10 @@
                 <section>
                     <h3><b>Why Python?</b></h3>
                     <ul>
-                        <li>Works on different platforms (Windows, Mac, Linux etc).</li>
+                        <li>Works on different platforms (Windows, Mac, Linux, etc.).</li>
                         <li>Python code is easy to read and understand.</li>
-                        <li>Most programming tasks are easier with Python than with any other programming language.</li>
-                        <li>The program runs immediately by Python's interpreter,</br>so there's a fast feedback.</li>
+                        <li>Most programming tasks are more accessible with Python than with any other programming language.</li>
+                        <li>The program runs immediately by Python's interpreter,</br>so there's fast feedback.</li>
                     </ul>
                 </section>
             </section>
@@ -74,12 +74,13 @@
                     <ul>
                         <li>Interactive mode:</br>Open a terminal and type "python"</li>
                         <pre><code data-trim data-noescape class="hljs">
-$python
-Python 2.7.17 (default, Oct 21 2019, 17:20:57)
-Type "help", "copyright", "credits" or "license" for more information.
->>>
+                            $ python
+                            Python 3.7.7 (default, Mar 13 2020, 21:39:43)
+                            [GCC 9.2.1 20190827 (Red Hat 9.2.1-1)] on linux
+                            Type "help", "copyright", "credits" or "license" for more information.
+                            >>>
                         </code></pre>
-                        Use Ctrl+d for exit.</br></br>
+                        Use Ctrl+d to exit.</br></br>
                         Your code will be deleted once you close the session!
                     </ul>
                 </section>
@@ -88,10 +89,39 @@ Type "help", "copyright", "credits" or "license" for more information.
                 <section>
                     <h3><b>How to run Python?</b></h3>
                     <ul>
-                        <li>Script mode:</br>Use a file that contains Python code with .py extention</li>
+                        <li>Script mode:</br>
+                            Use .py extension for indicating the file contains Python code in it</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs">
-$python mycode.py
+                        $ python mycode.py
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>Comments in Python</b></h3>
+                    <ul>
+                        <li>A hash sign (#) begins a comment.</li>
+                        <li>All characters after the # and up to the end of the physical line are part of the comment.</li>
+                        <li>The Python interpreter ignores them.</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
+                        >>> # This is a comment
+                        >>>
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h3><b>print()</b></h3>
+                    <ul>
+                        <li>Your first function!</li>
+                        <li>Prints a message.</li>
+                        <li>Don't forget to put the message between " "</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs">
+                        >>> print("Hi!")
+                        Hi!
                     </code></pre>
                 </section>
             </section>
@@ -100,15 +130,17 @@ $python mycode.py
                     <h3><b>Exercise</b></h3>
                     <ul>
                         <li>Open your favorite code editor (gedit/vim/other)</li>
-                        <li>Write in the following code:</br>
-                            print("Hello World!")</li>
+                        <li>Write the following code:</br>
+                            <p><i># This is my first comment</br>
+                                    print("Hello World!")</i></p>
+                        </li>
                         <li>Save the file and call it hello.py</li>
-                        <li>Run it on the terminal:</li>
+                        <li>Run it from the terminal:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs">
-$python hello.py
-Hello World!
-$
+                        $ python hello.py
+                        Hello World!
+                        $
                     </code></pre>
                 </section>
             </section>
