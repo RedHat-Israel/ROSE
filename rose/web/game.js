@@ -21,18 +21,13 @@ var ROSE = (function() {
             this.client = new Client(this.onmessage.bind(this), 2000);
         }.bind(this));
 
-        //Disabling sound until mute is possible in the UI
-        //var sound_loader = new SoundLoader(function() {});
-        //sound_loader.load("res/soundtrack/Nyan_Cat.ogg", function(sound) {
-        //    sound.play();
-        //});
-
         this.context = $("#game").get(0).getContext("2d");
         this.dashboard = new Dashboard();
         this.track = new Track(image_loader);
         this.obstacles = new Obstacles(image_loader);
         this.cars = new Cars(image_loader);
         this.finish_line = new FinishLine(image_loader);
+        this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
     }
 
     App.prototype.onmessage = function(m) {
@@ -422,24 +417,33 @@ var ROSE = (function() {
         img.src = url;
     }
 
-    function SoundLoader(done) {
-        this.loading = 0;
-        this.done = done;
-    }
-
-    SoundLoader.prototype.load = function(url, done) {
-        var audio = new Audio();
+    function Sound(file_path) {
         var self = this;
-        self.loading++;
-        $(audio).on('canplaythrough', function () {
-            done(audio);
-            self.loading--;
-            if (self.loading == 0) {
-                self.done();
+        self.audio = new Audio();
+        self.audio.src = file_path;
+
+        $("#music_ctl").click(function(event) {
+            event.preventDefault();
+            if (self.playing) {
+                self.playing = false;
+                self.pause();
+                $(this).text("Play");
+            } else {
+                self.playing = true;
+                self.play();
+                $(this).text("Mute");
             }
         });
-        audio.src = url;
     }
+
+    Sound.prototype.play = function() {
+        this.audio.play();
+    }
+
+    Sound.prototype.pause = function() {
+        this.audio.pause();
+    }
+
 
     return new App();
 }());
