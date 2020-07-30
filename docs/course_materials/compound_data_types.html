@@ -74,8 +74,8 @@ print(l)             # ['apple', 'orange']
                         <li>Creating a populated list:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-l = ["orange", "apple", "strawberry", "banana"]
-print(l)  # ["orange", "apple", "strawberry", "banana"]
+l = ["orange", "apple", "plum", "banana"]
+print(l)  # ["orange", "apple", "plum", "banana"]
                     </code></pre>
                 </section>
                 <section>
@@ -85,25 +85,23 @@ print(l)  # ["orange", "apple", "strawberry", "banana"]
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 l.insert(3, 'melon')
-print(l)
-# ['orange', 'apple', 'strawberry', 'melon', 'banana']
+print(l) # ['orange', 'apple', 'plum', 'melon', 'banana']
                     </code></pre>
                     <ul>
                         <li>Deleting an item on a specific index:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 del l[0]
-print(l)
-# ['apple', 'strawberry', 'melon', 'banana']
+print(l) # ['apple', 'plum', 'melon', 'banana']
                     </code></pre>
                 </section>
                 <section>
                     <h3><b>Popping an element (remove it and return it's value):</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 print(l.pop())  # 'banana'
-print(l)        # ['apple', 'strawberry', 'melon']
+print(l)        # ['apple', 'plum', 'melon']
 print(l.pop(0)) # 'apple'
-print(l)        # ['strawberry', 'melon']
+print(l)        # ['plum', 'melon']
                     </code></pre>
                 </section>
                 <section>
@@ -113,12 +111,14 @@ lst[i] = v      # Changes an element or slice by assigning
 lst.remove(v)   # Removes a specific value
                     </code></pre>
                     <ul>
-                        <li>The .extend() method adds all the elements of an iterable to the end of the list, and returns None:</li>
+                        <li>The .extend() method adds all the elements of an iterable to the end of the list:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 lst = [1,2,3]
-lst.extend([4,5,6])
-print(lst)  # [1,2,3,4,5,6]
+lst2 = [4,5,6]
+lst.extend(lst2)
+print(lst)      # [1,2,3,4,5,6]
+print(len(lst)) # 6
                     </code></pre>
                 </section>
                 <section>
@@ -127,7 +127,7 @@ print(lst)  # [1,2,3,4,5,6]
 print(l[0])     # 'orange'
 print(l[8])     # IndexError: list index out of range
 print(l[-1])    # 'banana'
-print(l[1:3])   # ['apple', 'strawberry']
+print(l[1:3])   # ['apple', 'plum']
                     </code></pre>
                 </section>
                 <section>
@@ -145,33 +145,33 @@ print(l)    # ['foo', 'bar', 'foo', 'bar', 'foo', 'bar']
                 <section>
                     <h3><b>In-place list operations</b></h3>
                     <ul>
-                        <li>The .reverse() method changes a list in-place, and returns None:</li>
+                        <li>The .reverse() method changes a list in-place:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-fruit = ["orange", "apple", "strawberry"]
+fruit = ["orange", "apple", "plum"]
 fruit.reverse()
-print(fruit)  # ['strawberry', 'apple', 'orange']
+print(fruit)  # ['plum', 'apple', 'orange']
                     </code></pre>
                     <ul>
                         <li>Another handy way to reverse a list is by using a full slice with a negative step:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-fruit = ["orange", "apple", "strawberry"]
+fruit = ["orange", "apple", "plum"]
 fruit = fruit[::-1]
-print(fruit)  # ['strawberry', 'apple', 'orange']
+print(fruit)  # ['plum', 'apple', 'orange']
                     </code></pre>
                 </section>
                 <section>
                     <ul>
-                        <li>The .sort() method sorts elements in-place, and returns None:</li>
+                        <li>The .sort() method sorts elements in-place:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-fruit = ["orange", "apple", "strawberry"]
+fruit = ["orange", "apple", "plum"]
 fruit.sort()
-print(fruit)  # ['apple', 'orange', 'strawberry']
+print(fruit)  # ['apple', 'orange', 'plum']
 
 fruit.sort(reverse=True)
-print(fruit)  # ['strawberry', 'orange', 'apple']
+print(fruit)  # ['plum', 'orange', 'apple']
                     </code></pre>
                 </section>
             </section>
@@ -229,11 +229,9 @@ print(fruit)  # ['strawberry', 'orange', 'apple']
                 <section>
                     <h3><b>Example</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-sports = {
-    'Ralph' : 'Football',
-    'Michael' : 'Basketball',
-    'Shirly' : 'Baseball'
-}
+sports = {'Ralph' : 'Football',
+          'Michael' : 'Basketball',
+          'Shirly' : 'Baseball'}
 print(sports)
 # {'Ralph': 'Football', 'Michael': 'Basketball',
 #  'Shirly': 'Baseball'}
@@ -296,9 +294,9 @@ s.update(s2) or s = s | s2 # updates s with s2 values
                 </section>
                 <!-- List and Dict references -->
                 <section>
-                    <h3><b>Lists, Dicts and references</b></h3>
+                    <h3><b>Lists, Dictionaries and references</b></h3>
                     <ul>
-                        <li>In Python, Lists and Dicts are passed by reference to the object and not it's value.</li>
+                        <li>In Python, Lists and Dictionaries are passed by reference to the object and not it's value.</li>
                         <li>For example, when using the assignment operator (=) on a list, a reference is created to the original list.</li>
                         <li>Which means that two variables point to the same value:</li>
                     </ul>
@@ -366,10 +364,10 @@ prtint(l)  # [5, 25, 100, 250, 1, 8, 'Hi!']
                 <section>
                     <h3><b>Sequence operations</b></h3>
                     <ul>
-                        <li>Check the length of lists, dicts, tuples and sets:</li>
+                        <li>Check the length of lists, dictionaries, tuples and sets:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-l = ['orange', 'apple', 'strawberry', 'banana']
+l = ['orange', 'apple', 'plum', 'banana']
 print(len(l))     # 4
 d = {'name': 'Tux', 'animal': 'penguin'}
 print(len(d))     # 2
@@ -379,14 +377,14 @@ s = {'apple', 'banana', 'orange', 'apple'}
 print(len(s))     # 3
                     </code></pre>
                     <ul>
-                        <li>For loops through the list:</li>
+                        <li>For loops through a list:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 for x in l:
     print(x)
 # orange
 # apple
-# strawberry
+# plum
 # banana
                     </code></pre>
                 </section>
