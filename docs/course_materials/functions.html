@@ -42,11 +42,7 @@
                     <b>Functions</b></h1>
             </section>
             <section>
-                <section>
-                    <h1><b>
-                            <span>Functions</span>
-                    </h1></b>
-                </section>
+
                 <section>
                     <h3><b>Functions</b></h3>
                     <ul>
@@ -61,49 +57,62 @@
                             <li>A body</li>
                         </ul>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-def print_name(my_name):
+                    <img width="750" height="170" style="" data-src="media/functions.png" />
+                </section>
+
+                <section>
+                    <h3><b>How to use</b></h3>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+def say_hello(my_name):
     print("Hello %s" %my_name)
-print_name("Joe")
+
+say_hello("Joe") # Hello Joe
                     </code></pre>
                 </section>
+
                 <section>
                     <h3><b>Multiple Parameters</b></h3>
                     <ul>
                         <li>A function can have any number of parameters</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-def print_name(first_name, last_name):
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+def say_hello(first_name, last_name):
     print("Hello %s %s" %(first_name, last_name))
-print_name("Joe", "Cocker")
+
+say_hello("Joe", "Cocker") # Hello Joe Cocker
                     </code></pre>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <ul>
+                        <li>Another way</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 first="Joe"
 last="Cocker"
-print_name(first, last)
+say_hello(first, last)
                     </code></pre>
                 </section>
 
                 <section>
                     <h3><b>Variables Scope</b></h3>
                     <ul>
-                        <li>When a function finish running all it s variables are vanished</li>
+                        <li>When a function ends running, all its variables vanish</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 def scope():
     a=10
     print(a)
-scope()
+
+scope()    # 10
 print(a)   #ERROR
                     </code></pre>
                     <ul>
                         <li>If we have defined a variable in the program and the function redefined it, then the value in the function is used in the function scope</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a=5
 def scope():
     a=10
     print(a)
+
 scope()    # 10
 print(a)   # 5
                     </code></pre>
@@ -111,21 +120,27 @@ print(a)   # 5
 
                 <section>
                     <h3><b>Summary</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 def increment(x):
     return x + 1
+
 result = increment(3)
-print (result)
+print(result)  # 4
                     </code></pre>
                     <ul>
-                        <li>Colon(:)indicates start of a block</li>
+                        <li>Colon(:) indicates the start of a block</li>
                         <li>Following lines are indented</li>
-                        <li>Function declaration does not specify return type</li>
+                        <li>Function declaration does not specify a return type</li>
                         <li>All functions return a value (None if not specified)</li>
                         <li>A function can have multiple parameters</li>
                         <li>Parameter data types are not specified</li>
                         <li>Be aware of variables scope</li>
                     </ul>
+                </section>
+
+                <section>
+                    <h3><b>Exercise</b></h3>
+                    TBD
                 </section>
             </section>
         </div>
