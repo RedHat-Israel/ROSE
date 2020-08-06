@@ -606,115 +606,60 @@ $
   Installing:
   figlet
   ...
-          </code></pre>
+           </code></pre>
+         </section>
         </section>
       </section>
-    </section>
       <script src="reveal/lib/js/head.min.js"></script>
       <script src="reveal/js/reveal.js"></script>
+
       <script>
         // More info https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
-          controls: true,
-          progress: true,
-          history: true,
-          center: true,
-          slideNumber: true,
-          transition: 'slide', // none/fade/slide/convex/concave/zoom
-          // More info https://github.com/hakimel/reveal.js#dependencies
-          dependencies: [{
-              src: 'reveal/lib/js/classList.js',
-              condition: function() {
-                return !document.body.classList;
-              }
-            },
-            {
-              src: 'reveal/plugin/markdown/marked.js',
-              condition: function() {
-                return !!document.querySelector('[data-markdown]');
-              }
-            },
-            {
-              src: 'reveal/plugin/markdown/markdown.js',
-              condition: function() {
-                return !!document.querySelector('[data-markdown]');
-              }
-            },
-            {
-              src: 'reveal/plugin/highlight/highlight.js',
-              async: true,
-              callback: function() {
-                hljs.initHighlightingOnLoad();
-              }
-            },
-            {
-              src: 'reveal/plugin/zoom-js/zoom.js',
-              async: true
-            },
-            {
-              src: 'reveal/plugin/notes/notes.js',
-              async: true
-            }
-          ]
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [{
+                    src: 'reveal/lib/js/classList.js',
+                    condition: function() {
+                        return !document.body.classList;
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/marked.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/markdown.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: 'reveal/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: 'reveal/plugin/notes/notes.js',
+                    async: true
+                }
+            ]
         });
       </script>
+      </div>
     </div>
-  </div>
-=======
- figlet
- ...
-                    </code></pre>
-                </section>
-            </section>
-            <script src="reveal/lib/js/head.min.js"></script>
-            <script src="reveal/js/reveal.js"></script>
-
-            <script>
-                // More info https://github.com/hakimel/reveal.js#configuration
-                Reveal.initialize({
-                    controls: true,
-                    progress: true,
-                    history: true,
-                    center: true,
-                    slideNumber: true,
-                    transition: 'slide', // none/fade/slide/convex/concave/zoom
-                    // More info https://github.com/hakimel/reveal.js#dependencies
-                    dependencies: [{
-                            src: 'reveal/lib/js/classList.js',
-                            condition: function() {
-                                return !document.body.classList;
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/markdown/marked.js',
-                            condition: function() {
-                                return !!document.querySelector('[data-markdown]');
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/markdown/markdown.js',
-                            condition: function() {
-                                return !!document.querySelector('[data-markdown]');
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/highlight/highlight.js',
-                            async: true,
-                            callback: function() {
-                                hljs.initHighlightingOnLoad();
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/zoom-js/zoom.js',
-                            async: true
-                        },
-                        {
-                            src: 'reveal/plugin/notes/notes.js',
-                            async: true
-                        }
-                    ]
-                });
-            </script>
->>>>>>> Use tabs on html tags formatting (#328)
-</body>
+  </body>
 </html>
