@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 
-<head>
+  <head>
     <meta charset="utf-8">
 
     <title>Linux Introduction</title>
@@ -24,477 +24,633 @@
     </script>
 
     <style>
-        .reveal .slide spre {
-            width: 100%
-        }
+      .reveal .slide spre {
+        width: 100%
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="reveal">
-        <div class="slides">
+      <div class="slides">
+        <section data-background-size="cover" data-background-image="media/rose_background.jpg">
+          <h1 class="slide_main_title"><b>Linux Introduction</b></h1>
+        </section>
+        <section>
+          <section>
+            <h3><b>Terminal</b></h3>
+            <ul>
+              <li>Terminal is an interface between humans and computers</li>
+              <li>The Terminal is a text-only interface </li>
+            </ul>
+          </section>
+          <section>
+            <h3><b>Open a terminal window</b></h3>
+            <ul>
+              <li>Open the search menu:</li>
+              <ul>
+                <li>Press the "Windows" key</li>
+                <li>Or move the mouse to the upper left corner of the screen</li>
+              </ul>
+              <li>Type "terminal" in the search bar</li>
+              <li>Click on the icon named "Terminal"</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+        $
+                </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>Command</b></h3>
+            <ul>
+              <li>A command is an instruction given by a user telling a computer to do something</li>
+              <li>Linux commands are the essence of the entire Linux operating system used to administer the entire system. You may not know it, but most of the applications you run within the graphical user interface are executing Linux commands for you in the background to accomplish the given task</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>pwd</b></h3>
+            <ul>
+              <li>Prints the current directory name</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ pwd
+      /home/student
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>Getting more info about commands</b></h3>
+            <ul>
+              <li>man</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ man pwd
+      PWD(1)
 
-            <section data-background-size="cover" data-background-image="media/rose_background.jpg">
-                <h1 class="slide_main_title"><b>Linux Introduction</b></h1>
-            </section>
-            <section>
-                <section>
-                    <h3><b>Open a terminal window</b></h3>
-                    <ul>
-                        <li>Open the search menu:</li>
-                        <ul>
-                            <li>Press the "Windows" key</li>
-                            <li>Or move the mouse to the upper left corner of the screen</li>
-                        </ul>
-                        <li>Type "terminal" in the search bar</li>
-                        <li>Click on the icon named "Terminal"</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>pwd</b></h3>
-                    <ul>
-                        <li>Prints the current directory name</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$pwd
-/home/student
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>mkdir</b></h3>
-                    <ul>
-                        <li>Creates a directory in the current directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$mkdir my_test
-$
-                    </code></pre>
-                    <ul>
-                        <li>Creates a directory in a specific directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$mkdir /home/student/my_test2
-$
-                    </code></pre>
-                    <ul>
-                        <li>Creates a directory and all parent directories if missing</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$mkdir -p my_test/dir2/dir3/dir4
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>cd</b></h3>
-                    <ul>
-                        <li>Change the working directory to another directory existing in the current directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$cd my_test
-$
-                    </code></pre>
-                    <ul>
-                        <li>Change to a specific directory (Full path)</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$cd /home/student/my_test2
-$
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>cd</b></h3>
-                    <ul>
-                        <li>Change to user home directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-  $cd
-  $
-                    </code></pre>
-                    <pre><code data-trim data-noescape class="hljs">
-  $cd ~
-  $
-                    </code></pre>
-                    <ul>
-                        <li>Change to parent directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-  $cd ..
-  $
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>ls</b></h3>
-                    <ul>
-                        <li>List current directory content</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-  $ls
-  my_test
-  my_test2
-  $
-                    </code></pre>
-                    <ul>
-                        <li>List specific directory content</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-  $ls /home/student
-  my_test
-  my_test2
-  $
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>ls -la</b></h3>
-                    <ul>
-                        <li>List current directory content with additional information and hidden files</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-  $ls -la
-  total 12K
-  drwxrwxr-x.  3 student student 4.0K Dec  9 22:57 .
-  drwxrwxr-x. 10 student student 4.0K Dec  9 22:45 ..
-  -rw-rw-r--.  1 student student    0 Dec  9 22:57 .bashrc
-  drwxrwxr-x.  2 student student 4.0K Dec  9 22:45 my_test
-  drwxrwxr-x.  2 student student 4.0K Dec  9 22:58 my_test2
+      NAME
+             pwd - print name of current/working directory
 
-  $
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>tree</b></h3>
-                    <ul>
-                        <li>List contents of directories in a tree-like format</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$tree
-.
-├── my_test
-│   └── dir2
-│       └── dir3
-│           └── dir4
-└── my_test2
+      SYNOPSIS
+             pwd [OPTION]...
+            </code></pre>
 
-5 directories, 0 files
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>rmdir</b></h3>
-                    <ul>
-                        <li>Remove a directory from the current directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$rmdir my_test
-$
-                    </code></pre>
-                    <ul>
-                        <li>Remove a directory and all parent directories</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$rmdir -p my_test/dir2/dir3/dir4
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>cat</b></h3>
-                    <ul>
-                        <li>Print the content of a file</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$cat ~/.bashrc
-# .bashrc
+          </section>
+          <section>
+            <ul>
+              <li>--help</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ pwd --help
+      pwd: pwd [-LP]
+          Print the name of the current working directory.
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>mv</b></h3>
-                    <ul>
-                        <li>Move a file to a different directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$mv homework1.py /home/student/my_homeworks/
-$
-                    </code></pre>
-                    <ul>
-                        <li>Change a file name</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$mv homework1.py new_homework1.py
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>cp</b></h3>
-                    <ul>
-                        <li>Copy a file to a new file</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$cp homework1.py homework1_backup.py
-$
-                    </code></pre>
-                    <ul>
-                        <li>Copy a file to a different directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$cp homework1.py /home/student/my_homeworks/
-$
-                    </code></pre>
-                    <ul>
-                        <li>Copy a directory and its files into a different directory</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$cp -r /home/student/my_homeworks/ backups/
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>rm</b></h3>
-                    <ul>
-                        <li>Remove a file</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$rm homework1_backup.py
-$
-                    </code></pre>
-                    <ul>
-                        <li>Remove a directory and all its content</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$rm -r /home/student/backups/
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>touch</b></h3>
-                    <ul>
-                        <li>Create new files</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$touch myfile1.txt myfile2.txt
-$ls
-myfile1.txt
-myfile2.txt
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>head</b></h3>
-                    <ul>
-                        <li>Print the first part of files</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$head -3 ~/.bashrc
-# .bashrc
+          Options:
+            -L	print the value of $PWD
+              </code></pre>
+          </section>
 
-# Source global definitions
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>tail</b></h3>
-                    <ul>
-                        <li>Print the last part of files</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$tail -3 ~/.bashrc
-# export SYSTEMD_PAGER=
+        </section>
+        <section>
+          <section>
+            <h3><b>ls</b></h3>
+            <ul>
+              <li>List current directory content</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ ls
+      my_test
+      my_test2
+      $
+              </code></pre>
+            <ul>
+              <li>List specific directory content</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ ls /home/student
+      my_test
+      my_test2
+      $
+              </code></pre>
+          </section>
+          <section>
+            <h3><b>ls -l</b></h3>
+            <ul>
+              <li>-l is a flag </li>
+              <li>-l print the output in a long listing format</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ ls -la
+      total 8K
+      drwxrwxr-x.  2 student student 4.0K Dec  9 22:45 my_test
+      drwxrwxr-x.  2 student student 4.0K Dec  9 22:58 my_test2
 
-# User specific aliases and functions
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>diff</b></h3>
-                    <ul>
-                        <li>Compare files line by line</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$diff myfile1.txt myfile2.txt
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>clear</b></h3>
-                    <ul>
-                        <li>Clear the terminal screen</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$clear
-$
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>Getting more info on commands</b></h3>
-                    <ul>
-                        <li>man</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$man pwd
-PWD(1)
+      $
+              </code></pre>
+          </section>
+          <section>
+            <h3><b>ls -a</b></h3>
+            <ul>
+              <li>-a is a flag </li>
+              <li>-a do not ignore entries starting with .</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ ls -la
+      . .. my_test my_test2
+      $
+              </code></pre>
+          </section>
+          <section>
+            <h3><b>ls -la</b></h3>
+            <ul>
+              <li>-la  you can use two flags or more at the same time.</li>
+              <li>List current directory content with additional information and hidden files</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ ls -la
+      total 12K
+      drwxrwxr-x.  3 student student 4.0K Dec  9 22:57 .
+      drwxrwxr-x. 10 student student 4.0K Dec  9 22:45 ..
+      -rw-rw-r--.  1 student student    0 Dec  9 22:57 .bashrc
+      drwxrwxr-x.  2 student student 4.0K Dec  9 22:45 my_test
+      drwxrwxr-x.  2 student student 4.0K Dec  9 22:58 my_test2
 
-NAME
-       pwd - print name of current/working directory
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>Directory</b></h3>
+            <ul>
+              <li>A directory is just a special file, which contains a list of entries and their ID</li>
+              <li>Actions we can perform on a file are: create, copy, view (read), delete, move file to a different directory, change the file name, run</li>
+              <li>Actions we can perform on a directory are: create, copy, list all files and directories, delete, change your current directory, change name</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>mkdir</b></h3>
+            <ul>
+              <li>Creates a directory in the current directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ mkdir my_test
+      $
+            </code></pre>
+            <ul>
+              <li>Creates a directory in a specific directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ mkdir /home/student/my_test2
+      $
+            </code></pre>
+            <ul>
+              <li>Creates a directory and all parent directories if missing</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ mkdir -p my_test/dir2/dir3/dir4
+      $
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>cd</b></h3>
+            <ul>
+              <li>Change the current directory to another directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd my_test
+      $
+              </code></pre>
+          </section>
 
-SYNOPSIS
-       pwd [OPTION]...
-                    </code></pre>
-                    <ul>
-                        <li>--help</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$pwd --help
-pwd: pwd [-LP]
-    Print the name of the current working directory.
+          <section>
+            <h3><b>/ – The Root Directory </b></h3>
+            <ul>
+              <li>Everything on your Linux system is located under the / directory, known as the root directory.</li>
+            </ul>
 
-    Options:
-      -L	print the value of $PWD
-...
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>wget</b></h3>
-                    <ul>
-                        <li>Utility for non-interactive download of files from the Web</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$wget https://redhat-israel.github.io/ROSE/materials.html
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd /
+      $ ls -la
+      bin   dev        etc   lib    lost+found  mnt  proc  run   sys  tmp  var
+      boot  Downloads  home  media      opt  root  sbin  usr
 
-Resolving redhat-israel.github.io...
-Connecting to redhat-israel.github.io... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 3094 (3.0K) [text/html]
-Saving to: ‘materials.html’
+              </code></pre>
 
-materials.html  100%[===============>]   3.02K  --.-KB/s
+          </section>
 
-‘materials.html’ saved [3094/3094]
+          <section>
+            <h3><b> ~ - Home directory </b></h3>
+            <ul>
+              <li>Each Linux user has a home directory, this directory is in /home directory. For example if you have a user called student, then his default home directory is /home/student </li>
+              <li>you can also use ~ to get to your home directory</li>
 
-$ls
-materials.html
-                    </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h3><b>Install a new software</b></h3>
-                    <ul>
-                        <li>sudo dnf install</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-$sudo dnf install sl
-Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:06:00 PM IST.
-Dependencies resolved.
-===============================================================================
- Package                              Arch
-===============================================================================
-Installing:
- sl
- ...
-                    </code></pre>
-                    <pre><code data-trim data-noescape class="hljs">
-$sudo dnf install figlet
-Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
-Dependencies resolved.
-===============================================================================
- Package                              Arch
-===============================================================================
-Installing:
- figlet
- ...
-                    </code></pre>
-                </section>
-            </section>
-            <script src="reveal/lib/js/head.min.js"></script>
-            <script src="reveal/js/reveal.js"></script>
+            </ul>
 
-            <script>
-                // More info https://github.com/hakimel/reveal.js#configuration
-                Reveal.initialize({
-                    controls: true,
-                    progress: true,
-                    history: true,
-                    center: true,
-                    slideNumber: true,
-                    transition: 'slide', // none/fade/slide/convex/concave/zoom
-                    // More info https://github.com/hakimel/reveal.js#dependencies
-                    dependencies: [{
-                            src: 'reveal/lib/js/classList.js',
-                            condition: function() {
-                                return !document.body.classList;
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/markdown/marked.js',
-                            condition: function() {
-                                return !!document.querySelector('[data-markdown]');
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/markdown/markdown.js',
-                            condition: function() {
-                                return !!document.querySelector('[data-markdown]');
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/highlight/highlight.js',
-                            async: true,
-                            callback: function() {
-                                hljs.initHighlightingOnLoad();
-                            }
-                        },
-                        {
-                            src: 'reveal/plugin/zoom-js/zoom.js',
-                            async: true
-                        },
-                        {
-                            src: 'reveal/plugin/notes/notes.js',
-                            async: true
-                        }
-                    ]
-                });
-            </script>
-</body>
+            <ul>
+              <li>Change Directory to the user home directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd
+      $ pwd
+      /home/student
+              </code></pre>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd ~
+      $ pwd
+      /home/student
 
+              </code></pre>
+
+          </section>
+
+          <section>
+            <h3><b>Absolute Path vs Relative Path </b></h3>
+            <ul>
+              <li>A path is a unique location to a file or a directory in a file system of an OS.</li>
+              <li>An absolute path is defined as specifying the location of a file or directory from the root directory(/). In other words, we can say that an absolute path is a complete path from start of actual filesystem from / directory.</li>
+              <li>Relative path is defined as path related to the present working directory(pwd). </li>
+            </ul>
+            <ul>
+              <li>.(a single dot) - this represents the current directory.</li>
+              <li>..(two dots) - this represents the parent directory.</li>
+            </ul>
+          </section>
+          <section>
+            <h3><b>Absolute path Vs relative path - examples </b></h3>
+
+            <ul>
+              <li>Change to a specific directory- absolute path</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd /home/student/my_test2
+      $ pwd
+      /home/student/my_test2
+              </code></pre>
+            <ul>
+              <li>Move one level up - Relative Path </li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd ..
+      $ pwd
+      /home/student/
+             </code></pre>
+
+            <ul>
+              <li>Change to a specific directory- relative path</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd my_test2
+      $ pwd
+      /home/student/my_test2
+             </code></pre>
+
+            <ul>
+              <li>Move two level up - relative path</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cd ../..
+      $ pwd
+      /home
+             </code></pre>
+
+
+          </section>
+
+        </section>
+        <section>
+          <section>
+            <h3><b>tree</b></h3>
+            <ul>
+              <li>List contents of directories in a tree-like format</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ tree
+      .
+      ├── my_test
+      │   └── dir2
+      │       └── dir3
+      │           └── dir4
+      └── my_test2
+
+      5 directories, 0 files
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>Exercise</b></h3>
+            <ul>
+              <li>Open a terminal </li>
+              <li>Navigate to your home directory</li>
+              <li>Create a directory called test</li>
+              <li>Navigate to test directory</li>
+              <li>create a directory called tmp in test directory</li>
+              <li>Navigate to test directory</li>
+              <li>Navigate two directories up </li>
+              <li>List the content of this directory in a tree format</li>
+              <li>Navigate to your root directory</li>
+              <li>Navigate to test/tmp directory in your home directory</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>cat</b></h3>
+            <ul>
+              <li>Print the content of a file</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cat ~/.bashrc
+      # .bashrc
+
+      # Source global definitions
+      if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+      fi
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>mv</b></h3>
+            <ul>
+              <li>Move a file to a different directory</li>
+              <li>The structure of mv command: mv [source] [destination]</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ mv homework1.py /home/student/my_homeworks/
+      $
+                </code></pre>
+            <ul>
+              <li>Change a file name</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ mv homework1.py new_homework1.py
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>cp</b></h3>
+            <ul>
+              <li>Copy a file to a new file</li>
+              <li>The structure of cp command: cp [source] [destination]</li>
+
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cp homework1.py homework1_backup.py
+      $
+              </code></pre>
+            <ul>
+              <li>Copy a file to a different directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cp homework1.py /home/student/my_homeworks/
+      $
+              </code></pre>
+            <ul>
+              <li>Copy a directory and its files into a different directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ cp -r /home/student/my_homeworks/ backups/
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>rm</b></h3>
+            <ul>
+              <li>Remove a file</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+    $ rm homework1_backup.py
+    $
+          </code></pre>
+            <ul>
+              <li>Remove a directory and all its content</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ rm -r /home/student/backups/
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>rmdir</b></h3>
+            <ul>
+              <li>Remove a directory from the current directory</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ rmdir my_test
+      $
+              </code></pre>
+            <ul>
+              <li>Remove a directory and all parent directories</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ rmdir -p my_test/dir2/dir3/dir4
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>touch</b></h3>
+            <ul>
+              <li>Create new files</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ touch myfile1.txt myfile2.txt
+      $ ls
+      myfile1.txt
+      myfile2.txt
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>head</b></h3>
+            <ul>
+              <li>Print the first part of files</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ head -3 ~/.bashrc
+      # .bashrc
+
+      # Source global definitions
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>tail</b></h3>
+            <ul>
+              <li>Print the last part of files</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ tail -3 ~/.bashrc
+      # export SYSTEMD_PAGER=
+
+      # User specific aliases and functions
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>clear</b></h3>
+            <ul>
+              <li>Clear the terminal screen</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ clear
+      $
+              </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3><b>Exercise</b></h3>
+            <ul>
+              <li>Open a terminal </li>
+              <li>Navigate to test/tmp in your home directory</li>
+              <li>Create two files a.txt and b.txt in tmp directory</li>
+              <li>Copy the file a.txt to test directory (one level up directory)</li>
+              <li>Change the name of b.txt file to c.txt file </li>
+              <li>Edit the file c.txt and add there your name</li>
+              <li>Print the content of the file c.txt </li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1 class="slide_main_title"><b>Extra</b></h1>
+          </section>
+          <section>
+            <h3><b>diff</b></h3>
+            <ul>
+              <li>Compare files line by line</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ diff myfile1.txt myfile2.txt
+      $
+      </code></pre>
+          </section>
+          <section>
+            <h3><b>wget</b></h3>
+            <ul>
+              <li>Utility for non-interactive download of files from the Web</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ wget https://redhat-israel.github.io/ROSE/materials.html
+      Resolving redhat-israel.github.io...
+      Connecting to redhat-israel.github.io... connected.
+      HTTP request sent, awaiting response... 200 OK
+      Length: 3094 (3.0K) [text/html]
+      Saving to: ‘materials.html’
+
+      materials.html  100%[===============>]   3.02K  --.-KB/s
+
+      ‘materials.html’ saved [3094/3094]
+
+      $ ls
+      materials.html
+            </code></pre>
+          </section>
+          <section>
+            <h3><b>Install a new software</b></h3>
+            <ul>
+              <li>sudo dnf install</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ sudo dnf install sl
+      Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:06:00 PM IST.
+      Dependencies resolved.
+      ===============================================================================
+      Package                              Arch
+      ===============================================================================
+      Installing:
+      sl
+            </code></pre>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      sl
+            </code></pre>
+            <pre><code data-trim data-noescape class="hljs">
+      $sudo dnf install figlet
+      Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
+      Dependencies resolved.
+      ===============================================================================
+      Package                              Arch
+      ===============================================================================
+      Installing:
+      figlet
+            </code></pre>
+          </section>
+        </section>
+        <script src="reveal/lib/js/head.min.js"></script>
+        <script src="reveal/js/reveal.js"></script>
+        <script>
+        // More info https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            slideNumber: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [{
+                src: 'reveal/lib/js/classList.js',
+                condition: function() {
+                    return !document.body.classList;
+                }
+            },
+                {
+                    src: 'reveal/plugin/markdown/marked.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/markdown/markdown.js',
+                    condition: function() {
+                        return !!document.querySelector('[data-markdown]');
+                    }
+                },
+                {
+                    src: 'reveal/plugin/highlight/highlight.js',
+                    async: true,
+                    callback: function() {
+                        hljs.initHighlightingOnLoad();
+                    }
+                },
+                {
+                    src: 'reveal/plugin/zoom-js/zoom.js',
+                    async: true
+                },
+                {
+                    src: 'reveal/plugin/notes/notes.js',
+                    async: true
+                }
+            ]
+        });
+        </script>
+      </div>
+    </div>
+  </body>
 </html>
