@@ -28,7 +28,7 @@ class Client(object):
             self.usage('server-address required')
 
         server_address = self.args[1]
-        url = 'http://%s:%d/rpc2' % (server_address, config.web_port)
+        url = 'http://%s:%d/rpc2' % (server_address, args.web_port)
         self.server = xmlrpclib.Server(url)
 
         if len(self.args) < 3:
