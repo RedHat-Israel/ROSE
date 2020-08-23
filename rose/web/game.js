@@ -73,7 +73,7 @@ var ROSE = (function() {
     }
 
     Client.prototype.connect = function() {
-        var wsuri = "ws://" + window.location.hostname + ":8880/ws";
+        var wsuri = "ws://" + window.location.hostname + ":" + window.location.port + "/ws";
         console.log("Connecting to " + wsuri);
         this.socket = new WebSocket(wsuri);
         this.socket.onopen = function(e) {

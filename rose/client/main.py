@@ -102,6 +102,18 @@ def main():
                         help="The server address to connect to."
                              " For example: '10.20.30.44' or 'my-server.com'."
                              " If not specified, localhost will be used.")
+    parser.add_argument("--server-port", "-p", dest="server_port",
+                        default=config.game_port,
+                        type=int,
+                        help="The server port to connect to."
+                             " For example: '7173'"
+                             " If not specified, 8888 will be used.")
+    parser.add_argument("--web-port", "-wp", dest="web_port",
+                        default=config.web_port,
+                        type=int,
+                        help="The port to connect to web UI in browser."
+                             " For example: '6261'"
+                             " If not specified, 8880 will be used.")
     parser.add_argument("driver_file",
                         help="The path to the driver python module")
 
@@ -113,10 +125,11 @@ def main():
         log.error("error loading driver module %r: %s", args.driver_file, e)
         sys.exit(2)
 
-    reactor.connectTCP(args.server_address, config.game_port,
+    log.info("Connecting to server. Address: %s Port:%d" % (args.server_address, args.server_port))
+    reactor.connectTCP(args.server_address, args.server_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
 
-    url = "http://%s:%d" % (args.server_address, config.web_port)
+    url = "http://%s:%d" % (args.server_address,  args.web_port)
     log.info("Please open %s to watch the game." % url)
 
     reactor.run()
