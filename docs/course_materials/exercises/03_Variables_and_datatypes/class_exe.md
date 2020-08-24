@@ -1,6 +1,6 @@
 # Variables and Data types - Class exercise 
 
-###variables_class.py
+### variables_class.py
 
 1. Create a variable named x and assign the value 50 to it.
 2. Display the sum of 5 + 10, using two variables: x and y.
