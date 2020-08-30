@@ -40,8 +40,8 @@
           <section>
             <h3><b>Terminal</b></h3>
             <ul>
-              <li>Terminal is an interface between humans and computers</li>
-              <li>The Terminal is a text-only interface </li>
+              <li>The Terminal is an interface between humans and computers.</li>
+              <li>The Terminal is a text-only interface.</li>
             </ul>
           </section>
           <section>
@@ -65,7 +65,8 @@
             <h3><b>Command</b></h3>
             <ul>
               <li>A command is an instruction given by a user telling a computer to do something</li>
-              <li>Linux commands are the essence of the entire Linux operating system used to administer the entire system. You may not know it, but most of the applications you run within the graphical user interface are executing Linux commands for you in the background to accomplish the given task</li>
+              <li>Linux commands are the essence of the entire Linux operating system used to administer the entire system.<br>
+                  You may not know it, but most of the applications you run within the graphical user interface are executing Linux commands for you in the background to accomplish the given task</li>
             </ul>
           </section>
         </section>
@@ -187,9 +188,11 @@
           <section>
             <h3><b>Directory</b></h3>
             <ul>
-              <li>A directory is just a special file, which contains a list of entries and their ID</li>
-              <li>Actions we can perform on a file are: create, copy, view (read), delete, move file to a different directory, change the file name, run</li>
-              <li>Actions we can perform on a directory are: create, copy, list all files and directories, delete, change your current directory, change name</li>
+              <li>A directory is just a special file, which contains a list of entries and their ID.</li>
+              <li>Actions we can perform on a <b>file</b> are:<br>
+                  create, copy, view (read), delete, move file to a different directory, change the file name, run.</li>
+              <li>Actions we can perform on a <b>directory</b> are:<br>
+                  create, copy, list all files and directories, delete, change your current directory, change name.</li>
             </ul>
           </section>
         </section>
@@ -250,13 +253,10 @@
           <section>
             <h3><b> ~ - Home directory </b></h3>
             <ul>
-              <li>Each Linux user has a home directory, this directory is in /home directory. For example if you have a user called student, then his default home directory is /home/student </li>
-              <li>you can also use ~ to get to your home directory</li>
-
-            </ul>
-
-            <ul>
-              <li>Change Directory to the user home directory</li>
+              <li>Each Linux user has a home directory, this directory is in <b>/home</b> directory.<br>
+                  For example, if you have a user called <i>student</i>, then his default home directory is <b>/home/student</b>.</li>
+              <li>You can also use <b>~</b> to get to your home directory</li>
+              <li>Change directory to the user <b>home</b> directory:</li>
             </ul>
             <pre><code data-trim data-noescape class="hljs lang-python">
       $ cd
@@ -273,22 +273,23 @@
           </section>
 
           <section>
-            <h3><b>Absolute Path vs Relative Path </b></h3>
+            <h3><b>Absolute Path vs. Relative Path</b></h3>
             <ul>
               <li>A path is a unique location to a file or a directory in a file system of an OS.</li>
-              <li>An absolute path is defined as specifying the location of a file or directory from the root directory(/). In other words, we can say that an absolute path is a complete path from start of actual filesystem from / directory.</li>
-              <li>Relative path is defined as path related to the present working directory(pwd). </li>
+              <li>An absolute path is defined as specifying the location of a file or directory from the root directory(/).<br>
+                  In other words, we can say that an absolute path is a complete path from start of actual filesystem from / directory.</li>
+              <li>Relative path is defined as path related to the present working directory (pwd). </li>
             </ul>
             <ul>
-              <li>.(a single dot) - this represents the current directory.</li>
-              <li>..(two dots) - this represents the parent directory.</li>
+              <li><b>.</b> (a single dot) - this represents the <b>current</b> directory.</li>
+              <li><b>..</b> (two dots) - this represents the <b>parent</b> directory.</li>
             </ul>
           </section>
           <section>
-            <h3><b>Absolute path Vs relative path - examples </b></h3>
+            <h3><b>Absolute Path vs. Relative Path - examples </b></h3>
 
             <ul>
-              <li>Change to a specific directory- absolute path</li>
+              <li>Change to a specific directory - absolute path</li>
             </ul>
             <pre><code data-trim data-noescape class="hljs lang-python">
       $ cd /home/student/my_test2
@@ -296,7 +297,7 @@
       /home/student/my_test2
               </code></pre>
             <ul>
-              <li>Move one level up - Relative Path </li>
+              <li>Move one level up - relative path </li>
             </ul>
             <pre><code data-trim data-noescape class="hljs lang-python">
       $ cd ..
@@ -305,7 +306,7 @@
              </code></pre>
 
             <ul>
-              <li>Change to a specific directory- relative path</li>
+              <li>Change to a specific directory - relative path</li>
             </ul>
             <pre><code data-trim data-noescape class="hljs lang-python">
       $ cd my_test2
@@ -351,15 +352,15 @@
             <h3><b>Exercise</b></h3>
             <ul>
               <li>Open a terminal </li>
-              <li>Navigate to your home directory</li>
-              <li>Create a directory called test</li>
-              <li>Navigate to test directory</li>
-              <li>create a directory called tmp in test directory</li>
-              <li>Navigate to test directory</li>
+              <li>Navigate to your <i>home</i> directory</li>
+              <li>Create a directory called <i>test</i></li>
+              <li>Navigate to the <i>test</i> directory</li>
+              <li>Create a directory called <i>tmp</i> in <i>test</i> directory</li>
+              <li>Navigate back to <i>test</i> directory</li>
               <li>Navigate two directories up </li>
               <li>List the content of this directory in a tree format</li>
-              <li>Navigate to your root directory</li>
-              <li>Navigate to test/tmp directory in your home directory</li>
+              <li>Navigate to your <i>root</i> directory</li>
+              <li>Navigate to <i>test/tmp</i> directory in your <i>home</i> directory</li>
             </ul>
           </section>
         </section>
@@ -528,12 +529,12 @@
             <h3><b>Exercise</b></h3>
             <ul>
               <li>Open a terminal </li>
-              <li>Navigate to test/tmp in your home directory</li>
-              <li>Create two files a.txt and b.txt in tmp directory</li>
-              <li>Copy the file a.txt to test directory (one level up directory)</li>
-              <li>Change the name of b.txt file to c.txt file </li>
-              <li>Edit the file c.txt and add there your name</li>
-              <li>Print the content of the file c.txt </li>
+              <li>Navigate to <i>test/tmp</i> in your <i>home</i> directory</li>
+              <li>Create two files <i>a.txt</i> and <i>b.txt</i> in <i>tmp</i> directory</li>
+              <li>Copy the file <i>a.txt</i> to the <i>test</i> directory (one level up directory)</li>
+              <li>Change the name of <i>b.txt</i> file to <i>c.txt</i></li>
+              <li>Edit the file <i>c.txt</i> and write there your name</li>
+              <li>Print the content of the file <i>c.txt</i> </li>
             </ul>
           </section>
         </section>
@@ -578,27 +579,21 @@
               <li>sudo dnf install</li>
             </ul>
             <pre><code data-trim data-noescape class="hljs lang-python">
-      $ sudo dnf install sl
-      Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:06:00 PM IST.
-      Dependencies resolved.
-      ===============================================================================
-      Package                              Arch
-      ===============================================================================
-      Installing:
-      sl
-            </code></pre>
-            <pre><code data-trim data-noescape class="hljs lang-python">
-      sl
-            </code></pre>
-            <pre><code data-trim data-noescape class="hljs">
-      $sudo dnf install figlet
-      Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
-      Dependencies resolved.
-      ===============================================================================
-      Package                              Arch
-      ===============================================================================
-      Installing:
-      figlet
+$ sudo dnf install figlet
+Last metadata expiration check: 1:16:01 ago on Mon 10 Dec 2018 12:15:00 PM IST.
+Dependencies resolved.
+===============================================================================
+ Package                              Arch
+===============================================================================
+Installing:
+ figlet
+Transaction Summary
+==============================================================================================================================================================================================
+Install  1 Package
+
+Total download size: 17 k
+Installed size: 28 k
+Is this ok [y/N]:
             </code></pre>
           </section>
         </section>
