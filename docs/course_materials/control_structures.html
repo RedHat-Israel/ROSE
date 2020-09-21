@@ -89,13 +89,42 @@
                 </section>
 
                 <section>
+                  <h3><b>True or False? </b></h3>
+                  <ul>
+                    <li> 5 > 6</li>
+                    <li> -1 > -2 </li>
+                    <li> 5 == -5 </li>
+                    <li> 5 != -5 </li>
+                    <li> 3 <= 6 </li>
+                    <li> 3 >= 6 </li>
+                    <li> 0 >= 0 </li>
+                  </ul>
+                </section>
+
+                <section>
+                  <h3><b>True or False? </b></h3>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+ x = 6
+ y = 7
+                    </code></pre>
+                  <ul>
+                    <li> x > y </li>
+                    <li> x < y </li>
+                    <li> x >= y </li>
+                    <li> x <= y </li>
+                    <li> x == y </li>
+                    <li> x != y </li>
+                  </ul>
+                </section>
+
+                <section>
                     <h3><b>Blocks</b></h3>
                     <ul>
                         <li>All control structures (if, for / while, functions) content must be in a block.</li>
                         <li>Block are determined by indentation.</li>
                         <li>You can use either Tab or some spaces to indent.</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 if 4 < 5:
     print("Yes, It is true!")
                     </code></pre>
@@ -106,7 +135,7 @@ if 4 < 5:
                     <ul>
                         <li>The general Python syntax for a simple if statement is:</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 if condition:
     doing-this-intended-block
     it-can-take-more-than-one-line
@@ -115,14 +144,14 @@ if condition:
                         <li>If the condition is true: <b>do</b> the intended block</li>
                         <li>If the condition is not true: <b>skip</b> the intended block</li>
                     </ul>
-                    <pre class="fragment"><code data-trim data-noescape class="hljs">
+                    <pre class="fragment"><code data-trim data-noescape class="hljs lang-python">
 # What will be printed here?
 age = 13
 if age > 20:
     print("You are too old!")
 print('You are young!')
                     </code></pre>
-                    <pre class="fragment"><code data-trim data-noescape class="hljs">
+                    <pre class="fragment"><code data-trim data-noescape class="hljs lang-python">
 # And now?
 age = 13
 if age < 20:
@@ -136,7 +165,7 @@ if age < 20:
                     <ul>
                         <li>What if the boolean expression is 'False' and not 'True'?</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 if condition:
   doing-this-block-if-condition-is-true
 else:
@@ -145,7 +174,7 @@ else:
                     <ul>
                         <li>'else' simply tells the computer what to do if the conditions of 'if' aren't met</li>
                     </ul>
-                    <pre class="fragment"><code data-trim data-noescape class="hljs">
+                    <pre class="fragment"><code data-trim data-noescape class="hljs lang-python">
 # Example:
 
 today = "Tuesday"
@@ -160,7 +189,7 @@ else:
                     <ul>
                         <li>Sometimes we have to check multiple conditions.</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 if condition1:
     run-block-for-true-condition-1
 elif condition2:
@@ -179,8 +208,9 @@ else:
                 <section>
                     <h3><b>Let's Practice together!</b></h3>
                     <ul>
-                        <li>Write a program that defines parameter 'a'.</li>
-                        <li>The program checks if 'a' is positive, negative or equal zero and prints a proper message. </li>
+                      <li>Create a file named <b>is_positive.py</b></li>
+                      <li>In this file, write a program that defines parameter 'a'.</li>
+                      <li>The program checks if 'a' is positive, negative or equal zero and prints a proper message. </li>
                     </ul>
                     <img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png" />
                 </section>
@@ -194,7 +224,7 @@ else:
                 </section>
                 <section>
                     <h3><b>Simple While Loop</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 while True:
     name = input("Enter your name: ")
     print("Hello %s!!" %name)
@@ -202,7 +232,7 @@ while True:
                 </section>
                 <section>
                     <h3><b>Break and Continue</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 SECRET = 'xyzzy'
 
 while True:
@@ -219,7 +249,7 @@ print("Welcome!")
                 </section>
                 <section>
                     <h3><b>While with condition</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 step = 0
 while step < 10:
     print(step)
@@ -227,17 +257,120 @@ while step < 10:
 print("Finished!!")
                     </code></pre>
                 </section>
+
+                <section>
+                  <h3><b>Let's Practice together!</b></h3>
+                  <ul>
+                    <li>Create a file named <b>find_largest_smallest.py</b></li>
+                    <li>In this file, Write a program that requests numbers from the user.</li>
+                    <li>The program breaks when the user enters the value done.</li>
+                    <li>The program should print the largest and smallest numbers entered.</li>
+                  </ul>
+                  <img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png" />
+                </section>
             </section>
 
             <section>
                 <section>
                     <h1><b>
-                            <span>For Loop</span>
-                    </h1></b>
+                       <span>For Loop</span>
+                    </b></h1>
+                </section>
+                <section>
+                  <h3><b>For loop </b></h3>
+                  <ul>
+                    <li>A for loop is used for iterating over a sequence: a list, a tuple, a dictionary, a set, or a string.</li>
+                  </ul>
+                </section>
+              <section>
+                  <h3><b>For loop </b></h3>
+                  <ul>
+                    <li> You can loop on tuple of ints </li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+    # Print 1 - 5
+    for i in (1,2,3,4,5):
+        print(i)
+
+    1
+    2
+    3
+    4
+    5
+                        </code></pre>
+                  <ul>
+                    <li> You can loop on array of ints as well </li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+    for i in [1,2,3,4,5]:
+        print(i)
+    1
+    2
+    3
+    4
+    5
+                        </code></pre>
+                </section>
+
+                <section>
+                  <h3><b>For loop </b></h3>
+                  <ul>
+                    <li> You can loop on array of int/boolean/strings or all together </li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+      for i in ("a",2,3,True,5):
+          print(i)
+
+      a
+      2
+      3
+      True
+      5
+
+                  </code></pre>
+                </section>
+
+                <section>
+                  <h3><b>For loop using range</b></h3>
+                  <ul>
+                    <li>range(n) produces [0, 1, ..., n-1]</li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+  # Print "Hello" 5 times
+  for x in range(5):
+      print("Hello!")
+                      </code></pre>
+                  <ul>
+                    <li>range(i, j) produces [i, i+1, ..., j-1]</li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+  # Start from 2 until 6
+  # (2,3,4,5,6)
+  for x in range(2,7):
+      print(x)
+                      </code></pre>
+                </section>
+                <section>
+                  <h3><b>For loop using range</b></h3>
+                  <ul>
+                    <li>range(i, j, k) produces [i, i+k, ..., m]</li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+  # Start from 0 until 21, increased by 3
+  # (0,3,6,9,12,5,18,21)
+  for x in range(0,22,3):
+      print(x)
+                      </code></pre>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+  # Start from 10 until 0, decreased by 1
+  # (10,9,8,7,6,5,4,3,2,1)
+  for x in range(10,0,-1):
+      print(x)
+                      </code></pre>
                 </section>
                 <section>
                     <h3><b>For loop on a String</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 for c in 'Hello World!':
     print(c)
 H
@@ -256,7 +389,7 @@ d
                 </section>
                 <section>
                     <h3><b>For loop on a list</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 airports=["TLV","SOF","MUC"]
 for name in airports:
     print(name)
@@ -266,55 +399,34 @@ MUC
                     </code></pre>
                 </section>
                 <section>
-                    <h3><b>For loop using range</b></h3>
-                    <ul>
-                        <li>range(n) produces [0, 1, ..., n-1]</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-# Print "Hello" 5 times
-for x in range(5):
-    print("Hello!")
-                    </code></pre>
-                    <ul>
-                        <li>range(i, j) produces [i, i+1, ..., j-1]</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-# Start from 2 until 6
-# (2,3,4,5,6)
-for x in range(2,7):
-    print(x)
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>For loop using range</b></h3>
-                    <ul>
-                        <li>range(i, j, k) produces [i, i+k, ..., m]</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-# Start from 0 until 21, increased by 3
-# (0,3,6,9,12,5,18,21)
-for x in range(0,22,3):
-    print(x)
-                    </code></pre>
-                    <pre><code data-trim data-noescape class="hljs">
-# Start from 10 until 0, decreased by 1
-# (10,9,8,7,6,5,4,3,2,1)
-for x in range(10,0,-1):
-    print(x)
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>Nested Loop</b></h3>
-                    <ul>
-                        <li>A loop inside another loop</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-for i in range(10):
-    for j in range(10):
-        print(i, j)
-                    </code></pre>
+                  <h3><b>Let's Practice for loop together!</b></h3>
+                  <ul>
+                    <li>The name of the file should be <b>sum.py</b>.</li>
+                    <li>Accept number from user and calculate the sum of all number between 1 and given number,
+                      For example user given 10 so the output should be 55 (1+2+3+4+5+6+7+8+9+10 = 55).
+                    </li>
+                  </ul>
+                  <img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png" />
                 </section>
 
+
+
+            </section>
+            <section>
+              <section>
+                <h1><b>Extra</b></h1>
+              </section>
+              <section>
+                <h3><b>Nested Loop</b></h3>
+                <ul>
+                  <li>A loop inside another loop</li>
+                </ul>
+                <pre><code data-trim data-noescape class="hljs lang-python">
+  for i in range(10):
+      for j in range(10):
+          print(i, j)
+                      </code></pre>
+              </section>
             </section>
         </div>
     </div>
