@@ -1,4 +1,4 @@
-### Linux - Class exercise 2 
+### Let's Practice Together \#2 
 
 - Open a terminal
 - Navigate to ***test/tmp*** directory in your ***home*** directory

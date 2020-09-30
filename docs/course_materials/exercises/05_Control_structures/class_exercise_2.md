@@ -1,4 +1,4 @@
-### Let's Practice together!
+### Let's Practice Together \#2
 
 - Create a file named *find_largest_smallest.py*
 - In this file, write a program that requests numbers from the user.

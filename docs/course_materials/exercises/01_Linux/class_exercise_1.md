@@ -1,4 +1,4 @@
-### Linux - Class exercise 1 
+### Let's Practice Together \#1 
 
 - Open a terminal
 - Navigate to your ***home*** directory
