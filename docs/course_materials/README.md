@@ -9,9 +9,10 @@ How to update/add exercises to course slides
 </section>
 ```
    - Example path: `"exercises/01_Linux/class_exercise_2.md"`
-   - Make sure not to use the abriviation 'exe', the styling of the slides won't work propperly.  
+   - Make sure not to use the abbreviation 'exe', the styling of the slides won't work properly.  
 
 3. To test the slides follow the next steps:
    1. Run `pipenv shell`
    2. Run `python -m http.server 9000` (use a port number of your choosing)
-   3. Open your browser on `localhost:9000` and navigate to the wanted slides.
+   3. Open your browser on `localhost:9000` and navigate to the wanted slides  
+   or run `xdg-open http://localhost:9000/docs/course_materials/YOURSLIDES.html`.
