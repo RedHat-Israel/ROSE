@@ -43,7 +43,7 @@
                 <section>
                     <h1><b>
                             <span>List</span>
-                    </h1></b>
+                    </b></h1>
                 </section>
                 <section>
                     <h3><b>Basics</b></h3>
@@ -54,9 +54,10 @@
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 l = list()
-type(l) # list
+type(l) # &ltclass 'list'&gt
+
 l = []
-type(l) # list
+type(l) # &ltclass 'list'&gt
                     </code></pre>
                 </section>
                 <section>
@@ -96,11 +97,11 @@ print(l) # ['apple', 'plum', 'melon', 'banana']
                     </code></pre>
                 </section>
                 <section>
-                    <h3><b>Popping an element (remove it and return it's value):</b></h3>
+                    <h3><b>Popping an element (remove it and return its value):</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-print(l.pop())  # 'banana'
+print(l.pop())  # banana
 print(l)        # ['apple', 'plum', 'melon']
-print(l.pop(0)) # 'apple'
+print(l.pop(0)) # apple
 print(l)        # ['plum', 'melon']
                     </code></pre>
                 </section>
@@ -117,20 +118,21 @@ lst.remove(v)   # Removes a specific value
 lst = [1,2,3]
 lst2 = [4,5,6]
 lst.extend(lst2)
-print(lst)      # [1,2,3,4,5,6]
+print(lst)      # [1, 2, 3, 4, 5, 6]
 print(len(lst)) # 6
                     </code></pre>
                 </section>
                 <section>
                     <h3><b>Retrieving elements by index, negative index, and slicing:</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-print(l[0])     # 'orange'
+print(l[0])     # 'plum'
 print(l[8])     # IndexError: list index out of range
-print(l[-1])    # 'banana'
-print(l[1:3])   # ['apple', 'plum']
+print(l[-1])    # 'melon'
+print(l[0:2])   # ['plum', 'melon']
                     </code></pre>
                 </section>
                 <section>
+                    <h3><b>Concatination and multiplication:</b></h3>
                     <ul>
                         <li>Lists can be concatenated with + and multiplied by *:</li>
                     </ul>
@@ -180,13 +182,13 @@ print(fruit)  # ['plum', 'orange', 'apple']
                 <section>
                     <h1><b>
                             <span>Tuple</span>
-                    </h1></b>
+                    </b></h1>
                 </section>
                 <section>
                     <h3><b>Overview</b></h3>
                     <ul>
                         <li>Immutable: you cannot change its content</li>
-                        <li>Tuples are used for grouping ordered data</li>
+                        <li>Tuples used for grouping ordered data</li>
                         <li>Supports indexing and slicing syntax</li>
                         <li>Powerful assignment feature (packing/unpacking)</li>
                         <li>Creation is faster than a list</li>
@@ -195,18 +197,17 @@ print(fruit)  # ['plum', 'orange', 'apple']
                 <section>
                     <h3><b>Creating a tuple</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-            t = tuple()
-            type(t) # tuple
+t = tuple()
+type(t) #  &ltclass 'tuple'&gt
 
-            t = (1, 2, 'hi')
-            type(t) # tuple
+t = (1, 2, 'hi')
+type(t) # &ltclass 'tuple'&gt
 
-            t = 1, 2, 'hi' # be careful
-            type(t) # tuple
+t = 1, 2, 'hi' # be careful
+type(t) # &ltclass 'tuple'&gt
 
-            t = tuple([1,2,'yo']) # casting a list to a tuple
-            print(t) # (1, 2, 'yo')
-            
+t = tuple([1,2,'yo']) # casting a list to a tuple
+print(t) # (1, 2, 'yo')
                     </code></pre>
                 </section>
             </section>
@@ -220,11 +221,13 @@ print(fruit)  # ['plum', 'orange', 'apple']
                 <section>
                     <h3><b>Basics</b></h3>
                     <ul>
-                        <li>Dictionary is an unordered set of <key: value> pairs, where the keys are unique</li>
+                        <li>Dictionary is an unordered set of &ltkey: value&gt pairs, where the keys are unique</li>
                         <li>dict() and {} are empty dictionaries</li>
-                        <li>d[k] accesses the value mapped to k</li>
-                        <li>d[k] = v updates the value mapped to k</li>
                     </ul>
+                        <pre><code data-trim data-noescape class="hljs lang-python">
+d[k]     # accesses the value mapped to k
+d[k] = v # updates the value mapped to k
+                        </code></pre>
                 </section>
                 <section>
                     <h3><b>Example</b></h3>
@@ -232,7 +235,10 @@ print(fruit)  # ['plum', 'orange', 'apple']
 sports = {'Ralph' : 'Football',
           'Michael' : 'Basketball',
           'Shirly' : 'Baseball'}
-print(sports) # {'Ralph': 'Football', 'Michael': 'Basketball', 'Shirly': 'Baseball'}
+
+print(sports)
+# {'Ralph': 'Football', 'Michael': 'Basketball',
+#  'Shirly': 'Baseball'}
 
 print(sports['Michael'])   # Basketball
                     </code></pre>
@@ -261,7 +267,7 @@ print(sports)
                 <section>
                     <h1><b>
                             <span>Extras</span>
-                    </h1></b>
+                    </b></h1>
                 </section>
                 <!-- Sets -->
                 <section>
@@ -271,6 +277,10 @@ print(sports)
                         <li>Empty set: set()</li>
                         <li>{1, 'blah', 5, -1}</li>
                     </ul>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+s = set()
+type(s) #  &ltclass 'set'&gt
+                    </code></pre>
                 </section>
                 <section>
                     <h3><b>Set Methods</b></h3>
@@ -294,7 +304,7 @@ s.update(s2) or s = s | s2 # updates s with s2 values
                 <section>
                     <h3><b>Lists, Dictionaries and references</b></h3>
                     <ul>
-                        <li>In Python, Lists and Dictionaries are passed by reference to the object and not it's value.</li>
+                        <li>In Python, Lists and Dictionaries are passed by reference to the object and not by value.</li>
                         <li>For example, when using the assignment operator (=) on a list, a reference is created to the original list.</li>
                         <li>Which means that two variables point to the same value:</li>
                     </ul>
@@ -323,16 +333,18 @@ prtint(l)  # [5, 25, 100, 250, 1, 8, 'Hi!']
                 </section>
                 <section>
                     <ul>
-                        <li>Same principle applies to dictionaries:</li>
+                        <li>The same principle applies to dictionaries:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-                        d1 = dict(eat='banana', drink='water') # {'eat': 'banana', 'drink': 'water'}
-                        d2 = d1 # {'eat': 'banana', 'drink': 'water'}
-                        d2['brush'] = 'teeth'
-                        print(d1)
-                        # {'eat': 'banana', 'drink': 'water', 'brush': 'teeth'}
-                        print(d2)
-                        # {'eat': 'banana', 'drink': 'water', 'brush': 'teeth'}
+d1 = dict(eat='banana', drink='water')
+print(d1) # {'eat': 'banana', 'drink': 'water'}
+d2 = d1
+
+d2['brush'] = 'teeth'
+print(d1)
+# {'eat': 'banana', 'drink': 'water', 'brush': 'teeth'}
+print(d2)
+# {'eat': 'banana', 'drink': 'water', 'brush': 'teeth'}
                     </code></pre>
                     <ul>
                         <li>Dictionaries are being passed by reference and not by their raw value</li>
@@ -343,19 +355,21 @@ prtint(l)  # [5, 25, 100, 250, 1, 8, 'Hi!']
                         <li>There are two ways to duplicate a dictionary</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-                        d1 = {'eat': 'banana', 'drink': 'water'}
+d1 = {'eat': 'banana', 'drink': 'water'}
                     </code></pre>
                     <ul>
                         <li>By creating a new dict out of an existing one:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-                        d2 = dict(d1) # {'eat': 'banana', 'drink': 'water'}
+d2 = dict(d1)
+print(d2) # {'eat': 'banana', 'drink': 'water'}
                     </code></pre>
                     <ul>
                         <li>Or by using the .copy() method:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-                        d2 = d1.copy() # {'eat': 'banana', 'drink': 'water'}
+d2 = d1.copy()
+print(d2) # {'eat': 'banana', 'drink': 'water'}
                     </code></pre>
                 </section>
                 <!-- Loops and sequences -->
@@ -367,15 +381,21 @@ prtint(l)  # [5, 25, 100, 250, 1, 8, 'Hi!']
                     <pre><code data-trim data-noescape class="hljs lang-python">
 l = ['orange', 'apple', 'plum', 'banana']
 print(len(l))     # 4
+
 d = {'name': 'Tux', 'animal': 'penguin'}
 print(len(d))     # 2
+
 t = ('orange', 'apple')
 print(len(t))     # 2
+
 s = {'apple', 'banana', 'orange', 'apple'}
 print(len(s))     # 3
                     </code></pre>
+                </section>
+                <section>
+                    <h3><b>Sequence operations</b></h3>
                     <ul>
-                        <li>For loops through a list:</li>
+                        <li>For loop through a list:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 for x in l:
