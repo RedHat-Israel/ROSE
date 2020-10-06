@@ -66,7 +66,7 @@ too old.
 
 Open a pipenv shell that you'll use for the following commands:
 
-    pipenv shell
+    pipenv --python /usr/local/bin/python3.7 shell
 
 Start the server on some machine:
 
@@ -78,7 +78,7 @@ Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 Open a pipenv shell that you'll use for the following commands:
 
-    pipenv shell
+    pipenv --python /usr/local/bin/python3.7 shell
 
 Start up the client, using your driver file:
 
@@ -127,7 +127,7 @@ To install development requirements:
 
 To open a shell for development, use:
 
-    pipenv shell
+    pipenv --python /usr/local/bin/python3.7 shell
 
 Before submitting patches, please run the tests:
 
