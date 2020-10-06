@@ -106,7 +106,7 @@
                   <pre><code data-trim data-noescape class="hljs lang-python">
  x = 6
  y = 7
-                    </code></pre>
+                  </code></pre>
                   <ul>
                     <li> x > y </li>
                     <li> x < y </li>
@@ -121,7 +121,7 @@
                     <h3><b>Blocks</b></h3>
                     <ul>
                         <li>All control structures (if, for / while, functions) content must be in a block.</li>
-                        <li>Block are determined by indentation.</li>
+                        <li>Blocks are determined by indentation.</li>
                         <li>You can use either Tab or some spaces to indent.</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
@@ -133,7 +133,7 @@ if 4 < 5:
                 <section>
                     <h3><b>Simple If</b></h3>
                     <ul>
-                        <li>The general Python syntax for a simple if statement is:</li>
+                        <li>The general Python syntax for a simple 'if' statement is:</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 if condition:
@@ -167,21 +167,21 @@ if age < 20:
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 if condition:
-  doing-this-block-if-condition-is-true
+    doing-this-block-if-condition-is-true
 else:
-  doing-this-block-if-condition-is-false
+    doing-this-block-if-condition-is-false
                     </code></pre>
                     <ul>
-                        <li>'else' simply tells the computer what to do if the conditions of 'if' aren't met</li>
+                        <li>'else' simply tells the computer what to do if the conditions of the 'if' statement aren't met</li>
                     </ul>
                     <pre class="fragment"><code data-trim data-noescape class="hljs lang-python">
 # Example:
 
 today = "Tuesday"
 if today == "Sunday":
-  print ("Yay! Today we have ROSE!")
+    print ("Yay! Today we have ROSE!")
 else:
-  print ("No ROSE for today...")
+    print ("No ROSE for today...")
                      </code></pre>
                 </section>
                 <section>
@@ -200,7 +200,7 @@ else:
     run-block-for-all-conditions-were-false
                     </code></pre>
                     <ul>
-                        <li>'elif' block actually combines 'else' and 'if' block.</li>
+                        <li>'elif' block actually combines 'else' and 'if' blocks.</li>
                         <li>This is what 'elif' uses for!</li>
                     </ul>
                 </section>
@@ -222,6 +222,9 @@ while True:
     name = input("Enter your name: ")
     print("Hello %s!!" %name)
                     </code></pre>
+                    <ul>
+                        <li>When it's going to stop?!</li>
+                    </ul>
                 </section>
                 <section>
                     <h3><b>Break and Continue</b></h3>
@@ -270,48 +273,44 @@ print("Finished!!")
               <section>
                   <h3><b>For loop </b></h3>
                   <ul>
-                    <li> You can loop on tuple of ints </li>
+                    <li>You can loop over a tuple of ints</li>
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-    # Print 1 - 5
-    for i in (1,2,3,4,5):
-        print(i)
-
-    1
-    2
-    3
-    4
-    5
+for i in (1,2,3,4,5):
+    print(i)
+# 1
+# 2
+# 3
+# 4
+# 5
                         </code></pre>
                   <ul>
-                    <li> You can loop on array of ints as well </li>
+                    <li>You can loop over an array of ints as well</li>
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-    for i in [1,2,3,4,5]:
-        print(i)
-    1
-    2
-    3
-    4
-    5
+for i in [1,2,3,4,5]:
+    print(i)
+# 1
+# 2
+# 3
+# 4
+# 5
                         </code></pre>
                 </section>
 
                 <section>
                   <h3><b>For loop </b></h3>
                   <ul>
-                    <li> You can loop on array of int/boolean/strings or all together </li>
+                    <li>You can loop over an array of ints/booleans/strings or all together</li>
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-      for i in ("a",2,3,True,5):
-          print(i)
-
-      a
-      2
-      3
-      True
-      5
-
+for i in ("a",2,3,True,5):
+    print(i)
+# a
+# 2
+# 3
+# True
+# 5
                   </code></pre>
                 </section>
 
@@ -321,18 +320,18 @@ print("Finished!!")
                     <li>range(n) produces [0, 1, ..., n-1]</li>
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-  # Print "Hello" 5 times
-  for x in range(5):
-      print("Hello!")
+# Print "Hello" 5 times
+for x in range(5):
+    print("Hello!")
                       </code></pre>
                   <ul>
                     <li>range(i, j) produces [i, i+1, ..., j-1]</li>
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-  # Start from 2 until 6
-  # (2,3,4,5,6)
-  for x in range(2,7):
-      print(x)
+# Start from 2 until 6
+# (2,3,4,5,6)
+for x in range(2,7):
+    print(x)
                       </code></pre>
                 </section>
                 <section>
@@ -354,40 +353,38 @@ print("Finished!!")
                       </code></pre>
                 </section>
                 <section>
-                    <h3><b>For loop on a String</b></h3>
+                    <h3><b>For loop over a String</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 for c in 'Hello World!':
     print(c)
-H
-e
-l
-l
-o
-
-W
-o
-r
-l
-d
-!
+# H
+# e
+# l
+# l
+# o
+#
+# W
+# o
+# r
+# l
+# d
+# !
                     </code></pre>
                 </section>
                 <section>
-                    <h3><b>For loop on a list</b></h3>
+                    <h3><b>For loop over a list</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
 airports=["TLV","SOF","MUC"]
 for name in airports:
     print(name)
-TLV
-SOF
-MUC
+
+# TLV
+# SOF
+# MUC
                     </code></pre>
                 </section>
                 <section data-markdown="exercises/05_Control_structures/class_exercise_3.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
-
-
-
             </section>
             <section>
               <section>
@@ -399,9 +396,11 @@ MUC
                   <li>A loop inside another loop</li>
                 </ul>
                 <pre><code data-trim data-noescape class="hljs lang-python">
-  for i in range(10):
-      for j in range(10):
-          print(i, j)
+for i in range(10):
+    for j in range(10):
+        print(i, j)
+
+# Try it
                       </code></pre>
               </section>
             </section>
