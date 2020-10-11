@@ -26,7 +26,7 @@ def main():
     If the argument is 'same', the track will generate the obstacles in the same place for both drivers.
     Otherwise, the obstacles will be genrated in random locations for each driver.
     """
-    if args.track_definition=="same":
+    if args.track_definition == "same":
         config.is_track_random = False
     else:
         config.is_track_random = True
