@@ -8,15 +8,15 @@ import os.path
 import sys
 
  
-def load_check_file(file_path):
+def load_file(file_path):
     """
-    Load the check file as module
+    Load the file as module
 
     Arguments:
-      file_path (str): The path to the check file
+      file_path (str): The path to the file
 
     Returns:
-        Check file module
+        File as module
 
     Raises:
         FileNotFoundError if the file cannot be loaded
@@ -32,7 +32,7 @@ def load_check_file(file_path):
             module_spec.loader.exec_module(module)
             return module
         except FileNotFoundError as e:
-            print("Error loading check exercise file %r: %s" % (file_path, e.strerror))
+            print("Error loading the file %r: %s" % (file_path, e.strerror))
             sys.exit(2)
             
             
@@ -47,6 +47,8 @@ parser.add_argument("exercise_file",
 
 args = parser.parse_args()
 
-exercise_mod = load_check_file(args.exercise_file)
+cur_dir = os.path.dirname(os.path.abspath(__file__))
+helper = load_file(cur_dir + '/check_helper.py')
+exercise_mod = load_file(args.exercise_file)
 
 exercise_mod.main()

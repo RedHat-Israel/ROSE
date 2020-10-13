@@ -1,50 +1,28 @@
-import argparse
 import os.path
-from os import path
 from pathlib import Path
+import check_helper
 
 home = str(Path.home())
-exercise_commands = ['mkdir', 'tree']
-
-def get_student_commands():
-    '''
-    Checks stutent history file for key commands.
-    If the history is longer than 1000 commands, checks only 1000 last commands.
-    '''
-    my_commands = []
-    hist_path = home + '/.bash_history'
-    with open(hist_path, 'r') as rf:
-        for line in rf:
-            my_commands.append(line[:-1])
-    if len(my_commands) > 1000:
-        my_commands = my_commands[-1000:]
-    return my_commands
-
-def used_right_commands(my_commands):
-    '''
-    Checks if the student used the correct commands. 
-    ''' 
-    for command in exercise_commands:
-        return any(command in performed_command for performed_command in my_commands)
-    return True
-
-def created_directories():
-    return path.exists(home + '/test/tmp')
+exercise_commands = {'mkdir': 'creating directories', 'tree': 'viewing the directory tree'}
+exercise_paths = [home + '/test/tmp']
 
 def main():
     '''
     Running the tests and prompting the student according to his work.
     '''
     test_result = ''
-    student_commands = get_student_commands()
-    if not used_right_commands(student_commands):
-        test_result += ("It seems you missed some commands. "
-                    "Make sure you have used 'mkdir' for creating the directories "
-                    "and 'tree' for viewing the directory tree.\n")
-    if not created_directories():
+    student_commands = check_helper.get_student_commands()
+    unused_commands = check_helper.find_unused_commands(student_commands, exercise_commands)
+    if len(unused_commands) > 0:
+        test_result += "It seems you missed some commands. Make sure you have used the following commands:\n"
+        for command in unused_commands:
+            test_result += "'" + command + "' for " + exercise_commands[command] + '.\n'
+    missing_paths = check_helper.created_directories(exercise_paths)
+    if len(missing_paths) > 0:
         test_result += ("It seems that not all directories were created in the right place. "
-                    "Make sure you create the 'test' directory in 'home' "
-                    "and a 'tst' directory in 'test'.")
+                    "Make sure you create the following:\n")
+        for cur_path in missing_paths:
+            test_result += cur_path + "\n"
     if len(test_result) == 0:
         test_result = 'Great work! You finished your exercise.'
     print(test_result)
