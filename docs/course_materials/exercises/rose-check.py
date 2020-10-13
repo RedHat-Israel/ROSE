@@ -42,8 +42,8 @@ Calling the corresponding check_exercise file.
 logging.basicConfig(level=logging.INFO)
 parser = argparse.ArgumentParser(description="ROSE Exercise")
 parser.add_argument("exercise_file",
-                    help="The path to the check_exercise file."
-                         " For example: '01_Linux/check_class_exercise_1.py'")
+                    help="The path to the check_exercise file. "
+                         "For example: '01_Linux/check_class_exercise_1.py'")
 
 args = parser.parse_args()
 
