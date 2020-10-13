@@ -49,13 +49,19 @@ class Track(object):
         Generates new row with obstacles
 
         Try to create fair but random obstacle stream. Each player get the same
-        obstacles, but in different cells.
+        obstacles, but in different cells if 'is_track_random' is True.
+        Otherwise, the tracks will be identical.
         """
         row = [obstacles.NONE] * config.matrix_width
         obstacle = obstacles.get_random_obstacle()
-        for lane in range(config.max_players):
-            low = lane * config.cells_per_player
-            high = low + config.cells_per_player
-            cell = random.choice(range(low, high))
-            row[cell] = obstacle
+        if config.is_track_random:
+            for lane in range(config.max_players):
+                low = lane * config.cells_per_player
+                high = low + config.cells_per_player
+                cell = random.choice(range(low, high))
+                row[cell] = obstacle
+        else:
+            cell = random.choice(range(0, config.cells_per_player))
+            for lane in range(config.max_players):
+                row[cell + lane * config.cells_per_player] = obstacle
         return row

@@ -72,6 +72,10 @@ Start the server on some machine:
 
     ./rose-server
 
+For running the same track for all drivers (instead or random) start the server using:
+
+    ./rose-server -t same
+
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 ## Running a driver

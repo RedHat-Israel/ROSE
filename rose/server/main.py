@@ -1,5 +1,6 @@
 import socket
 import logging
+import argparse
 
 from twisted.internet import reactor
 from twisted.web import server, static
@@ -14,6 +15,22 @@ log = logging.getLogger('main')
 
 def main():
     logging.basicConfig(level=logging.INFO, format=config.logger_format)
+    parser = argparse.ArgumentParser(description="ROSE Server")
+    parser.add_argument("--track_definition", "-t", dest="track_definition",
+                        default="random", choices=["random", "same"],
+                        help="Definition of driver tracks: random or same."
+                             "If not specified, random will be used.")
+
+    args = parser.parse_args()
+    """
+    If the argument is 'same', the track will generate the obstacles in the same place for both drivers.
+    Otherwise, the obstacles will be genrated in random locations for each driver.
+    """
+    if args.track_definition == "same":
+        config.is_track_random = False
+    else:
+        config.is_track_random = True
+    
     log.info('starting server')
     g = game.Game()
     h = net.Hub(g)
