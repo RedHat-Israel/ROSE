@@ -45,7 +45,7 @@
             </ul>
           </section>
           <section>
-            <h3><b>Open a terminal window</b></h3>
+            <h3><b>GUI - Open a terminal window</b></h3>
             <ul>
               <li>Open the search menu:</li>
               <ul>
@@ -56,7 +56,21 @@
               <li>Click on the icon named "Terminal"</li>
             </ul>
             <pre><code data-trim data-noescape class="hljs lang-python">
-        $
+        [student@vm0x ~]
+                </code></pre>
+          </section>
+          <section>
+            <h3><b>CLI - Open a terminal window</b></h3>
+            <ul>
+              <li>Windows - Use putty</li>
+              <li>Linux & Mac - Lunch terminal and ssh to your vm</li>
+              <ul>
+                <li>ssh student@xx.xx.xx.xx</li>
+              </ul>
+              <li>Once we are connected we can see the shell prompt:</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+        [student@vm0x ~]
                 </code></pre>
           </section>
         </section>
@@ -99,7 +113,9 @@
       SYNOPSIS
              pwd [OPTION]...
             </code></pre>
-
+            <ul>
+              <li>Use Escape to exit the man</li>
+            </ul>
           </section>
           <section>
             <ul>
@@ -113,6 +129,29 @@
           Options:
             -L	print the value of $PWD
               </code></pre>
+          </section>
+          <section>
+            <ul>
+              <li>info </li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+     $ info pwd
+     File: coreutils.info,  Node: pwd invocation,  Next: stty invocation,  Up: Working context
+
+19.1 'pwd': Print working directory
+===================================
+
+'pwd' prints the name of the current directory.  Synopsis:
+
+     pwd [OPTION]...
+
+   The program accepts the following options.  Also see *note Common
+options::.
+
+              </code></pre>
+            <ul>
+              <li>Use Escape to exit the info pages</li>
+            </ul>
           </section>
 
         </section>
@@ -369,6 +408,62 @@
               </code></pre>
           </section>
         </section>
+
+        <section>
+          <section>
+            <h3><b>Vim</b></h3>
+            <ul>
+              <li>Vim is an editor to create or edit a text file.</li>
+              <li>There are two modes in vim: command mode and insert mode.</li>
+              <ul>
+                <li>In the command mode, user can move around the file, delete text, etc.</li>
+                <li>In the insert mode, user can insert text.</li>
+              </ul>
+            </ul>
+          </section>
+          <section>
+            <h3><b>Open file with vim</b></h3>
+            <ul>
+              <li>To open a file with the vim editor:</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ vim file-name
+      $
+              </code></pre>
+            <ul>
+              <li>If the file exists, it will open it with the vim editor</li>
+              <li>If the file does not exists, it will create a new file with this name and open it with the vim editor</li>
+            </ul>
+          </section>
+          <section>
+            <h3><b>Usefull vim commands</b></h3>
+            <ul>
+              <li>i - Enter insert mode</li>
+              <li>esc - Exit insert mode</li>
+              <li>:w - Save file</li>
+              <li>:wq - Save and close file</li>
+              <li>:wq! - Force save and close file</li>
+              <li>:q - Close file</li>
+              <li>:q! - Close file, <b>do not</b>> save changes</li>
+              <li>dd - Delete line (cut)</li>
+              <li>yy - Copy line</li>
+              <li>p - Paste</li>
+              <li>gg - Go to the first line</li>
+              <li>G - Go to the last line</li>
+              <li>:n - Go to line n</li>
+              <li>/word - Search word in the file</li>
+              <li>For more usefull commands run: man vim</li>
+            </ul>
+          </section>
+        </section>
+        <section>
+          <section data-markdown="exercises/01_Linux/class_exercise_2.1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+          </section>
+        </section>
+        <section>
+          <section data-markdown="exercises/01_Linux/class_exercise_2.2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+          </section>
+        </section>
         <section>
           <section>
             <h3><b>mv</b></h3>
@@ -509,57 +604,6 @@
       $ clear
       $
               </code></pre>
-          </section>
-        </section>
-        <section>
-          <section data-markdown="exercises/01_Linux/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
-          </section>
-        </section>
-        <section>
-          <section>
-            <h3><b>Vim</b></h3>
-            <ul>
-              <li>Vim is an editor to create or edit a text file.</li>
-              <li>There are two modes in vim: command mode and insert mode.</li>
-              <ul>
-                <li>In the command mode, user can move around the file, delete text, etc.</li>
-                <li>In the insert mode, user can insert text.</li>
-              </ul>
-            </ul>
-          </section>
-          <section>
-            <h3><b>Open file with vim</b></h3>
-            <ul>
-              <li>To open a file with the vim editor:</li>
-            </ul>
-            <pre><code data-trim data-noescape class="hljs lang-python">
-      $ vim file-name
-      $
-              </code></pre>
-              <ul>
-                <li>If the file exists it will open it with the vim editor</li>
-                <li>If the file does not exists it will create a new file with this name and open it with the vim editor</li>
-              </ul>
-          </section>
-          <section>
-            <h3><b>Usefull vim commands</b></h3>
-            <ul>
-              <li>i - Enter insert mode</li>
-              <li>esc - Exit insert mode</li>
-              <li>:w - Save file</li>
-              <li>:wq - Save and close file</li>
-              <li>:wq! - Force save and close file</li>
-              <li>:q - Close file</li>
-              <li>:q! - Close file, do not save changes</li>
-              <li>dd - Delete line (cut)</li>
-              <li>yy - Copy line</li>
-              <li>p - Paste</li>
-              <li>gg - Go to the first line</li>
-              <li>G - Go to the last line</li>
-              <li>:n - Go to line n</li>
-              <li>/word - Search word in the file</li>
-              <li>For more usefull commands run: man vim</li>
-            </ul>
           </section>
         </section>
         <section>

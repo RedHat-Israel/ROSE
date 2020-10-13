@@ -4,7 +4,7 @@
 
 In this exercise you will practice the following commands:
 
-pwd, mdkir, cd, ls, tree, rm, touch, cat, gedit
+pwd, mdkir, cd, ls, tree, rm, touch, cat, vim
 
 Please write down your answers, including the command you used and the output you got.
 
