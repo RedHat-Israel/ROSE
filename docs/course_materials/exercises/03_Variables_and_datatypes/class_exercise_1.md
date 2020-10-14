@@ -1,4 +1,4 @@
-### Let's Practice Together \#1 
+### Let's Practice Together \#1
 
 - Create a file named *variables_class.py*
 - Create a variable named x and assign the value 50 to it.
