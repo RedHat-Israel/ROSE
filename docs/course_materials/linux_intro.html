@@ -99,64 +99,6 @@
         </section>
         <section>
           <section>
-            <h3><b>Getting more info about commands</b></h3>
-            <ul>
-              <li>man</li>
-            </ul>
-            <pre><code data-trim data-noescape class="hljs lang-python">
-      $ man pwd
-      PWD(1)
-
-      NAME
-             pwd - print name of current/working directory
-
-      SYNOPSIS
-             pwd [OPTION]...
-            </code></pre>
-            <ul>
-              <li>Use Escape to exit the man</li>
-            </ul>
-          </section>
-          <section>
-            <ul>
-              <li>--help</li>
-            </ul>
-            <pre><code data-trim data-noescape class="hljs lang-python">
-      $ pwd --help
-      pwd: pwd [-LP]
-          Print the name of the current working directory.
-
-          Options:
-            -L	print the value of $PWD
-              </code></pre>
-          </section>
-          <section>
-            <ul>
-              <li>info </li>
-            </ul>
-            <pre><code data-trim data-noescape class="hljs lang-python">
-     $ info pwd
-     File: coreutils.info,  Node: pwd invocation,  Next: stty invocation,  Up: Working context
-
-19.1 'pwd': Print working directory
-===================================
-
-'pwd' prints the name of the current directory.  Synopsis:
-
-     pwd [OPTION]...
-
-   The program accepts the following options.  Also see *note Common
-options::.
-
-              </code></pre>
-            <ul>
-              <li>Use Escape to exit the info pages</li>
-            </ul>
-          </section>
-
-        </section>
-        <section>
-          <section>
             <h3><b>ls</b></h3>
             <ul>
               <li>List current directory content</li>
@@ -223,6 +165,88 @@ options::.
               </code></pre>
           </section>
         </section>
+        <section>
+          <section>
+            <h3><b>Getting more info about commands</b></h3>
+            <ul>
+              <li>man</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ man ls
+      LS(1)                                                          User Commands                                                          LS(1)
+
+NAME
+       ls - list directory contents
+
+SYNOPSIS
+       ls [OPTION]... [FILE]...
+
+DESCRIPTION
+       List information about the FILEs (the current directory by default).  Sort entries alphabetically if none of -cftuvSUX nor --sort is
+       specified.
+
+       Mandatory arguments to long options are mandatory for short options too.
+
+       -a, --all
+              do not ignore entries starting with .
+
+       -A, --almost-all
+              do not list implied . and ..
+
+       --author
+              with -l, print the author of each file
+
+       -b, --escape
+              print C-style escapes for nongraphic characters
+
+            </code></pre>
+            <ul>
+              <li>Use Escape to exit the man</li>
+            </ul>
+          </section>
+          <section>
+            <ul>
+              <li>--help</li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+      $ ls --help
+       ls --help
+Usage: ls [OPTION]... [FILE]...
+List information about the FILEs (the current directory by default).
+Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.
+
+Mandatory arguments to long options are mandatory for short options too.
+  -a, --all                  do not ignore entries starting with .
+  -A, --almost-all           do not list implied . and ..
+      --author               with -l, print the author of each file
+  -b, --escape               print C-style escapes for nongraphic characters
+      --block-size=SIZE      scale sizes by SIZE before printing them; e.g.,
+              </code></pre>
+          </section>
+          <section>
+            <ul>
+              <li>info </li>
+            </ul>
+            <pre><code data-trim data-noescape class="hljs lang-python">
+     $ info ls
+     File: coreutils.info,  Node: ls invocation,  Next: dir invocation,  Up: Directory listing
+
+10.1 'ls': List directory contents
+==================================
+
+The 'ls' program lists information about files (of any type, including
+directories).  Options and file arguments can be intermixed arbitrarily,
+as usual.
+
+
+              </code></pre>
+            <ul>
+              <li>Use Escape to exit the info pages</li>
+            </ul>
+          </section>
+
+        </section>
+
         <section>
           <section>
             <h3><b>Directory</b></h3>
