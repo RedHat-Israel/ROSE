@@ -10,4 +10,3 @@
 - List the content of this directory in a tree format
 - Navigate to your ***root*** directory
 - Navigate to ***test/tmp*** directory in your ***home*** directory
-- Save and exit the file
