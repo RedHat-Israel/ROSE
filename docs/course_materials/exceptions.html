@@ -48,7 +48,7 @@
                 <section>
                     <h3><b>Python handles all errors with exceptions</b></h3>
                     <ul>
-                        <li>An exception is a signal that an error or other unusual condition has occurred.</li>
+                        <li>An exception is a signal that an error or other unusual condition has occurred</li>
                     </ul>
                 </section>
                 <section>
@@ -72,7 +72,7 @@ except:
                 <section>
                     <h3><b>Don't Do It!</b></h3>
                     <ul>
-                        <li>Catching too broad exceptions is potentially dangerous.</li>
+                        <li>Catching too broad exceptions is potentially dangerous</li>
                         <li>Among others, this "wildcard" handler will catch:</li>
                         <ul>
                             <li>system exit triggers</li>
@@ -86,7 +86,7 @@ except:
                     <h3><b>Exercise: Divide by Zero</b></h3>
                     <ul>
                         <li>Try to divide 1/0. What happens?</li>
-                        <li>Catch the exception and tell the user he cannot divide by zero.</li>
+                        <li>Catch the exception and tell the user he cannot divide by zero</li>
                     </ul>
                 </section>
                 <section>
@@ -125,7 +125,7 @@ except AnotherException:
                 <section>
                     <h3><b>Raising Exceptions</b></h3>
                     <ul>
-                        <li>Exceptions can be raised with optional arguments.</li>
+                        <li>Exceptions can be raised with optional arguments</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs">
 raise RuntimeError()
@@ -135,7 +135,7 @@ raise RuntimeError("error message")
                 <section>
                     <h3><b>Accessing the Exception</b></h3>
                     <ul>
-                        <li>Use "as" to access the exception object.</li>
+                        <li>Use "as" to access the exception object</li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs">
 try:
@@ -160,7 +160,7 @@ except Exception:
     print('Outer')
                     </code></pre>
                     <ul>
-                        <li>The (default) root exception handler terminates the Python process.</li>
+                        <li>The (default) root exception handler terminates the Python process</li>
                     </ul>
                 </section>
                 <section>
@@ -180,7 +180,7 @@ except Exception:
     print('Outer')
                     </code></pre>
                     <ul>
-                        <li>This is useful for e.g. exception logging.</li>
+                        <li>This is useful for e.g. exception logging</li>
                     </ul>
                 </section>
             </section>
@@ -242,7 +242,7 @@ else:
                     <ul>
                         <li>Exception hierarchies can be designed</li>
                         <li>For example, OverflowError, ZeroDivisionError and FloatingPointError are all subclasses of ArithmeticError</li>
-                        <li>Just write a handler for ArithmeticError to catch any of them.</li>
+                        <li>Just write a handler for ArithmeticError to catch any of them</li>
                     </ul>
                 </section>
                 <section>
