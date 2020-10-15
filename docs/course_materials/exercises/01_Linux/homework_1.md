@@ -37,7 +37,7 @@ Please write down your answers, including the command you used and the output yo
 
 14. List only the files in the **web** directory
 
-15. Remove the file that is in **hw1** directory
+15. Remove the file that is in **web** directory
 
 16. List the files in the web directory
 
