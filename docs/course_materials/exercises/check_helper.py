@@ -3,15 +3,34 @@ from pathlib import Path
 import datetime as dt
 
 HOME = str(Path.home())
+command_dictionary = {
+    'pwd': 'printing current directory name',
+    'mkdir': 'creating directories',
+    'cd': 'changing between directories',
+    'ls': 'listing directory contents',
+    'tree': 'viewing the directory tree',
+    'rm': 'removing a file or directory',
+    'touch': 'creating new files',
+    'cat': 'printing the contents of a file',
+    'vim': 'editing a file',
+    'cp': 'coping a file to a new file',
+    'mv': 'moving directories or files',
+    'head': 'printing the first part of files',
+    'tail': 'printing the last part of files',
+    'diff': 'compare files line by line',
+    'clear': 'clearing the screen',
+    'man': 'opening manual',
+    }
+
 '''
 Setting colors for the output:
 green for positive feedback
 red negative feedback
 yellow for commands and paths, without new line
 '''
-def prGreen(feedback): print("\033[92m {}\033[00m" .format(feedback)) 
-def prRed(feedback): print("\033[91m {}\033[00m" .format(feedback))
-def prYellow(feedback): print("\033[93m {}\033[00m" .format(feedback), end='')
+def print_green(feedback): print("\033[92m {}\033[00m" .format(feedback)) 
+def print_red(feedback): print("\033[91m {}\033[00m" .format(feedback))
+def print_yellow(feedback): print("\033[93m {}\033[00m" .format(feedback), end='')
 
 def get_student_commands():
     '''
@@ -29,17 +48,23 @@ def get_student_commands():
                 my_commands.append(line[:-1])
     return my_commands
 
+def print_command_description(command):
+    if command_dictionary.get(command) is not None:
+        print(" for {} ... ".format(command_dictionary[command]), end='')
+    else:
+        print(" checking command structure", end='')
+
 def used_all_commands(exercise_commands):
     student_commands = get_student_commands()
     num_of_used_commands = 0
     print("Checking used commands...")
-    for command in exercise_commands.keys():
-        prYellow("'" + command + "'")
-        print(" for {} ... ".format(exercise_commands[command]), end='')
+    for command in exercise_commands:
+        print_yellow("'" + command + "'")
+        print_command_description(command)
         if not any(command in performed_command for performed_command in student_commands):
-            prRed("Missing")
+            print_red("Missing")
         else:
-            prGreen("Used")
+            print_green("Used")
             num_of_used_commands += 1
     print("Got {} out of {} commands.\n".format(str(num_of_used_commands), str(len(exercise_commands))))
     if num_of_used_commands == len(exercise_commands):
@@ -50,12 +75,12 @@ def created_all_paths(exercise_paths):
     num_of_created_paths = 0
     print("Checking created directories or files...")
     for cur_path in exercise_paths:
-        prYellow("'" + cur_path + "'")
+        print_yellow("'" + HOME + cur_path + "'")
         print(" ... ", end='')
-        if not os.path.exists(cur_path):
-            prRed("Missing")
+        if not os.path.exists(HOME + cur_path):
+            print_red("Missing")
         else:
-            prGreen("Created")
+            print_green("Created")
             num_of_created_paths += 1
     print("Got {} out of {} directories in the right spot.\n".format(str(num_of_created_paths), str(len(exercise_paths))))
     if num_of_created_paths == len(exercise_paths):
@@ -66,12 +91,12 @@ def deleted_all_paths(exercise_deleted_paths):
     num_of_deleted_paths = 0
     print("Checking deleted directories or files...")
     for cur_path in exercise_deleted_paths:
-        prYellow("'" + cur_path + "'")
+        print_yellow("'" + HOME + cur_path + "'")
         print(" ... ", end='')
-        if os.path.exists(cur_path):
-            prRed("Was not deleted")
+        if os.path.exists(HOME + cur_path):
+            print_red("Was not deleted")
         else:
-            prGreen("Deleted")
+            print_green("Deleted")
             num_of_deleted_paths += 1
     print("Deleted {} out of {} directories.\n".format(str(num_of_deleted_paths), str(len(exercise_deleted_paths))))
     if num_of_deleted_paths == len(exercise_deleted_paths):

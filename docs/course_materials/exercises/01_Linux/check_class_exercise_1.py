@@ -1,8 +1,8 @@
 from pathlib import Path
 import check_helper
 
-exercise_commands = {'mkdir': 'creating directories', 'tree': 'viewing the directory tree'}
-exercise_paths = [check_helper.HOME + '/test', check_helper.HOME + '/test/tmp']
+exercise_commands = ['mkdir', 'tree']
+exercise_paths = ['/test', '/test/tmp']
 
 def main():
     '''
