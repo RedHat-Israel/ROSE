@@ -47,8 +47,9 @@ parser.add_argument("exercise_file",
                     help="The path to the check_exercise file. "
                          "For example: '01_Linux/check_class_exercise_1.py'")
 parser.add_argument("--set_home", "-s", dest="home_directory",
-                        default=str(Path.home()),
+                        default=(str(Path.home())+"/"),
                         help="Custom definition of 'home' directory."
+                             "For example: /home/student/"
                              "If not specified, home folder will be used.")
 
 args = parser.parse_args()
@@ -56,6 +57,8 @@ args = parser.parse_args()
 If a custom folder is entered, will update the HOME value.
 '''
 if args.home_directory != str(Path.home()):
+    if args.home_directory[-1] != '/':
+        args.home_directory += '/'
     check_helper.HOME = args.home_directory
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))

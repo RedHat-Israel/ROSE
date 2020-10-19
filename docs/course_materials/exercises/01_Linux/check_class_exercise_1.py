@@ -2,7 +2,7 @@ from pathlib import Path
 import check_helper
 
 exercise_commands = ['mkdir', 'tree']
-exercise_paths = ['/test', '/test/tmp']
+exercise_paths = ['test', 'test/tmp']
 
 def main():
     '''
