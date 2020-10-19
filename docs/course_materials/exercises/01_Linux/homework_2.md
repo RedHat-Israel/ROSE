@@ -4,7 +4,7 @@
 Please save your answers in linux2.txt file.
 
 In this exercise, you will use these commands:
-tree, cp, mv, head, tail, diff, clear, man, cat and, wc.
+tree, cp, mv, vim, touch, head, tail, diff, clear, man, cat and, wc.
 
  
  1. Create a new directory named **hw2** in your home folder
