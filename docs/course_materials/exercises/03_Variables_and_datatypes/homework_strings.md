@@ -1,10 +1,10 @@
 # Variables and Data Types - HomeWork 
- 
+
 ## Strings
 
 Before answering the questions:
 1. Create a new directory Homework3
-2. In the Homework3 directory create a new file for each question 
+2. In the Homework3 directory create a new file for each question  
 *Please submit just python files that you ran !!!*
 
 ### names.py
@@ -22,16 +22,16 @@ Create a file *names.py*
 
 Create a file *times.py*
 
-Receive from the user the values for X and T and prints a nice line like:
-"You have to spend X*T minutes this week to complete ROSE homework"
-X - The number of questions 
+Receive from the user the values for X and T and prints a nice line like:  
+"You have to spend X*T minutes this week to complete ROSE homework"  
+X - The number of questions  
 T - Time to complete each question 
 
 ### letter.py
 
 Create a file *letter.py*
 
-Write a python code that accepts date, name,  address1, and address2 (as we learned in the last lesson)
+Write a python code that accepts date, name,  address1, and address2 (as we learned in the last lesson)  
 The code should print the following output:
 
         <date>                 
@@ -57,5 +57,5 @@ Declare the following variable :
 Perform the following functions:
 1. Use the “title()” function on the string variable and print it.
 2. Print the length of the string by len() function.
-3. Use the “replace(...,...)” function and replace the first word with the last word.
+3. Use the “replace(... , ...)” function and replace the first word with the last word.
 4. Use the “find()” function to know where is the ‘w’ word in the string.
