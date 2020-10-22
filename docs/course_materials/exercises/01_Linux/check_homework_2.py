@@ -1,6 +1,3 @@
-from pathlib import Path
-import check_helper
-
 exercise_commands = ['tree', 'cp', 'mv', 'vim', 'touch', 'head', 'tail', 'diff', 'clear', 'man', 'cat', 'wc', 'wc -l',
                     'mkdir songs drafts movies', 'my_song.txt ~/hw2/songs', 'welcome.txt ~/hw2/docs/backup.txt'
                     ]
@@ -15,9 +12,3 @@ exercise_paths = ['hw2/songs',
 exercise_deleted_paths = ['hw2/songs/new_song.txt',
                           'hw2/songs/my_song.txt'
                          ]
-
-def main():
-    '''
-    Running the tests and prompting the student according to his work.
-    '''
-    check_helper.test_exercise(exercise_commands, exercise_paths, exercise_deleted_paths)
