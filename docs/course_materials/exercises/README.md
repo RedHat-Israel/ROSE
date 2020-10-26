@@ -18,8 +18,6 @@ For the list of all available check files use:
 ## Adding check_exercise files:
 
 To add a check file use the convention `check_` followed by `homework` or `class_exercise`, and exercise number.
-Make sure to include a `type` variable set to `Linux` or `Python`.  
-The `type` variable is used to fetch the corresponding `Tester` for the exercise.
 
 ## Linux check_exercise files:
 
