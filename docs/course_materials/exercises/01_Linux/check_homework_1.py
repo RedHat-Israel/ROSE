@@ -1,6 +1,4 @@
-exercise_type = "Linux"
-
-exercise_commands = ['pwd', 'mkdir', 'cd', 'ls', 'tree', 'rm', 'touch', 'cat', 'vim', 'website.txt', 'docs'] 
+exercise_commands = ['pwd', 'mkdir', 'cd', 'ls', 'tree', 'rm', 'cat', 'vim', 'website.txt', 'docs'] 
 
 exercise_paths = ['hw1',
                 'hw1/web',

@@ -6,8 +6,7 @@ import logging
 import os.path
 from pathlib import Path
 import sys
-from linux_tester import LinuxTester
-from python_tester import PythonTester
+import linux_tester
 
 
 def load_file(file_path):
@@ -53,7 +52,7 @@ parser = argparse.ArgumentParser(description="ROSE Exercise")
 exercise_list = get_exe_list()
 parser.add_argument("exercise_file",
                     help="The path to the check_exercise file. "
-                         "The available exercises are: " + " ".join(exercise_list))
+                         "The available exercises are: " + ", ".join(exercise_list))
 parser.add_argument("--set_home", "-s", dest="home_directory",
                         default=(str(Path.home())+"/"),
                         help="Custom definition of 'home' directory, "
@@ -65,16 +64,19 @@ args = parser.parse_args()
 if args.home_directory[-1] != '/':
     args.home_directory += '/'
 
-exercise_mod = load_file(args.exercise_file)
-if exercise_mod.exercise_type == "Linux":
-    tester = LinuxTester(args.home_directory, exercise_mod)
-elif exercise_mod.exercise_type == "Python":
-    tester = PythonTester(args.home_directory, exercise_mod)
-else:
-    print("Invalid exercise type")
+linux_tester.HOME = args.home_directory
 
-flag = tester.test()
-if flag:
-    print('Great work! You finished your exercise.')
+if ("./" + args.exercise_file) in exercise_list:
+    exercise_mod = load_file(args.exercise_file)
+    linux_tester.COMMANDS = exercise_mod.exercise_commands
+    linux_tester.PATHS = exercise_mod.exercise_paths
+    linux_tester.DELETED_PATHS = exercise_mod.exercise_deleted_paths
+    finished = linux_tester.is_exercise_done()
+    if finished:
+        print('Great work! You finished your exercise.')
+    else:
+        print('Great effort! Try to complete the missing assignments.')
 else:
-    print('Great effort! Try to complete the missing assignments.')
+    print("Invalid exercise file")
+
+
