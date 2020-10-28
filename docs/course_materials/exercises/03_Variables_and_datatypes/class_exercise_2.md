@@ -1,7 +1,7 @@
 ### Let's Practice Together \#2
 
-- Create a file *variables_class.py*
-- Create a variable **x** and assign the value 50 to it.
-- Display the sum of 5 + 10, using two variables: x and y.
-- Create a variable **z**, assign x + y to it, and print the result.  
-- Create a variable named **car_name** and assign the value "Volvo" to it.
+- Create a new file **my_full_name.py** using vim editor
+- Get the user's first name and save it in a new variable **first_name**
+- Get the user's last name and save it in a new variable **last_name**
+- Print **first_name** and **last_name** using %s formatting
+- Save the file and run it on the terminal
