@@ -10,7 +10,7 @@ import linux_tester
 
 
 def load_file(file_path):
-    """
+    '''
     Load the file as module
 
     Arguments:
@@ -21,11 +21,11 @@ def load_file(file_path):
 
     Raises:
         FileNotFoundError if the file cannot be loaded
-    """
+    '''
     module_name = os.path.split(os.path.splitext(file_path)[0])[1]
     module_spec = importlib.util.spec_from_file_location(module_name, file_path)
     if module_spec is None:
-        print('Module: {} not found'.format(module_name))
+        print(f'Module: {module_name} not found')
         return None
     else:
         try:
@@ -33,7 +33,7 @@ def load_file(file_path):
             module_spec.loader.exec_module(module)
             return module
         except FileNotFoundError as e:
-            print("Error loading the file %r: %s" % (file_path, e.strerror))
+            print(f'Error loading the file {file_path}: {e.strerror}')
             sys.exit(2)
 
 def get_exe_list():
@@ -48,16 +48,16 @@ def get_exe_list():
 Calling the corresponding check_exercise file.
 '''
 logging.basicConfig(level=logging.INFO)
-parser = argparse.ArgumentParser(description="ROSE Exercise")
+parser = argparse.ArgumentParser(description='ROSE Exercise')
 exercise_list = get_exe_list()
-parser.add_argument("exercise_file",
-                    help="The path to the check_exercise file. "
-                         "The available exercises are: " + ", ".join(exercise_list))
-parser.add_argument("--set_home", "-s", dest="home_directory",
-                        default=(str(Path.home())+"/"),
-                        help="Custom definition of 'home' directory, "
-                             "for example: /home/student/. "
-                             "If not specified, home folder will be used.")
+parser.add_argument('exercise_file',
+                    help='The path to the check_exercise file. '
+                         'The available exercises are: ' + ', '.join(exercise_list))
+parser.add_argument('--set_home', '-s', dest='home_directory',
+                        default=(str(Path.home())+'/'),
+                        help='Custom definition of HOME directory, '
+                             'for example: /home/student/. '
+                             'If not specified, standard HOME folder will be used.')
 
 args = parser.parse_args()
 
@@ -66,7 +66,7 @@ if args.home_directory[-1] != '/':
 
 linux_tester.HOME = args.home_directory
 
-if ("./" + args.exercise_file) in exercise_list:
+if ('./' + args.exercise_file) in exercise_list:
     exercise_mod = load_file(args.exercise_file)
     linux_tester.COMMANDS = exercise_mod.exercise_commands
     linux_tester.PATHS = exercise_mod.exercise_paths
@@ -77,6 +77,6 @@ if ("./" + args.exercise_file) in exercise_list:
     else:
         print('Great effort! Try to complete the missing assignments.')
 else:
-    print("Invalid exercise file")
+    print('Invalid exercise file')
 
 
