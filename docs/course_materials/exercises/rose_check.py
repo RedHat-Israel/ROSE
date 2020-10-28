@@ -23,7 +23,8 @@ def load_file(file_path):
         FileNotFoundError if the file cannot be loaded
     '''
     module_name = os.path.split(os.path.splitext(file_path)[0])[1]
-    module_spec = importlib.util.spec_from_file_location(module_name, file_path)
+    module_spec = importlib.util.spec_from_file_location(module_name,
+                                                         file_path)
     if module_spec is None:
         print(f'Module: {module_name} not found')
         return None
@@ -36,6 +37,7 @@ def load_file(file_path):
             print(f'Error loading the file {file_path}: {e.strerror}')
             sys.exit(2)
 
+
 def get_exe_list():
     exercise_list = []
     for currentpath, folders, files in os.walk('.'):
@@ -43,7 +45,8 @@ def get_exe_list():
             if 'check_' in file and '.pyc' not in file:
                 exercise_list.append(os.path.join(currentpath, file))
     return exercise_list
-            
+
+
 '''
 Calling the corresponding check_exercise file.
 '''
@@ -52,12 +55,14 @@ parser = argparse.ArgumentParser(description='ROSE Exercise')
 exercise_list = get_exe_list()
 parser.add_argument('exercise_file',
                     help='The path to the check_exercise file. '
-                         'The available exercises are: ' + ', '.join(exercise_list))
+                         'The available exercises are: ' +
+                         ', '.join(exercise_list))
 parser.add_argument('--set_home', '-s', dest='home_directory',
-                        default=(str(Path.home())+'/'),
-                        help='Custom definition of HOME directory, '
-                             'for example: /home/student/. '
-                             'If not specified, standard HOME folder will be used.')
+                    default=(str(Path.home())+'/'),
+                    help='Custom definition of HOME directory, '
+                         'for example: /home/student/. '
+                         'If not specified, '
+                         'standard HOME folder will be used.')
 
 args = parser.parse_args()
 
@@ -78,5 +83,3 @@ if ('./' + args.exercise_file) in exercise_list:
         print('Great effort! Try to complete the missing assignments.')
 else:
     print('Invalid exercise file')
-
-

@@ -4,7 +4,7 @@ import color_print
 import command_dictionary as cd
 
 # set from rose_check.py from the check_exercise file.
-HOME = '' 
+HOME = ''
 COMMANDS = []
 PATHS = []
 DELETED_PATHS = []
@@ -42,19 +42,20 @@ def used_all_commands():
         # color_print.info('"' + command + '"', 0)
         color_print.info(command, 0)
         print_command_description(command)
-            
+
         # Print feedback about the command
-        if not any(command in performed_command for performed_command in student_commands):
+        if not any(command in performed_command
+                   for performed_command in student_commands):
             color_print.negative('Missing')
         else:
             color_print.positive('Used')
             num_of_used_commands += 1
-    
-    print(f'Got {str(num_of_used_commands)} out of {str(len(COMMANDS))}')
+
+    print(f'Got {str(num_of_used_commands)} out of {str(len(COMMANDS))}\n')
     if num_of_used_commands == len(COMMANDS):
         return True
     return False
-    
+
 
 def created(check_path):
     if os.path.exists(check_path):
@@ -79,8 +80,8 @@ def check_all_paths(path_type):
     paths_to_check will get a list of exercise paths to create or delete.
     path_type will get CREATED or DELETED.
     '''
-    case_type = {'created':created, 'deleted':deleted}
-    path_to_check = {'created':PATHS, 'deleted':DELETED_PATHS}
+    case_type = {'created': created, 'deleted': deleted}
+    path_to_check = {'created': PATHS, 'deleted': DELETED_PATHS}
     num_of_paths = 0
     print('Checking ' + path_type + ' directories or files...')
     for cur_path in path_to_check[path_type]:
@@ -90,21 +91,23 @@ def check_all_paths(path_type):
         print(' ... ', end='')
 
         num_of_paths += case_type[path_type](check_path)
-    print(f'{path_type.capitalize()} {str(num_of_paths)} out of {str(len(path_to_check[path_type]))} directories.\n')
+    print(f'{path_type.capitalize()} {str(num_of_paths)} out of '
+          f'{str(len(path_to_check[path_type]))} directories.\n')
     if num_of_paths == len(path_to_check[path_type]):
         return True
     return False
 
+
 def is_exercise_done():
     check_commands = used_all_commands()
     check_paths = check_all_paths('created')
-    
+
     # run the function only if the check is needed
-    if len(DELETED_PATHS) > 0: 
+    if len(DELETED_PATHS) > 0:
         check_deleted_paths = check_all_paths('deleted')
     else:
         check_deleted_paths = True
-    
+
     if check_commands and check_paths and check_deleted_paths:
         return True
     else:
