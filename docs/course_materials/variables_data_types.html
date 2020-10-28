@@ -42,8 +42,69 @@
             <section>
                 <section>
                     <h1><b>
+                            <span>Interactive Input and String Formatting</span>
+                    </b></h1>
+                </section>
+                <section>
+                    <h3><b>Interactive Input</b></h3>
+                    <ul>
+                        <li>In order to get an input:</li>
+                        <ul>
+                            <li>input()</li>
+                            <li>input(prompt) : prints prompt before reading input</li>
+                        </ul>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+>>> name = input('Enter your name: ')
+Enter your name: 'John Snow'
+>>> print(name)
+John Snow
+
+>>> address = input('Enter your address: ')
+Enter your address: 'Tel Aviv'
+>>> print(address)
+Tel Aviv
+                    </code></pre>
+                </section>
+                <section>
+                    <h3><b>Formatting</b></h3>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+    >>> name = 'Tom'
+    >>> family_name = 'Sawyer'
+    >>> print('Hello %s!' % name)
+    >>> Hello Tom!
+    >>> print('Hello %s %s!' % (name, family_name))
+    >>> Hello Tom Sawyer!
+                    </code></pre>
+                </section>
+                <section data-markdown="exercises/03_Variables_and_datatypes/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h1><b>
                             <span>Variables</span>
-                    </h1></b>
+                    </b></h1>
+                </section>
+                <section>
+                    <h3><b>What is a Variable?</b></h3>
+                    <ul>
+                        <li>In computer programming, a variable has a name and contains a value.</li>
+                        <li>The kind of value that a variable can hold is also called a data type</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><b>Variables Names</b></h3>
+                    <ul>
+                        <li>A variable can have a short name (like a and b) or a more descriptive name<br>For example: age, carname, total_volume</li>
+                        <li>Rules for Python variables:</li>
+                          <ul>
+                            <li>A variable name <b>must</b> start with a letter or the underscore character</li>
+                            <li>A variable name <b>cannot</b> start with a number</li>
+                            <li>A variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )</li>
+                            <li>Variable names are <b>case-sensitive</b> (age, Age and AGE are three different variables)</li>
+                        </ul>
+                    </ul>
                 </section>
                 <section>
                     <h3><b>Assignment</b></h3>
@@ -51,7 +112,7 @@
                         <li>Variables in Python can hold values</li>
                         <li>This is done using the assignment operator (=)</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a = 100
 print(a) # 100
 
@@ -70,7 +131,7 @@ print(d) # 300
                     <ul>
                         <li>You can modify the values in any variable by reassigning the value</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a = 10
 print(a)    # 10
 
@@ -90,7 +151,7 @@ print(a)    # Hello
                         <li>You can add to a variable using: a += 20</li>
                         <li>This the same as: a = a + 20</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a = 50
 print(a) # 50
 
@@ -99,7 +160,7 @@ print(a) # 70
                     </code></pre>
                     <ul>
                         <li>Other operations are also available:</li>
-                        <li>-=, *=, /=, //=, %= and **=</li>
+                        <li>-=, *=, /=, %= and **=</li>
                     </ul>
                 </section>
                 <section>
@@ -108,7 +169,7 @@ print(a) # 70
                         <li>Getting the value of a variable that does not exist will produce an error</li>
                         <li>Each variable must be assigned before it is accessed</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a = 50
 print(a) # 50
 
@@ -120,35 +181,60 @@ print(b) # NameError: name 'b' is not defined
                     <ul>
                         <li>Multiple assignments can be made in a single statement</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a, b, c = 5, 3.2, "Hello"
                     </code></pre>
                     <ul>
                         <li>Assigning the same value to multiple variables</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 x = y = z = 0
                     </code></pre>
                 </section>
-
             </section>
             <section>
                 <section>
                     <h1><b>
-                            <span>Arithmetic Operators</span>
+                            <span>Numbers</span>
                     </h1></b>
+                </section>
+                <section>
+                    <h3><b>Number data types</b></h3>
+                    <ul>
+                        <li>Python supports integers and floating point numbers</li>
+                        <li>Integers and floating points are separated by the presence or absence of a decimal point:<br>5 is an integer whereas 5.0 is a floating-point number</li>
+                    </ul>
+                </section>
+                <section>
+                    <h3><b>Type conversion</b></h3>
+                    <ul>
+                        <li>Operations between a float and an integer will result in a float</li>
+                        <li>We can use functions like int() and float() to convert between types.<br>These functions can convert also from strings</li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+            >>> 1 + 2.0
+            3.0
+            >>> int(2.3)
+            2
+            >>> int(-2.8)
+            -2
+            >>> float(5)
+            5.0
+            >>> int("76")
+            76
+                    </code></pre>
                 </section>
                 <section>
                     <h3><b>Mathematics operations</b></h3>
                     <ul>
                         <li>Same rules as in simple math including order of operations and parenthesis</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     </code></pre>
                 </section>
                 <section>
-                    <h3><b>Operators</b></h3>
+                    <h3><b>Arithmetic Operators</b></h3>
                     <div style="width: 950px; font-size: 20px">
                         <table>
                             <tr>
@@ -182,11 +268,6 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                                 <td>x % y<br>(remainder of x/y)</td>
                             </tr>
                             <tr>
-                                <td>//</td>
-                                <td>Floor division - division that results into whole number adjusted to the left in the number line</td>
-                                <td>x // y<br></td>
-                            </tr>
-                            <tr>
                                 <td>**</td>
                                 <td>Exponent - left operand raised to the power of right</td>
                                 <td>x ** y<br>(x to the power y)</td>
@@ -196,7 +277,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                 </section>
                 <section>
                     <h3><b>Examples</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
             x = 15
             y = 4
 
@@ -212,38 +293,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
             print('x ** y =',x**y) # Output: x ** y = 50625
                     </code></pre>
                 </section>
-            </section>
-            <section>
-                <section>
-                    <h1><b>
-                            <span>Numbers</span>
-                    </h1></b>
-                </section>
-                <section>
-                    <h3><b>Number data types</b></h3>
-                    <ul>
-                        <li>Python supports integers, floating point numbers</li>
-                        <li>Integers and floating points are separated by the presence or absence of a decimal point:<br>5 is integer whereas 5.0 is a floating point number</li>
-                    </ul>
-                </section>
-                <section>
-                    <h3><b>Type conversion</b></h3>
-                    <ul>
-                        <li>Operations between a float and an integer will result in a float</li>
-                        <li>We can use functions like int() and float() to convert between types<br>These functions can convert also from strings</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-            >>> 1 + 2.0
-            3.0
-            >>> int(2.3)
-            2
-            >>> int(-2.8)
-            -2
-            >>> float(5)
-            5.0
-            >>> int("76")
-            76
-                    </code></pre>
+                <section data-markdown="exercises/03_Variables_and_datatypes/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
             </section>
             <section>
@@ -257,7 +307,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <ul>
                         <li>Python boolean types literals are True and False</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
       a = True
       if a:
          print("Hi there!")
@@ -287,15 +337,15 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                             </tr>
                             <tr>
                                 <td>x or y</td>
-                                <td>if x is False, then y , else x</td>
+                                <td>x = True, y = False, x or y -> True</td>
                             </tr>
                             <tr>
                                 <td>x and y</td>
-                                <td>if x is False, then x, else y</td>
+                                <td>x = False, y = True, x and y -> False</td>
                             </tr>
                             <tr>
                                 <td>not x</td>
-                                <td>if x is False, then True, else False</td>
+                                <td>x = False, not x -> True</td>
                             </tr>
                         </table>
                     </div>
@@ -308,11 +358,19 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     </h1></b>
                 </section>
                 <section>
+                    <h3><b>What is a String?</b></h3>
+                    <ul>
+                        <li>A string is a data type used in programming, such as an integer and float</li>
+                        <li>Represents text. For example, the word "hamburger" and the phrase "I ate 3 hamburgers" are both strings</li>
+                        <li>Even "12345" could be considered as a string, if specified correctly. </li>
+                    </ul>
+                </section>
+                <section>
                     <h3><b>Strings literals</b></h3>
                     <ul>
                         <li>The following strings literals are equivalent:</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
   "Hello World!"
   'Hello World!'
   """Hello World!"""
@@ -321,25 +379,9 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <ul>
                         <li>Choose the quoting style that fits your need:</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
       "It's a very nice day."
       'The sign says "Hello World!".'
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>Multi-line Strings</b></h3>
-                    <ul>
-                        <li>Triple quoting allows multi-line string:</li>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
-      """Shopping List:
-      Cheese
-      Apples
-      Bread"""
-
-      '''ABC
-      DEF
-      GHI'''
                     </code></pre>
                 </section>
                 <section>
@@ -350,7 +392,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                         <li>\' and \" :quote and double quote</li>
                         <li>\\ :slash</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
       "I say \"Hello!\".\nYou say: \"Goodbye!\"."
                     </code></pre>
                 </section>
@@ -366,14 +408,14 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <ul>
                         <li>endswith, startswith</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
   s = 'hello world'
   s.startswith('he')  # -> True
                     </code></pre>
                     <ul>
                         <li>isalnum, isalpha, isdigit, islower, isupper, isspace</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
     '123'.isdigit()  # -> True
     'Hello World'.islower()  # -> False
                     </code></pre>
@@ -383,14 +425,14 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <ul>
                         <li>count</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
   s = 'hello world'
   s.count('l')  # -> 3
                     </code></pre>
                     <ul>
                         <li>find</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
     s = 'hello world'
     s.find('l')  # -> 2
     s.find('t')  # -> -1
@@ -401,7 +443,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <ul>
                         <li>lower, upper , title , capitalize , swapcase</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
   s = 'hello world'
   s.title()  # -> 'Hello World'
   s.capitalize()  # -> 'Hello world'
@@ -409,21 +451,21 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <ul>
                         <li>replace</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
     s = 'hello world'
     s.replace('world', 'john')  # -> 'hello john'
                     </code></pre>
                     <ul>
                         <li>strip, rstrip, lstrip - removes spaces and new lines from the ends of a string:</li>
                     </ul>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
           s = '     hello!    \n'
           s.strip() # -> 'hello!'
                     </code></pre>
                 </section>
                 <section>
                     <h3><b>+ and *</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
     'hello ' + 'world'  # -> 'hello world'
 
     'hello ' * 3  # -> 'hello hello hello '
@@ -452,7 +494,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                 </section>
                 <section>
                     <h3><b>Examples</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
             s = 'Monty Python'
 
             # slicing (inclusive start, exclusive end)
@@ -468,7 +510,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                 </section>
                 <section>
                     <h3><b>Examples</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
             # can use negative indexes as well
             s[2:-2]  # -> 'nty Pyth'
 
@@ -482,46 +524,6 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     <img width="750" height="190" style="" data-src="media/string-slicing.png" />
                 </section>
             </section>
-            <section>
-                <section>
-                    <h1><b>
-                            <span>Interactive Input and String Formatting</span>
-                    </h1></b>
-                </section>
-                <section>
-                    <h3><b>Interactive Input</b></h3>
-                    <ul>
-                        <li>In order to get an input:</li>
-                        <ul>
-                            <li>input()</li>
-                            <li>input(prompt) : prints prompt before reading input</li>
-                        </ul>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs">
->>> name = input('Enter your name: ')
-Enter your name: 'John Snow'
->>> print(name)
-John Snow
-
->>> age = int(input('Enter your age: '))
-Enter your age: 37
->>> print(age)
-37
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>Formatting</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
-    >>> name = 'Tom'
-    >>> family_name = 'Sawyer'
-    >>> print('Hello %s!' % name)
-    >>> Hello Tom!
-    >>> print('Hello %s %s!' % (name, family_name))
-    >>> Hello Tom Sawyer!
-                    </code></pre>
-                </section>
-            </section>
-
         </div>
     </div>
 

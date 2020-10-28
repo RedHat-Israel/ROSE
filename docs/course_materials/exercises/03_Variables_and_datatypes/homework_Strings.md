@@ -1,41 +1,5 @@
 # Variables and Data Types - HomeWork exercise 
-
-## Variables, numbers and boolean 
-
-Before answering the questions:
-1. Change Directory to lesson2 
-2. Create a directory called Homework2 
-3. Create a file called variables.py and answer the following:
-
-### variables.py - Exercise 1
-Add two variables together:
-1. Declare three variables (x, y, and z) as integers.
-2. Assign a value of 9 to x
-3. Assign a value of 7 to y
-4. Make z equal to the sum of those two variables. 
-5. Print out the contents of the z variable.
-
-### variables.py - Exercise 2
-Create a new file called calculations.txt And answer the following questions:
-
-For answering the following questions use the python terminal and run the commands you need.
-Finally, give a short answer to each question in calculation.txt file 
-
-1. What is the result of 10 ** 3?
-2. Given (x = 1), what will be the value of after we run (x += 2)?
-3. What is the result of float(1)?
-4. What is the result of 10 == “10”?
-5. Print the result of the following variable: 
-6. Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5     
  
- 
-### variables.py - Exercise 3
-1. Accept two numbers from the user (using input) and calculate multiplication (*)
-2. Accept two numbers from the user (using input) and calculate Subtract (-)
-3. Accept two numbers from the user (using input) and calculate Divide (/)
-4. Accept two numbers from the user (using input) and calculate Modulus (%) 
- 
-
 ## Strings
 
 Before answering the questions:
