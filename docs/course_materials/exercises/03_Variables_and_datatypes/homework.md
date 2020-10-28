@@ -30,10 +30,11 @@ Finally, give a short answer to each question in calculation.txt file
  
  
 ### variables.py - Exercise 3
-1. Accept two numbers from the user (using input) and calculate multiplication (*)
-2. Accept two numbers from the user (using input) and calculate Subtract (-)
-3. Accept two numbers from the user (using input) and calculate Divide (/)
-4. Accept two numbers from the user (using input) and calculate Modulus (%) 
+Accept two numbers from the user (using input) and:
+1. Calculate multiplication (*) of the numbers
+2. Calculate Subtract (-) of the numbers
+3. Calculate Divide (/) of the numbers
+4. Calculate Modulus (%) of the numbers
  
 
 ## Strings
