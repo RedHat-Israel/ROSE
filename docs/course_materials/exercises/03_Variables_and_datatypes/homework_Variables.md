@@ -15,7 +15,16 @@ Add two variables together:
 4. Make **z** equal to the sum of those two variables. 
 5. Print out the contents of the **z** variable.
 
+
 ### variables_2.py - Exercise 2
+Accept two numbers from the user (using input) and:
+1. Calculate multiplication (*) of the numbers
+2. Calculate Subtract (-) of the numbers
+3. Calculate Divide (/) of the numbers
+4. Calculate Modulus (%) of the numbers
+
+
+### calculations.txt - Exercise 3
 Create a new file **calculations.txt** And answer the following questions:
 
 For answering the following questions use the python terminal and run the commands you need.
@@ -29,8 +38,3 @@ Finally, give a short answer to each question in **calculation.txt** file
    Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5     
  
  
-### variables_3.py - Exercise 3
-1. Accept two numbers from the user (using input) and calculate multiplication (*)
-2. Accept two numbers from the user (using input) and calculate Subtract (-)
-3. Accept two numbers from the user (using input) and calculate Divide (/)
-4. Accept two numbers from the user (using input) and calculate Modulus (%) 
