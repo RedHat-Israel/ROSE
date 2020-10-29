@@ -9,7 +9,7 @@ Before answering the questions:
 
 ### variables_1.py - Exercise 1
 Add two variables together:
-1. Declare three variables (**x**,** y**, and **z**) as integers.
+1. Declare three variables (**x**,**y**, and **z**) as integers.
 2. Assign a value of 9 to **x**
 3. Assign a value of 7 to **y**
 4. Make **z** equal to the sum of those two variables. 
