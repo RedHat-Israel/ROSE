@@ -42,47 +42,6 @@
             <section>
                 <section>
                     <h1><b>
-                            <span>Interactive Input and String Formatting</span>
-                    </b></h1>
-                </section>
-                <section>
-                    <h3><b>Interactive Input</b></h3>
-                    <ul>
-                        <li>In order to get an input:</li>
-                        <ul>
-                            <li>input()</li>
-                            <li>input(prompt) : prints prompt before reading input</li>
-                        </ul>
-                    </ul>
-                    <pre><code data-trim data-noescape class="hljs lang-python">
->>> name = input('Enter your name: ')
-Enter your name: 'John Snow'
->>> print(name)
-John Snow
-
->>> address = input('Enter your address: ')
-Enter your address: 'Tel Aviv'
->>> print(address)
-Tel Aviv
-                    </code></pre>
-                </section>
-                <section>
-                    <h3><b>Formatting</b></h3>
-                    <pre><code data-trim data-noescape class="hljs lang-python">
-    >>> name = 'Tom'
-    >>> family_name = 'Sawyer'
-    >>> print('Hello %s!' % name)
-    >>> Hello Tom!
-    >>> print('Hello %s %s!' % (name, family_name))
-    >>> Hello Tom Sawyer!
-                    </code></pre>
-                </section>
-                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/03_Variables_and_datatypes/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h1><b>
                             <span>Variables</span>
                     </b></h1>
                 </section>
@@ -293,7 +252,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
             print('x ** y =',x**y) # Output: x ** y = 50625
                     </code></pre>
                 </section>
-               <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/03_Variables_and_datatypes/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+               <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/03_Variables_and_datatypes/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
             </section>
             <section>
@@ -397,11 +356,61 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
                     </code></pre>
                 </section>
             </section>
+
+          <section>
+            <section>
+              <h1><b>
+                <span>Interactive Input and String Formatting</span>
+              </b></h1>
+            </section>
+            <section>
+              <h3><b>Interactive Input</b></h3>
+              <ul>
+                <li>In order to get an input:</li>
+                <ul>
+                  <li>input()</li>
+                  <li>input(prompt) : prints prompt before reading input</li>
+                </ul>
+              </ul>
+              <pre><code data-trim data-noescape class="hljs lang-python">
+>>> name = input('Enter your name: ')
+Enter your name: 'John Snow'
+>>> print(name)
+John Snow
+
+>>> address = input('Enter your address: ')
+Enter your address: 'Tel Aviv'
+>>> print(address)
+Tel Aviv
+                    </code></pre>
+            </section>
+            <section>
+              <h3><b>Formatting</b></h3>
+              <pre><code data-trim data-noescape class="hljs lang-python">
+    >>> name = 'Tom'
+    >>> family_name = 'Sawyer'
+    >>> print('Hello %s!' % name)
+    >>> Hello Tom!
+    >>> print('Hello %s %s!' % (name, family_name))
+    >>> Hello Tom Sawyer!
+                    </code></pre>
+            </section>
+            <section>
+              <h3><b>+ and *</b></h3>
+              <pre><code data-trim data-noescape class="hljs lang-python">
+    'hello ' + 'world'  # -> 'hello world'
+
+    'hello ' * 3  # -> 'hello hello hello '
+                    </code></pre>
+            </section>
+            <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/03_Variables_and_datatypes/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+            </section>
+          </section>
             <section>
                 <section>
                     <h1><b>
                             <span>Common String Methods</span>
-                    </h1></b>
+                    </b></h1>
                 </section>
                 <section>
                     <h3><b>Checks</b></h3>
@@ -463,14 +472,7 @@ a = (3 + 2)*5 + 6/3 #  5*5 + 2 =27
           s.strip() # -> 'hello!'
                     </code></pre>
                 </section>
-                <section>
-                    <h3><b>+ and *</b></h3>
-                    <pre><code data-trim data-noescape class="hljs lang-python">
-    'hello ' + 'world'  # -> 'hello world'
 
-    'hello ' * 3  # -> 'hello hello hello '
-                    </code></pre>
-                </section>
             </section>
             <section>
                 <section>
