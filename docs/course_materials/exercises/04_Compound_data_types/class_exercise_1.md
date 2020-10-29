@@ -7,5 +7,3 @@
 - Replace all "p" values with "o"
 - Replace "4" value with "d"
 - Replace the first item with "G"
-
-<div style="text-align:center"><img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png"/>

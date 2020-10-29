@@ -14,5 +14,3 @@ the "name" value is the name of the student, and the other keys should be an emp
     - The student's homework
     - The student's quizzes
     - The student's tests
-
-<div style="text-align:center"><img data-natural-width="340" data-natural-height="234" style="" data-src="https://posteo.de/images/daten.png"/>
