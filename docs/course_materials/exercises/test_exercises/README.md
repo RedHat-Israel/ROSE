@@ -2,6 +2,10 @@
 
 ## Running the checks
 
+First, make sure you are using python 3.7 or later.  
+
+        `pipenv --python /usr/local/bin/python3.7 shell`
+
 For checking an exercise, you should use the following:  
 
         `rose_check lesson/check_homework_1`
