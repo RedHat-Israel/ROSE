@@ -36,14 +36,7 @@ description: This project is a game that has been developed in order to help tea
     <h1 style="color:#159957;"><a href="course_materials/variables_data_types.html#" target="_blank" style="color: #159957">Variables and Data Types</a></h1>
     <iframe src="course_materials/variables_data_types.html#/"
     width="750" height="550"></iframe>
-    <br>
-    <h2 style="color:#34689C">See following homework for some practice: <br>
-    <a href="course_materials/exercises/03_Variables_and_datatypes/homework_Strings.html#" target="_blank" 
-    style="color:#159957">1. Strings exercises</a><br>
-    <a href="course_materials/exercises/03_Variables_and_datatypes/homework_Variables.html#" target="_blank" 
-    style="color:#159957">2. Variables exercises</a>
-    </h2>
-    <br>
+    <br><br>
 </div>
 
 </body>

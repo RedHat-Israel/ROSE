@@ -36,9 +36,7 @@ description: This project is a game that has been developed in order to help tea
     <h1 style="color:#159957"><a href="course_materials/linux_intro.html#" target="_blank" style="color: #159957">Linux Introduction</a></h1>
     <iframe src="course_materials/linux_intro.html#/"
     width="750" height="550"></iframe>
-    <br>
-    <h2 style="color:#34689C">See <a href="course_materials/linux_intro_homework.html#" target="_blank" style="color:#159957">homework exercises</a> for some practice.</h2>
-    <br>
+    <br><br>
 </div>
 
 </body>
