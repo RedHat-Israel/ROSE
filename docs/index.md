@@ -31,6 +31,8 @@ For each type of obstacles there is a different action, and different points.
 
 See [materials](materials.md) for our course materials.
 
+See [homework exercises](homework.md) for our course homework exercises.
+
 See [examples/driver](examples/driver.md) for explanation on how to write a driver module.
 
 See [development](development.md) for details on getting started
