@@ -1,4 +1,4 @@
-# Variables and Data Types - HomeWork exercise 
+# Variables and Data Types - HomeWork 
  
 ## Strings
 
@@ -7,7 +7,10 @@ Before answering the questions:
 2. In the Homework3 directory create a new file for each question 
 *Please submit just python files that you ran !!!*
 
-### Names.py
+### names.py
+
+Create a file *names.py*
+
 1. Create a string variable with your name, call it my_name
 2. Create a string variable with your family name, call it my_family_name
 3. Create a string variable called my_full_name which is composed from the 2 variables my_name and my_family_name.
@@ -15,13 +18,19 @@ Before answering the questions:
 5. Create a variable msg with "My name is X and I’m from Y" using the variables you created above
 
 
-### Times.py
+### times.py
+
+Create a file *times.py*
+
 Receive from the user the values for X and T and prints a nice line like:
 "You have to spend X*T minutes this week to complete ROSE homework"
 X - The number of questions 
 T - Time to complete each question 
 
-### Letter.py
+### letter.py
+
+Create a file *letter.py*
+
 Write a python code that accepts date, name,  address1, and address2 (as we learned in the last lesson)
 The code should print the following output:
 
@@ -37,7 +46,11 @@ The code should print the following output:
         Sincerely
                Koogle Inc.
                <address2>
+               
 ### manipulations.py
+
+Create a file *manipulations.py*
+
 Declare the following variable :  
     
     s = ‘work hard dream big’ 
@@ -46,4 +59,3 @@ Perform the following functions:
 2. Print the length of the string by length() function.
 3. Use the “replace(...,...)” function and replace the first word with the last word.
 4. Use the “find()” function to know where is the ‘w’ word in the string.
-	

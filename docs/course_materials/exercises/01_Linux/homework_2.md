@@ -1,4 +1,4 @@
-# Linux - Homework 
+# Linux - HomeWork 
 
 ### linux2.txt
 Please save your answers in linux2.txt file.

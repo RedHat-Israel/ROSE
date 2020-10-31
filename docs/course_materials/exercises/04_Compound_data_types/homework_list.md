@@ -1,8 +1,10 @@
-#  Compound data types - HomeWork exercise 
+#  Compound data types - HomeWork 
 
 ## List
 
-### Lists.py
+### lists.py
+
+Create a file *lists.py*
 
 Note: If you want to add a comment in your code, you can add #. 
 Python will ignore each line that starts with # and will not try to run it as a code
@@ -44,25 +46,3 @@ Before each exercise, write in a comment the exercise number, for example:
 3. Create a new list **l3** with the items of **l1** and **l2**, print **l3**.
 4. Sort **l3** and print the sorted list.
 5. Print the length of **l1**, **l2**, and **l3**.
-
-
-## dictionary
-
-
-### countries.py 
-
-- Create a new dictionary with the Udi number of flights to each country:  “Italy”:2 “Spain”:3  “Israel”:1
-- Insert a new element :
-“Belgium”:1
-- Delete “Italy” record from the dictionary
-- Print how many times Udi was in Spain 
-  
-
-### family_members_average_age.py
-
-- Define a dictionary called ages, ages should be empty in it this time
-- Add your family members names to the dictionary with their ages. 
-   for example: “Samira”:8 
-- Print the dictionary
-- Calculate the average age in your family and 
-- Print the average age using the dictionary

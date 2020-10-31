@@ -1,4 +1,4 @@
-# Introduction‬‏ - HomeWork exercise 
+# Introduction‬‏ - HomeWork 
 
 ### house.txt
 
