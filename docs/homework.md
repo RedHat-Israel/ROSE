@@ -4,9 +4,10 @@ tagline: Materials
 description: This project is a game that has been developed in order to help teach kids Python
 ---
 
-# Course Home Work
+# Course Homework
 
-Here you may find ROSE course homework exercises sectioned by subjects:
+Here you may find ROSE course homework exercises sectioned by subjects:  
+(return to [course materials](materials.md))
 
 ## Intro
 
