@@ -32,13 +32,6 @@ Before each exercise, write in a comment the exercise number, for example:
 5. Print the length of the **l1**
 6. Add the number 1 to the **l1**, 1 should be the first item on the list
 
-#### Slicing a list
-
-1. Print first 4 numbers of **l1**. 
-2. Print 4 last numbers of **l1**. 
-3. Print the two numbers in the middle
-4. Print l1[20], which error did you get? What does this error say? (write your answer in a comment #)
-	
 #### Update the list 
 
 1. Remove the items 4 and 5 from the **l1** and print **l1**.
