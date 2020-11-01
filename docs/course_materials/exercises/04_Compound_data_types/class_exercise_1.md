@@ -1,6 +1,7 @@
 ### Let's Practice Together \#1 
 
-- Create a file named *my_list.py*
+Create a file *my_list.py*
+
 - Create a new list with the following items: "p","k","p" ,"p","4","J","p"
 - Append "b" to the list you created
 - Remove item in index 1

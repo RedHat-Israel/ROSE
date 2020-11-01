@@ -1,6 +1,7 @@
 ### Let's Practice Together \#3
 
-- Create a file named *my_dict.py*
+Create a file *my_dict.py*
+
 - Create a dictionary called student with the keys: "name", "homework", "quizzes", and "tests".
 the "name" value is the name of the student, and the other keys should be an empty list.
 - Itzik got the following scores: 

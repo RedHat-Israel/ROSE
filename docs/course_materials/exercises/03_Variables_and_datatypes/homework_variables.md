@@ -1,14 +1,15 @@
-# Variables and Data Types - HomeWork exercise 
+# Variables and Data Types - HomeWork 
 
 ## Variables, numbers and boolean 
 
 Before answering the questions:
-1. Create a directory **lesson4** and change your current directory to **lesson4**
-2. Create a directory  **homework** inside **lesson4**
-3. Create a file  **variables.py** and answer the following:
+1. Create a directory *lesson4* and change your current directory to *lesson4*
+2. Create a directory  *homework* inside *lesson4* and change your current directory to *homework*
 
-### variables_1.py - Exercise 1
-Add two variables together:
+### variables_1.py 
+
+Create a file *variables_1.py*
+
 1. Declare three variables (**x**,**y**, and **z**) as integers.
 2. Assign a value of 9 to **x**
 3. Assign a value of 7 to **y**
@@ -16,7 +17,10 @@ Add two variables together:
 5. Print out the contents of the **z** variable.
 
 
-### variables_2.py - Exercise 2
+### variables_2.py
+
+Create a file *variables_2.py*
+
 Accept two numbers from the user (using input) and:
 1. Calculate multiplication (*) of the numbers
 2. Calculate Subtract (-) of the numbers
@@ -24,11 +28,12 @@ Accept two numbers from the user (using input) and:
 4. Calculate Modulus (%) of the numbers
 
 
-### calculations.txt - Exercise 3
-Create a new file **calculations.txt** And answer the following questions:
+### calculations.txt
+
+Create a new file *calculations.txt* And answer the following questions:
 
 For answering the following questions use the python terminal and run the commands you need.
-Finally, give a short answer to each question in **calculation.txt** file 
+Finally, give a short answer to each question in *calculation.txt* file 
 
 1. What is the result of 10 ** 3?
 2. Given (x = 1), what will be its value of after we run (x += 2)?
