@@ -2,13 +2,11 @@
 
 ### linux2.txt
 
-Please save your answers in *linux2.txt* file.
-
 In this exercise, you will use these commands:
 
     `tree, cp, mv, vim, touch, head, tail, diff, clear, man, cat and, wc.`
 
-Please write down your answers, including the command you used and the output you get into *linux1.txt*.
+Please write down your answers, including the command you used and the output you get into *linux2.txt*.
 
 1. Create a new directory named **hw2** in your home folder.
 
@@ -36,3 +34,9 @@ Please write down your answers, including the command you used and the output yo
 12. List in a tree format all the directories in your home directory.
 
 13. Change the name of **my_song.txt** to **your_song.txt** (The file is in ~/hw2/songs).
+
+14. Print the content of the file **your_song.txt**.
+
+15. Clear the terminal screen.
+
+16. Bonus - Use the command **wc** to print how many lines you have in  ~/hw2/songs/your_song.txt (don't forget to use man).

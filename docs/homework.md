@@ -18,10 +18,6 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 1. [Basic commands](course_materials/exercises/01_Linux/homework_1.md)
 2. [Advanced commands](course_materials/exercises/01_Linux/homework_2.md)
 
-## Python Intro
-
-1. [Python exercises](course_materials/exercises/02_Python_intro/homework.md)
-
 ## Variables and Data Types
 
 1. [Strings exercises](course_materials/exercises/03_Variables_and_datatypes/homework_Strings.md)

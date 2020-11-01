@@ -17,4 +17,10 @@ verticalMenu.appendChild(createLink("functions.html","6. Functions"))
 verticalMenu.appendChild(createLink("exceptions.html","7. Exceptions"))
 verticalMenu.appendChild(createLink("#","8. Object Orientation"))
 verticalMenu.appendChild(createLink("modules_packages.html","9. Modules and Packages"))
-verticalMenu.appendChild(createLink("homework.html#","* Homework exercises"))
+
+let homework = createLink("homework.html#","---------")
+homework.setAttribute("style", "color: white;")
+homework.onmouseover = function() {
+    this.style.backgroundColor = "white";
+}
+verticalMenu.appendChild(homework)
