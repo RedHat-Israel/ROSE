@@ -39,4 +39,4 @@ Please write down your answers, including the command you used and the output yo
 
 15. Clear the terminal screen.
 
-16. Bonus - Use the command **wc** to print how many lines you have in  ~/hw2/songs/your_song.txt (don't forget to use man).
+16. Bonus - Use the command **wc** to print how many lines you have in ~/hw2/songs/your_song.txt (don't forget to use man).
