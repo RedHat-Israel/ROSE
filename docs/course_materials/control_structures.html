@@ -205,7 +205,7 @@ else:
                     </ul>
                 </section>
 
-                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_if.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
             </section>
 
@@ -214,6 +214,12 @@ else:
                     <h1><b>
                             <span>While Loop</span>
                     </h1></b>
+                </section>
+                <section>
+                  <h3><b>While loop</b></h3>
+                  <ul>
+                    <li>The while loop loops through a block of code as long as a specified condition is true</li>
+                  </ul>
                 </section>
                 <section>
                     <h3><b>Simple While Loop</b></h3>
@@ -226,9 +232,68 @@ while True:
                         <li>When it's going to stop?!</li>
                     </ul>
                 </section>
-                <section>
-                    <h3><b>Break and Continue</b></h3>
-                    <pre><code data-trim data-noescape class="hljs lang-python">
+              <section>
+                <h3><b>While with condition</b></h3>
+                <ul>
+                  <li>step variable must be initialized first</li>
+                  <li>i += 1 is the same as writing i = i + 1</li>
+                </ul>
+                <pre><code data-trim data-noescape class="hljs lang-python">
+step = 0
+while i < 10:
+    print(i)
+    i += 1
+print("Finished!!")
+                    </code></pre>
+
+                <ul>
+                  <li>We can run the same but backwards </li>
+                  <li> i -= 1 is the same as writing i = i -1 </li>
+                </ul>
+                <pre><code data-trim data-noescape class="hljs lang-python">
+i = 10
+while i > 0:
+    print(i)
+    i -= 1
+                </code></pre>
+              </section>
+              <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_while_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n"></section>
+              <section>
+                <h3><b>Break</b></h3>
+                <ul>
+                  <li>With the break statement we can stop the loop even if the while condition is true</li>
+                </ul>
+                <pre><code data-trim data-noescape class="hljs lang-python">
+i = 1
+while i < 10:
+    print(i)
+    if i == 3:
+        break
+    i += 1
+                    </code></pre>
+              </section>
+              <section>
+                <h3><b>Continue</b></h3>
+                <ul>
+                  <li>Continue to the next iteration if i is 3</li>
+                </ul>
+                <pre><code data-trim data-noescape class="hljs lang-python">
+i = 0
+while i < 10:
+    i += 1
+    if i == 3:
+        continue
+    print(i)
+                    </code></pre>
+              </section>
+              <section>
+                <h3><b>Break & Continue & input</b></h3>
+                <ul>
+                  <li>This code accepts a password from the user</li>
+                  <li>If the password is correct, it will print "Welcome"</li>
+                  <li>If the user didn't enter the password or the password is not correct, the code will continue ask for the password</li>
+                </ul>
+                <pre><code data-trim data-noescape class="hljs lang-python">
 SECRET = 'xyzzy'
 
 while True:
@@ -243,18 +308,8 @@ while True:
 print("Welcome!")
                     </code></pre>
                 </section>
-                <section>
-                    <h3><b>While with condition</b></h3>
-                    <pre><code data-trim data-noescape class="hljs lang-python">
-step = 0
-while step < 10:
-    print(step)
-    step = step + 1
-print("Finished!!")
-                    </code></pre>
-                </section>
 
-                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_while_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
             </section>
 
@@ -383,7 +438,7 @@ for name in airports:
 # MUC
                     </code></pre>
                 </section>
-                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_3.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/05_Control_structures/class_exercise_for.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
             </section>
             <section>
