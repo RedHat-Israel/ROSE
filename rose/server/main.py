@@ -23,14 +23,15 @@ def main():
 
     args = parser.parse_args()
     """
-    If the argument is 'same', the track will generate the obstacles in the same place for both drivers.
-    Otherwise, the obstacles will be genrated in random locations for each driver.
+    If the argument is 'same', the track will generate the obstacles in the
+    same place for both drivers, otherwise, the obstacles will be genrated in
+    random locations for each driver.
     """
     if args.track_definition == "same":
         config.is_track_random = False
     else:
         config.is_track_random = True
-    
+
     log.info('starting server')
     g = game.Game()
     h = net.Hub(g)
