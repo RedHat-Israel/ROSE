@@ -53,7 +53,7 @@ Create a file *manipulations.py*
 
 Declare the following variable :  
     
-    s = ‘work hard dream big’ 
+    s = 'work hard dream big'
 Perform the following functions:
 1. Use the “title()” function on the string variable and print it.
 2. Print the length of the string by length() function.
