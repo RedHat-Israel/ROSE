@@ -56,6 +56,6 @@ Declare the following variable :
     s = 'work hard dream big'
 Perform the following functions:
 1. Use the “title()” function on the string variable and print it.
-2. Print the length of the string by length() function.
+2. Print the length of the string by len() function.
 3. Use the “replace(...,...)” function and replace the first word with the last word.
 4. Use the “find()” function to know where is the ‘w’ word in the string.
