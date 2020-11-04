@@ -10,10 +10,9 @@ Before answering the questions:
 
 Create a file *variables_1.py*
 
-1. Declare three variables (**x**,**y**, and **z**) as integers.
-2. Assign a value of 9 to **x**
-3. Assign a value of 7 to **y**
-4. Make **z** equal to the sum of those two variables. 
+2. Declare a variable **x** with the value 9
+3. Declare a variable **x** with the value 7
+4. Declare a variable **z** with the sum of **x** and **y** variables. 
 5. Print out the contents of the **z** variable.
 
 

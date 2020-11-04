@@ -7,7 +7,9 @@
 
 Create a file *countries.py*
 
-- Create a new dictionary with the Udi number of flights to each country:  “Italy”:2 “Spain”:3  “Israel”:1
+- Create a new dictionary with Udi's flights number to each country:
+
+  “Italy”:2 “Spain”:3  “Israel”:1
 - Insert a new element :
 “Belgium”:1
 - Delete “Italy” record from the dictionary
