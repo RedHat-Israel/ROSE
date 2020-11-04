@@ -20,13 +20,13 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 
 ## Variables and Data Types
 
-1. [Variables exercises](course_materials/exercises/03_Variables_and_datatypes/homework_Strings.md)
-2. [Strings exercises](course_materials/exercises/03_Variables_and_datatypes/homework_Strings.md)
+1. [Variables exercises](course_materials/exercises/03_Variables_and_datatypes/homework_variables.md)
+2. [Strings exercises](course_materials/exercises/03_Variables_and_datatypes/homework_strings.md)
 
 ## Compound Data Types
 
-1. [List exercises](course_materials/exercises/04_Compound_data_types/homework.md)
-2. [Dictionary exercises](course_materials/exercises/04_Compound_data_types/homework.md)
+1. [List exercises](course_materials/exercises/04_Compound_data_types/homework_list.md)
+2. [Dictionary exercises](course_materials/exercises/04_Compound_data_types/homework_dictionary.md)
 
 ## Control Structures
 
