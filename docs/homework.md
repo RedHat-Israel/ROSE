@@ -29,4 +29,6 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 
 ## Control Structures
 
-1. [Structures exercises](course_materials/exercises/05_Control_structures/homework.md)
+2. [IF condition exercises](course_materials/exercises/05_Control_structures/homework_if.md)
+3. [While loop exercises](course_materials/exercises/05_Control_structures/homework_while.md)
+4. [For loop exercises](course_materials/exercises/05_Control_structures/homework_for.md)
