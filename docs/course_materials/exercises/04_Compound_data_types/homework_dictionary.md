@@ -24,5 +24,4 @@ Create a file *family_members_average_age.py*
 - Add your family members names to the dictionary with their ages. 
    for example: “Samira”:8 
 - Print the dictionary
-- Calculate the average age in your family and 
-- Print the average age using the dictionary
+- Calculate the average age in your family using the dictionary and print it.
