@@ -42,7 +42,7 @@ Before each exercise, write in a comment the exercise number, for example:
 #### Update the list
 
 1. Remove the items 4 and 5 from the **l1** and print **l1**.
-2. Create a new list - **l2**, with the items: -1, -2 ,-3 and print **l2**.
-3. Create a new list **l3** with the items of **l1** and **l2**, print **l3**.
+2. Create a new list **l2**, with the items: -1, -2 ,-3 and print **l2**.
+3. Create a new list **l3**, with the items of **l1** and **l2**, print **l3**.
 4. Sort **l3** and print the sorted list.
 5. Print the length of **l1**, **l2**, and **l3**.
