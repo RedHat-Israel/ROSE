@@ -11,7 +11,7 @@ Before answering the questions:
 Create a file *variables_1.py*
 
 2. Declare a variable **x** with the value 9
-3. Declare a variable **x** with the value 7
+3. Declare a variable **y** with the value 7
 4. Declare a variable **z** with the sum of **x** and **y** variables. 
 5. Print out the contents of the **z** variable.
 
