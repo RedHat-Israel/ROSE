@@ -11,6 +11,7 @@ flake8 = "*"
 pytest = "*"
 pytest-coverage = "*"
 pytest-timeout = "*"
+pytest-check-links = "*"
 
 
 [packages]
