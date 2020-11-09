@@ -415,7 +415,7 @@ Suppose you are given the following class:
 ```
 class Giraffe:
     def move(leg,x,y):
-       print("Giraffe moves its %s leg to point %s,%s" % (leg, x, y))
+       print(f"Giraffe moves its {leg} leg to point {x},{y}")
 ```
 
 add a function named dance() that id doing the following

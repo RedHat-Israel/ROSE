@@ -1,11 +1,11 @@
 class Error(Exception):
     """ Base class for server errors """
     def __str__(self):
-        return self.message % self.args
+        return self.message.format(self.args)
 
 
 class PlayerExists(Error):
-    message = "Player exists: %s"
+    message = "Player exists: {}"
 
     def __init__(self, name):
         self.args = (name,)
@@ -18,19 +18,19 @@ class TooManyPlayers(Error):
 class NoSuchPlayer(Error):
     def __init__(self, name):
         self.args = (name,)
-    message = "No such player: %s"
+    message = "No such player: {}"
 
 
 class ActionForbidden(Error):
     def __init__(self, action):
         self.args = (action,)
-    message = "You are not allowed to %s"
+    message = "You are not allowed to {}"
 
 
 class InvalidMessage(Error):
     def __init__(self, reason):
         self.args = (reason,)
-    message = "Invalid message: %s"
+    message = "Invalid message: {}"
 
 
 class GameAlreadyStarted(Error):

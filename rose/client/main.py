@@ -31,7 +31,7 @@ class Client(basic.LineReceiver):
         elif msg.action == 'error':
             self.factory.error(msg.payload)
         else:
-            log.info('Unexpected message: %s %s', msg.action, msg.payload)
+            log.info(f'Unexpected message: {msg.action} {msg.payload}')
 
 
 class ClientFactory(protocol.ReconnectingClientFactory):
@@ -110,13 +110,13 @@ def main():
     try:
         driver_mod = load_driver_module(args.driver_file)
     except ImportError as e:
-        log.error("error loading driver module %r: %s", args.driver_file, e)
+        log.error(f"error loading driver module {args.driver_file}: {e}")
         sys.exit(2)
 
     reactor.connectTCP(args.server_address, config.game_port,
                        ClientFactory(driver_mod.driver_name, driver_mod.drive))
 
-    url = "http://%s:%d" % (args.server_address, config.web_port)
-    log.info("Please open %s to watch the game." % url)
+    url = f"http://{args.server_address}:{config.web_port}"
+    log.info(f"Please open {url} to watch the game.")
 
     reactor.run()

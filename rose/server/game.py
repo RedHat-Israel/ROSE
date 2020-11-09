@@ -100,7 +100,7 @@ class Game(object):
             raise error.InvalidMessage("action required")
         action = info['action']
         if action not in actions.ALL:
-            raise error.InvalidMessage("invalid drive action %s" % action)
+            raise error.InvalidMessage(f"invalid drive action {action}")
         self.players[name].action = action
         self.players[name].response_time = info.get('response_time', 1.0)
 
@@ -110,7 +110,7 @@ class Game(object):
         for i, p in enumerate(top_scorers):
             line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
             lines.append(line)
-        log.info("%s", os.linesep.join(lines))
+        log.info(f"{os.linesep.join(lines)}")
 
     def loop(self):
         self.track.update()

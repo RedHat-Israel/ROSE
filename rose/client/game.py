@@ -65,18 +65,18 @@ class Game(component.Component):
     # Handling client events
 
     def client_connected(self):
-        log.info('client connected: joining as %s', self.name)
+        log.info(f'client connected: joining as {self.name}')
         msg = message.Message('join', {"name": self.name})
         self.client.send_message(msg)
 
     def client_disconnected(self, reason):
-        log.info('client disconnected: %s', reason.getErrorMessage())
+        log.info(f'client disconnected: {reason.getErrorMessage()}')
 
     def client_failed(self, reason):
-        log.info('client failed: %s', reason.getErrorMessage())
+        log.info(f'client failed: {reason.getErrorMessage()}')
 
     def client_error(self, error):
-        log.info('client error: %s', error.get('message'))
+        log.info(f"client error: {error.get('message')}")
         reactor.stop()
 
     def client_update(self, info):

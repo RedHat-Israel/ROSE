@@ -28,8 +28,9 @@ class Client(object):
             self.usage('server-address required')
 
         server_address = self.args[1]
-        url = 'http://%s:%d/rpc2' % (server_address, config.web_port)
+        url = f'http://f{server_address}:{config.web_port}/rpc2'
         self.server = xmlrpclib.Server(url)
+
 
         if len(self.args) < 3:
             self.usage('Verb required')
@@ -39,11 +40,11 @@ class Client(object):
         try:
             method = getattr(self, method_name)
         except AttributeError:
-            self.usage('Unknown verb: %r' % verb)
+            self.usage(f'Unknown verb: {verb}')
         try:
             method()
         except Exception as e:
-            log.error("Error running: %s, %s", verb, e)
+            log.error(f"Error running: {verb}, {e}")
             sys.exit(1)
 
     def do_start(self):
@@ -71,7 +72,7 @@ class Client(object):
             log.info(msg)
         basename = os.path.basename(self.args[0])
         commands = '|'.join(self.commands())
-        log.info('Usage: %s <server-address> [%s]', basename, commands)
+        log.info(f'Usage: {basename} <server-address> [{commands}]')
         sys.exit(2)
 
 if __name__ == '__main__':

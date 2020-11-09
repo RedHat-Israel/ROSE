@@ -69,7 +69,7 @@ class PlayerProtocol(basic.LineReceiver):
             msg = message.parse(line)
             self.dispatch(msg)
         except error.Error as e:
-            log.warning("Error handling message: %s", e)
+            log.warning(f"Error handling message: {e}")
             msg = message.Message('error', {'message': str(e)})
             self.sendLine(str(msg).encode('utf-8'))
             self.transport.loseConnection()
@@ -118,14 +118,14 @@ class WatcherProtocol(WebSocketServerProtocol):
     # WebSocketServerProtocol interface
 
     def onConnect(self, request):
-        log.info("watcher connected from %s", request)
+        log.info(f"watcher connected from {request}")
 
     def onOpen(self):
         self.hub.add_watcher(self)
 
     def onClose(self, wasClean, code, reason):
-        log.info("watcher closed (wasClean=%s, code=%s, reason=%s)",
-                 wasClean, code, reason)
+        log.info(f"watcher closed (wasClean={wasClean}, code={code}, reason={reason})",
+                )
         self.hub.remove_watcher(self)
 
     # Hub client interface

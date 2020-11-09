@@ -37,7 +37,7 @@ def main():
     h = net.Hub(g)
     reactor.listenTCP(config.game_port, net.PlayerFactory(h))
     root = static.File(config.web_root)
-    wsuri = u"ws://%s:%s" % (socket.gethostname(), config.web_port)
+    wsuri = f"ws://{socket.gethostname()}:{config.web_port}"
     watcher = net.WatcherFactory(wsuri, h)
     root.putChild(b"ws", WebSocketResource(watcher))
     root.putChild(b'res', static.File(config.res_root))

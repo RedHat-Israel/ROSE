@@ -73,8 +73,8 @@ def process(players, track):
         # Fix up collisions
 
         if (player.x, player.y) in positions:
-            log.info('player %s collision at %d,%d',
-                     player.name, player.x, player.y)
+            log.info(f'player {player.name} collision at {player.x},{player.y}'
+                     )
             player.score += config.score_move_backward
             if player.y < config.matrix_height - 1:
                 player.y += 1
@@ -83,9 +83,9 @@ def process(players, track):
             elif player.x < config.matrix_width - 1:
                 player.x += 1
 
-        log.info('process_actions: name=%s lane=%d pos=%d,%d score=%d '
-                 'response_time=%0.6f',
-                 player.name, player.lane, player.x, player.y, player.score,
-                 player.response_time)
+        log.info(f'process_actions: name={player.name} lane={player.lane} '
+                 f'pos={player.x},{player.y} score={player.score} '
+                 f"response_time={player.response_time:.6f}"
+                 )
 
         positions.add((player.x, player.y))
