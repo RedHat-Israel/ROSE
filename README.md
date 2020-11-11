@@ -49,24 +49,37 @@ Refer to our GitHub pages for the course materials and additional resources:
 
 ## Requirements
 
-First we need to get pipenv installed. The best way is to install it for
+First we need to make sure we have pipenv installed:
+
+    pipenv --version
+
+If you don't have it installed, the best way is to install it only for
 your user:
 
     pip install --user pipenv
 
-Now we can use pipenv to install the rest of the dependencies, and
-create a virtual environment:
+## Getting started
 
-    pipenv install
+Use pipenv to create a virtual environment and to install the rest of the dependencies:
+
+    pipenv --python /usr/local/bin/python3.7 install
 
 You can also install packages from your distribution, but they may be
 too old.
 
+After creating the environment, we want to activate and enter our environment: 
+
+    pipenv shell
+
+Indication that you are inside the environment, the prompt line will look like this:
+
+    (ROSE) [student@vm29 ROSE]$
+
 ## Running the server
 
-Open a pipenv shell that you'll use for the following commands:
+Open the virtual environment that you created in the previous step: 
 
-    pipenv --python /usr/local/bin/python3.7 shell
+    pipenv shell
 
 Start the server on some machine:
 
@@ -80,9 +93,9 @@ Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 ## Running a driver
 
-Open a pipenv shell that you'll use for the following commands:
+In a new window, open your virtual environment:
 
-    pipenv --python /usr/local/bin/python3.7 shell
+    pipenv shell
 
 Start up the client, using your driver file:
 
