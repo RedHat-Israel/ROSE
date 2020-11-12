@@ -42,7 +42,7 @@ Refer to our GitHub pages for the course materials and additional resources:
   [August Penguin 2017](http://ap.hamakor.org.il/2017/)
 - [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) [Fred Rolland](https://github.com/rollandf)
   and [Ori Rabin](https://github.com/orrabin)'s talk at
-  [PyCon Israel 2017](http://il.pycon.org/2017/)
+  [PyCon Israel 2017](https://pycon.org.il/2017/)
 - [Read](https://opensource.com/education/15/9/open-source-education-israel) an article by Laura Novich
   on [opensource.com](https://opensource.com)
 
