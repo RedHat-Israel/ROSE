@@ -60,6 +60,8 @@ your user:
 
 ## Getting started
 
+The following commands should be performed only once; after creating the environment you will be connecting to the same environment each time you open a new session. 
+
 Use pipenv to create a virtual environment and to install the rest of the dependencies:
 
     pipenv --python /usr/local/bin/python3.7 install
@@ -73,11 +75,11 @@ After creating the environment, we want to activate and enter our environment:
 
 Indication that you are inside the environment, the prompt line will look like this:
 
-    (ROSE) [student@vm29 ROSE]$
+    (ROSE) [username@hostname ROSE]$
 
 ## Running the server
 
-Open the virtual environment that you created in the previous step: 
+If you are not in your virtual environment, please run it:
 
     pipenv shell
 
