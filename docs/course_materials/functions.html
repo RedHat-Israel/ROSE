@@ -42,7 +42,6 @@
                     <b>Functions</b></h1>
             </section>
             <section>
-
                 <section>
                     <h3><b>Functions</b></h3>
                     <ul>
@@ -59,7 +58,6 @@
                     </ul>
                     <img width="750" height="170" style="" data-src="media/functions.png" />
                 </section>
-
                 <section>
                     <h3><b>How to use</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
@@ -69,7 +67,6 @@ def say_hello(my_name):
 say_hello("Joe") # Hello Joe
                     </code></pre>
                 </section>
-
                 <section>
                     <h3><b>Multiple Parameters</b></h3>
                     <ul>
@@ -90,7 +87,6 @@ last="Cocker"
 say_hello(first, last)
                     </code></pre>
                 </section>
-
                 <section>
                     <h3><b>Variables Scope</b></h3>
                     <ul>
@@ -117,7 +113,6 @@ scope()    # 10
 print(a)   # 5
                     </code></pre>
                 </section>
-
                 <section>
                     <h3><b>Summary</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
@@ -137,18 +132,53 @@ print(result)  # 4
                         <li>Be aware of variables scope</li>
                     </ul>
                 </section>
-
-                <section>
-                    <h3><b>Exercise</b></h3>
-                    TBD
+                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/06_Functions/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
+                <section>
+                    <h3><b>Example - is even? </b></h3>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+def is_even(number):
+    if number % 2 == 0:
+        return True
+    else:
+        return False
+                    </code ></pre>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+is_even(5) # False
+is_even(3) # False
+is_even(2) # True
+                    </code></pre>
+                </section>
+                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/06_Functions/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+                </section>
+                <section>
+                  <h3><b>Example - is prime? </b></h3>
+                  <ul>
+                    <li>A prime number is a natural number greater than 1 that is not a product of two smaller natural numbers.</li>
+                  </ul>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+def is_prime(x):
+    if x < 2:
+        return False
+    for n in range(2, x - 1):
+        if x % n == 0:
+            return False
+    return True
+                  </code ></pre>
+                  <pre><code data-trim data-noescape class="hljs lang-python">
+is_prime(4) # False
+is_prime(2) # True
+is_prime(6) # False
+is_prime(7) # True
+is_prime(39) # False
+is_prime(31) # True
+                </code ></pre>
+              </section>
             </section>
         </div>
     </div>
-
     <script src="reveal/lib/js/head.min.js"></script>
     <script src="reveal/js/reveal.js"></script>
-
     <script>
         // More info https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({

@@ -30,6 +30,11 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 
 ## Control Structures
 
-2. [IF condition exercises](course_materials/exercises/05_Control_structures/homework_if.md)
-3. [While loop exercises](course_materials/exercises/05_Control_structures/homework_while.md)
-4. [For loop exercises](course_materials/exercises/05_Control_structures/homework_for.md)
+1. [IF condition exercises](course_materials/exercises/05_Control_structures/homework_if.md)
+2. [While loop exercises](course_materials/exercises/05_Control_structures/homework_while.md)
+3. [For loop exercises](course_materials/exercises/05_Control_structures/homework_for.md)
+3. [Extra](course_materials/exercises/05_Control_structures/extra.md)
+
+## Functions
+
+1. [Functions](course_materials/exercises/06_Functions/homework.md)
