@@ -9,4 +9,4 @@ install:
 
 script:
     - flake8
-    - pytest
+    - pytest --check-links --ignore=docs/course_materials/reveal
