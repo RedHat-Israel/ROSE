@@ -69,6 +69,8 @@ with the lane owner.
     |       |       |       |X|       |       |      |
     |       |       |       |X|       |       |      |
 
+Every turn the driver moves one step forward and gains 10 points
+if there was no obstacle.  
 Here are the possible obstacles and the action you should take when hitting
 them:
 
@@ -76,35 +78,35 @@ them:
                         action.
                         Score : 0
 
-* `obstacles.PENGUIN`   return `actions.PICKUP` and move 1 step forward. You will
-                        not move backward if you do not pick up the penguin.
+* `obstacles.PENGUIN`   return `actions.PICKUP` and move forward. You will
+                        move forward even if you do not pick up the penguin.
                         Score : 10 for `PICKUP` otherwise 0
 
 * `obstacles.WATER`     return `actions.BRAKE` if you want to continue forward.
                         return `actions.RIGHT` or `actions.LEFT` if you like to
                         bypass the obstacle. Any other action will cause you to
-                        move backward.
+                        stay in place.
                         Score: 4 for `BRAKE`, 0 for `LEFT`/`RIGHT` otherwise -10
 
 * `obstacles.CRACK`     return `actions.JUMP` if you want to continue forward
                         return `actions.RIGHT` or `actions.LEFT` if you like to
                         bypass the obstacle. Any other action will cause you to
-                        move backward.
+                        stay in place.
                         Score: 5 for `JUMP`, 0 for `LEFT`/`RIGHT` otherwise -10
 
 * `obstacles.TRASH`     you must return `actions.RIGHT` or `actions.LEFT` to bypass
                         the obstacle. Any other action will cause you to
-                        move backward.
+                        stay in place.
                         Score: 0 for `LEFT`/`RIGHT` otherwise -10
 
 * `obstacles.BIKE`      you must return `actions.RIGHT` or `actions.LEFT` to bypass
                         the obstacle. Any other action will cause you to
-                        move backward.
+                        stay in place.
                         Score: 0 for `LEFT`/`RIGHT` otherwise -10
 
 * `obstacles.BARRIER`   you must return `actions.RIGHT` or `actions.LEFT` to bypass
                         the obstacle. Any other action will cause you to
-                        move backward.
+                        stay in place.
                         Score: 0 for `LEFT`/`RIGHT` otherwise -10
 
 NOTE : If you are driving out of your lane and have a collision with the lane
@@ -112,4 +114,4 @@ NOTE : If you are driving out of your lane and have a collision with the lane
 
 
 Please check and test drive the examples drivers modules in this directory.
-Then go ahead and write the fastest driver!
+Then go ahead and write the best driver!
