@@ -49,7 +49,7 @@ Refer to our GitHub pages for the course materials and additional resources:
 
 ## Requirements
 
-Once we're in the ROSE repository, we need to get pipenv installed. The best way is to install it for
+Once we're in the ROSE directory, we need to get pipenv installed. The best way is to install it for
 your user:
 
     pip install --user pipenv
