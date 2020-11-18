@@ -49,6 +49,8 @@ checking for obstacles:
     else:
         # Choose the best action for obstacle
 
+You can view the "none.py" driver as a reference.
+
 The game has 2 lanes and each lane has 3 routes in which you can drive.
 On game start, each car starts at the center route of its lane.
 The car can pass to other lane, but will be punished for collisions
