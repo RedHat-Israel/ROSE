@@ -1,25 +1,19 @@
 [[source]]
-
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
-
 [dev-packages]
-
 flake8 = "*"
 pytest = "*"
 pytest-coverage = "*"
 pytest-timeout = "*"
 pytest-check-links = "*"
 
-
 [packages]
-
 autobahn = "*"
 twisted = "*"
-
+six = "*"
 
 [requires]
-
 python_version = "3.7"

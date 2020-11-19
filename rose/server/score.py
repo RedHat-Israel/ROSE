@@ -46,7 +46,7 @@ def process(players, track):
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
-            if player.action != actions.LEFT and player.action != actions.RIGHT:
+            if player.action not in (actions.LEFT, actions.RIGHT):
                 track.clear(player.x, player.y)
                 player.y += 1
                 player.score += config.score_move_backward * 2
