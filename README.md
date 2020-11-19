@@ -49,7 +49,8 @@ Refer to our GitHub pages for the course materials and additional resources:
 
 ## Requirements
 
-First we need to make sure we have pipenv installed:
+Once we're in the ROSE directory, we need to verify we have pipenv installed.
+In order to make sure we have pipenv installed:
 
     pipenv --version
 
