@@ -1,7 +1,6 @@
 language: python
 
 python:
-  - "2.7"
   - "3.7"
 
 install:
@@ -10,4 +9,4 @@ install:
 
 script:
     - flake8
-    - pytest
+    - pytest --check-links --ignore=docs/course_materials/reveal

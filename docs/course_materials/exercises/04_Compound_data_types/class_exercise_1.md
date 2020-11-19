@@ -7,3 +7,4 @@
 - Replace all "p" values with "o"
 - Replace "4" value with "d"
 - Replace the first item with "G"
+- Print your list

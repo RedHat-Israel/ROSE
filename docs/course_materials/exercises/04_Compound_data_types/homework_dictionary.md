@@ -7,7 +7,9 @@
 
 Create a file *countries.py*
 
-- Create a new dictionary with the Udi number of flights to each country:  “Italy”:2 “Spain”:3  “Israel”:1
+- Create a new dictionary with Udi's flights number to each country:
+
+  “Italy”:2 “Spain”:3  “Israel”:1
 - Insert a new element :
 “Belgium”:1
 - Delete “Italy” record from the dictionary
@@ -22,5 +24,4 @@ Create a file *family_members_average_age.py*
 - Add your family members names to the dictionary with their ages. 
    for example: “Samira”:8 
 - Print the dictionary
-- Calculate the average age in your family and 
-- Print the average age using the dictionary
+- Calculate the average age in your family using the dictionary and print it.

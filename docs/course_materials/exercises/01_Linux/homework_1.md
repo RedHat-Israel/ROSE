@@ -1,13 +1,12 @@
-# Linux - HomeWork
+# Linux - Homework
 
 ### linux1.txt
 
 In this exercise you will practice the following commands:
 
-pwd, mkdir, cd, ls, tree, rm, cat, vim
+    `pwd, mkdir, cd, ls, tree, rm, cat, vim`
 
-Please write down your answers, including the command you used and the output you got.
-
+Please write down your answers, including the command you used and the output you get into *linux1.txt*.
 
 1. Go to your home directory
 

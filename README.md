@@ -42,31 +42,44 @@ Refer to our GitHub pages for the course materials and additional resources:
   [August Penguin 2017](http://ap.hamakor.org.il/2017/)
 - [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) [Fred Rolland](https://github.com/rollandf)
   and [Ori Rabin](https://github.com/orrabin)'s talk at
-  [PyCon Israel 2017](http://il.pycon.org/2017/)
+  [PyCon Israel 2017](https://pycon.org.il/2017/)
 - [Read](https://opensource.com/education/15/9/open-source-education-israel) an article by Laura Novich
   on [opensource.com](https://opensource.com)
 
 
 ## Requirements
 
-Once we're in the ROSE directory, we need to get pipenv installed. The best way is to install it for
+Once we're in the ROSE directory, we need to get pipenv installed. 
+First we need to make sure we have pipenv installed, 
+If you don't have it installed, the best way is to install it only for
 your user:
 
     pip install --user pipenv
 
-Now we can use pipenv to install the rest of the dependencies, and
-create a virtual environment:
+## Getting started
 
-    pipenv install
+The following commands should be performed only once; after creating the environment you will be connecting to the same environment each time you open a new session. 
+
+Use pipenv to create a virtual environment and to install the rest of the dependencies:
+
+    pipenv --python /usr/local/bin/python3.7 install
 
 You can also install packages from your distribution, but they may be
 too old.
 
+After creating the environment, we want to activate and enter our environment: 
+
+    pipenv shell
+
+Indication that you are inside the environment, the prompt line will look like this:
+
+    (ROSE) [username@hostname ROSE]$
+
 ## Running the server
 
-Open a pipenv shell that you'll use for the following commands:
+If you are not in your virtual environment, please run it:
 
-    pipenv --python /usr/local/bin/python3.7 shell
+    pipenv shell
 
 Start the server on some machine:
 
@@ -80,9 +93,9 @@ Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 ## Running a driver
 
-Open a pipenv shell that you'll use for the following commands:
+In a new window, open your virtual environment:
 
-    pipenv --python /usr/local/bin/python3.7 shell
+    pipenv shell
 
 Start up the client, using your driver file:
 
