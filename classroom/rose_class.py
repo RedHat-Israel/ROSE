@@ -1,8 +1,5 @@
 import argparse
-import importlib
 import logging
-import os.path
-import sys
 import class_creator
 import connect_service
 
@@ -15,29 +12,29 @@ def main():
     - Update teacher list.
     - Update student list.
     '''
-    
+
     logging.basicConfig(level=logging.INFO)
     parser = argparse.ArgumentParser(description='ROSE Classroom')
     parser.add_argument('--create_class', '-c', dest='class_name',
                         help='Creating a new class using given name. '
-                            'If not specified, '
-                            'class won\'t be created.')
+                             'If not specified, '
+                             'class won\'t be created.')
     parser.add_argument('--print_class', '-p', action="store_true",
                         help='Printing existing classes.')
     parser.add_argument('--teacher_list', '-t', dest='teacher_list',
                         help='Adding teachers using a list. '
-                            'Expects csv file.'
-                            'If class exists,'
-                            'please provide class ID using -i.')
+                             'Expects csv file.'
+                             'If class exists,'
+                             'please provide class ID using -i.')
     parser.add_argument('--student_list', '-s', dest='student_list',
                         help='Adding students using a list. '
-                            'Expects csv file.'
-                            'If class exists,'
-                            'please provide class ID using -i.')
+                             'Expects csv file.'
+                             'If class exists,'
+                             'please provide class ID using -i.')
     parser.add_argument('--class_id', '-i',
                         help='Specifies a class id for adding student '
-                            'lists or teacher lists.'
-                            'Use combined with -t and/or -s')
+                             'lists or teacher lists.'
+                             'Use combined with -t and/or -s')
 
     args = parser.parse_args()
 
@@ -54,15 +51,16 @@ def main():
         print('Please use --help to inspect the possible actions.')
     else:
         if args.teacher_list is not None:
-            pass
+            class_creator.create_invitation(service, args, 'TEACHER')
 
         if args.student_list is not None:
-            pass
+            class_creator.create_invitation(service, args, 'STUDENT')
 
-        if (args.student_list is None and args.teacher_list is None
-            and not args.print_class):
+        no_list = args.student_list is None and args.teacher_list is None
+        if (no_list and not args.print_class):
             print('Please use -s to update student list',
                   'or/and -t to update teacher list.')
+
 
 if __name__ == '__main__':
     main()
