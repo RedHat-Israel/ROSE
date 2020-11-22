@@ -40,6 +40,11 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 1. [Functions](course_materials/exercises/06_Functions/homework.md)
 
 
+## Exceptions
+
+1. [Exceptions](course_materials/exercises/07_Exceptions/homework.md)
+
+
 ## Models and Packages 
 
-1. [Models and packages](course_materials/exercises/07_Modules_and_packages/homework.md)
+1. [Models and packages](course_materials/exercises/08_Modules_and_packages/homework.md)
