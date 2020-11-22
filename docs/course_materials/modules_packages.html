@@ -49,35 +49,65 @@
                     <h3><b>The 'import' statement</b></h3>
                     <ul>
                         <li>Allow use of other python files and libraries</li>
-                        <li>Imports: import math</li>
-                        <li>Named imports: import math as m</li>
-                        <li>Specific imports: from math import pow</li>
-                        <li>Import all: from math import * (dangerous! used only in very specific cases)</li>
+                        <li>Imports: </li>
+                        <pre><code data-trim data-noescape class="hljs lang-python">
+                        import math
+                        </code></pre>
+                        <li>Named imports: </li>
+                        <pre><code data-trim data-noescape class="hljs lang-python">
+                          import math as m
+                        </code></pre>
+                        <li>Specific imports: </li>
+                        <pre><code data-trim data-noescape class="hljs lang-python">
+                        from math import pow
+                        </code></pre>
+                        <li>Import all: (dangerous! used only in very specific cases)</li>
+                        <pre><code data-trim data-noescape class="hljs lang-python">
+                        from math import *
+                        </code></pre>
                     </ul>
                 </section>
                 <section>
                     <h3><b>Example</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 import random
 print (random.randint(0, 5))
                     </code></pre>
                 </section>
                 <section>
-                    <h3><b>Modules</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <h3><b>Make a module</b></h3>
+                    <ul>
+                      <li>
+                        To make a module, create a Python file. Then import it like any other module.
+                      </li>
+                    </ul>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 # utensils.py
 def eat_soup():
     return 'spoon'
+                    </code></pre>
+
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 
 # main.py (option 1)
 import utensils
 print(utensils.eat_soup())
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 
 # main.py (option 2)
 from utensils import eat_soup
 print(eat_soup())
                     </code></pre>
                 </section>
+                <section>
+                  <h3><b>python module not found</b></h3>
+                  <ul>
+                    <li>If you get the error “ImportError: No module named “, this means the module is not installed or don't exsits.</li>
+
+                  </ul>
+                </section>
+
                 <section>
                     <h3><b>Packages</b></h3>
                     <ul>
@@ -87,19 +117,27 @@ print(eat_soup())
                 </section>
                 <section>
                     <h3><b>Example</b></h3>
-                    <pre><code data-trim data-noescape class="hljs">
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 # fruits/__init__.py
 # -- empty -- nothing here
+
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 
 # fruits/apple.py
 def print_it():
     print('apple')
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
 
 # main.py
 from fruits import apple
 apple.print_it()
                     </code></pre>
                 </section>
+              <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/07_Modules_and_packages/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+              </section>
+
             </section>
         </div>
     </div>
