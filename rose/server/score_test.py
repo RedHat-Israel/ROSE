@@ -43,12 +43,12 @@ class SinglePlayerTest(object):
     def assert_move_back(self):
         assert self.player.x == self.x
         assert self.player.y == self.y + 1
-        assert self.player.score == self.score
+        assert self.player.score == self.score - config.score_move_forward
 
     def assert_move_back_no_punish(self):
         assert self.player.x == self.x
         assert self.player.y == self.y + 1
-        assert self.player.score == self.score
+        assert self.player.score == self.score - config.score_move_forward
 
     def assert_keep_obstacle(self):
         assert self.track.get(self.x, self.y) == self.obstacle
@@ -96,7 +96,7 @@ class TestPenguin(SinglePlayerTest):
         self.process()
         # Player move up and get more score
         assert self.player.x == self.x
-        assert self.player.y == self.y - 1
+        assert self.player.y == self.y
         assert self.player.score == self.score + config.score_move_forward * 2
         self.assert_remove_obstacle()
 
@@ -211,7 +211,7 @@ class TestBarrier(TurnTest):
 
 class TestLimits(SinglePlayerTest):
     """
-    Handling movment out of the track
+    Handling movement out of the track
     """
     obstacle = obstacles.NONE
 
@@ -251,7 +251,7 @@ class TestLimits(SinglePlayerTest):
         self.obstacle = obstacles.TRASH
         self.track.set(self.x, self.y, self.obstacle)
         self.process()
-        self.assert_score(config.score_move_backward)
+        self.assert_score(config.score_move_backward * 2)
         self.assert_remove_obstacle()
 
 
@@ -296,7 +296,7 @@ class TestCollisions(object):
         # Player 2 got more score but move back
         assert self.player2.x == 1
         assert self.player2.y == 6
-        assert self.player2.score == config.score_move_forward
+        assert self.player2.score == config.score_move_forward * 2
 
     def test_after_turn_to_not_in_lane(self):
         # Player 1 in its lane at 2,5
