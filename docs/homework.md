@@ -38,3 +38,8 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 ## Functions
 
 1. [Functions](course_materials/exercises/06_Functions/homework.md)
+
+
+## Models and Packages 
+
+1. [Models and packages](course_materials/exercises/07_Modules_and_packages/homework.md)
