@@ -1,4 +1,4 @@
-# Functions - HomeWork
+# Modules and packages - HomeWork
 
 ### animals.py
 
