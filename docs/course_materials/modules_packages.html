@@ -16,18 +16,18 @@
 
     <!-- Printing and PDF exports -->
     <script>
-        var link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
-        document.getElementsByTagName('head')[0].appendChild(link);
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'reveal/css/print/pdf.css' : 'reveal/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
 
     </script>
 
     <style>
-        .reveal .slide spre {
-            width: 100%
-        }
+    .reveal .slide spre {
+        width: 100%
+    }
 
     </style>
 </head>
@@ -42,7 +42,7 @@
             <section>
                 <section>
                     <h1><b>
-                            <span>Modules and Packages</span>
+                        <span>Modules and Packages</span>
                     </h1></b>
                 </section>
                 <section>
@@ -51,61 +51,59 @@
                         <li>Allow use of other python files and libraries</li>
                         <li>Imports: </li>
                         <pre><code data-trim data-noescape class="hljs lang-python">
-                        import math
+                            import math
                         </code></pre>
                         <li>Named imports: </li>
                         <pre><code data-trim data-noescape class="hljs lang-python">
-                          import math as m
+                            import math as m
                         </code></pre>
                         <li>Specific imports: </li>
                         <pre><code data-trim data-noescape class="hljs lang-python">
-                        from math import pow
+                            from math import pow
                         </code></pre>
                         <li>Import all: (dangerous! used only in very specific cases)</li>
                         <pre><code data-trim data-noescape class="hljs lang-python">
-                        from math import *
+                            from math import *
                         </code></pre>
                     </ul>
                 </section>
                 <section>
                     <h3><b>Example</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-import random
-print (random.randint(0, 5))
+                        import random
+                        print (random.randint(0, 5))
                     </code></pre>
                 </section>
                 <section>
                     <h3><b>Make a module</b></h3>
                     <ul>
-                      <li>
-                        To make a module, create a Python file. Then import it like any other module.
-                      </li>
+                        <li>
+                            To make a module, create a Python file.<br>
+                            Then import it like any other module.
+                        </li>
                     </ul>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-# utensils.py
-def eat_soup():
-    return 'spoon'
-                    </code></pre>
-
-                    <pre><code data-trim data-noescape class="hljs lang-python">
-
-# main.py (option 1)
-import utensils
-print(utensils.eat_soup())
+                        # utensils.py
+                        def eat_soup():
+                        return 'spoon'
                     </code></pre>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-
-# main.py (option 2)
-from utensils import eat_soup
-print(eat_soup())
+                        # main.py (option 1)
+                        import utensils
+                        print(utensils.eat_soup())
+                    </code></pre>
+                    <pre><code data-trim data-noescape class="hljs lang-python">
+                        # main.py (option 2)
+                        from utensils import eat_soup
+                        print(eat_soup())
                     </code></pre>
                 </section>
                 <section>
-                  <h3><b>python module not found</b></h3>
-                  <ul>
-                    <li>If you get the error “ImportError: No module named “, this means the module is not installed or don't exsits.</li>
-
-                  </ul>
+                    <h3><b>python module not found</b></h3>
+                    <ul>
+                        <li>If you get the error “ImportError: No module named “, <br>
+                            this means the module is not installed or don't exsits.</li>
+                    </ul>
                 </section>
 
                 <section>
@@ -118,25 +116,22 @@ print(eat_soup())
                 <section>
                     <h3><b>Example</b></h3>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-# fruits/__init__.py
-# -- empty -- nothing here
-
+                        # fruits/__init__.py
+                        # -- empty -- nothing here
                     </code></pre>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-
-# fruits/apple.py
-def print_it():
-    print('apple')
+                        # fruits/apple.py
+                        def print_it():
+                        print('apple')
                     </code></pre>
                     <pre><code data-trim data-noescape class="hljs lang-python">
-
-# main.py
-from fruits import apple
-apple.print_it()
+                        # main.py
+                        from fruits import apple
+                        apple.print_it()
                     </code></pre>
                 </section>
-              <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/08_Modules_and_packages/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
-              </section>
+                <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/08_Modules_and_packages/class_exercise_1.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
+                </section>
 
             </section>
         </div>
@@ -146,52 +141,52 @@ apple.print_it()
     <script src="reveal/js/reveal.js"></script>
 
     <script>
-        // More info https://github.com/hakimel/reveal.js#configuration
-        Reveal.initialize({
-            controls: true,
-            progress: true,
-            history: true,
-            center: true,
-            slideNumber: true,
-            transition: 'slide', // none/fade/slide/convex/concave/zoom
-            // More info https://github.com/hakimel/reveal.js#dependencies
-            dependencies: [{
-                    src: 'reveal/lib/js/classList.js',
-                    condition: function() {
-                        return !document.body.classList;
-                    }
-                },
-                {
-                    src: 'reveal/plugin/markdown/marked.js',
-                    condition: function() {
-                        return !!document.querySelector('[data-markdown]');
-                    }
-                },
-                {
-                    src: 'reveal/plugin/markdown/markdown.js',
-                    condition: function() {
-                        return !!document.querySelector('[data-markdown]');
-                    }
-                },
-                {
-                    src: 'reveal/plugin/highlight/highlight.js',
-                    async: true,
-                    callback: function() {
-                        hljs.initHighlightingOnLoad();
-                    }
-                },
-                {
-                    src: 'reveal/plugin/zoom-js/zoom.js',
-                    async: true
-                },
-                {
-                    src: 'reveal/plugin/notes/notes.js',
-                    async: true
-                }
-            ]
-        });
+    // More info https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        slideNumber: true,
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+        // More info https://github.com/hakimel/reveal.js#dependencies
+        dependencies: [{
+            src: 'reveal/lib/js/classList.js',
+            condition: function() {
+                return !document.body.classList;
+            }
+        },
+        {
+            src: 'reveal/plugin/markdown/marked.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        },
+        {
+            src: 'reveal/plugin/markdown/markdown.js',
+            condition: function() {
+                return !!document.querySelector('[data-markdown]');
+            }
+        },
+        {
+            src: 'reveal/plugin/highlight/highlight.js',
+            async: true,
+            callback: function() {
+                hljs.initHighlightingOnLoad();
+            }
+        },
+        {
+            src: 'reveal/plugin/zoom-js/zoom.js',
+            async: true
+        },
+        {
+            src: 'reveal/plugin/notes/notes.js',
+            async: true
+        }
+    ]
+});
 
-    </script>
+</script>
 
 </body>
 
