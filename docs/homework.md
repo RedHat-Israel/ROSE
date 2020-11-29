@@ -48,3 +48,10 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 ## Models and Packages 
 
 1. [Models and packages](course_materials/exercises/08_Modules_and_packages/homework.md)
+
+
+## Extra
+
+1. [join_files](course_materials/exercises/09_Extra/class_exercise_1.md)
+2. [timer](course_materials/exercises/09_Extra/class_exercise_1.md)
+3. [Extra](course_materials/exercises/09_Extra/homework.md)
