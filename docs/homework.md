@@ -53,5 +53,5 @@ Here you may find ROSE course homework exercises sectioned by subjects:
 ## Extra
 
 1. [join_files](course_materials/exercises/09_Extra/class_exercise_1.md)
-2. [timer](course_materials/exercises/09_Extra/class_exercise_1.md)
+2. [timer](course_materials/exercises/09_Extra/class_exercise_2.md)
 3. [Extra](course_materials/exercises/09_Extra/homework.md)
