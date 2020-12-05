@@ -100,6 +100,13 @@ In a new window, open your virtual environment:
 
     pipenv shell
 
+Create your driver file: 
+    
+    cp examples/none.py mydriver.py
+
+Edit the file mydriver.py and change the driver_name variable to your name.   
+      
+
 Start up the client, using your driver file:
 
     ./rose-client mydriver.py
