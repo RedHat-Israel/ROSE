@@ -20,10 +20,6 @@ def main():
                         help='A flag for course actions, stores True. '
                              'Has to be followed by an action as --create. '
                              'If not specified, will be False.')
-    parser.add_argument('--topic', action='store_true',
-                        help='A flag for topic actions, stores True. '
-                             'Has to be followed by an action as --create. '
-                             'If not specified, will be False.')
     parser.add_argument('--create', '-c', dest='name',
                         help='Creating a new instance using given name. '
                              'If not specified, cannot be created. '
@@ -45,7 +41,7 @@ def main():
     parser.add_argument('--id', '-i',
                         help='Specifies an instance id. Can be used for '
                              'adding student lists or teacher lists, adding '
-                             'topics, homework and more. '
+                             'Topics, Homework and more. '
                              'Please specify the needed action. '
                              'Use combined with instance type as --course.')
 
