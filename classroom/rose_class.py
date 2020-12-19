@@ -2,7 +2,6 @@ import argparse
 import logging
 import course_creator
 import connect_service
-import content_edit
 
 
 def main():
