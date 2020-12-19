@@ -1,4 +1,4 @@
-# Managing a Class in Classroom
+# Managing a Course in Classroom
 
 ## Setup
 
@@ -16,27 +16,32 @@
 
 First, make sure you are running the commands from the **classroom** directory.
 
+### Course management:  
+Each command will start with:  
+
+        `python rose_class.py --course
+
 For creating a course use:  
 
-        `python rose_class.py -c "className"`
+        `python rose_class.py --course -c "course name"`
 
-For retrieving existing classes and their IDs use:  
+For retrieving existing courses and their IDs use:  
 
-        `python rose_class.py -p`
+        `python rose_class.py --course -p`
 
-For addressing a specific class use class ID:
+For addressing a specific course use ID:
 
-        `python rose_class.py -i classID`
+        `python rose_class.py --course -i ID`
 
 For adding students using a list  
 (requires class ID and a file with mail addresses, accepts csv files):  
 
-        `python rose_class.py -i classID -s file_path`
+        `python rose_class.py --course -i ID -s file_path`
 
 For adding teachers using a list  
 (requires class ID and a file with mail addresses, accepts csv files):  
 
-        `python rose_class.py -i classID -t file_path`
+        `python rose_class.py --course -i ID -t file_path`
 
 ## Notice
 
