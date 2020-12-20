@@ -27,7 +27,7 @@ var ROSE = (function() {
         this.obstacles = new Obstacles(image_loader);
         this.cars = new Cars(image_loader);
         this.finish_line = new FinishLine(image_loader);
-        this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
+        this.sound = new Sound("res/soundtrack/Mission_Impossible.ogg");
     }
 
     App.prototype.onmessage = function(m) {
