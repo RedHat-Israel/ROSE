@@ -48,3 +48,16 @@ For adding teachers using a list
 
 - A mail can be added to teacher list or student list, not both.
 - Only one invitation can exist for each mail. Before sending a new invitation the old one must be canceled.
+
+### Topics management:  
+Each command will start with:  
+
+        `python rose_class.py --topic
+
+For creating a topic in a course use (have to specify the course ID):  
+
+        `python rose_class.py --course -i --topic -c "topic name"`
+
+For retrieving existing topics in a course and their IDs use (have to specify the course ID):  
+
+        `python rose_class.py --course -i --topic -p`

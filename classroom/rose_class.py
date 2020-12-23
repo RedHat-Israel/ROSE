@@ -2,6 +2,7 @@ import argparse
 import logging
 import course_creator
 import connect_service
+import content_edit
 
 
 def main():
@@ -71,10 +72,11 @@ def main():
         if args.course and args.id:
             if args.print:
                 content_edit.print_topics(service, args.id)
-            
+
             if args.name:
                 content_edit.create_topic(service, args.name, args.id)
-        else: print('Wrong action')
+        else:
+            print('Wrong action')
 
 
 if __name__ == '__main__':

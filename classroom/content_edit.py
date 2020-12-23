@@ -1,9 +1,8 @@
-import os
-from googleapiclient import errors
-
 """
 Topics in classroom
 """
+
+
 def print_topics(service, course_id):
     # Call the Classroom API
     results = service.courses().topics().list(courseId=course_id).execute()
