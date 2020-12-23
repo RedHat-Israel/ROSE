@@ -49,7 +49,7 @@ def main():
     '''Set up the service to google classroom'''
     service = connect_service.create_service()
 
-    if args.course:
+    if args.course and not args.topic:
         if args.name:
             args.id = course_creator.create_course(service, args.name)
             print(f'The id returned {args.id}')
@@ -67,6 +67,14 @@ def main():
             no_list = args.student_list is None and args.teacher_list is None
             if (no_list):
                 print('Please use -h to check the available actions.')
+    elif args.topic:
+        if args.course and args.id:
+            if args.print:
+                content_edit.print_topics(service, args.id)
+            
+            if args.name:
+                content_edit.create_topic(service, args.name, args.id)
+        else: print('Wrong action')
 
 
 if __name__ == '__main__':

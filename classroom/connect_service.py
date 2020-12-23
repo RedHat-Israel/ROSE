@@ -7,7 +7,8 @@ from google.auth.transport.requests import Request
 
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/classroom.rosters',
-          'https://www.googleapis.com/auth/classroom.courses']
+          'https://www.googleapis.com/auth/classroom.courses',
+          'https://www.googleapis.com/auth/classroom.topics']
 
 
 def create_service():
