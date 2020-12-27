@@ -3,7 +3,8 @@
 ## Setup
 
 1. Create a credentials.json file by using [google quickstart](https://developers.google.com/classroom/quickstart/python) (step 1)  
-   Choose your app name, desktop app, and press the button 'download client configuration' to the rose classroom directory.
+   Choose your app name, desktop app, and press the button 'download client configuration'.  
+   Save the file in the rose classroom directory.
 
 2. Make sure that the following packages are installed: (step 2 in google guide, also included in ROSE pipfile for developers)
    - google-api-python-client
