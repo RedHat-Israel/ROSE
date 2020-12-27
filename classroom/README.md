@@ -56,8 +56,8 @@ Each command will start with:
 
 For creating a topic in a course use (have to specify the course ID):  
 
-        `python rose_class.py --course -i --topic -c "topic name"`
+        `python rose_class.py --course -i ID --topic -c "topic name"`
 
 For retrieving existing topics in a course and their IDs use (have to specify the course ID):  
 
-        `python rose_class.py --course -i --topic -p`
+        `python rose_class.py --course -i ID --topic -p`
