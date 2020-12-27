@@ -3,7 +3,7 @@
 ## Setup
 
 1. Create a credentials.json file by using [google quickstart](https://developers.google.com/classroom/quickstart/python) (step 1)  
-   Choose your app name, desktop app, and download client configuration(using button) to classroom directory.
+   Choose your app name, desktop app, and press the button 'download client configuration' to the rose classroom directory.
 
 2. Make sure that the following packages are installed: (step 2 in google guide, also included in ROSE pipfile for developers)
    - google-api-python-client
@@ -34,12 +34,12 @@ For addressing a specific course use ID:
         `python rose_class.py --course -i ID`
 
 For adding students using a list  
-(requires class ID and a file with mail addresses, accepts csv files):  
+(requires course ID and a file with mail addresses, accepts csv files):  
 
         `python rose_class.py --course -i ID -s file_path`
 
 For adding teachers using a list  
-(requires class ID and a file with mail addresses, accepts csv files):  
+(requires course ID and a file with mail addresses, accepts csv files):  
 
         `python rose_class.py --course -i ID -t file_path`
 
