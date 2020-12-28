@@ -9,7 +9,8 @@ def main():
     '''
     Getting user input and preforming corresponding actions.
     Available functions:
-    - Create course in classroom.
+    - Create course/topic in classroom.
+    - Print existing courses/topics.
     - Update teacher list.
     - Update student list.
     '''
@@ -18,6 +19,10 @@ def main():
     parser = argparse.ArgumentParser(description='ROSE Classroom')
     parser.add_argument('--course', action='store_true',
                         help='A flag for course actions, stores True. '
+                             'Has to be followed by an action as --create. '
+                             'If not specified, will be False.')
+    parser.add_argument('--topic', action='store_true',
+                        help='A flag for topic actions, stores True. '
                              'Has to be followed by an action as --create. '
                              'If not specified, will be False.')
     parser.add_argument('--create', '-c', dest='name',
@@ -50,7 +55,9 @@ def main():
     '''Set up the service to google classroom'''
     service = connect_service.create_service()
 
-    if args.course and not args.topic:
+    if args.id and len(args.id) < 12:
+        print('Please check the ID specified and try again.')
+    elif args.course and not args.topic:
         if args.name:
             args.id = course_creator.create_course(service, args.name)
             print(f'The id returned {args.id}')
