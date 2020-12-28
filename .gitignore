@@ -10,3 +10,9 @@ htmlcov/
 
 Pipfile.lock
 requirements.txt
+
+# Classroom setup
+classroom/credentials.json
+.vscode/launch.json
+classroom/*.csv
+classroom/token.pickle
