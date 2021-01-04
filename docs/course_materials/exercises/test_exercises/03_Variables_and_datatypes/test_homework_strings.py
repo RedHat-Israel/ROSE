@@ -7,7 +7,7 @@ The tests will check:
 
 Guidelines:
 - Student's exercise files should be placed in the same dir as this test.
-- Test names are in the form: test_<topic>_<exc>.py
+- Test names are in the form: test_<topic>_<num>.py
 
 Usage:
 
@@ -23,49 +23,6 @@ Usage:
 import os
 import re
 from subprocess import PIPE, STDOUT, Popen, TimeoutExpired
-
-
-def test_variables_exc1():
-    answer_file = 'variables.py'
-    expected_pycode = [
-        r'^.*x *= *9.*',
-        r'^.*y *= *7.*',
-        r'^.*z *= *x *\+ *y.*',
-        r'^.*print.*z.*',
-    ]
-    expected_stdout = '16'
-
-    check_list_of_answers_from_file(expected_pycode, answer_file)
-
-    stdout = run_cmd(['python3', answer_file])
-    check_list_of_answers([expected_stdout], stdout.strip(), word_pattern=True)
-
-
-def test_variables_exc2():
-    answer_file = 'calculations.txt'
-    expected_answers = [
-        # What is the result of 10 ** 3?
-        '1000',
-        # Given (x = 1), what will be the value of after we run (x += 2)?
-        '3',
-        # What is the result of float(1)?
-        r'1\.0',
-        # What is the result of 10 == “10”?
-        'False',
-        # Print the result of the following variable:
-        # Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5
-        '555',
-    ]
-    check_list_of_answers_from_file(expected_answers, answer_file, word_pattern=True)
-
-
-def test_variables_exc3():
-    # ??? TODO: ASK SHIRA file names
-    # Accept two numbers from the user (using input) and calculate multiplication (*)
-    # Accept two numbers from the user (using input) and calculate Subtract (-)
-    # Accept two numbers from the user (using input) and calculate Divide (/)
-    # Accept two numbers from the user (using input) and calculate Modulus (%)
-    pass
 
 
 def test_strings_names():
@@ -129,8 +86,10 @@ def check_list_of_answers(expected_answers_list, text, word_pattern=False):
                 # print("MATCHED")
                 expected_answers_list.remove(answer)
 
-    assert len(expected_answers_list) == 0, "Some expected answers were not found"
+    assert len(expected_answers_list) == 0, ("Some expected answers were " +
+                                             "not found.")
 
 
 def does_student_file_exist(filename):
-    assert os.path.exists(filename), f'Student homework file not found: {filename}'
+    assert os.path.exists(filename), ('Student homework file not ' +
+                                      f'found: {filename}')

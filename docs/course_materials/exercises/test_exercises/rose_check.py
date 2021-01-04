@@ -6,7 +6,12 @@ import logging
 import os.path
 from pathlib import Path
 import sys
+from configparser import ConfigParser
+import pytest
 import linux_tester
+import conftest
+
+HOME = ''
 
 
 def load_file(file_path):
@@ -43,7 +48,7 @@ def get_exe_list():
     for currentpath, folders, files in os.walk('.'):
         for file in files:
             if 'check_' in file and '.pyc' not in file:
-                exercise_list.append(os.path.join(currentpath, file))
+                exercise_list.append(os.path.join(currentpath, file).replace('\\','/'))
     return exercise_list
 
 
@@ -52,34 +57,62 @@ Calling the corresponding check_exercise file.
 '''
 logging.basicConfig(level=logging.INFO)
 parser = argparse.ArgumentParser(description='ROSE Exercise')
+# getting exercise list fir linux exercises
 exercise_list = get_exe_list()
-parser.add_argument('exercise_file',
-                    help='The path to the check_exercise file. '
-                         'The available exercises are: ' +
-                         ', '.join(exercise_list))
+
+# getting mark list for running pytest to check other exercises
+config = ConfigParser()
+config.read('pytest.ini')
+# read values from a pytest section
+markers = config.get('pytest', 'markers').split('\n')
+select_markers = [x.split(':')[0] for x in markers if len(x) > 0]
+
+parser = argparse.ArgumentParser(description='details',
+                                 usage='use "%(prog)s --help" for more '
+                                       'information',
+                                 formatter_class=argparse.RawTextHelpFormatter)
+parser.add_argument('--exercise_file', '-e', dest='exercise_file',
+                    help='The path to the check_exercise file.\n'
+                         'The available exercises are:\n' +
+                         '\n'.join(exercise_list))
 parser.add_argument('--set_home', '-s', dest='home_directory',
                     default=(str(Path.home())+'/'),
                     help='Custom definition of HOME directory, '
-                         'for example: /home/student/. '
+                         'for example: /home/student/.\n'
                          'If not specified, '
                          'standard HOME folder will be used.')
+parser.add_argument('--test_exercise', '-t', dest='test_exercise',
+                    default='', choices=select_markers,
+                    help='The available exercise tests '
+                         '(If not specified, the test will not execute):'
+                         '\n--------------------------------------------------'
+                         + '\n'.join(markers))
 
 args = parser.parse_args()
 
 if args.home_directory[-1] != '/':
     args.home_directory += '/'
 
-linux_tester.HOME = args.home_directory
-
-if ('./' + args.exercise_file) in exercise_list:
-    exercise_mod = load_file(args.exercise_file)
-    linux_tester.COMMANDS = exercise_mod.exercise_commands
-    linux_tester.PATHS = exercise_mod.exercise_paths
-    linux_tester.DELETED_PATHS = exercise_mod.exercise_deleted_paths
-    finished = linux_tester.is_exercise_done()
-    if finished:
+if args.test_exercise:
+    HOME = args.home_directory
+    result = pytest.main(['-m ' + args.test_exercise])
+    if result == 0:
         print('Great work! You finished your exercise.')
     else:
-        print('Great effort! Try to complete the missing assignments.')
+        print('Great effort! Try to correct the failed assignments.')
 else:
-    print('Invalid exercise file')
+    linux_tester.HOME = args.home_directory
+    print(args.exercise_file)
+    print(exercise_list)
+    if ('./' + args.exercise_file) in exercise_list:
+        exercise_mod = load_file(args.exercise_file)
+        linux_tester.COMMANDS = exercise_mod.exercise_commands
+        linux_tester.PATHS = exercise_mod.exercise_paths
+        linux_tester.DELETED_PATHS = exercise_mod.exercise_deleted_paths
+        finished = linux_tester.is_exercise_done()
+        if finished:
+            print('Great work! You finished your exercise.')
+        else:
+            print('Great effort! Try to complete the missing assignments.')
+    else:
+        print('Invalid exercise file')
