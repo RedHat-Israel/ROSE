@@ -9,7 +9,6 @@ import sys
 from configparser import ConfigParser
 import pytest
 import linux_tester
-import conftest
 
 HOME = ''
 
@@ -48,7 +47,8 @@ def get_exe_list():
     for currentpath, folders, files in os.walk('.'):
         for file in files:
             if 'check_' in file and '.pyc' not in file:
-                exercise_list.append(os.path.join(currentpath, file).replace('\\','/'))
+                exercise_list.append(os.path.join(currentpath,
+                                                  file).replace('\\', '/'))
     return exercise_list
 
 

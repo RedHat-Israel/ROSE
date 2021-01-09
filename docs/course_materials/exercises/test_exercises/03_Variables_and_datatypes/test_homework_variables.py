@@ -20,35 +20,43 @@ Usage:
     # Test a specific topic
     pytest -o addopts="" -k test_variables
 """
-from pathlib import Path
 import pytest
 
 
 @pytest.mark.variables
-def test_variables_1(helpers, home_folder):
-    answer_file = str(home_folder) + 'variables.py'
-    print(answer_file)
-    expected_pycode = [
+def test_variables_1(helpers):
+    helpers.student_file = helpers.home_dir + 'variables_1.py'
+    helpers.expected_pycode = [
         r'^.*x *= *9.*',
         r'^.*y *= *7.*',
         r'^.*z *= *x *\+ *y.*',
-        r'^.*print.*z.*',
+        r'^.*print\(.*z.*\).*',
     ]
-    expected_stdout = '16'
+    helpers.expected_stdout = [r'.*16']
 
-    helpers.does_student_file_exist(answer_file)
-
-    helpers.check_answers_from_file(helpers, expected_pycode, answer_file)
-
-    stdout = helpers.run_cmd(['python', answer_file])
-    helpers.check_list_of_answers([expected_stdout], stdout.strip(),
-                                  word_pattern=True)
+    helpers.test_assignment()
 
 
 @pytest.mark.variables
 def test_variables_2(helpers):
-    answer_file = 'calculations.txt'
-    expected_answers = [
+    helpers.student_file = helpers.home_dir + 'variables_2.py'
+    helpers.expected_pycode = [
+        r'^.*\*.*',
+        r'^.*-.*',
+        r'^.*/.*',
+        r'^.*%.*',
+    ]
+    helpers.input = [['10', '3'], ['5', '6']]
+    helpers.expected_stdout = [[r'.*30', r'.*7', r'.*' + str(10/3), r'.*1'],
+                               [r'.*30', r'.*-1', r'.*' + str(5/6), r'.*5']]
+
+    helpers.test_assignment()
+
+
+@pytest.mark.variables
+def test_calculations(helpers):
+    helpers.student_file = helpers.home_dir + 'calculations.txt'
+    helpers.expected_pycode = [
         # What is the result of 10 ** 3?
         '1000',
         # Given (x = 1), what will be the value of after we run (x += 2)?
@@ -61,16 +69,5 @@ def test_variables_2(helpers):
         # Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5
         '555',
     ]
-    helpers.check_answers_from_file(helpers, expected_answers, answer_file,
-                                    word_pattern=True)
 
-
-@pytest.mark.variables
-def test_variables_3(helpers):
-    # ??? TODO: ASK SHIRA file names
-    # Accept two numbers from the user (using input) and calculate:
-    # 1. multiplication (*)
-    # 2. Subtract (-)
-    # 3. Divide (/)
-    # 4. Modulus (%)
-    pass
+    helpers.test_assignment()
