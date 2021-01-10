@@ -1,24 +1,16 @@
-""" Automatically check student's homework
-
+"""
+Automatically check student's homework
+----------------------------------------
 The tests will check:
  1. The content of the exercise file
  2. The execution and output of the exercise file
  3. The output with different inputs
 
 Guidelines:
-- Student's exercise files should be placed in the same dir as this test.
-- Test names are in the form: test_<topic>_<num>.py
-
-Usage:
-
-    # List all tests
-    pytest -o addopts="" --collect-only
-
-    # Run all tests:
-    pytest -o addopts=""
-
-    # Test a specific topic
-    pytest -o addopts="" -k test_variables
+- You have to specify the dir Student's exercise files should be placed
+in the same dir as this test.
+- Test names are in the form: test_<exercise>.py
+- Before each test should be the appropriate fixture: @pytest.mark.<topic>
 """
 
 

@@ -74,6 +74,7 @@ parser = argparse.ArgumentParser(description='details',
 parser.add_argument('--exercise_file', '-e', dest='exercise_file',
                     help='The path to the check_exercise file.\n'
                          'The available exercises are:\n' +
+                         '--------------------------------------------------'
                          '\n'.join(exercise_list))
 parser.add_argument('--set_home', '-s', dest='home_directory',
                     default=(str(Path.home())+'/'),

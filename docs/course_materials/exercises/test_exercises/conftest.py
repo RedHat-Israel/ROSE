@@ -10,7 +10,10 @@ import os
 import re
 import pytest
 from subprocess import PIPE, STDOUT, Popen, TimeoutExpired
+import logging
 from rose_check import HOME
+
+LOGGER = logging.getLogger()
 
 
 @pytest.fixture
@@ -48,11 +51,11 @@ class Test_helpers:
                 for data, expected_stdout in zip(self.input,
                                                  self.expected_stdout):
                     student_stdout = self.run_cmd(data)
-                    self.test_answers(expected_stdout, student_stdout.strip(),
-                                      message=(f'For input: {data}, ' +
+                    self.test_answers(expected_stdout, student_stdout,
+                                      message=(f'For input: {data},\n' +
                                                'the expected output is: ' +
-                                               f'{expected_stdout} but ' +
-                                               f'got {student_stdout}'),
+                                               f'{expected_stdout}\nbut ' +
+                                               f'got:\n{student_stdout}'),
                                       word_pattern=self.exact_answer)
             else:
                 student_stdout = self.run_cmd()
@@ -65,9 +68,10 @@ class Test_helpers:
         '''
         Checks if the student file exists
         '''
-        assert os.path.exists(self.student_file), ('Student homework file ' +
-                                                   'not found: ' +
-                                                   self.student_file)
+        assert os.path.exists(self.student_file), LOGGER.warning(
+                                                  'Student homework file ' +
+                                                  'not found: ' +
+                                                  self.student_file)
 
     def get_student_code(self):
         with open(self.student_file, 'r') as f:
@@ -89,7 +93,7 @@ class Test_helpers:
         except TimeoutExpired:
             p.kill()
             stdout, stderr = p.communicate()
-        assert p.returncode == 0, stderr
+        assert p.returncode == 0, LOGGER.error(stderr)
 
         return stdout.decode('utf-8')
 
@@ -107,7 +111,7 @@ class Test_helpers:
                     # print("MATCHED")
                     expected_list.remove(answer)
 
-        assert len(expected_list) == 0, message
+        assert len(expected_list) == 0, LOGGER.warning(message)
 
 
 @pytest.fixture
