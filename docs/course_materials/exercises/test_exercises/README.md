@@ -51,11 +51,11 @@ The check_exercise file uses 3 lists for tests:
 ## Adding test files(not linux lesson):
 
 To add a test file:
-1. You should name it according to the exercise/homework theme.
-2. Each function in the file sould br proceeded with the appropiate decorator(aka mark in pytest). Use the same mark(`@pytest.mark.<topic>`) for tests you would like to run together. For example: `@pytest.mark.variables` for variables homework check.
-3. You should also add the new mark to the pytest.ini file, for it to be recognized by pytest.
-4. Each function in the test file should be named: test_exercise_# and should invok helpers as input. For example: `def test_variables_1(helpers)`
-5. The helpers is defined by pytest fixture and creates a Helpers class that stores our check values and the functions for the testing.
+1. You should name it according to the `exercise/homework` theme.
+2. For every test function, add an appropriate decorator (aka `mark` in pytest). Use the same `mark('@pytest.mark.<topic>')` for tests you would like to run together. For example: `@pytest.mark.variables` for variables homework check.
+3. In order for `pytest` to recognize the new marks, you need to add them to the `pytest.ini` file.
+4. Each function in the test file should be named: `test_exercise_#` and should invoke `helpers` as input. For example: `def test_variables_1(helpers)`
+5. The `helpers` is defined by `pytest fixture` and creates a `Helpers class` that stores our check values and the functions for the testing.
 
 ## Variables in the files:
 

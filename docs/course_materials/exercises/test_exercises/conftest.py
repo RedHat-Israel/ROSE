@@ -42,12 +42,15 @@ class Test_helpers:
         # testing the code
         if len(self.expected_pycode) > 0:
             student_code = self.get_student_code()
+            # LOGGER.info(student_code)
             self.test_answers(self.expected_pycode, student_code,
                               message='Check your code, it\'s incomplete.')
 
         # Testing the output
         if len(self.expected_stdout) > 0:
             if self.input:
+                if re.match(r'.*(\n)*', self.expected_stdout[0][0]):
+                    self.arrange_stdout()
                 for data, expected_stdout in zip(self.input,
                                                  self.expected_stdout):
                     student_stdout = self.run_cmd(data)
@@ -74,9 +77,26 @@ class Test_helpers:
                                                   self.student_file)
 
     def get_student_code(self):
+        '''
+        Returns the student code/text as an array by lines
+        '''
         with open(self.student_file, 'r') as f:
             student_code = f.read()
         return student_code
+
+    def arrange_stdout(self):
+        '''
+        Splits the output message into lines by \\n
+        and replaces \\t by \\s+ for the regex.
+        '''
+        original_stdout = self.expected_stdout.copy()
+        for stdout in original_stdout:
+            if re.match(r'.*(\n)?.*(\t)?.*', stdout[0]):
+                self.expected_stdout.remove(stdout)
+                stdout[0] = stdout[0].replace('\t', '\\s+')
+                stdout = stdout[0].split('\n')
+                self.expected_stdout.append(stdout)
+        # LOGGER.info(f'try again\n{self.expected_stdout}')
 
     def run_cmd(self, data=[], **kwargs):
         '''
@@ -110,7 +130,7 @@ class Test_helpers:
                 if re.match(pattern, line):
                     # print("MATCHED")
                     expected_list.remove(answer)
-
+        # LOGGER.info(expected_list)
         assert len(expected_list) == 0, LOGGER.warning(message)
 
 
