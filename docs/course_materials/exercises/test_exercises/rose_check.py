@@ -134,6 +134,6 @@ elif args.test_exercise:
     if finished:
         print('Great work! You finished your exercise.')
     else:
-        print('Great effort! Try to complete the missing assignments.')
+        print('Great effort! Try to correct the failed assignments.')
 else:
-    print('Please reffer to help for the available options.')
+    print('Please reffer to `--help` for the available options.')
