@@ -43,28 +43,19 @@ class Test_helpers:
         if len(self.expected_pycode) > 0:
             student_code = self.get_student_code()
             # LOGGER.info(student_code)
-            self.test_answers(self.expected_pycode, student_code,
-                              message='Check your code, it\'s incomplete.')
+            self.test_answers(self.expected_pycode, student_code)
 
         # Testing the output
         if len(self.expected_stdout) > 0:
             if self.input:
-                if re.match(r'.*(\n)*', self.expected_stdout[0][0]):
-                    self.arrange_stdout()
                 for data, expected_stdout in zip(self.input,
                                                  self.expected_stdout):
                     student_stdout = self.run_cmd(data)
-                    self.test_answers(expected_stdout, student_stdout,
-                                      message=(f'For input: {data},\n' +
-                                               'the expected output is: ' +
-                                               f'{expected_stdout}\nbut ' +
-                                               f'got:\n{student_stdout}'),
+                    self.test_answers([expected_stdout], [student_stdout],
                                       word_pattern=self.exact_answer)
             else:
                 student_stdout = self.run_cmd()
                 self.test_answers(self.expected_stdout, student_stdout.strip(),
-                                  message='Your code output not match the ' +
-                                  'expected output.',
                                   word_pattern=self.exact_answer)
 
     def test_file_exist(self):
@@ -83,20 +74,6 @@ class Test_helpers:
         with open(self.student_file, 'r') as f:
             student_code = f.read()
         return student_code
-
-    def arrange_stdout(self):
-        '''
-        Splits the output message into lines by \\n
-        and replaces \\t by \\s+ for the regex.
-        '''
-        original_stdout = self.expected_stdout.copy()
-        for stdout in original_stdout:
-            if re.match(r'.*(\n)?.*(\t)?.*', stdout[0]):
-                self.expected_stdout.remove(stdout)
-                stdout[0] = stdout[0].replace('\t', '\\s+')
-                stdout = stdout[0].split('\n')
-                self.expected_stdout.append(stdout)
-        # LOGGER.info(f'try again\n{self.expected_stdout}')
 
     def run_cmd(self, data=[], **kwargs):
         '''
@@ -118,20 +95,27 @@ class Test_helpers:
         return stdout.decode('utf-8')
 
     @staticmethod
-    def test_answers(expected_list, answer_list, message, word_pattern=False):
+    def test_answers(expected_list, answer_list, word_pattern=False):
         '''
         Compares students answers with expected ones.
         '''
-        for line in answer_list.splitlines():
-            # print(f'line: |{line}|')
-            for answer in expected_list:
-                pattern = f'\\b{answer}\\b' if word_pattern else answer
-                # print(f'pattern: {pattern}')
-                if re.match(pattern, line):
+        message = ''
+        # print(expected_list)
+        for answer in expected_list:
+            pattern = f'\\b{answer[0]}\\b' if word_pattern else answer[0]
+            # print(f'pattern: {pattern}')
+            matched = False
+            answers = answer_list if word_pattern else answer_list.splitlines()
+            for line in answers:
+                # print(f'line: |{line}|')
+                if re.search(pattern, line, re.MULTILINE):
                     # print("MATCHED")
-                    expected_list.remove(answer)
+                    matched = True
+                    break
+            if not matched:
+                message += '\n' + answer[1]
         # LOGGER.info(expected_list)
-        assert len(expected_list) == 0, LOGGER.warning(message)
+        assert len(message) == 0, LOGGER.warning(message)
 
 
 @pytest.fixture

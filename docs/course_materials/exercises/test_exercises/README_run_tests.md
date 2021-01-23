@@ -11,16 +11,12 @@ Second, change directory to `ROSE/docs/course_materials/exercises/test_exercises
 For checking an exercise, you should use `-t` or `--test_exercise` in combination  
 with the test name. For example:  
 
-        `rose_check -t <check_homework_#>`
-
-or
-
-        `rose_check -t <mark_of_exercise>`
+        `python rose_check.py -t <check_homework_# or mark_of_exercise>`
 
 If you need to run on a directory different from HOME use `-s` or `--set_dir`:  
 
-        `rose-check -t <check_homework_#> -s <your_dir>`
+        `python rose_check.py -t <check_homework_# or mark_of_exercise> -s <your_dir>`
 
 For the list of all available check files use `-e` or `--exercises`:  
 
-        `rose_check -e`
+        `python rose_check.py -e`

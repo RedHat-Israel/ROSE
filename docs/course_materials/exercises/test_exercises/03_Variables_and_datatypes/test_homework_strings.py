@@ -20,19 +20,23 @@ def test_names(helpers):
     helpers.student_file = helpers.home_dir + 'names.py'
     helpers.expected_pycode = [
         # Create a string variable with your name, call it my_name
-        r'''\bmy_name\s*=\s*['"]\w+["']''',
+        [r'''\bmy_name\s*=\s*['"]\w+["']''', 'my_name variable is missing'],
         # Create a string variable with your family name,
         # call it my_family_name
-        r'''\bmy_family_name\s*=\s*['"]\w+["']''',
+        [r'''\bmy_family_name\s*=\s*['"]\w+["']''',
+         'my_family_name variable is missing'],
         # Create a string variable called my_full_name which is composed from
         # the 2 variables my_name and my_family_name.
-        r'''\bmy_full_name\s*=.*\bmy_name\b.*\bmy_family_name\b''',
+        [r'''\bmy_full_name\s*=.*\bmy_name\b.*\bmy_family_name\b''',
+         'my_full_name variable is not defined'],
         # Create a variable with your city name: call it my_city_name
-        r'''\bmy_city_name\s*=\s*['"]\w+['"]''',
+        [r'''\bmy_city_name\s*=\s*['"]\w+['"]''',
+         'my_city variable is missing'],
         # Create a variable msg with "My name is X and I’m from Y" using
         # the variables you created above
-        r'''\bmsg\s*=.*[f'My name is {]my_(full_)?name''' +
-        r'''[} and I'm from {my_city_name}]'''
+        [r'''\bmsg\s*=.*[f'My name is {]my_(full_)?name''' +
+         r'''[} and I'm from {my_city_name}]''',
+         'my_message variable is not defined']
     ]
 
     helpers.test_assignment()
@@ -43,11 +47,15 @@ def test_times(helpers):
     helpers.student_file = helpers.home_dir + 'times.py'
     expected_msg = ('You have to spend {} minutes this week to ' +
                     'complete ROSE homework')
+    helpers.exact_answer = True
     helpers.input = [['2', '3'], ['11', '6'], ['10', '2']]
     helpers.expected_stdout = [
-        [expected_msg.format(6)],
-        [expected_msg.format(66)],
-        [expected_msg.format(20)],
+        [expected_msg.format(6),
+         f'for input: {helpers.input[0]} expected output: 6'],
+        [expected_msg.format(66),
+         f'for input: {helpers.input[1]} expected output: 66'],
+        [expected_msg.format(20),
+         f'for input: {helpers.input[2]} expected output: 20'],
     ]
 
     helpers.test_assignment()
@@ -57,8 +65,10 @@ def test_times(helpers):
 def test_letter(helpers):
     helpers.student_file = helpers.home_dir + 'letter.py'
     helpers.expected_pycode = [
-        r'''\b(print\(f'{date}\\n\\tFor\\n\\t{name}).*''',
+       [r'''\b[print(f]['|"][{].*[date].*[}\\n\\tFor\\n\\t{].*[name].*[}].*''',
+        'make sure to use \\t, \\n and f\' in your print statement.'],
     ]
+    helpers.exact_answer = True
     expected_msg = ('{}\n\tFor\n\t{}\n\t{}\n' +
                     '\nDear Mr./Mrs. {}\n' +
                     'Please visit our office as soon as possible to arrange ' +
@@ -74,12 +84,16 @@ def test_letter(helpers):
                                      helpers.input[0][1],
                                      helpers.input[0][2],
                                      helpers.input[0][1],
-                                     helpers.input[0][3])],
+                                     helpers.input[0][3]),
+         f'For the input: {helpers.input[0]},' +
+         'some of the expected text was missing'],
         [r'.*' + expected_msg.format(helpers.input[1][0],
                                      helpers.input[1][1],
                                      helpers.input[1][2],
                                      helpers.input[1][1],
-                                     helpers.input[1][3])]
+                                     helpers.input[1][3]),
+         f'For the input: {helpers.input[0]},' +
+         'some of the expected text was missing']
     ]
 
     helpers.test_assignment()
@@ -90,8 +104,10 @@ def test_manipulations(helpers):
     helpers.student_file = helpers.home_dir + 'manipulations.py'
     helpers.expected_pycode = [
         # declare the varible s: "...very long line..."
-        r'''\b[s]\s*=\s*[\'\'\'].*''',
-        r'''.*[\'\'\']'''
+        [r'''\b[s]\s*=\s*[\'\'\'].*''',
+         'missing \'\'\''],
+        [r'''.*[\'\'\']''',
+         'expected several lines that end with \'\'\'']
     ]
 
     helpers.test_assignment()
