@@ -17,7 +17,7 @@ import pytest
 
 @pytest.mark.strings
 def test_names(helpers):
-    helpers.student_file = helpers.home_dir + 'names.py'
+    helpers.set_student_file('names.py')
     helpers.expected_pycode = [
         # Create a string variable with your name, call it my_name
         [r'''\bmy_name\s*=\s*['"]\w+["']''', 'my_name variable is missing'],
@@ -44,7 +44,7 @@ def test_names(helpers):
 
 @pytest.mark.strings
 def test_times(helpers):
-    helpers.student_file = helpers.home_dir + 'times.py'
+    helpers.set_student_file('times.py')
     expected_msg = ('You have to spend {} minutes this week to ' +
                     'complete ROSE homework')
     helpers.exact_answer = True
@@ -63,7 +63,7 @@ def test_times(helpers):
 
 @pytest.mark.strings
 def test_letter(helpers):
-    helpers.student_file = helpers.home_dir + 'letter.py'
+    helpers.set_student_file('letter.py')
     helpers.expected_pycode = [
        [r'''\b[print(f]['|"][{].*[date].*[}\\n\\tFor\\n\\t{].*[name].*[}].*''',
         'make sure to use \\t, \\n and f\' in your print statement.'],
@@ -101,7 +101,7 @@ def test_letter(helpers):
 
 @pytest.mark.strings
 def test_manipulations(helpers):
-    helpers.student_file = helpers.home_dir + 'manipulations.py'
+    helpers.set_student_file('manipulations.py')
     helpers.expected_pycode = [
         # declare the varible s: "...very long line..."
         [r'''\b[s]\s*=\s*[\'\'\'].*''',

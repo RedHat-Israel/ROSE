@@ -23,7 +23,6 @@ def home_folder():
 
 class Test_helpers:
     def __init__(self):
-        self.home_dir = str(HOME)
         self.student_file = ''
         self.expected_pycode = []
         self.expected_stdout = []
@@ -100,22 +99,24 @@ class Test_helpers:
         Compares students answers with expected ones.
         '''
         message = ''
-        # print(expected_list)
+        LOGGER.debug(f'expected: {expected_list}')
         for answer in expected_list:
             pattern = f'\\b{answer[0]}\\b' if word_pattern else answer[0]
-            # print(f'pattern: {pattern}')
+            LOGGER.debug(f'pattern: {pattern}')
             matched = False
             answers = answer_list if word_pattern else answer_list.splitlines()
             for line in answers:
-                # print(f'line: |{line}|')
+                LOGGER.debug(f'line: |{line}|')
                 if re.search(pattern, line, re.MULTILINE):
-                    # print("MATCHED")
+                    LOGGER.debug("MATCHED")
                     matched = True
                     break
             if not matched:
                 message += '\n' + answer[1]
-        # LOGGER.info(expected_list)
         assert len(message) == 0, LOGGER.warning(message)
+
+    def set_student_file(self, file):
+        self.student_file = os.path.join(str(HOME), file)
 
 
 @pytest.fixture
