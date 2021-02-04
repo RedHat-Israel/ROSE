@@ -58,17 +58,17 @@ def test_calculations(helpers):
     helpers.set_student_file('calculations.txt')
     helpers.expected_pycode = [
         # What is the result of 10 ** 3?
-        [r'^1000$', 'For 10 ** 3 the expected result is 1000'],
+        [r'\b1000\b', 'For 10 ** 3 the expected result is 1000'],
         # Given (x = 1), what will be the value of after we run (x += 2)?
-        [r'^3$', 'for x=1; x+=2 the expected result is 3'],
+        [r'\b3\b', 'for x=1; x+=2 the expected result is 3'],
         # What is the result of float(1)?
-        [r'^1\.0$', 'For float(1) the expected result is 1.0'],
+        [r'\b1\.0\b', 'For float(1) the expected result is 1.0'],
         # What is the result of 10 == “10”?
         ['False', 'For 10 == "10" the expected result is False'],
         # Print the result of the following variable:
         # Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5
-        [r'^555$', 'For Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 )' +
-                   '*5\nthe expected result is 555'],
+        [r'\b555\b', 'For Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 )' +
+                     '*5\nthe expected result is 555'],
     ]
 
     helpers.test_assignment()
