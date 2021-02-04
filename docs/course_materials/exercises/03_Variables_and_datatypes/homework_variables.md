@@ -10,10 +10,10 @@ Before answering the questions:
 
 Create a file *variables_1.py*
 
-2. Declare a variable **x** with the value 9
-3. Declare a variable **y** with the value 7
-4. Declare a variable **z** with the sum of **x** and **y** variables. 
-5. Print out the contents of the **z** variable.
+1. Declare a variable **x** with the value 9
+2. Declare a variable **y** with the value 7
+3. Declare a variable **z** with the sum of **x** and **y** variables. 
+4. Print out the contents of the **z** variable.
 
 
 ### variables_2.py
@@ -38,7 +38,5 @@ Finally, give a short answer to each question in *calculation.txt* file
 2. Given (x = 1), what will be its value of after we run (x += 2)?
 3. What is the result of float(1)?
 4. What is the result of 10 == “10”?
-5. Print the result of the following variable: 
-   Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5     
- 
- 
+5. Print the result of the following variable:  
+   Number = ((((13 * 8 - 4) * 2 + 50) * 4 ) % 127 ) *5
