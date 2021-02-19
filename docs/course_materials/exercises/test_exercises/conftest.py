@@ -36,26 +36,35 @@ class Test_helpers:
         2. If the writen code corresponds to the requirments
         3. If the output corresponds to the requirments
         '''
+        LOGGER.info(f'Started testing {self.student_file}:')
         self.test_file_exist()
 
         # testing the code
+        test_code = True
         if len(self.expected_pycode) > 0:
+            LOGGER.info('testing the code...')
             student_code = self.get_student_code()
             # LOGGER.info(student_code)
-            self.test_answers(self.expected_pycode, student_code)
+            test_code = self.test_answers(self.expected_pycode, student_code)
 
         # Testing the output
+        test_stdout = True
         if len(self.expected_stdout) > 0:
+            LOGGER.info('testing the output...')
             if self.input:
                 for data, expected_stdout in zip(self.input,
                                                  self.expected_stdout):
                     student_stdout = self.run_cmd(data)
-                    self.test_answers([expected_stdout], [student_stdout],
-                                      word_pattern=self.exact_answer)
+                    test_stdout = self.test_answers(
+                                        [expected_stdout],
+                                        [student_stdout],
+                                        word_pattern=self.exact_answer)
             else:
                 student_stdout = self.run_cmd()
-                self.test_answers(self.expected_stdout, student_stdout.strip(),
-                                  word_pattern=self.exact_answer)
+                test_stdout = self.test_answers(self.expected_stdout,
+                                                student_stdout.strip(),
+                                                word_pattern=self.exact_answer)
+        assert (test_code and test_stdout)
 
     def test_file_exist(self):
         '''
@@ -113,7 +122,11 @@ class Test_helpers:
                     break
             if not matched:
                 message += '\n' + answer[1]
-        assert len(message) == 0, LOGGER.warning(message)
+        # assert len(message) == 0, LOGGER.warning(message)
+        if len(message) != 0:
+            LOGGER.warning(message)
+            return False
+        return True
 
     def set_student_file(self, file):
         self.student_file = os.path.join(str(HOME), file)
