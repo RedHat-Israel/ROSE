@@ -18,12 +18,19 @@ import pytest
 @pytest.mark.dictionary
 def test_countries(helpers):
     helpers.set_student_file('countries.py')
+    dictionary_message = str('make sure to set all the values in the ' +
+                             'dictionary: {"Italy":2, "Spain":3, "Israel":1}')
     helpers.expected_pycode = [
         # Create a new dictionary with Udi’s flights number to each country:
         # "Italy":2 "Spain":3 "Israel":1
-        [r'''^.*\s*=\s*\{.*\bItaly\b.*\:\s?2\s?,.*\bSpain\b.*\:\s?3\s?,''' +
-         r'''.*\bIsrael\b.*\:\s?1\s?\}''',
-         'set the dictionary using: {"Italy":2 "Spain":3 "Israel":1}'],
+        [r'''^.*\s*=\s*\{\s*''',
+         dictionary_message],
+        [r'''.*\bItaly\b.*\:\s?2\s?,.*''',
+         dictionary_message],
+        [r'''.*\bSpain\b.*\:\s?3\s?,.*''',
+         dictionary_message],
+        [r'''.*\bIsrael\b.*\:\s?1\s?.*\}?''',
+         dictionary_message],
         # Insert a new element : "Belgium":1
         [r'''^.*\[(('Belgium')|("Belgium"))\]\s*=\s*1''',
          'to add a key-value pair use: `dict["key"] = value`'],
@@ -58,8 +65,10 @@ def test_family(helpers):
          r'''(ages\[.*\]\s*\+\s*ages\[.*\])''',
          'sum the members by using: sum(dict.values() or ' +
          'for loop on dict.values or by adding dict[key]'],
-        [r'''(\/\s*len\(ages\))|(\/\s*\d)''',
-         'to calculate average you can divide by using len(dict)'],
+        [r'''(\/\s*len\(ages\))''',
+         [r'''(\/\s*\d)''',
+          'a better way to calculate average is using len(dict)',
+          'to calculate average you can divide by using len(dict)']],
     ]
 
     helpers.expected_stdout = [

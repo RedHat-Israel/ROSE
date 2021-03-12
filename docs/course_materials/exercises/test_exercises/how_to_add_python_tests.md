@@ -24,6 +24,13 @@ Each test needs the following variables:
                               [r'^.*print\(.*z.*\).*',
                                  'please use the print function']]
    ```
+   You can also add a check for working but not optimal code by using the following:  
+   ```
+   helpers.expected_pycode = [[r"f'best \{solution\}",
+                               [r"other correct solution",
+                                'explenation for better solution',
+                                'error message']]]
+   ```
 
 3. **helpers.input**(list):
    Should include all the inputs we want to check.  

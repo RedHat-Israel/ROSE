@@ -15,7 +15,7 @@ Create a file *names.py*
 2. Create a string variable with your family name, call it my_family_name
 3. Create a string variable called my_full_name which is composed from the 2 variables my_name and my_family_name.
 4. Create a variable with your city name: call it my_city_name
-5. Create a variable msg with "My name is X and I’m from Y" using the variables you created above
+5. Create a variable my_message with "My name is X and I’m from Y" using the variables you created above
 
 
 ### times.py
