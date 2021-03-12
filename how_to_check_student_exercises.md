@@ -12,15 +12,20 @@ Install all dependencies:
 
 Second, change directory to `docs/course_materials/exercises/test_exercises` before running the tests.
 
-For checking an exercise, you should use `-t` or `--test_exercise` in combination  
-with the test name. For example:  
+For getting the Help use:  
 
-        `python rose_check.py -t <check_homework_# or mark_of_exercise>`
-
-If you need to run on a directory different from HOME use `-s` or `--set_dir`:  
-
-        `python rose_check.py -t <check_homework_# or mark_of_exercise> -s <your_dir>`
+        `python rose_check.py --help`
 
 For the list of all available check files use `-e` or `--exercises`:  
 
         `python rose_check.py -e`
+
+For checking an exercise, you should use `-t` or `--test_exercise` in combination  
+with the test name. For example:  
+
+        `python rose_check.py -t <exercise_name>`
+
+If you need to run on a directory different from HOME use `-s` or `--set_dir`.  
+It should include all student homework files:  
+
+        `python rose_check.py -t <exercise_name> -s <student _homework_dir>`

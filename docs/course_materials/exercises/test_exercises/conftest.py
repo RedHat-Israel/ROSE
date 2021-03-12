@@ -14,6 +14,8 @@ import logging
 from rose_check import HOME
 
 LOGGER = logging.getLogger()
+# Allow next row for debug output.
+# LOGGER.setLevel('DEBUG')
 
 
 @pytest.fixture
@@ -112,24 +114,42 @@ class Test_helpers:
         for answer in expected_list:
             pattern = f'\\b{answer[0]}\\b' if word_pattern else answer[0]
             LOGGER.debug(f'pattern: {pattern}')
-            matched = False
             answers = answer_list if word_pattern else answer_list.splitlines()
-            for line in answers:
-                LOGGER.debug(f'line: |{line}|')
-                if re.search(pattern, line, re.MULTILINE):
-                    LOGGER.debug("MATCHED")
-                    matched = True
-                    break
+            matched = Test_helpers.test_answer_match(pattern, answers)
             if not matched:
-                message += '\n' + answer[1]
+                if isinstance(answer[1], list):
+                    message += Test_helpers.test_lesser_answers(answer[1],
+                                                                answers)
+                else:
+                    message += '\n' + answer[1]
         # assert len(message) == 0, LOGGER.warning(message)
         if len(message) != 0:
-            LOGGER.warning(message)
+            LOGGER.info(f'Good job, but needs some work:\n{message}')
             return False
         return True
 
     def set_student_file(self, file):
         self.student_file = os.path.join(str(HOME), file)
+
+    @staticmethod
+    def test_answer_match(pattern, answers):
+        matched = False
+        for line in answers:
+            LOGGER.debug(f'line: |{line}|')
+            if re.search(pattern, line, re.MULTILINE):
+                LOGGER.debug("MATCHED")
+                matched = True
+                break
+        return matched
+
+    @staticmethod
+    def test_lesser_answers(expected_answer, answers):
+        LOGGER.debug("Checking lesser answers")
+        matched = Test_helpers.test_answer_match(expected_answer[0], answers)
+        if not matched:
+            return expected_answer[2]
+        LOGGER.warning(expected_answer[1])
+        return ""
 
 
 @pytest.fixture
