@@ -121,7 +121,7 @@ class Test_helpers:
                     message += Test_helpers.test_lesser_answers(answer[1],
                                                                 answers)
                 else:
-                    message += '\n' + answer[1]
+                    message += answer[1] + '\n'
         # assert len(message) == 0, LOGGER.warning(message)
         if len(message) != 0:
             LOGGER.info(f'Good job, but needs some work:\n{message}')
