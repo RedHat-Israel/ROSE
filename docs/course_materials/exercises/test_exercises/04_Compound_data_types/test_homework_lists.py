@@ -40,17 +40,22 @@ def test_lists(helpers):
         [r'''len\(l1\)''',
          '1.5. Expected len(list) for getting the length of the list'],
         # Add the number 1 to the l1 at index 0
-        [r'''l1\.insert\(0, 1\)''',
+        [r'''l1\.insert\(0,\s*1\)''',
          '1.6. Expected the use of list.insert(index, value)'],
         # comment for Slicing a list exercise
         [r'''^[#]+.*((S|s)licing|2)''',
          '2. Expected a comment for exercise 2 - Slicing a list'],
         # Print first 4 numbers of l1
         [r'''(print\()?l1\[0?:4\]\)?''',
-         '2.1. Expected the use of range for printing a sequence'],
+         [r'for.*in range\(.*?4\)\:',
+          '2.1 A better solution is using slicing - list[:4]',
+          '2.1. Expected the use of slicing for printing a sequence']],
         # Print 4 last numbers of l1
         [r'''(print\()?l1\[-4:\]\)?''',
-         '2.2. Expected the use of negative range for printing a sequence'],
+         [r'for.*in range\(4,\s?8\)\:',
+          '2.2 A better solution is using slicing list[-4:]',
+          '2.2. Expected the use of slicing a list ' +
+          'with negative values for printing a sequence']],
         # Print the two numbers in the middle
         [r'''(print\()?l1\[((3:5)|(\(len\(l1\)\/2\-1\):''' +
          r'''\(len\(l1\)\/2\+1\)))\]\)''',
@@ -80,14 +85,18 @@ def test_lists(helpers):
     ]
 
     helpers.expected_stdout = [
-        [r'\b4\b[^\]]$',
+        [r'.*?\b4\b(.*[^\]])?$',
          '1.3. Index of number 6 is incorrect'],
-        [r'\b7\b[^\]]$',
+        [r'.*?\b7\b(.*[^\]])?$',
          '1.5. length of l1 is incorrect'],
         [r'\[1, 2, 3, 4\]',
-         '2.1. Expected the first 4 numbers'],
+         [r'.*?\b1\b(.*[^\]])?$',
+          '2.1. Expected a one line print of the first 4 numbers',
+          '2.1. Expected the first 4 numbers: 1,2,3,4']],
         [r'\[5, 6, 7, 8\]',
-         '2.2. Expected the last 4 numbers'],
+         [r'.*?\b5\b(.*[^\]])?$',
+          '2.1. Expected a one line print of the last 4 numbers',
+          '2.2. Expected the last 4 numbers: 5,6,7,8']],
         [r'\[4, 5\]',
          '2.3. Expected the 2 middle numbers'],
         [r'\[1, 2, 3, 6, 7, 8\]',
@@ -98,11 +107,11 @@ def test_lists(helpers):
          '3.3. Expected the l3 list that contains l1 and l2'],
         [r'\[\-3, \-2, \-1, 1, 2, 3, 6, 7, 8\]',
          '3.4. Expected a sorted l3 list'],
-        [r'\b6\b[^\]]$',
+        [r'.*?\b6\b(.*[^\]])?$',
          '3.5. len of l1 should be 6'],
-        [r'\b3\b[^\]]$',
+        [r'.*?\b3\b(.*[^\]])?$',
          '3.5. len of l2 should be 3'],
-        [r'\b9\b[^\]]$',
+        [r'.*?\b9\b(.*[^\]])?$',
          '3.5. len of l3 should be 9'],
     ]
 

@@ -10,7 +10,9 @@ Install all dependencies:
 
         `pipenv install --dev`
 
-Second, change directory to `docs/course_materials/exercises/test_exercises` before running the tests.
+Second, change directory to test folder before running the tests:  
+
+        `cd docs/course_materials/exercises/test_exercises`
 
 For getting the Help use:  
 
