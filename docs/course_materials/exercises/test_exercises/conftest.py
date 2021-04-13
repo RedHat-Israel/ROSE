@@ -16,6 +16,7 @@ from rose_check import HOME
 LOGGER = logging.getLogger()
 # Allow next row for debug output.
 # LOGGER.setLevel('DEBUG')
+# LOGGER.setFormatter('[%(levelname)8s] %(message)s')
 
 
 @pytest.fixture
@@ -93,14 +94,15 @@ class Test_helpers:
                       else None)
 
         p = Popen(['python', self.student_file], stdout=PIPE, stdin=PIPE,
-                  stderr=STDOUT)
+                  stderr=PIPE)
         try:
             stdout, stderr = p.communicate(input=input_data, timeout=20,
                                            **kwargs)
         except TimeoutExpired:
             p.kill()
             stdout, stderr = p.communicate()
-        assert p.returncode == 0, LOGGER.error(stderr)
+        assert p.returncode == 0, LOGGER.error(f'Failed while running' +
+                                  f' the code. The error is:\n{stderr.decode()}')
 
         return stdout.decode('utf-8')
 
