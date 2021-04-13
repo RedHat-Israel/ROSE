@@ -15,7 +15,7 @@ in the same dir as this test.
 import pytest
 
 
-@pytest.mark.dictionary
+@pytest.mark.dictionaries
 def test_countries(helpers):
     helpers.set_student_file('countries.py')
     dictionary_message = str('make sure to set all the values in the ' +
@@ -33,41 +33,41 @@ def test_countries(helpers):
          dictionary_message],
         # Insert a new element : "Belgium":1
         [r'''^.*\[(('Belgium')|("Belgium"))\]\s*=\s*1''',
-         'to add a key-value pair use: `dict["key"] = value`'],
+         'for adding a key-value pair expected: `dict["key"] = value`'],
         # Delete “Italy” record from the dictionary
         [r'''^del\s*.*\[(('Italy')|("Italy"))\]$''',
-         'to delete a key-value pair use: `del dict["key"]'],
+         'for deleting a key-value pair expected: `del dict["key"]'],
         # Print how many times Udi was in Spain
         [r'''print\(.*\[(('Spain')|("Spain"))\]\)''',
-         'to print a value use: `print(dict["key"])`'],
+         'for printing a value expected: `print(dict["key"])`'],
     ]
 
     helpers.test_assignment()
 
 
-@pytest.mark.dictionary
+@pytest.mark.dictionaries
 def test_family(helpers):
     helpers.set_student_file('family_members_average_age.py')
     helpers.expected_pycode = [
         # Define a dictionary called ages, ages should be empty in it this time
         [r'''^ages\s*=\s*\{\}$''',
-         'define a dictionary using `ages = {}`'],
+         'Expected to see a dictionary definition using `ages = {}`'],
         # Add your family members names to the dictionary with their ages.
         # for example: “Samira”:8
         [r'''(ages\.update\({)|(ages\[.*\]=\d*)''',
-         'add a member using dict.update() or dict(key)=value'],
+         'Expected the use of dict.update() or dict(key)=value for updating'],
         # Print the dictionary
         [r'''^print\(.*\bages\b.*\)''',
-         'print the dictionary using print(dict)'],
+         'Expected the use of print(dict) for printing.'],
         # Calculate the average age in your family using the dictionary
         # and print it.
         [r'''(for.*in ages\.values\(\):)|(sum\(ages\.values\(\)\))|''' +
          r'''(ages\[.*\]\s*\+\s*ages\[.*\])''',
-         'sum the members by using: sum(dict.values() or ' +
+         'Expected the use of: sum(dict.values() or ' +
          'for loop on dict.values or by adding dict[key]'],
         [r'''(\/\s*len\(ages\))''',
          [r'''(\/\s*\d)''',
-          'a better way to calculate average is using len(dict)',
+          'A better way to calculate average is using len(dict)',
           'to calculate average you can divide by using len(dict)']],
     ]
 
