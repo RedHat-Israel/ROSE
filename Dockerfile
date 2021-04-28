@@ -1,26 +1,42 @@
-# Use official CentOS Python 2.7 image
-# https://developer.fedoraproject.org/tools/docker/docker-images.html
-FROM centos/python-27-centos7 AS base
+# Generate a container that generates requirements.txt
+ARG PY_VERSION=3.7
+FROM python:${PY_VERSION} as source
 
-# Project maintainer
-LABEL maintainer="frolland@redhat.com"
+ARG DEV
 
-# Required env vars
-ENV LD_LIBRARY_PATH="/opt/rh/python27/root/usr/lib64/" \
-    ENABLE_PIPENV=true
+ENV ENABLE_PIPENV=true
 
 # Install pipenv
 RUN pip install --upgrade pipenv
 
+COPY Pipfile ./Pipfile
+
+# Generate requirements.txt file from Pipfile
+RUN if [ -z ${DEV} ]; \
+    then \
+        pipenv lock -r > requirements.txt; \
+    else \
+        pipenv lock --dev -r > requirements.txt; \
+    fi
+
+# Generate work image
+ARG PY_VERSION
+FROM python:${PY_VERSION}
+
+# Project maintainer
+LABEL maintainer="frolland@redhat.com"
+
+# Copy pipfile to default WORKDIR
+COPY --from=source requirements.txt ./requirements.txt
+
+# Install dependencies
+RUN pip install -r requirements.txt
+
 # Copy application to default WORKDIR
 COPY . ./
-
-# Install dependencies from pipfile
-RUN pipenv install
 
 # Server port
 EXPOSE 8880
 
 # Server command
-ENTRYPOINT [ "pipenv" ]
 CMD [ "run", "python", "rose-server"]

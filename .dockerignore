@@ -1,4 +1,3 @@
-docs/
-examples/
+/classroom
+/docs
 Makefile
-README*

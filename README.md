@@ -98,11 +98,13 @@ Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 Build the Docker image:
 
-    docker build -t rose:server .
+    docker build -t rose_server .
 
 Run the Docker image on port 8880:
+(If you don't want to see the log of the run in the current window, replace `-it` with `-d`)
 
-    docker run -it --rm -p 8880 rose:server
+    docker run -it --rm --name=rose_server -p 8880:8880 rose_server python ./rose-server
+
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
@@ -112,12 +114,12 @@ In a new window, open your virtual environment:
 
     pipenv shell
 
-Create your driver file: 
-    
+Create your driver file:  
+
     cp examples/none.py mydriver.py
 
-Edit the file mydriver.py and change the driver_name variable to your name.   
-      
+Edit the file mydriver.py and change the driver_name variable to your name.  
+
 
 Start up the client, using your driver file:
 
@@ -126,6 +128,11 @@ Start up the client, using your driver file:
 The server address can be specified that way (Replace '10.20.30.44' with your server address):
 
     ./rose-client -s 10.20.30.44 mydriver.py
+
+For running the driver on the Docker container use:
+
+    docker exec -it rose_server python ./rose-client examples/random-driver.py
+
 
 For driver modules, see the [examples](examples) directory.
 
@@ -167,6 +174,10 @@ To install development requirements:
 To open a shell for development, use:
 
     pipenv --python /usr/local/bin/python3.7 shell
+
+For development in docker, use:
+
+    docker build --build-arg DEV=True -t rose_dev .
 
 Before submitting patches, please run the tests:
 
