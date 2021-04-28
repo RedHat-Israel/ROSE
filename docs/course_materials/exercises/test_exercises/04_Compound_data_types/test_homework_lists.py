@@ -83,7 +83,7 @@ def test_lists(helpers):
          '3. Expected a comment for exercise 3 - Update the list'],
         # Remove the items 4 and 5 from the l1 and print l1
         [r'''(del l1\[3:5\])|(l1.remove\(4\))''',
-         '3.1 Expected the use of `del list[:]` or list.remove(i)'],
+         '3.1. Expected the use of `del list[:]` or list.remove(i)'],
         [r'\[1, 2, 3, 6, 7, 8\]',
          '3.1. Expected a print of l1 list after removing the middle numbers'],
         # Create a new list l2, with the items: -1, -2 ,-3 and print l2
