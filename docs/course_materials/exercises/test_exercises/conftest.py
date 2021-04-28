@@ -37,8 +37,8 @@ class Test_helpers:
         '''
         Runs all checks on a assignment
         1. If student answer file exists
-        2. If the writen code corresponds to the requirments
-        3. If the output corresponds to the requirments
+        2. If the written code corresponds to the requirements
+        3. If the output corresponds to the requirements
         '''
         LOGGER.info(f'Started testing {self.student_file}:')
         self.test_file_exist()
@@ -63,10 +63,11 @@ class Test_helpers:
         LOGGER.info('Testing the code...')
         LOGGER.debug(student_work)
         test_code, message = self.test_answers(self.tests_list, student_work)
-        # LOGGER.info(message)
+        LOGGER.debug(message)
         assert test_code, LOGGER.info('Good job, ' +
-                                      f'but needs some work:\n{message}')
-        LOGGER.info(f'Better code can be achieved by:\n{message}')
+                                      f'but needs some work:\n{message[:-1]}')
+        if message != '':
+            LOGGER.info(f'Better code can be achieved by:\n{message}')
 
     def test_file_exist(self):
         '''
