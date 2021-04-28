@@ -18,9 +18,10 @@ import pytest
 @pytest.mark.dictionaries
 def test_countries(helpers):
     helpers.set_student_file('countries.py')
+    helpers. expected_stdout = False
     dictionary_message = str('make sure to set all the values in the ' +
                              'dictionary: {"Italy":2, "Spain":3, "Israel":1}')
-    helpers.expected_pycode = [
+    helpers.tests_list = [
         # Create a new dictionary with Udi’s flights number to each country:
         # "Italy":2 "Spain":3 "Israel":1
         [r'''^.*\s*=\s*\{\s*''',
@@ -48,7 +49,7 @@ def test_countries(helpers):
 @pytest.mark.dictionaries
 def test_family(helpers):
     helpers.set_student_file('family_members_average_age.py')
-    helpers.expected_pycode = [
+    helpers.tests_list = [
         # Define a dictionary called ages, ages should be empty in it this time
         [r'''^ages\s*=\s*\{\}$''',
          'Expected to see a dictionary definition using `ages = {}`'],
@@ -59,6 +60,8 @@ def test_family(helpers):
         # Print the dictionary
         [r'''^print\(.*\bages\b.*\)''',
          'Expected the use of print(dict) for printing.'],
+        [r'''(\'\w*\':\s\d*)|(r'^[^{].*\b\d*\b')''',
+         'please print the dictionary `ages`'],
         # Calculate the average age in your family using the dictionary
         # and print it.
         [r'''(for.*in ages\.values\(\):)|(sum\(ages\.values\(\)\))|''' +
@@ -69,13 +72,6 @@ def test_family(helpers):
          [r'''(\/\s*\d)''',
           'A better way to calculate average is using len(dict)',
           'to calculate average you can divide by using len(dict)']],
-    ]
-
-    helpers.expected_stdout = [
-        [r'''\'\w*\':\s\d*''',
-         'please print the dictionary `ages`'],
-        [r'''\'\w*\':\s\d*''',
-         r'^[^{].*\b\d*\b'],
     ]
 
     helpers.test_assignment()
