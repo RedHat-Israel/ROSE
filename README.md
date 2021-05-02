@@ -46,6 +46,8 @@ Refer to our GitHub pages for the course materials and additional resources:
 - [Read](https://opensource.com/education/15/9/open-source-education-israel) an article by Laura Novich
   on [opensource.com](https://opensource.com)
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 
 ## Requirements
 
