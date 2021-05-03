@@ -46,7 +46,6 @@ Refer to our GitHub pages for the course materials and additional resources:
 - [Read](https://opensource.com/education/15/9/open-source-education-israel) an article by Laura Novich
   on [opensource.com](https://opensource.com)
 
-
 ## Requirements
 
 Once we're in the ROSE directory, we need to verify we have pipenv installed.
@@ -61,7 +60,7 @@ your user:
 
 ## Getting started
 
-The following commands should be performed only once; after creating the environment you will be connecting to the same environment each time you open a new session. 
+The following commands should be performed only once; after creating the environment you will be connecting to the same environment each time you open a new session.
 
 Use pipenv to create a virtual environment and to install the rest of the dependencies:
 
@@ -70,7 +69,7 @@ Use pipenv to create a virtual environment and to install the rest of the depend
 You can also install packages from your distribution, but they may be
 too old.
 
-After creating the environment, we want to activate and enter our environment: 
+After creating the environment, we want to activate and enter our environment:
 
     pipenv shell
 
@@ -105,12 +104,11 @@ Run the Docker image on port 8880:
 
     docker run -it --rm --name=rose_server -p 8880:8880 rose_server python ./rose-server
 
-
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
 ## Running a driver
 
-In a new window, open your virtual environment:
+In a new window, open your virtual environment:  
 
     pipenv shell
 
@@ -119,7 +117,6 @@ Create your driver file:
     cp examples/none.py mydriver.py
 
 Edit the file mydriver.py and change the driver_name variable to your name.  
-
 
 Start up the client, using your driver file:
 
@@ -133,14 +130,12 @@ For running the driver on the Docker container use:
 
     docker exec -it rose_server python ./rose-client examples/random-driver.py
 
-
 For driver modules, see the [examples](examples) directory.
 
 You can run the game with just 1 driver!
 To let 2 drivers compete, repeat these commands in 2 terminals.
 
-Command line interface
-----------------------
+## Command line interface
 
 You can control the game from the command line using the rose-admin tool.
 
@@ -157,11 +152,9 @@ would change game rate to 10 frames per second:
 
     ./rose-admin <server-address> set-rate 10
 
-
 ## Creating a tarball
 
     python setup.py sdist
-
 
 ## Developing
 
