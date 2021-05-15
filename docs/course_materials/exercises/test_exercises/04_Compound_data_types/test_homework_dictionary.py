@@ -18,7 +18,7 @@ import pytest
 @pytest.mark.dictionaries
 def test_countries(helpers):
     helpers.set_student_file('countries.py')
-    helpers. expected_stdout = False
+    helpers.expected_stdout = False
     dictionary_message = str('make sure to set all the values in the ' +
                              'dictionary: {"Italy":2, "Spain":3, "Israel":1}')
     helpers.tests_list = [

@@ -118,6 +118,7 @@ class Test_helpers:
             pattern = f'\\b{answer[0]}\\b' if word_pattern else answer[0]
             LOGGER.debug(f'pattern: {pattern}')
             answers = answer_list if word_pattern else answer_list.splitlines()
+            LOGGER.debug(f'answers: {answers}')
             matched = Test_helpers.test_answer_match(pattern, answers)
             if not matched:
                 if isinstance(answer[1], list):

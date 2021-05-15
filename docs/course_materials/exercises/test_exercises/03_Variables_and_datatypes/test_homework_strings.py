@@ -18,7 +18,8 @@ import pytest
 @pytest.mark.strings
 def test_names(helpers):
     helpers.set_student_file('names.py')
-    helpers.expected_pycode = [
+    helpers.expected_stdout = False
+    helpers.tests_list = [
         # Create a string variable with your name, call it my_name
         [r'''\bmy_name\s*=\s*['"]\w+(\s\w+)*["']''',
          'check my_name variable definition'],
@@ -45,7 +46,7 @@ def test_names(helpers):
           r'''['"]\s*\%\s*\(my_(full_)?name,\s*my_city_name\))''',
           'a better definition for my_message should use f"string"',
           'expected the use of f"string" for my_message variable, ' +
-          'make sure to include the previos variables']]
+          'make sure to include the previous variables']]
         # ,
         #  'check my_message variable definition']
     ]
@@ -56,11 +57,12 @@ def test_names(helpers):
 @pytest.mark.strings
 def test_times(helpers):
     helpers.set_student_file('times.py')
+    helpers.expected_pycode = False
     expected_msg = ('You have to spend {} minutes this week to ' +
                     'complete ROSE homework')
-    helpers.exact_answer = True
+
     helpers.input = [['2', '3'], ['11', '6'], ['10', '2']]
-    helpers.expected_stdout = [
+    helpers.tests_list = [
         [expected_msg.format(6),
          f'for input: {helpers.input[0]} expected output: 6'],
         [expected_msg.format(66),
@@ -75,36 +77,38 @@ def test_times(helpers):
 @pytest.mark.strings
 def test_letter(helpers):
     helpers.set_student_file('letter.py')
-    helpers.expected_pycode = [
-        [r'''\bprint\(f['|"]\{.*[date].*\}\\n\\tFor\\n\\t\{.*[name].*\}.*''',
-         'make sure to use \\t, \\n and f\' in your print statement.'],
-    ]
-    helpers.exact_answer = True
-    expected_msg = ('{}\n\tFor\n\t{}\n\t{}\n' +
-                    '\nDear Mr./Mrs. {}\n' +
-                    'Please visit our office as soon as possible to arrange ' +
-                    'your payments.\n' +
-                    'We can\'t wait until it’s all done ...\n\n' +
-                    'Sincerely\n\tKoogle Inc.\n\t{}')
     helpers.input = [
         ['3.3.20', 'Anna', 'Rasbery, US', 'Hotel california, US'],
-        ['5.4.21', 'Yael', 'Herzel 5, Haifa', 'Yam 1, Tel Aviv']
     ]
-    helpers.expected_stdout = [
-        [r'.*' + expected_msg.format(helpers.input[0][0],
-                                     helpers.input[0][1],
-                                     helpers.input[0][2],
-                                     helpers.input[0][1],
-                                     helpers.input[0][3]),
-         f'For the input: {helpers.input[0]},' +
-         'some of the expected text was missing'],
-        [r'.*' + expected_msg.format(helpers.input[1][0],
-                                     helpers.input[1][1],
-                                     helpers.input[1][2],
-                                     helpers.input[1][1],
-                                     helpers.input[1][3]),
-         f'For the input: {helpers.input[0]},' +
-         'some of the expected text was missing']
+    error_message_for_partial_letter = (
+        f'For the input: {helpers.input[0]},' +
+        'some of the expected text was missing'
+        )
+
+    helpers.tests_list = [
+        [r'''\bprint\(f['|"]\{.*[date].*\}\\n\\tFor\\n\\t\{.*[name].*\}.*''',
+         'make sure to use \\t, \\n and f\' in your print statement.'],
+        [r'.*' + helpers.input[0][0],
+         error_message_for_partial_letter],
+        [r'.*\tFor',
+         error_message_for_partial_letter],
+        [r'.*\t' + helpers.input[0][1],
+         error_message_for_partial_letter],
+        [r'.*\t' + helpers.input[0][2],
+         error_message_for_partial_letter],
+        [r'.*Dear Mr./Mrs. ' + helpers.input[0][1],
+         error_message_for_partial_letter],
+        [r'.*Please visit our office as soon as possible to arrange ' +
+         'your payments.',
+         error_message_for_partial_letter],
+        [r'.*We can\'t wait until it’s all done ...',
+         error_message_for_partial_letter],
+        [r'.*Sincerely',
+         error_message_for_partial_letter],
+        [r'.*\tKoogle Inc.',
+         error_message_for_partial_letter],
+        [r'.*\t' + helpers.input[0][3],
+         error_message_for_partial_letter],
     ]
 
     helpers.test_assignment()
@@ -113,8 +117,9 @@ def test_letter(helpers):
 @pytest.mark.strings
 def test_manipulations(helpers):
     helpers.set_student_file('manipulations.py')
-    helpers.expected_pycode = [
-        # declare the varible s: "...very long line..."
+    helpers.expected_stdout = False
+    helpers.tests_list = [
+        # declare the variable s: "...very long line..."
         [r'''\b[s]\s*=\s*[\'\'\'].*''',
          'missing \'\'\''],
         [r'''.*[\'\'\']''',
