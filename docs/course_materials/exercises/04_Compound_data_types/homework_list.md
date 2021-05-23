@@ -1,4 +1,4 @@
-# Compound data types - HomeWork  
+# Compound data types - HomeWork
 
 ## List
 
@@ -21,7 +21,7 @@ Before each exercise, write in a comment the exercise number, for example:
     list2 = list()
     # 2 - slicing a list
 
-#### 1. Create a list  
+#### 1. Create a list
 
 1. Create two empty lists and named them **list1** and **list2**. Create those empty lists in two different ways.
 2. Create a list with the following numbers: 2,3,4,5,6 the list name should be **l1**

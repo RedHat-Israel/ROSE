@@ -7,8 +7,9 @@ The tests will check:
  3. The output with different inputs
 
 Guidelines:
-- You have to specify the dir Student's exercise files should be placed
-in the same dir as this test.
+- Student's work should be placed at the HOME directory.
+If another directory was chosen use the appropriate command
+when running the test.
 - Test names are in the form: test_<exercise>.py
 - Before each test should be the appropriate fixture: @pytest.mark.<topic>
 """
