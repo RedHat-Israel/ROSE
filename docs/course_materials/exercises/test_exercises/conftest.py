@@ -53,7 +53,7 @@ class Test_helpers:
             else:
                 student_work += self.run_cmd()
                 LOGGER.debug(f'run CMD, {student_work}')
-        
+
         # Reads code file
         if self.expected_pycode:
             student_work += self.get_student_code()
@@ -135,7 +135,7 @@ class Test_helpers:
 
     def set_student_file(self, file):
         self.student_file = os.path.join(str(HOME), file)
-    
+
     @staticmethod
     def test_answer_match(pattern, answers):
         matched = False
