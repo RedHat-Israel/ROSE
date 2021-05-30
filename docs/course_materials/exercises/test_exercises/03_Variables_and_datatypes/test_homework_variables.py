@@ -7,8 +7,9 @@ The tests will check:
  3. The output with different inputs
 
 Guidelines:
-- You have to specify the dir Student's exercise files should be placed
-in the same dir as this test.
+- Student's work should be placed at the HOME directory.
+If another directory was chosen use the appropriate command
+when running the test.
 - Test names are in the form: test_<exercise>.py
 - Before each test should be the appropriate fixture: @pytest.mark.<topic>
 """
@@ -18,14 +19,14 @@ import pytest
 @pytest.mark.variables
 def test_variables_1(helpers):
     helpers.set_student_file('variables_1.py')
-    helpers.expected_pycode = [
+    helpers.tests_list = [
         [r'^.*x *= *(int\()?\s?9\s?(\))?$', 'x should equal 9'],
         [r'^.*y *= *(int\()?\s?7\s?(\))?$', 'y should equal 7'],
         [r'^.*z *= *(int\()?\s?x\s?(\))? *\+ *(int\()?\s?y\s?(\))?$',
          'z should equal the sum of x and y'],
         [r'^.*print\(.*z.*\).*', 'print message is missing'],
+        [r'.*16', 'The expected output is 16']
     ]
-    helpers.expected_stdout = [[r'.*16', 'The expected output is 16']]
 
     helpers.test_assignment()
 
@@ -33,22 +34,22 @@ def test_variables_1(helpers):
 @pytest.mark.variables
 def test_variables_2(helpers):
     helpers.set_student_file('variables_2.py')
-    helpers.expected_pycode = [
+    helpers.input = [['10', '3']]
+    error_message = f'For input: {helpers.input[0]}, '
+    helpers.tests_list = [
         [r'^.*\*.*', 'The arithmetic operator * is missing'],
         [r'^.*-.*', 'The arithmetic operator - is missing'],
         [r'^.*/.*', 'The arithmetic operator / is missing'],
         [r'^.*%.*', f'The arithmetic operator {"%"} is missing'],
+        [r'\D*30\D*',
+         error_message + f'the expected multiplication answer is {30}'],
+        [r'\D*7\D*',
+         error_message + f'the expected subtraction answer is {7}'],
+        [r'\D*' + str(10/3) + r'\D*',
+         error_message + f'the expected devision answer is {10/3}'],
+        [r'\D*1\D*',
+         error_message + f'the expected modulo answer is {1}'],
     ]
-    helpers.exact_answer = True
-    helpers.input = [['10', '3'], ['5', '6']]
-    helpers.expected_stdout = [[r'\D*30\D*7\D*' + str(10/3) +
-                                r'\D*1\D*',
-                               f'For input: {helpers.input[0]}, ' +
-                                f'expected output is: {30}, {7}, {10/3}, {1}'],
-                               [r'\D*30\D*-1\D*' + str(5/6) +
-                                r'\D*5\D*',
-                               f'For input: {helpers.input[1]}, ' +
-                                f'expected output is: {30}, {-1}, {5/6}, {5}']]
 
     helpers.test_assignment()
 
@@ -56,7 +57,8 @@ def test_variables_2(helpers):
 @pytest.mark.variables
 def test_calculations(helpers):
     helpers.set_student_file('calculations.txt')
-    helpers.expected_pycode = [
+    helpers.expected_stdout = False
+    helpers.tests_list = [
         # What is the result of 10 ** 3?
         [r'\b1000\b', 'For 10 ** 3 the expected result is 1000'],
         # Given (x = 1), what will be the value of after we run (x += 2)?
