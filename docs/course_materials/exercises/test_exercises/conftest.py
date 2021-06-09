@@ -58,13 +58,13 @@ class Test_helpers:
         if self.expected_pycode:
             student_work += self.get_student_code()
 
-        # testing the code
+        # Tests the code
         LOGGER.info('Testing the code...')
         LOGGER.debug(student_work)
         test_code, message = self.test_answers(self.tests_list, student_work)
         LOGGER.debug(message)
-        assert test_code, LOGGER.info('Good job, ' +
-                                      f'but needs some work:\n{message[:-1]}')
+        assert test_code, LOGGER.info('Good job, but needs ' +
+                                      f'some improvements:\n{message[:-1]}')
         if message != '':
             LOGGER.info(f'Better code can be achieved by:\n{message}')
 
