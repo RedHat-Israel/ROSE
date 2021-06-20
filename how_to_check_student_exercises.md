@@ -31,3 +31,5 @@ If you need to run on a directory different from HOME use `-s` or `--set_dir`.
 It should include all student homework files:  
 
         `python rose_check.py -t <exercise_name> -s <student _homework_dir>`
+
+You can watch the following demo: [exercise check demo](https://youtu.be/TKkol2uyQ3g)
