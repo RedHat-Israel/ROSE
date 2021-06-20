@@ -78,35 +78,12 @@ def test_letter(helpers):
     helpers.input = [
         ['3.3.20', 'Anna', 'Rasbery, US', 'Hotel california, US'],
     ]
-    error_message_for_partial_letter = (
-        f'For the input: {helpers.input[0]},' +
-        'some of the expected text was missing'
-        )
 
     helpers.tests_list = [
         [r'''\bprint\(f['|"]\{.*[date].*\}\\n\\tFor\\n\\t\{.*[name].*\}.*''',
-         'make sure to use \\t, \\n and f\' in your print statement.'],
-        [r'.*' + helpers.input[0][0],
-         error_message_for_partial_letter],
-        [r'.*\tFor',
-         error_message_for_partial_letter],
-        [r'.*\t' + helpers.input[0][1],
-         error_message_for_partial_letter],
-        [r'.*\t' + helpers.input[0][2],
-         error_message_for_partial_letter],
-        [r'.*Dear Mr./Mrs. ' + helpers.input[0][1],
-         error_message_for_partial_letter],
-        [r'.*Please visit our office as soon as possible to arrange ' +
-         'your payments.',
-         error_message_for_partial_letter],
-        [r'.*We can\'t wait until it’s all done ...',
-         error_message_for_partial_letter],
-        [r'.*Sincerely',
-         error_message_for_partial_letter],
-        [r'.*\tKoogle Inc.',
-         error_message_for_partial_letter],
-        [r'.*\t' + helpers.input[0][3],
-         error_message_for_partial_letter],
+         [r'.*\\n.*\\t.*',
+          'For best solution, make sure to enter all the text',
+          'make sure to use \\t, \\n and f\' in your print statement.']],
     ]
 
     helpers.test_assignment()
