@@ -17,10 +17,12 @@ google-auth-httplib2 = "*"
 google-auth-oauthlib = "*"
 
 
+
 [packages]
 
 autobahn = "*"
 twisted = "*"
+idna = ">=2.5,<3"
 
 
 [requires]
