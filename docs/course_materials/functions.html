@@ -167,26 +167,25 @@ is_even(2) # True
                 <section data-background-size="cover" data-background-image="media/exr_background.jpeg" data-markdown="exercises/06_Functions/class_exercise_2.md" data-separator="^\n\n\n" data-separator-vertical="^\n\n">
                 </section>
                 <section>
-                  <h3><b>Example - is prime? </b></h3>
+                  <h3><b>Example - Recursion</b></h3>
                   <ul>
-                    <li>A prime number is a natural number greater than 1 that is not a product of two smaller natural numbers.</li>
+                    <li>A function that calls itself until a specified condition is met.</li>
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-def is_prime(x):
-    if x < 2:
-        return False
-    for n in range(2, x - 1):
-        if x % n == 0:
-            return False
-    return True
+def my_print(message, repeat_times):
+    if repeat_times == 0:
+        return
+    
+    print(message)
+
+    my_print(message, repeat_times - 1)
                   </code ></pre>
                   <pre><code data-trim data-noescape class="hljs lang-python">
-is_prime(4) # False
-is_prime(2) # True
-is_prime(6) # False
-is_prime(7) # True
-is_prime(39) # False
-is_prime(31) # True
+my_print("ROSE", 5) # ROSE
+my_print("ROSE", 4) # ROSE
+my_print("ROSE", 3) # ROSE
+my_print("ROSE", 2) # ROSE
+my_print("ROSE", 1) # ROSE
                 </code ></pre>
               </section>
             </section>
