@@ -173,12 +173,9 @@ is_even(2) # True
                   </ul>
                   <pre><code data-trim data-noescape class="hljs lang-python">
 def my_print(message, repeat_times):
-    if repeat_times == 0:
-        return
-    
-    print(message)
-
-    my_print(message, repeat_times - 1)
+    if repeat_times != 0:
+        print(message)
+        my_print(message, repeat_times - 1)
                   </code ></pre>
                   <pre><code data-trim data-noescape class="hljs lang-python">
 my_print("ROSE", 5) # ROSE ROSE ROSE ROSE ROSE
