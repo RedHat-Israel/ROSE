@@ -1,6 +1,6 @@
 ### Let's Practice Together \#2
 
-- Copy the file content from /home/student/ROSE/docs/course_materials/exercises/01_Linux/roses to a new file in your home directory called **roses.txt**
+- Copy the file content from /home/student/ROSE/docs/course_materials/exercises/01_Linux/roses.txt to a new file in your home directory called **roses.txt**
 - Open the **roses.txt** file with vim editor
 - Enter **insert** mode
 - Add your own line to the poem
