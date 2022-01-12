@@ -36,5 +36,5 @@ Create a file *bill.py*
 Write a program that calculates how much I should pay.<br> 
 The program receives from the client the total amount to pay.<br>
 If the amount is smaller than 1000, then the client should get a discount of 5% <br> 
-If the amount is bigger than 1000, then the client should get a 10% discount.<br>
+If the amount is bigger than or equal to 1000, then the client should get a 10% discount.<br>
 Print the discount and how much money the client should pay totaly.
