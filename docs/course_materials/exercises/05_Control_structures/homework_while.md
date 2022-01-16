@@ -8,7 +8,8 @@ Create a file *while_average.py*
 
 Write a Python program that gets integer numbers from the user in a loop (use 'input').<br>
 The loop should break when the user enters the number 0.<br>
-In the end, the program should print the sum and the average of the numbers.
+In the end, the program should print the sum and the average of the numbers.<br>
+NOTE: The 0 at the end shouldn't be calculated in the average.
 
 For example: 
 
