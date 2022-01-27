@@ -57,6 +57,11 @@ If you don't have it installed, the best way is to install it only for
 your user:
 
     pip install --user pipenv
+    
+Or with pip3:
+
+    pip3 install --user pipenv
+
 
 ## Getting started
 
@@ -69,7 +74,8 @@ Use pipenv to create a virtual environment and to install the rest of the depend
 You can also install packages from your distribution, but they may be
 too old.
 
-After creating the environment, we want to activate and enter our environment:
+After creating the environment, we want to activate and enter our environment.
+(Make sure you're in the ROSE directory):
 
     pipenv shell
 
