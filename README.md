@@ -106,6 +106,16 @@ Run the Docker image on port 8880:
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
+
+### Tunneling the UI server to your browser
+
+You can use SSH tunneling when running the server on your remote VM,
+so you can view the game in you local browser:
+
+   ssh -L 8880:127.0.0.1:8880 <user>@<vm-ip>
+  
+After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game. 
+
 ## Running a driver
 
 In a new window, open your virtual environment:  
