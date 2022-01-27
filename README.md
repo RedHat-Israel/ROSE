@@ -112,7 +112,7 @@ Open a browser at http://\<server-address\>:8880 to view and control the game.
 You can use SSH tunneling when running the server on your remote VM,
 so you can view the game in you local browser:
 
-   ssh -L 8880:127.0.0.1:8880 <user>@<vm-ip>
+    ssh -L 8880:127.0.0.1:8880 <user>@<server-address>
   
 After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game. 
 
