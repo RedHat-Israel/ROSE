@@ -1,6 +1,6 @@
 from rose.common import obstacles, actions  # NOQA
 
-driver_name = "ofek"
+driver_name = "idan"
 
 
 def drive(world):
