@@ -1,9 +1,13 @@
 init: Pipfile
-	pip install --user pipenv
+	python -m pip install pipenv --user
 	pipenv install
 
+dev-init: Pipfile
+	python -m pip install pipenv --user
+	pipenv install --dev
+
 test: pytest.ini
-	pytest
+	pipenv run pytest
 
 admin: rose-admin
 	pipenv run ./rose-admin
@@ -13,3 +17,6 @@ server: rose-server
 
 client: rose-client
 	pipenv run ./rose-client
+
+container-image:
+	podman build --build-arg DEV=True -t rose_dev .
