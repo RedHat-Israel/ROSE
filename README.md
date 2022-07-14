@@ -66,7 +66,7 @@ Use pipenv to create a virtual environment and to install the rest of the depend
 
     pipenv install
 
-You can also install developement packages by running:
+You can also install development packages by running:
 
     pipenv --dev install
 
