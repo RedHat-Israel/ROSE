@@ -203,7 +203,7 @@ To install development requirements:
 
 To open a shell for development, use:
 
-    pipenv --python /usr/local/bin/python3.7 shell
+    pipenv shell
 
 For development in docker, use:
 
