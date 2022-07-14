@@ -3,6 +3,7 @@
 
 # Editors
 .idea
+.vscode
 
 # Coverage
 .coverage
@@ -13,6 +14,5 @@ requirements.txt
 
 # Classroom setup
 classroom/credentials.json
-.vscode/launch.json
 classroom/*.csv
 classroom/token.pickle

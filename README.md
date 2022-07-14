@@ -56,12 +56,7 @@ In order to make sure we have pipenv installed:
 If you don't have it installed, the best way is to install it only for
 your user:
 
-    pip install --user pipenv
-    
-Or with pip3:
-
-    pip3 install --user pipenv
-
+    python -m pip install --user pipenv
 
 ## Getting started
 
@@ -69,10 +64,11 @@ The following commands should be performed only once; after creating the environ
 
 Use pipenv to create a virtual environment and to install the rest of the dependencies:
 
-    pipenv --python /usr/local/bin/python3.7 install
+    pipenv install
 
-You can also install packages from your distribution, but they may be
-too old.
+You can also install developement packages by running:
+
+    pipenv --dev install
 
 After creating the environment, we want to activate and enter our environment.
 (Make sure you're in the ROSE directory):
@@ -99,16 +95,16 @@ For running the same track for all drivers (instead or random) start the server 
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
-### Running the server in Docker
+### Running the server in Podman
 
 Build the Docker image:
 
-    docker build -t rose_server .
+    podman build -t rose_server .
 
 Run the Docker image on port 8880:
 (If you don't want to see the log of the run in the current window, replace `-it` with `-d`)
 
-    docker run -it --rm --name=rose_server -p 8880:8880 rose_server python ./rose-server
+    podman run -it --rm --name=rose_server -p 8880:8880 rose_server python ./rose-server
 
 Open a browser at http://\<server-address\>:8880 to view and control the game.
 
@@ -121,6 +117,15 @@ so you can view the game in you local browser:
     ssh -L 8880:127.0.0.1:8880 <user>@<server-address>
   
 After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game. 
+
+### Openning a firewall port
+
+You can also open ports 8880 and 8888 on the remote VM running the server, and browse from a local machine
+in case port 8880 or 8888 are blocked by [firewalld](https://firewalld.org/):
+
+    sudo firewall-cmd --add-port=8880/tcp --permanent
+    sudo firewall-cmd --add-port=8888/tcp --permanent
+    sudo firewall-cmd --reload
 
 ## Running a driver
 
@@ -167,6 +172,17 @@ To modify the game rate, you can use the "set-rate" command. The following comma
 would change game rate to 10 frames per second:
 
     ./rose-admin <server-address> set-rate 10
+
+## Using tmux / screen
+
+`./rose-server` and `./rose-client <driver name>` do not return, but continue running, in order to run both server and drivers a user need to run them in separate shells,
+Each driver will run it it's own pipenv shell. tmux, may be usefull in this case.
+```
+For example (tmux):
+  Ctrl-c - create a new window
+  Ctrl-n - toggel to next window
+  Ctrl-w - list open windows
+```
 
 ## Creating a tarball
 
