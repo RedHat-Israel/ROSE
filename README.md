@@ -103,7 +103,7 @@ server using:
 
     ./rose-server -t same
 
-Open a browser at http://\<server-address\>:8880 to view and control the
+Open a browser at http://{server-address}:8880 to view and control the
 game.
 
 ### Running the server in Podman
@@ -119,7 +119,7 @@ Run the Docker image on port 8880:
 If you don't want to see the log of the run in the current window,
 replace `-it` with `-d`.
 
-Open a browser at http://\<server-address\>:8880 to view and control the
+Open a browser at http://{server-address}:8880 to view and control the
 game.
 
 ### Tunneling the UI server to your browser
@@ -127,7 +127,7 @@ game.
 You can use SSH tunneling when running the server on your remote VM, so
 you can view the game in you local browser:
 
-    ssh -L 8880:127.0.0.1:8880 <user>@<server-address>
+    ssh -L 8880:127.0.0.1:8880 {user}@{server-address}
 
 After starting the server (as mentioned above), open a browser at
 http://127.0.0.1:8880/ to view and control the game.
@@ -181,20 +181,20 @@ tool.
 
 To start a race, use the rose-admin tool on any machine:
 
-    ./rose-admin <server-address> start
+    ./rose-admin {server-address} start
 
 To stop a race, use the rose-admin tool on any machine:
 
-    ./rose-admin <server-address> stop
+    ./rose-admin {server-address} stop
 
 To modify the game rate, you can use the "set-rate" command. The
 following command would change game rate to 10 frames per second:
 
-    ./rose-admin <server-address> set-rate 10
+    ./rose-admin {server-address} set-rate 10
 
 ## Using tmux / screen
 
-`./rose-server` and `./rose-client <driver name>` do not return, but
+`./rose-server` and `./rose-client {driver name}` do not return, but
 continue running, in order to run both server and drivers a user need to
 run them in separate shells, Each driver will run it it's own pipenv
 shell. `tmux` may be useful in this case.
