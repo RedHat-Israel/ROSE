@@ -2,8 +2,9 @@
 
 [![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
 
-This project is a game that has been developed to assist in teaching kids python.
-The students need to code the behavior of a car to achieve the best score.
+This project is a game that has been developed to assist in teaching
+kids python.  The students need to code the behavior of a car to achieve
+the best score.
 
 Here is a video of a race (running code from students):
 (Click on the screenshot to play the video)
@@ -12,18 +13,22 @@ Here is a video of a race (running code from students):
 " target="_blank"><img src="docs/rose-video-preview.jpg"
 alt="ROSE Race Car Game" width="860" height="720" border="10" /></a>
 
-In this game, two race cars compete to achieve the most points.
-The race car must recognize the race track, the obstacles, and the bonus areas;
-then calculate the best path where the pitfalls are avoided and all the bonus points are collected.
-The cars move autonomously on the screen within the race track game with no interference
-from the students. No joystick or mouse shall be used.
+In this game, two race cars compete to achieve the most points.  The
+race car must recognize the race track, the obstacles, and the bonus
+areas; then calculate the best path where the pitfalls are avoided and
+all the bonus points are collected.  The cars move autonomously on the
+screen within the race track game with no interference from the
+students. No joystick or mouse shall be used.
 
-In order to control the car movements, the students needs to implement a 'driver'.
-This code  controls the car and will decide what the next action of the car will be.
+In order to control the car movements, the students needs to implement a
+'driver'.  This code  controls the car and will decide what the next
+action of the car will be.
 
-For each type of obstacles there is a different action and different points assigned.
+For each type of obstacles there is a different action and different
+points assigned.
 
-See [examples/README.md](examples/README.md) for an explanation on how to write a driver module.
+See [examples/README.md](examples/README.md) for an explanation on how
+to write a driver module.
 
 ## GitHub pages
 
@@ -43,13 +48,13 @@ Refer to our GitHub pages for the course materials and additional resources:
 - [Watch](https://www.youtube.com/watch?v=41oxZr43Ih0) [Fred Rolland](https://github.com/rollandf)
   and [Ori Rabin](https://github.com/orrabin)'s talk at
   [PyCon Israel 2017](https://pycon.org.il/2017/)
-- [Read](https://opensource.com/education/15/9/open-source-education-israel) an article by Laura Novich
-  on [opensource.com](https://opensource.com)
+- [Read](https://opensource.com/education/15/9/open-source-education-israel)
+  an article by Laura Novich on [opensource.com](https://opensource.com)
 
 ## Requirements
 
-Once we're in the ROSE directory, we need to verify we have pipenv installed.
-In order to make sure we have pipenv installed:
+Once we're in the ROSE directory, we need to verify we have pipenv
+installed.  In order to make sure we have pipenv installed:
 
     pipenv --version
 
@@ -60,9 +65,12 @@ your user:
 
 ## Getting started
 
-The following commands should be performed only once; after creating the environment you will be connecting to the same environment each time you open a new session.
+The following commands should be performed only once; after creating the
+environment you will be connecting to the same environment each time you
+open a new session.
 
-Use pipenv to create a virtual environment and to install the rest of the dependencies:
+Use pipenv to create a virtual environment and to install the rest of
+the dependencies:
 
     pipenv install
 
@@ -70,12 +78,13 @@ You can also install development packages by running:
 
     pipenv --dev install
 
-After creating the environment, we want to activate and enter our environment.
-(Make sure you're in the ROSE directory):
+After creating the environment, we want to activate and enter our
+environment (make sure you're in the ROSE directory):
 
     pipenv shell
 
-Indication that you are inside the environment, the prompt line will look like this:
+Indication that you are inside the environment, the prompt line will
+look like this:
 
     (ROSE) [username@hostname ROSE]$
 
@@ -89,11 +98,13 @@ Start the server on some machine:
 
     ./rose-server
 
-For running the same track for all drivers (instead or random) start the server using:
+For running the same track for all drivers (instead or random) start the
+server using:
 
     ./rose-server -t same
 
-Open a browser at http://\<server-address\>:8880 to view and control the game.
+Open a browser at http://\<server-address\>:8880 to view and control the
+game.
 
 ### Running the server in Podman
 
@@ -102,21 +113,24 @@ Build the Docker image:
     podman build -t rose_server .
 
 Run the Docker image on port 8880:
-(If you don't want to see the log of the run in the current window, replace `-it` with `-d`)
 
     podman run -it --rm --name=rose_server -p 8880:8880 rose_server python ./rose-server
 
-Open a browser at http://\<server-address\>:8880 to view and control the game.
+If you don't want to see the log of the run in the current window,
+replace `-it` with `-d`.
 
+Open a browser at http://\<server-address\>:8880 to view and control the
+game.
 
 ### Tunneling the UI server to your browser
 
-You can use SSH tunneling when running the server on your remote VM,
-so you can view the game in you local browser:
+You can use SSH tunneling when running the server on your remote VM, so
+you can view the game in you local browser:
 
     ssh -L 8880:127.0.0.1:8880 <user>@<server-address>
 
-After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game.
+After starting the server (as mentioned above), open a browser at
+http://127.0.0.1:8880/ to view and control the game.
 
 ### Opening firewall ports
 
@@ -138,13 +152,15 @@ Create your driver file:
 
     cp examples/none.py mydriver.py
 
-Edit the file mydriver.py and change the driver_name variable to your name.
+Edit the file mydriver.py and change the driver_name variable to your
+name.
 
 Start up the client, using your driver file:
 
     ./rose-client mydriver.py
 
-The server address can be specified that way (Replace '10.20.30.44' with your server address):
+The server address can be specified that way (Replace '10.20.30.44' with
+your server address):
 
     ./rose-client -s 10.20.30.44 mydriver.py
 
@@ -155,11 +171,13 @@ For running the driver on the Docker container use:
 For driver modules, see the [examples](examples) directory.
 
 You can run the game with just 1 driver!
+
 To let 2 drivers compete, repeat these commands in 2 terminals.
 
 ## Command line interface
 
-You can control the game from the command line using the rose-admin tool.
+You can control the game from the command line using the rose-admin
+tool.
 
 To start a race, use the rose-admin tool on any machine:
 
@@ -169,8 +187,8 @@ To stop a race, use the rose-admin tool on any machine:
 
     ./rose-admin <server-address> stop
 
-To modify the game rate, you can use the "set-rate" command. The following command
-would change game rate to 10 frames per second:
+To modify the game rate, you can use the "set-rate" command. The
+following command would change game rate to 10 frames per second:
 
     ./rose-admin <server-address> set-rate 10
 
@@ -195,7 +213,8 @@ Example `tmux` commands:
 
 ## Developing
 
-Should you want to contribute to the project, please read the [Code of Conduct](docs/code-of-conduct.md).
+Should you want to contribute to the project, please read the
+[Code of Conduct](docs/code-of-conduct.md).
 
 To install development requirements:
 
