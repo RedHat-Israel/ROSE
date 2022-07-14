@@ -115,8 +115,8 @@ You can use SSH tunneling when running the server on your remote VM,
 so you can view the game in you local browser:
 
     ssh -L 8880:127.0.0.1:8880 <user>@<server-address>
-  
-After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game. 
+
+After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game.
 
 ### Opening firewall ports
 
@@ -130,15 +130,15 @@ blocked by [firewalld](https://firewalld.org/):
 
 ## Running a driver
 
-In a new window, open your virtual environment:  
+In a new window, open your virtual environment:
 
     pipenv shell
 
-Create your driver file:  
+Create your driver file:
 
     cp examples/none.py mydriver.py
 
-Edit the file mydriver.py and change the driver_name variable to your name.  
+Edit the file mydriver.py and change the driver_name variable to your name.
 
 Start up the client, using your driver file:
 
