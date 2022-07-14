@@ -175,14 +175,18 @@ would change game rate to 10 frames per second:
 
 ## Using tmux / screen
 
-`./rose-server` and `./rose-client <driver name>` do not return, but continue running, in order to run both server and drivers a user need to run them in separate shells,
-Each driver will run it it's own pipenv shell. tmux, may be usefull in this case.
-```
-For example (tmux):
-  Ctrl-c - create a new window
-  Ctrl-n - toggel to next window
-  Ctrl-w - list open windows
-```
+`./rose-server` and `./rose-client <driver name>` do not return, but
+continue running, in order to run both server and drivers a user need to
+run them in separate shells, Each driver will run it it's own pipenv
+shell. `tmux` may be useful in this case.
+
+Example `tmux` commands:
+
+| Command | Description              |
+|---------|--------------------------|
+| Ctrl+c  | Create a new window      |
+| Ctrl+n  | Toggle to next window    |
+| Ctrl+w  | List open windows        |
 
 ## Creating a tarball
 
