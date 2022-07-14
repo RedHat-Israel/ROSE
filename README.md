@@ -118,10 +118,11 @@ so you can view the game in you local browser:
   
 After starting the server (as mentioned above), open a browser at http://127.0.0.1:8880/ to view and control the game. 
 
-### Openning a firewall port
+### Opening firewall ports
 
-You can also open ports 8880 and 8888 on the remote VM running the server, and browse from a local machine
-in case port 8880 or 8888 are blocked by [firewalld](https://firewalld.org/):
+You can also open ports 8880 and 8888 on the remote VM running the
+server, and browse from a local machine in case port 8880 or 8888 are
+blocked by [firewalld](https://firewalld.org/):
 
     sudo firewall-cmd --add-port=8880/tcp --permanent
     sudo firewall-cmd --add-port=8888/tcp --permanent
