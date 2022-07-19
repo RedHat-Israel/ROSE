@@ -10,7 +10,6 @@
 htmlcov/
 
 Pipfile.lock
-requirements.txt
 
 # Classroom setup
 classroom/credentials.json
