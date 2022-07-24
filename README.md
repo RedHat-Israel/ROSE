@@ -1,6 +1,7 @@
 # ROSE Project
 
-[![Build Status](https://travis-ci.org/RedHat-Israel/ROSE.svg?branch=master)](https://travis-ci.org/RedHat-Israel/ROSE)
+![CI WorkFlow](https://github.com/RedHat-Israel/ROSE/actions/workflows/ci.yml/badge.svg)
+
 
 This project is a game that has been developed to assist in teaching
 kids python.  The students need to code the behavior of a car to achieve
