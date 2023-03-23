@@ -52,48 +52,36 @@ Refer to our GitHub pages for the course materials and additional resources:
 - [Read](https://opensource.com/education/15/9/open-source-education-israel)
   an article by Laura Novich on [opensource.com](https://opensource.com)
 
-## Requirements
-
-Once we're in the ROSE directory, we need to verify we have pipenv
-installed.  In order to make sure we have pipenv installed:
-
-    pipenv --version
-
-If you don't have it installed, the best way is to install it only for
-your user:
-
-    python -m pip install --user pipenv
-
 ## Getting started
 
 The following commands should be performed only once; after creating the
 environment you will be connecting to the same environment each time you
 open a new session.
 
-Use pipenv to create a virtual environment and to install the rest of
+Use venv to create a virtual environment and to install the rest of
 the dependencies:
 
-    pipenv install
-
-You can also install development packages by running:
-
-    pipenv --dev install
+    python -m venv ./venv
 
 After creating the environment, we want to activate and enter our
 environment (make sure you're in the ROSE directory):
 
-    pipenv shell
+    source ./venv/bin/activate
+
+After entering the virtual enviornment we need to install the project dependencies:
+
+    pip install -r requirments.txt
 
 Indication that you are inside the environment, the prompt line will
 look like this:
 
-    (ROSE) [username@hostname ROSE]$
+    (venv) [username@hostname ROSE]$
 
 ## Running the server
 
 If you are not in your virtual environment, please run it:
 
-    pipenv shell
+    source ./venv/bin/activate
 
 Start the server on some machine:
 
@@ -147,7 +135,7 @@ blocked by [firewalld](https://firewalld.org/):
 
 In a new window, open your virtual environment:
 
-    pipenv shell
+    source ./venv/bin/activate
 
 Create your driver file:
 
@@ -197,7 +185,7 @@ following command would change game rate to 10 frames per second:
 
 `./rose-server` and `./rose-client {driver name}` do not return, but
 continue running, in order to run both server and drivers a user need to
-run them in separate shells, Each driver will run it it's own pipenv
+run them in separate shells, Each driver will run it it's own venv
 shell. `tmux` may be useful in this case.
 
 Example `tmux` commands:
