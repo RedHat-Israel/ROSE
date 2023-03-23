@@ -61,7 +61,7 @@ open a new session.
 Use venv to create a virtual environment and to install the rest of
 the dependencies:
 
-    python -m venv ~/.venv/rose
+    python3 -m venv ~/.venv/rose
 
 After creating the environment, we want to activate and enter our
 environment (make sure you're in the ROSE directory):
