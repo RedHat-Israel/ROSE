@@ -135,7 +135,7 @@ blocked by [firewalld](https://firewalld.org/):
 
 In a new window, open your virtual environment:
 
-    source ./venv/bin/activate
+    source ~/.venv/rose/bin/activate
 
 Create your driver file:
 
