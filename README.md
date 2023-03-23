@@ -61,27 +61,27 @@ open a new session.
 Use venv to create a virtual environment and to install the rest of
 the dependencies:
 
-    python -m venv ./venv
+    python -m venv ~/.venv/rose
 
 After creating the environment, we want to activate and enter our
 environment (make sure you're in the ROSE directory):
 
-    source ./venv/bin/activate
+    source ~/.venv/rose/bin/activate
 
 After entering the virtual enviornment we need to install the project dependencies:
 
-    pip install -r requirments.txt
+    pip install -r requirements.txt
 
 Indication that you are inside the environment, the prompt line will
 look like this:
 
-    (venv) [username@hostname ROSE]$
+    (rose) [username@hostname ROSE]$
 
 ## Running the server
 
-If you are not in your virtual environment, please run it:
+If you are not in your virtual environment, please activate it:
 
-    source ./venv/bin/activate
+    source ~/.venv/rose/bin/activate
 
 Start the server on some machine:
 
@@ -185,7 +185,7 @@ following command would change game rate to 10 frames per second:
 
 `./rose-server` and `./rose-client {driver name}` do not return, but
 continue running, in order to run both server and drivers a user need to
-run them in separate shells, Each driver will run it it's own venv
+run them in separate shells, using the same virtual environment.
 shell. `tmux` may be useful in this case.
 
 Example `tmux` commands:
@@ -205,13 +205,17 @@ Example `tmux` commands:
 Should you want to contribute to the project, please read the
 [Code of Conduct](docs/code-of-conduct.md).
 
+To create venv use:
+
+    python3 -m venv ~/.venv/rose
+    
+To enter the venv:
+
+    source ~/.venv/rose/bin/activate
+
 To install development requirements:
 
-    pipenv install --dev
-
-To open a shell for development, use:
-
-    pipenv shell
+    pip install -r requirements-dev.txt
 
 For development in docker, use:
 
