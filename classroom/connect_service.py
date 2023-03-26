@@ -37,4 +37,4 @@ def create_service():
 
     service = build('classroom', 'v1', credentials=creds,
                     cache_discovery=False)
-    return (service)
+    return service
