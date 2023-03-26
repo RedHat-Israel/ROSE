@@ -1,6 +1,7 @@
+
 var ROSE = (function() {
     "use strict";
-
+    
     function App() {
         this.client = null;
         this.controller = null;
@@ -15,7 +16,7 @@ var ROSE = (function() {
 
     App.prototype.ready = function() {
         this.controller = new Controller();
-        this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
+        this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0, 20.0, 30.0,40.0,50.0]);
 
         var image_loader = new ImageLoader(function() {
             this.client = new Client(this.onmessage.bind(this), 2000);
@@ -30,6 +31,7 @@ var ROSE = (function() {
         this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
     }
 
+    
     App.prototype.onmessage = function(m) {
         var msg = JSON.parse(m.data);
         if (msg.action !== "update") {
@@ -131,7 +133,7 @@ var ROSE = (function() {
     }
 
     Controller.prototype.update = function(state) {
-        if(state.players.length == 0){
+        if (!state.players || state.players.length == 0){
             $("#info").text("No players connected")
             $("#start").attr("disabled", "disabled");
             $("#stop").attr("disabled", "disabled");
@@ -145,7 +147,10 @@ var ROSE = (function() {
             $("#start").removeAttr("disabled");
             $("#stop").attr("disabled", "disabled");
         }
+        
+
     }
+    
 
     Controller.prototype.disable = function() {
         $("#start").attr("disabled", "disabled");
@@ -416,6 +421,7 @@ var ROSE = (function() {
         });
         img.src = url;
     }
+    
 
     function Sound(file_path) {
         var self = this;
@@ -444,6 +450,8 @@ var ROSE = (function() {
         this.audio.pause();
     }
 
-
+  
+  
     return new App();
+    
 }());
