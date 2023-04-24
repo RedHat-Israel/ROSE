@@ -26,4 +26,4 @@ idna = ">=2.5,<3"
 
 [requires]
 
-python_version = "3.7"
+python_version = "3.9"

@@ -1,5 +1,5 @@
 # Generate a container that generates requirements.txt
-ARG PY_VERSION=3.7
+ARG PY_VERSION=3.9
 FROM python:${PY_VERSION} as source
 
 ARG DEV
@@ -14,14 +14,13 @@ COPY Pipfile ./Pipfile
 # Generate requirements.txt file from Pipfile
 RUN if [ -z ${DEV} ]; \
     then \
-        pipenv lock -r > requirements.txt; \
+        pipenv lock > requirements.txt; \
     else \
-        pipenv lock --dev -r > requirements.txt; \
+        pipenv lock --dev > requirements.txt; \
     fi
 
 # Generate work image
-ARG PY_VERSION
-FROM python:${PY_VERSION}
+FROM registry.access.redhat.com/ubi9/python-39
 
 # Project maintainer
 LABEL maintainer="frolland@redhat.com"
