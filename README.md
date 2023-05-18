@@ -190,11 +190,14 @@ shell. `tmux` may be useful in this case.
 
 Example `tmux` commands:
 
-| Command | Description              |
-|---------|--------------------------|
-| Ctrl+c  | Create a new window      |
-| Ctrl+n  | Toggle to next window    |
-| Ctrl+w  | List open windows        |
+| Command    | Description                |
+|------------|----------------------------|
+| Ctrl+b + c | Create a new window        |
+| Ctrl+b + n | Toggle to next window      |
+| Ctrl+b + w | List open windows          |
+| Ctrl+b + 0 | Select Window 0            |
+| Ctrl+b + 1 | Select Window 1            |
+| Ctrl+d     | Close a window (exit bash) |
 
 ## Creating a tarball
 
