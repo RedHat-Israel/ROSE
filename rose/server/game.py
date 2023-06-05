@@ -3,7 +3,7 @@ import logging
 import os
 
 import six
-
+import json
 from twisted.internet import reactor, task
 
 from rose.common import actions, config, error, message, obstacles  # NOQA
@@ -37,7 +37,7 @@ class Game(object):
     @rate.setter
     def rate(self, value):
         if value != self._rate:
-            log.info('change game rate to %d frames per second', value)
+            log.info('change game rate to %d frames per second(Speed of player)', value)
             self._rate = value
             if self.started:
                 self.looper.stop()
@@ -110,7 +110,24 @@ class Game(object):
         for i, p in enumerate(top_scorers):
             line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
             lines.append(line)
+        def write_json(new_data, filename='/home/ori/Documents/ROSE/ROSE/rose/web/ScoreData.json'):
+            with open(filename, 'r+', encoding='utf-8') as file:
+                try:
+                    file_data = json.load(file)
+                except json.JSONDecodeError:
+                    file_data = {}
+                if "emp_details" not in file_data:
+                    file_data["emp_details"] = []
+                file_data["emp_details"].   append(new_data)
+                file.seek(0)
+                json.dump(file_data, file, indent=4)
+        score_value = line[line.rfind("score:") + 6:]
+        y = score_value
+        write_json("Score: " + y)
         log.info("%s", os.linesep.join(lines))
+                
+            
+
 
     def loop(self):
         self.track.update()
