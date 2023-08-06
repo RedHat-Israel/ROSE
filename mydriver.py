@@ -2,6 +2,7 @@ from rose.common import obstacles, actions
 
 driver_name = "Car_6"
 
+
 def drive(world):
     x = world.car.x
     y = world.car.y
@@ -34,26 +35,24 @@ def drive(world):
         elif line == 'L':
             return actions.RIGHT
         elif line == 'M':
-            if not check_side_obs('R'):
+            if not check_side_obs('R', world):
                 return actions.RIGHT
-            elif not check_side_obs('L'):
+            elif not check_side_obs('L', world):
                 return actions.LEFT
+    else:
+        return actions.NONE
 
 
-
-def check_side_obs(side):
+def check_side_obs(side, world):
     x = world.car.x
     y = world.car.y
 
     try:
         if side == 'R':
-            obstacle = world.get((x + 1 , y))
+            obstacle = world.get((x + 1, y - 1))
         if side == 'L':
-            obstacle = world.get((x - 1 , y))
+            obstacle = world.get((x - 1, y - 1))
     except IndexError:
         return False
 
     return obstacle != obstacles.PENGUIN
-
-
-
