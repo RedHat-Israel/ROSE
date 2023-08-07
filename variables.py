@@ -1,7 +1,7 @@
 from rose.common import obstacles, actions
 
 good_obs_lst = [obstacles.PENGUIN, obstacles.WATER, obstacles.CRACK]
-bad_obs_lst = [obstacles.BIKE, obstacles.BARRIER]
+bad_obs_lst = [obstacles.BIKE, obstacles.BARRIER, obstacles.TRASH]
 
 water_gain_score = 4
 water_loss_score = -10
