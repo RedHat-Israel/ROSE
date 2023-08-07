@@ -156,7 +156,7 @@ def findTheHighScoreWay(vision, pos):
     scoreFrontLine = sumScore([vision[1][0], vision[1][1], vision[1][2], 'front'])
     scoreRightLine = sumScore([vision[2][0], vision[2][1], vision[2][2], 'right'])
 
-    # hanlde scores when moving between screen sides
+    # Hanlde the scores when moving between screen sides
     if pos[0] == 2:
         scoreRightLine -= 10
     elif pos[0] == 3:
