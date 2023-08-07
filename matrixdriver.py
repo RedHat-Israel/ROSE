@@ -57,10 +57,13 @@ def score_obs(obstacle):
 
 def pathfinder(matrix, line, world):
     if line == 0:
+        if matrix[2][0][0] == -10:
+            return actions.RIGHT
+
         way1gain = matrix[2][0][0] + matrix[1][0][0]
         way2gain = matrix[2][1][1] + matrix[1][1][0]
         if way1gain > way2gain:
-           return  obs_response(score_to_obs(world))
+           return  obs_response(matrix[2][0][0])
         elif way2gain > way1gain:
             return actions.RIGHT
         else:
@@ -77,15 +80,18 @@ def pathfinder(matrix, line, world):
         elif way3gain > way1gain and way3gain > way2gain:
             return actions.RIGHT
         elif way2gain > way3gain and way2gain > way1gain:
-            return obs_response(score_to_obs(world))
+            return obs_response(matrix[2][1][0])
         else:
             return actions.NONE
 
     elif line == 2:
+        if matrix[2][2][0] == -10:
+            return actions.LEFT
+
         way3gain = matrix[2][2][0] + matrix[1][2][0]
         way2gain = matrix[2][1][1] + matrix[1][1][0]
         if way3gain > way2gain:
-            return obs_response(score_to_obs(world))
+            return obs_response(matrix[2][2][0])
         elif way2gain > way3gain:
             return actions.LEFT
         else:
@@ -102,20 +108,20 @@ def obs_response(obstacle):
     else:
         return actions.NONE
 
-def score_to_obs(world):
-    #if obstacle_score == (water_gain_score, water_loss_score):
-        #return obstacles.WATER
-    #elif obstacle_score == (crack_gain_score, crack_loss_score):
-        #return obstacles.CRACK
-    # elif obstacle_score == (penguin_gain_score, penguin_loss_score):
-    #     return obstacles.PENGUIN
-    # elif obstacle_score == (bad_obs_score, bad_obs_score):
-    #     return obstacles.BIKE
-    # return obstacles.NONE
-    x = world.car.x
-    y = world.car.y
-
-    try:
-        return world.get((x, y - 1))
-    except IndexError:
-        return obstacles.NONE
+def score_to_obs(obstacle_score):
+    if obstacle_score == (water_gain_score, water_loss_score):
+        return obstacles.WATER
+    elif obstacle_score == (crack_gain_score, crack_loss_score):
+        return obstacles.CRACK
+    elif obstacle_score == (penguin_gain_score, penguin_loss_score):
+        return obstacles.PENGUIN
+    elif obstacle_score == (bad_obs_score, bad_obs_score):
+        return obstacles.BIKE
+    return obstacles.NONE
+    # x = world.car.x
+    # y = world.car.y
+    #
+    # try:
+    #     return world.get((x, y - 1))
+    # except IndexError:
+    #     return obstacles.NONE
