@@ -60,7 +60,7 @@ def pathfinder(matrix, line, world):
         way1gain = matrix[2][0][0] + matrix[1][0][0]
         way2gain = matrix[2][1][1] + matrix[1][1][0]
         if way1gain > way2gain:
-            obs_response(score_to_obs(world))
+           return  obs_response(score_to_obs(world))
         elif way2gain > way1gain:
             return actions.RIGHT
         else:
@@ -77,7 +77,7 @@ def pathfinder(matrix, line, world):
         elif way3gain > way1gain and way3gain > way2gain:
             return actions.RIGHT
         elif way2gain > way3gain and way2gain > way1gain:
-            obs_response(score_to_obs(world))
+            return obs_response(score_to_obs(world))
         else:
             return actions.NONE
 
@@ -85,11 +85,12 @@ def pathfinder(matrix, line, world):
         way3gain = matrix[2][2][0] + matrix[1][2][0]
         way2gain = matrix[2][1][1] + matrix[1][1][0]
         if way3gain > way2gain:
-            obs_response(score_to_obs(world))
+            return obs_response(score_to_obs(world))
         elif way2gain > way3gain:
             return actions.LEFT
         else:
             return actions.NONE
+    return actions.NONE
 
 def obs_response(obstacle):
     if obstacle == obstacles.PENGUIN:
