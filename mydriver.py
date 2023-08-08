@@ -3,15 +3,30 @@ from rose.common import obstacles, actions  # NOQA
 
 driver_name = "Michael Schumacher"
 
-def generate_paths(x, y):
+def bounds(world, x):
+    if x == 3 or x == 0:
+        return "Full L"
+    if x == 5 or x == 2:
+        return "Full R"
+
+def check_lane(world, x):
+    if 0 <= x <= 2:
+        return 1
+    if 3 <= x <= 5:
+        return 2
+
+
+def generate_paths(world, x, y):
     paths = []
-    for dy1 in range(1, 4):  # Moving upward
-        for dx1 in range(-1, 2):  # Moving diagonally
-            for dy2 in range(1, 4):  # Moving upward
-                for dx2 in range(-1, 2):  # Moving diagonally
-                    if dy1 != dy2:  # Ensure different y values
-                        path = [(x + dx1, y - dy1), (x + dx2, y - dy2), (x, y)]
-                        paths.append(path)
+    x_paths = [x, x - 1, x + 1]
+    if bounds(world, x) == "Full L" and check_lane(world, x) == 1:
+        x_paths.remove(x - 1)
+
+    if bounds(world, x) == "Full R" and check_lane(world, x) == 2:
+        x_paths.remove(x + 1)
+
+    for x in x_paths:
+        paths.append(((x, y - 1), (x, y - 2)))
     return paths
 
 def calc_score_for_path(world, path):
