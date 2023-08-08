@@ -96,7 +96,7 @@ def pathfinder(matrix, line, world):
             return actions.LEFT
         else:
             equal_ways_response(matrix, line, world)
-    return equal_ways_response(matrix, line, world)
+    return actions.NONE
 
 def obs_response(obstacle, line):
     if obstacle == obstacles.PENGUIN:
