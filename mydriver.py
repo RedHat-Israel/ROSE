@@ -3,7 +3,7 @@ This driver does not do any action.
 """
 from rose.common import obstacles, actions  # NOQA
 
-driver_name = "No Driver"
+driver_name = "test Driver"
 
 find2 = True
 goal = False
@@ -60,6 +60,7 @@ def drive(world):
             return actions.BRAKE
         #obsitcale in front in the car
         if vision[0][1] != obstacles.NONE: #front of the car
+            #action =  findTheHighScoreWay(vision, pos)
             if vision[0][0] == obstacles.NONE or vision[0][0] == obstacles.PENGUIN:
                 print ('There is an obstacle ahead - turning left')
                 return actions.LEFT
@@ -143,6 +144,13 @@ def sumScore(line):
             #add more condition if pinguin and than obs
             print('why drop 10? is there obstacle - spot = ', spot, 'lines=', line)
             sumTotal -= 10
+        goodList = [obstacles.PENGUIN, obstacles.CRACK, obstacles.WATER]
+    for item in goodList:
+        if item in line :
+            itemIndex = line.index(item)
+            if line[itemIndex+1] == obstacles.TRASH or line[itemIndex+1] == obstacles.BARRIER or line[itemIndex+1] == obstacles.BIKE:
+                sumTotal += 10
+                print('get up with 10')
     return sumTotal
 
 def findTheHighScoreWay(vision, pos):
@@ -159,22 +167,31 @@ def findTheHighScoreWay(vision, pos):
     print('right:', vision[0][2], '-', vision[1][2], '-', vision[2][2])
 
     # handle scores when moving between screen sides
+    print("Right:", scoreRightLine)
+    print("Left:", scoreLeftLine)
     if pos[0] == 2:
-        scoreRightLine -= 10
+        scoreRightLine -= 900
+        print("deducted:",scoreRightLine)
     elif pos[0] == 3:
-        scoreLeftLine -= 10
+        scoreLeftLine -= 900
+        print("deducted:", scoreLeftLine)
 
     print('score left', scoreLeftLine, ' | score front', scoreFrontLine, ' | score right', scoreRightLine)
     print('---------------------------------------------------------------------------------------')
 
     if scoreFrontLine == scoreLeftLine:
         if scoreFrontLine == scoreRightLine:
-            actionToMove = actions.NONE #all are equal - don't turn
-        elif scoreLeftLine >= scoreRightLine:
-            if scoreLeftLine > scoreFrontLine:
+            if pos[0] < home[0] and vision[0][2] == obstacles.NONE:
+                actionToMove = actions.RIGHT
+            if pos[0] > home[0] and vision[0][0] == obstacles.NONE:
                 actionToMove = actions.LEFT
-        elif scoreRightLine > scoreFrontLine:
-            actionToMove = actions.RIGHT
+            #actionToMove = actions.NONE #all are equal - don't turn
+    elif scoreLeftLine >= scoreRightLine:
+        if scoreLeftLine > scoreFrontLine:
+            actionToMove = actions.LEFT
+    elif scoreRightLine > scoreFrontLine:
+        actionToMove = actions.RIGHT
     print('action to move', actionToMove)
     return actionToMove
+
 
