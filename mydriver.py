@@ -58,13 +58,13 @@ def drive(world):
             return actions.JUMP
         if vision[0][1] == obstacles.WATER:
             return actions.BRAKE
-        # does what it must
-        if vision[0][1] != obstacles.NONE: #obsitcale in front in the car
+        #obsitcale in front in the car
+        if vision[0][1] != obstacles.NONE: #front of the car
             if vision[0][0] == obstacles.NONE or vision[0][0] == obstacles.PENGUIN:
-                print ('left')
+                print ('There is an obstacle ahead - turning left')
                 return actions.LEFT
             elif vision[0][2] == obstacles.NONE or vision[0][2] == obstacles.PENGUIN:
-                print('right')
+                print('There is an obstacle ahead - turning left')
                 return actions.RIGHT
         return findTheHighScoreWay(vision, pos)
         # if (vision[0][0] != obstacles.NONE and vision[0][0] != obstacles.PENGUIN) and (
@@ -127,45 +127,54 @@ def sumScore(line):
     penguin = 10
     crack = 5
     water = 4
-    sum = 0
+    sumTotal = 0
 
     for spot in line:
-        if spot in ['left', 'front', 'right']:
-            break
         if spot == obstacles.PENGUIN and (line.index(spot) != 0 or line[3] == 'front'):
-            sum += penguin
+            sumTotal += penguin
+            print('pinguin - spot = ', spot, 'lines', line)
         elif spot == obstacles.CRACK and (line.index(spot) != 0 or line[3] == 'front'):
-            sum += crack
+            sumTotal += crack
+            print('crack - spot = ', spot, 'lines', line)
         elif spot == obstacles.WATER and (line.index(spot) != 0 or line[3] == 'front'):
-            sum += water
-        elif spot != obstacles.NONE: #other obstacles
-            sum -= 10
-            """
-    if (line[3] == 'left' or line[3] == 'right') and (line[0] == obstacles.NONE or line[0] == obstacles.PENGUIN):
-        print('ok')
-    elif  (line[3] == 'left' or line[3] == 'right'):
-        sum = -90
-        """
-
-    print(sum)
-    return sum
+            sumTotal += water
+            print('water - spot = ', spot, 'lines', line)
+        elif spot == obstacles.TRASH or spot == obstacles.CRACK or spot == obstacles.BARRIER or spot == obstacles.BIKE or spot == obstacles.WATER:  # other obstacles
+            #add more condition if pinguin and than obs
+            print('why drop 10? is there obstacle - spot = ', spot, 'lines=', line)
+            sumTotal -= 10
+    return sumTotal
 
 def findTheHighScoreWay(vision, pos):
     actionToMove = actions.NONE
-    scoreLeftLine = sumScore([vision[0][0], vision[0][1], vision[0][2], 'left'])
-    scoreFrontLine = sumScore([vision[1][0], vision[1][1], vision[1][2], 'front'])
-    scoreRightLine = sumScore([vision[2][0], vision[2][1], vision[2][2], 'right'])
+    scoreLeftLine = 0
+    scoreFrontLine = 0
+    scoreRightLine = 0
 
-    # Handle the scores when moving between screen sides
+    scoreLeftLine = sumScore([vision[0][0], vision[1][0], vision[2][0], 'left'])
+    scoreFrontLine = sumScore([vision[0][1], vision[1][1], vision[2][1], 'front'])
+    scoreRightLine = sumScore([vision[0][2], vision[1][2], vision[2][2], 'right'])
+    print('left:', vision[0][0], '-', vision[1][0], '-', vision[2][0])
+    print('front:', vision[0][1], '-', vision[1][1], '-', vision[2][1])
+    print('right:', vision[0][2], '-', vision[1][2], '-', vision[2][2])
+
+    # handle scores when moving between screen sides
     if pos[0] == 2:
         scoreRightLine -= 10
     elif pos[0] == 3:
         scoreLeftLine -= 10
 
-    if scoreLeftLine > scoreRightLine:
-        if scoreLeftLine > scoreFrontLine:
-            actionToMove = actions.LEFT
-    elif scoreRightLine > scoreFrontLine:
+    print('score left', scoreLeftLine, ' | score front', scoreFrontLine, ' | score right', scoreRightLine)
+    print('---------------------------------------------------------------------------------------')
+
+    if scoreFrontLine == scoreLeftLine:
+        if scoreFrontLine == scoreRightLine:
+            actionToMove = actions.NONE #all are equal - don't turn
+        elif scoreLeftLine >= scoreRightLine:
+            if scoreLeftLine > scoreFrontLine:
+                actionToMove = actions.LEFT
+        elif scoreRightLine > scoreFrontLine:
             actionToMove = actions.RIGHT
+    print('action to move', actionToMove)
     return actionToMove
 
