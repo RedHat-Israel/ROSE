@@ -64,7 +64,7 @@ def pathfinder(matrix, line, world):
         elif way2gain > way1gain:
             return actions.RIGHT
         else:
-            return actions.NONE
+            return equal_ways_response(matrix, line, world)
 
     elif line == 1:
         way1gain = matrix[0][0][1] + matrix[1][0][0]
@@ -78,12 +78,10 @@ def pathfinder(matrix, line, world):
         elif way2gain > way3gain and way2gain > way1gain:
             return obs_response(score_to_obs(world))
         else:
-            return actions.NONE
+            return equal_ways_response(matrix, line, world)
+
 
     elif line == 2:
-        if matrix[2][2][0] == -10:
-            return actions.LEFT
-
         way3gain = matrix[0][2][0] + matrix[1][2][0]
         way2gain = matrix[0][1][1] + matrix[1][1][0]
         if way3gain > way2gain:
@@ -91,8 +89,8 @@ def pathfinder(matrix, line, world):
         elif way2gain > way3gain:
             return actions.LEFT
         else:
-            return actions.NONE
-    return actions.NONE
+            equal_ways_response(matrix, line, world)
+    return equal_ways_response(matrix, line, world)
 
 def obs_response(obstacle):
     if obstacle == obstacles.PENGUIN:
@@ -102,7 +100,7 @@ def obs_response(obstacle):
     elif obstacle == obstacles.WATER:
         return actions.BRAKE
     else:
-        return actions.NONE
+        return actions.RIGHT
 
 def score_to_obs(world):
     # if obstacle_score == (water_gain_score, water_loss_score):
@@ -121,3 +119,39 @@ def score_to_obs(world):
         return world.get((x, y - 1))
     except IndexError:
         return obstacles.NONE
+
+def equal_ways_response(matrix, line, world):
+    if line == 0:
+        way1gain = matrix[0][2][0]
+        way2gain = matrix[1][2][0]
+        if way1gain > way2gain:
+            obs_response(score_to_obs(world))
+        elif way2gain > way1gain:
+            return actions.RIGHT
+        else:
+            obs_response(score_to_obs(world))
+
+    elif line == 1:
+        way1gain = matrix[0][2][1]
+        way2gain = matrix[1][2][0]
+        way3gain = matrix[2][2][0]
+
+        if way1gain > way2gain and way1gain > way3gain:
+            return actions.LEFT
+        elif way3gain > way1gain and way3gain > way2gain:
+            return actions.RIGHT
+        elif way2gain > way3gain and way2gain > way1gain:
+            obs_response(score_to_obs(world))
+        else:
+            obs_response(score_to_obs(world))
+
+    elif line == 2:
+        way3gain = matrix[2][2][0]
+        way2gain = matrix[0][2][0]
+        if way3gain > way2gain:
+            return actions.NONE
+        elif way2gain > way3gain:
+            return actions.LEFT
+        else:
+            obs_response(score_to_obs(world))
+    return obs_response(score_to_obs(world))
