@@ -99,8 +99,14 @@ def obs_response(obstacle):
         return actions.JUMP
     elif obstacle == obstacles.WATER:
         return actions.BRAKE
-    else:
-        return actions.RIGHT
+    elif obstacle in bad_obs_lst:
+        if line == 0:
+            return actions.RIGHT
+        elif line == 1:
+            return actions.NONE
+        elif line == 2:
+            return actions.LEFT
+    return actions.NONE
 
 def score_to_obs(world):
     # if obstacle_score == (water_gain_score, water_loss_score):
