@@ -7,28 +7,36 @@ def drive(world):
     x = world.car.x
     y = world.car.y
 
+
+
     try:
         obstacle = world.get((x, y - 1))
     except IndexError:
         pass
         # change once look farther.
 
-    # add way to check line - using x?
-    if x == 1 or x == 4:
+    if x % 3 == 1:
         line = 'M'
-    elif x == 0 or x == 3:
+    elif x % 3 == 0:
         line = 'L'
-    elif x == 2 or x == 5:
+    elif x % 3 == 2:
         line = 'R'
 
-    if obstacle == obstacles.NONE:
-        return actions.NONE
-    elif obstacle == obstacles.PENGUIN:
+    if obstacle in good_obs_lst:
+        return good_obs_response(obstacle)
+
+
+def good_obs_response(obstacle):
+    if obstacle == obstacles.PENGUIN:
         return actions.PICKUP
     elif obstacle == obstacles.CRACK:
         return actions.JUMP
     elif obstacle == obstacles.WATER:
         return actions.BRAKE
+
+def obstacle_response(obstacle, line, world):
+    if obstacle == obstacles.NONE:
+        return actions.NONE
     elif obstacle == obstacles.TRASH or obstacle == obstacles.BARRIER or obstacle == obstacles.BIKE:
         if line == 'R':
             return actions.LEFT
@@ -49,9 +57,9 @@ def check_side_obs(side, world):
 
     try:
         if side == 'R':
-            obstacle = world.get((x + 1, y - 1))
-        if side == 'L':
             obstacle = world.get((x - 1, y - 1))
+        if side == 'L':
+            obstacle = world.get((x + 1, y - 1))
     except IndexError:
         return False
 
