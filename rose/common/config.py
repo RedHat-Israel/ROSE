@@ -39,8 +39,8 @@ cells_per_player = matrix_width // max_players
 
 score_move_forward = 10
 score_gas_start = 100
-score_move_backward = -10
-score_move_backward_obstacle = -2
+score_move_backward = -1
+score_move_backward_obstacle = -1
 score_jump = 5
 score_brake = 4
 
