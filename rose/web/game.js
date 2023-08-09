@@ -261,6 +261,7 @@ var ROSE = (function() {
             }
 //            if (player.score.toString() == '0') {
                 alert(typeof(player.score))
+                alert(player.score.toString() == '0')
 //            }
         }
     }
