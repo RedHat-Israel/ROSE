@@ -11,7 +11,7 @@ class Player(object):
         self.y = None
         self.action = None
         self.response_time = None
-        self.score = None
+        self.score = 100
         self.reset()
 
     # Game state interface
