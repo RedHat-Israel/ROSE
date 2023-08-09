@@ -249,6 +249,7 @@ var ROSE = (function() {
         $("#time_left").text(text)
 
         var i;
+        var message = "";
         for (i = 0; i < this.players.length; i++) {
             var player = this.players[i];
             var displayScore = player.score < 0 ? 0 : player.score;
@@ -262,10 +263,13 @@ var ROSE = (function() {
             }
 
             if (player.score <= 0) {
-                alert(`${player.name} lost`)
+                message = `${player.name} lost`;
+                alert(message)
             }
         }
-        alert("test")
+        if (message != "") {
+            alert("test")
+        }
     }
 
     function Obstacles(loader) {
