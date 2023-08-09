@@ -20,4 +20,5 @@ def get_random_obstacle():
         obstacle = PENGUIN
     else:
         obstacle = random.choice(ALL)
+    return obstacle
     #return random.choice(ALL)
