@@ -255,14 +255,16 @@ var ROSE = (function() {
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
                 $("#left.player .score").text("Fuel: " + displayScore)
+                alert("player lane 0 ")
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text("Fuel: " + displayScore)
+                alert("player lane 1 ")
             }
 
-            if (player.score < '0') {
-                alert(`{player.name} lost `)
+            if (player.score <= 0) {
+                alert(`${player.name} lost`)
             }
         }
     }
