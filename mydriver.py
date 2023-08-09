@@ -3,7 +3,7 @@ This driver does not do any action.
 """
 from rose.common import obstacles, actions  # NOQA
 
-driver_name = "test Driver"
+driver_name = "test"
 
 find2 = True
 goal = False
