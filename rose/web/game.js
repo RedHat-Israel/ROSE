@@ -268,7 +268,7 @@ var ROSE = (function() {
             }
         }
         if (message != "") {
-            alert("test")
+            alert(message)
         }
     }
 
