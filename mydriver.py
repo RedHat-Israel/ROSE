@@ -60,13 +60,13 @@ def drive(world):
             return actions.BRAKE
         #obsitcale in front in the car
         if vision[0][1] != obstacles.NONE: #front of the car
-            #action =  findTheHighScoreWay(vision, pos)
-            if vision[0][0] == obstacles.NONE or vision[0][0] == obstacles.PENGUIN:
-                print ('There is an obstacle ahead - turning left')
-                return actions.LEFT
-            elif vision[0][2] == obstacles.NONE or vision[0][2] == obstacles.PENGUIN:
-                print('There is an obstacle ahead - turning left')
-                return actions.RIGHT
+            action =  findTheHighScoreWay(vision, pos)
+            # if vision[0][0] == obstacles.NONE or vision[0][0] == obstacles.PENGUIN:
+            #     print ('There is an obstacle ahead - turning left')
+            #     return actions.LEFT
+            # elif vision[0][2] == obstacles.NONE or vision[0][2] == obstacles.PENGUIN:
+            #     print('There is an obstacle ahead - turning left')
+            #     return actions.RIGHT
         return findTheHighScoreWay(vision, pos)
         # if (vision[0][0] != obstacles.NONE and vision[0][0] != obstacles.PENGUIN) and (
         #         vision[0][2] != obstacles.NONE and vision[0][2] != obstacles.PENGUIN):
@@ -176,16 +176,19 @@ def findTheHighScoreWay(vision, pos):
         scoreLeftLine -= 900
         print("deducted:", scoreLeftLine)
 
+
     print('score left', scoreLeftLine, ' | score front', scoreFrontLine, ' | score right', scoreRightLine)
     print('---------------------------------------------------------------------------------------')
 
     if scoreFrontLine == scoreLeftLine:
         if scoreFrontLine == scoreRightLine:
+            actionToMove = actions.NONE  # all are equal - don't turn
+        else:
             if pos[0] < home[0] and vision[0][2] == obstacles.NONE:
                 actionToMove = actions.RIGHT
             if pos[0] > home[0] and vision[0][0] == obstacles.NONE:
                 actionToMove = actions.LEFT
-            #actionToMove = actions.NONE #all are equal - don't turn
+        actionToMove = actions.NONE #all are equal - don't turn
     elif scoreLeftLine >= scoreRightLine:
         if scoreLeftLine > scoreFrontLine:
             actionToMove = actions.LEFT
