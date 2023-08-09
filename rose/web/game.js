@@ -253,7 +253,7 @@ var ROSE = (function() {
             var player = this.players[i];
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
-                $("#left.player .score").text(player.score)
+                $("#left.player .score").text("gas: " + player.score)
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
