@@ -116,10 +116,10 @@ class Game(object):
         self.track.update()
         score.process(self.players, self.track)
         top_scorers = sorted(six.itervalues(self.players), reverse=True)
+        self.timeleft += 1
         for p in top_scorers:
             if p.score > 0:
                 self.update_clients()
-                self.timeleft += 1
             else:
                 self.stop()
 
