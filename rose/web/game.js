@@ -62,7 +62,7 @@ var ROSE = (function() {
         top_margin: 10,
         row_height: 65,
         track_length: 9,
-        finish_line_duration: 5
+        finish_line_duration: -1
     };
 
     function Client(onmessage, reconnect_msec) {
