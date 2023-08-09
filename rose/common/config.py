@@ -8,7 +8,7 @@ web_port = 8880
 # Server
 
 game_rate = 1.0
-game_duration = 60
+game_duration = 0
 number_of_cars = 4
 is_track_random = True
 

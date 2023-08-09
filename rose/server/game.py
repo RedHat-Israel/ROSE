@@ -115,11 +115,13 @@ class Game(object):
     def loop(self):
         self.track.update()
         score.process(self.players, self.track)
-        if self.timeleft > 0:
-            self.update_clients()
-            self.timeleft -= 1
-        else:
-            self.stop()
+        top_scorers = sorted(six.itervalues(self.players), reverse=True)
+        for p in top_scorers:
+            if p.score > 0:
+                self.update_clients()
+                self.timeleft += 1
+            else:
+                self.stop()
 
     def update_clients(self):
         msg = message.Message('update', self.state())
