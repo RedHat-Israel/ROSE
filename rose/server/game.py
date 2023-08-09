@@ -107,13 +107,24 @@ class Game(object):
     def print_stats(self):
         lines = ['Stats:']
         top_scorers = sorted(six.itervalues(self.players), reverse=True)
+        line = '%2s | %15s | %5s | %9s | %9s | %9s | %10s |' % \
+               ('#', 'Name', 'Score', 'Penguins', 'Cracks', 'Water', 'Collisions')
+        lines.append(line)
+        line = '%2s | %15s | %5s | %9s | %9s | %9s | %10s |' % \
+               ('', '', '', 'Collected', 'Collected', 'Collected', '')
+        lines.append(line)
+        line = '_______________________________________________________________________________'
+        lines.append(line)
         for i, p in enumerate(top_scorers):
-            line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
+            p_collected = '%d / %d' % (p.penguin_collected, self.track.penguin_counter)
+            line = '%2d | %15s | %5d | %9s | %9s | %9s | %10s |' % \
+                   (i + 1, p.name, p.score, p_collected, p.crack_collected, p.water_collected, p.collision_count)
             lines.append(line)
         log.info("%s", os.linesep.join(lines))
 
     def loop(self):
         self.track.update()
+        self.track.searching_penguin()
         score.process(self.players, self.track)
         if self.timeleft > 0:
             self.update_clients()
