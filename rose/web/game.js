@@ -251,14 +251,16 @@ var ROSE = (function() {
         var i;
         for (i = 0; i < this.players.length; i++) {
             var player = this.players[i];
+            var displayScore = player.score < 0 ? 0 : player.score;
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
-                $("#left.player .score").text("Fuel: " + player.score)
+                $("#left.player .score").text("Fuel: " + displayScore)
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
-                $("#right.player .score").text("Fuel: " + player.score)
+                $("#right.player .score").text("Fuel: " + displayScore)
             }
+
             if (player.score <= '0') {
                 alert(`{player.name} lost `)
             }
