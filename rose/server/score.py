@@ -61,6 +61,12 @@ def process(players, track):
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.score += config.score_move_forward
+        elif obstacle == obstacles.BOOSTER:
+            if player.action == actions.PICKUP:
+                track.clear(player.x, player.y)
+                player.score += config.score_move_forward * 2
+
+
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same

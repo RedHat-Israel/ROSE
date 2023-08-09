@@ -285,11 +285,6 @@ var ROSE = (function() {
         loader.load("res/obstacles/water.png", function(img) {
             self.textures["water"] = img;
         });
-        loader.load("res/obstacles/booster.png", function(img) {
-            self.textures["booster"] = img;
-        });
-
-
     }
 
     Obstacles.prototype.update = function(state) {

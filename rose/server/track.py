@@ -64,4 +64,5 @@ class Track(object):
             cell = random.choice(range(0, config.cells_per_player))
             for lane in range(config.max_players):
                 row[cell + lane * config.cells_per_player] = obstacle
+        print(row)
         return row
