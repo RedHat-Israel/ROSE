@@ -1,3 +1,13 @@
+function GetParameterValues(param) {
+    var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for (var i = 0; i < url.length; i++) {
+        var urlparam = url[i].split('=');
+        if (urlparam[0] == param) {
+            return urlparam[1];
+        }
+    }
+}
+var theme = GetParameterValues("theme");
 var ROSE = (function() {
     "use strict";
 
@@ -27,8 +37,9 @@ var ROSE = (function() {
         this.obstacles = new Obstacles(image_loader);
         this.cars = new Cars(image_loader);
         this.finish_line = new FinishLine(image_loader);
-        this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
+        this.sound = new Sound(`res/themes/${theme}/soundtrack/soundtrack.ogg`);
 
+        console.log(this.theme);
         // Get the <span> element that closes the modal
         var modal = document.getElementById("myModal");
 
@@ -36,7 +47,7 @@ var ROSE = (function() {
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
-          modal.style.display = "none";
+            modal.style.display = "none";
         }
 
     }
@@ -120,6 +131,10 @@ var ROSE = (function() {
             var modal = document.getElementById("myModal");
             modal.style.display = "block";
 
+            $( "#theme" ).on( "change", function() {
+                var theme = $( "#theme").val();
+                window.location.replace(`http://127.0.0.1:8880/?theme=${theme}`);
+            } );
 
         });
     }
@@ -291,22 +306,22 @@ var ROSE = (function() {
         this.textures = {};
         var self = this;
 
-        loader.load("res/obstacles/barrier.png", function(img) {
+        loader.load(`res/themes/${theme}/obstacles/barrier.png`, function(img) {
             self.textures["barrier"] = img;
         });
-        loader.load("res/obstacles/bike.png", function(img) {
+        loader.load(`res/themes/${theme}/obstacles/bike.png`, function(img) {
             self.textures["bike"] = img;
         });
-        loader.load("res/obstacles/crack.png", function(img) {
+        loader.load(`res/themes/${theme}/obstacles/crack.png`, function(img) {
             self.textures["crack"] = img;
         });
-        loader.load("res/obstacles/penguin.png", function(img) {
+        loader.load(`res/themes/${theme}/obstacles/penguin.png`, function(img) {
             self.textures["penguin"] = img;
         });
-        loader.load("res/obstacles/trash.png", function(img) {
+        loader.load(`res/themes/${theme}/obstacles/trash.png`, function(img) {
             self.textures["trash"] = img;
         });
-        loader.load("res/obstacles/water.png", function(img) {
+        loader.load(`res/themes/${theme}/obstacles/water.png`, function(img) {
             self.textures["water"] = img;
         });
     }
@@ -330,16 +345,16 @@ var ROSE = (function() {
         this.players = null;
         this.textures = [null, null, null, null];
         var self = this;
-        loader.load("res/cars/car1.png", function(img) {
+        loader.load(`res/themes/${theme}/cars/car1.png`, function(img) {
             self.textures[0] = img;
         });
-        loader.load("res/cars/car2.png", function(img) {
+        loader.load(`res/themes/${theme}/cars/car2.png`, function(img) {
             self.textures[1] = img;
         });
-        loader.load("res/cars/car3.png", function(img) {
+        loader.load(`res/themes/${theme}/cars/car3.png`, function(img) {
             self.textures[2] = img;
         });
-        loader.load("res/cars/car4.png", function(img) {
+        loader.load(`res/themes/${theme}/cars/car4.png`, function(img) {
             self.textures[3] = img;
         });
     }
@@ -370,7 +385,7 @@ var ROSE = (function() {
         this.texture = null;
         this.timeleft = null;
         var self = this;
-        loader.load("res/end/final_flag.png", function(img) {
+        loader.load(`res/themes/${theme}/end/final_flag.png`, function(img) {
             self.texture = img;
         });
     }
@@ -394,13 +409,13 @@ var ROSE = (function() {
         this.textures = [null, null, null];
         var self = this;
 
-        loader.load("res/bg/bg_1.png", function(img) {
+        loader.load(`res/themes/${theme}/bg/bg_1.png`, function(img) {
             self.textures[0] = img;
         });
-        loader.load("res/bg/bg_2.png", function(img) {
+        loader.load(`res/themes/${theme}/bg/bg_2.png`, function(img) {
             self.textures[1] = img;
         });
-        loader.load("res/bg/bg_3.png", function(img) {
+        loader.load(`res/themes/${theme}/bg/bg_3.png`, function(img) {
             self.textures[2] = img;
         });
     }
