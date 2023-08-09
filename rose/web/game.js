@@ -261,7 +261,7 @@ var ROSE = (function() {
                 $("#right.player .score").text("Fuel: " + displayScore)
             }
 
-            if (player.score <= '0') {
+            if (player.score < '0') {
                 alert(`{player.name} lost `)
             }
         }
