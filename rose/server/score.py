@@ -125,6 +125,7 @@ def process(players, track):
                 track.clear(player.x, player.y)
                 player.y += 1
                 player.score += config.score_move_backward_obstacle
+                print("CHECKKKKKKKK  crack::", player.score)
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
@@ -132,11 +133,15 @@ def process(players, track):
                 track.clear(player.x, player.y)
                 player.y += 1
                 player.score += config.score_move_backward_obstacle
+                print("CHECKKKKKKKK not obstacle::", player.score)
+
         elif obstacle == obstacles.WATER:
             if player.action != actions.BRAKE:
                 track.clear(player.x, player.y)
                 player.y += 1
                 player.score += config.score_move_backward_obstacle
+                print("CHECKKKKKKKK : brake:", player.score)
+
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
                 if player.score < 100:
@@ -145,6 +150,7 @@ def process(players, track):
                         player.score += 100 - player.score
                     else:
                         player.score += config.score_move_forward
+                print("CHECKKKKKKKK penguin ::", player.score)
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same

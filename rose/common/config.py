@@ -37,9 +37,9 @@ cells_per_player = matrix_width // max_players
 
 # Score Points
 
-score_move_forward = 100
+score_move_forward = 10
 score_gas_start = 100
-score_move_backward = -15
+score_move_backward = -10
 score_move_backward_obstacle = -2
 score_jump = 5
 score_brake = 4
