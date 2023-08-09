@@ -15,3 +15,5 @@ Pipfile.lock
 classroom/credentials.json
 classroom/*.csv
 classroom/token.pickle
+
+seed.txt

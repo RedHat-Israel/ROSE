@@ -42,12 +42,12 @@ def main():
     the seed will be the seed submitted by the user.
     """
     if args.seed == "":
-        random.seed(str(random.randint(1, 100000000000000000)))
+        random.seed(str(random.randint(1, 100000)))
         config.track_seed = args.seed
     else:
         config.track_seed = args.seed
 
-    log.info(f"The seed is {config.track_seed}")
+    log.info("The seed is " + config.track_seed)
     random.seed(config.track_seed)
 
     log.info('starting server')

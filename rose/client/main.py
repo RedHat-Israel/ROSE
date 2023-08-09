@@ -113,10 +113,8 @@ def main():
                              "If not specified, random will be used.")
     args = parser.parse_args()
 
-    if args.seed == "":
-        config.track_seed = str(random.randint(1, 100000000000000000))
-    else:
-        config.track_seed = args.seed
+    with open("seed.txt", "w") as f:
+        f.write(args.seed)
 
     try:
         driver_mod = load_driver_module(args.driver_file)
