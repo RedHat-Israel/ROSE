@@ -17,12 +17,13 @@ log = logging.getLogger('game')
 
 class Game(component.Component):
 
-    def __init__(self, client, name, drive_func):
+    def __init__(self, client, name, drive_func,seed):
         self.client = client
         self.drive_func = drive_func
         self.name = name
         self.track = track.Track()
         self.players = {}
+        self.seed = seed
         self.cars = [car.Car(1),
                      car.Car(2),
                      car.Car(3),

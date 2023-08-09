@@ -42,7 +42,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     maxDelay = 2
 
     def __init__(self, name, drive_func):
-        self.game = game.Game(self, name, drive_func)
+        self.game = game.Game(self, name, drive_func,config.track_seed)
         self.client = None
 
     # Client events

@@ -35,11 +35,18 @@ body {
     background-color: #222;
 }
 
-#start, #stop, #music_ctl {
-    width: 120px;
+#copy, #start, #stop, #music_ctl {
+    width: 140px;
     padding: 8px 24px;
     margin: 0;
+
 }
+ #seed{
+  width: 140px;
+  padding: 8px 24px;
+  margin: 0;
+ }
+
 
 #rate_ctl {
     position: absolute;
@@ -116,6 +123,8 @@ body {
     font-size: 40px;
     top: 50px;
 }
+
+
 
 #time_left {
     width: 105px;

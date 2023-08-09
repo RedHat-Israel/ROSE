@@ -254,11 +254,13 @@ var ROSE = (function() {
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
                 $("#left.player .score").text(player.score)
+
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text(player.score)
             }
+            $("#seed").text(game.seed)
         }
     }
 
@@ -301,6 +303,8 @@ var ROSE = (function() {
             ctx.drawImage(img, x, y);
         }
     }
+
+
 
     function Cars(loader) {
         this.players = null;
@@ -380,6 +384,8 @@ var ROSE = (function() {
             self.textures[2] = img;
         });
     }
+
+
 
     Track.prototype.update = function(state) {
         this.track = state.track;
