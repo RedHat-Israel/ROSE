@@ -28,7 +28,9 @@ class SinglePlayerTest(object):
     def assert_score(self, score):
         assert self.player.x == self.x
         assert self.player.y == self.y
-        assert self.player.score == score + config.score_move_forward
+        # assert self.player.score == score + config.score_move_forward
+
+        assert self.player.score == score + config.score_gas_start
 
     def assert_move_right(self):
         assert self.player.x == self.x + 1
