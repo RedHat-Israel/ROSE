@@ -28,6 +28,17 @@ var ROSE = (function() {
         this.cars = new Cars(image_loader);
         this.finish_line = new FinishLine(image_loader);
         this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
+
+        // Get the <span> element that closes the modal
+        var modal = document.getElementById("myModal");
+
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+
     }
 
     App.prototype.onmessage = function(m) {
@@ -102,6 +113,15 @@ var ROSE = (function() {
             event.preventDefault();
             self.stop();
         });
+
+        $("#settings").click(function(event) {
+            event.preventDefault();
+//            self.settings();
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+
+
+        });
     }
 
     Controller.prototype.start = function() {
@@ -128,6 +148,10 @@ var ROSE = (function() {
                 self.update(true);
                 console.log("Error stopping: " + xhr.responseText);
             })
+    }
+
+    Controller.prototype.settings = function(){
+
     }
 
     Controller.prototype.update = function(state) {
