@@ -260,7 +260,7 @@ var ROSE = (function() {
                 $("#right.player .score").text("Fuel: " + player.score)
             }
             if (player.score < '0') {
-                alert(typeof(player.score))
+                alert(`{player.name} lost `)
             }
         }
     }
