@@ -259,10 +259,9 @@ var ROSE = (function() {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text("Fuel: " + player.score)
             }
-//            if (player.score.toString() == '0') {
+            if (player.score <= '0') {
                 alert(typeof(player.score))
-                alert(player.score.toString() == '0')
-//            }
+            }
         }
     }
 
