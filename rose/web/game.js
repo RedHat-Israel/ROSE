@@ -288,6 +288,9 @@ var ROSE = (function() {
         loader.load("res/obstacles/booster.png", function(img) {
             self.textures["booster"] = img;
         });
+        loader.load("res/obstacles/penguin_booster.png", function(img) {
+            self.textures["penguin_booster"] = img;
+        });
 
 
     }

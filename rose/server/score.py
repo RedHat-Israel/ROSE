@@ -65,6 +65,9 @@ def process(players, track):
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
                 player.score += config.score_move_forward * 2
+        elif obstacle == obstacles.PENGUIN_B:
+            if player.action == actions.PICKUP:
+                player.score += config.score_move_forward * 2
 
 
 
