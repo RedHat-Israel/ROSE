@@ -50,6 +50,7 @@ class Game(object):
             raise error.GameAlreadyStarted()
         if not self.players:
             raise error.ActionForbidden("start a game with no players.")
+        random.seed(config.track_seed)
         self.track.reset()
         for p in six.itervalues(self.players):
             p.reset()
