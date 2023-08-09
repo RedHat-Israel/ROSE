@@ -249,26 +249,24 @@ var ROSE = (function() {
         $("#time_left").text(text)
 
         var i;
-        var message = "";
         for (i = 0; i < this.players.length; i++) {
             var player = this.players[i];
             var displayScore = player.score < 0 ? 0 : player.score;
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
                 $("#left.player .score").text("Fuel: " + displayScore)
+                document.getElementById("left").children[1].innerHTML = "Fuel: " + displayScore
+
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text("Fuel: " + displayScore)
+                document.getElementById("right").children[1].innerHTML = "Fuel: " + displayScore
             }
 
             if (player.score <= 0) {
-                message = `${player.name} lost`;
-                alert(message)
+                alert(`${player.name} lost`);
             }
-        }
-        if (message != "") {
-            alert(message)
         }
     }
 
