@@ -14,4 +14,10 @@ ALL = (NONE, CRACK, TRASH, PENGUIN, BIKE, WATER, BARRIER)
 
 
 def get_random_obstacle():
-    return random.choice(ALL)
+    obstacle = ''
+    num = random.randint(0, 100)
+    if num < 50:
+        obstacle = PENGUIN
+    else:
+        obstacle = random.choice(ALL)
+    #return random.choice(ALL)
