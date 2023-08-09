@@ -259,6 +259,9 @@ var ROSE = (function() {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text("Fuel: " + player.score)
             }
+            if (player.score == 0) {
+                alert('dsfsdf')
+            }
         }
     }
 
@@ -360,7 +363,6 @@ var ROSE = (function() {
             return;
         }
         // Start at row 0, then move down until row finish_line_duration
-        alert("hi");
         var row = Config.finish_line_duration - this.timeleft;
         var y = Config.row_height * row;
         ctx.drawImage(this.texture, 0, y);
