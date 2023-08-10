@@ -11,7 +11,7 @@ game_rate = 1.0
 game_duration = 60
 number_of_cars = 4
 is_track_random = True
-
+is_dev_mode = False
 # Matrix
 
 matrix_height = 9

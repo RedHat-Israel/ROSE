@@ -1,6 +1,7 @@
 import socket
 import logging
 import argparse
+import os
 
 from twisted.internet import reactor
 from twisted.web import server, static
@@ -20,6 +21,8 @@ def main():
                         default="random", choices=["random", "same"],
                         help="Definition of driver tracks: random or same."
                              "If not specified, random will be used.")
+    parser.add_argument("--dev", "-d", dest="dev_definition", action='store_true',
+                        help="Set development mode")
 
     args = parser.parse_args()
     """
@@ -31,6 +34,14 @@ def main():
         config.is_track_random = False
     else:
         config.is_track_random = True
+
+    install_dir = os.path.dirname(__file__)
+    if args.dev_definition:
+        config.web_root = os.path.join(install_dir, "../web-dev")
+    else:
+        config.web_root = os.path.join(install_dir, "../web")
+
+    config.is_dev_mode = args.dev_definition
 
     log.info('starting server')
     g = game.Game()

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>ROSE Game</title>
+    <link rel="stylesheet" type="text/css" href="game.css">
+  </head>
+
+  <body>
+    <div id="content">
+
+      <form id="control">
+
+        <button id="start" disabled>Start</button>
+        <button id="stop"  disabled>Stop</button>
+        <button id="pausegame" disabled>Pause</button>
+        <button id="music_ctl">Music</button>
+        <label id="info"></label>
+
+        <div id="rate_ctl">
+          <label>Speed</label>
+          <span class="group">
+            <button id="dec_rate" disabled>&ndash;</button>
+            <button id="cur_rate" disabled>FPS</button>
+            <button id="inc_rate" disabled>+</button>
+          </span>
+        </div>
+      </form>
+      <div id="players">
+        <div id="left" class="player">
+          <div class="name"></div>
+          <div class="score" ></div>
+        </div>
+        <div id="time_left">60</div>
+        <div id="right" class="player">
+          <div class="name"></div>
+          <div class="score"></div>
+        </div>
+        </div>
+      <canvas id="game" width="910" height="585">
+        <h2>Unsupported browser</h2>
+      </canvas>
+
+    </div>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="game.js"></script>
+
+    <script>
+      $(document).ready(function() {
+        ROSE.ready();
+      });
+    </script>
+  </body>
+</html>

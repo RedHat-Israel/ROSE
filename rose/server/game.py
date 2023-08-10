@@ -41,7 +41,10 @@ class Game(object):
             self._rate = value
             if self.started:
                 self.looper.stop()
-                self.looper.start(1.0 / self._rate)
+                if self._rate == 0:
+                    self.looper.start(3600 * 24)
+                else:
+                    self.looper.start(1.0 / self._rate)
             else:
                 self.update_clients()
 
