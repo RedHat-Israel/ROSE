@@ -8,7 +8,7 @@ web_port = 8880
 # Server
 
 game_rate = 1.0
-game_duration = 60
+game_duration = 0
 number_of_cars = 4
 is_track_random = True
 
@@ -38,7 +38,9 @@ cells_per_player = matrix_width // max_players
 # Score Points
 
 score_move_forward = 10
-score_move_backward = -10
+score_gas_start = 100
+score_move_backward = -5
+score_move_backward_obstacle = -5
 score_jump = 5
 score_brake = 4
 

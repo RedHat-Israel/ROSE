@@ -62,7 +62,7 @@ var ROSE = (function() {
         top_margin: 10,
         row_height: 65,
         track_length: 9,
-        finish_line_duration: 5
+        finish_line_duration: -1
     };
 
     function Client(onmessage, reconnect_msec) {
@@ -251,13 +251,19 @@ var ROSE = (function() {
         var i;
         for (i = 0; i < this.players.length; i++) {
             var player = this.players[i];
+            var displayScore = player.score < 0 ? 0 : player.score;
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
-                $("#left.player .score").text(player.score)
+                $("#left.player .score").text("Fuel: " + displayScore)
+
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
-                $("#right.player .score").text(player.score)
+                $("#right.player .score").text("Fuel: " + displayScore)
+            }
+
+            if (player.score <= 0) {
+                alert(`${player.name} lost`);
             }
         }
     }
