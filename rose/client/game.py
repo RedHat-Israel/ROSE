@@ -21,9 +21,9 @@ class Game(component.Component):
         self.client = client
         self.drive_func = drive_func
         self.name = name
-        self.track = seed
+        self.track = track.Track()
         self.players = {}
-        self.seed = ""
+        self.seed = seed
         self.cars = [car.Car(1),
                      car.Car(2),
                      car.Car(3),
