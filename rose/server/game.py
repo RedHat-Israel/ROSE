@@ -141,5 +141,5 @@ class Game(object):
                 'players': [p.state() for p in six.itervalues(self.players)],
                 'timeleft': self.timeleft,
                 'rate': self.rate,
-                'seed': self.seed
+                'seed': "seed:" + self.seed
                 }
