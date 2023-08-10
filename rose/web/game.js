@@ -129,7 +129,7 @@ var ROSE = (function() {
                 console.log("Error stopping: " + xhr.responseText);
             })
     }
-
+$("#seed").text(game.seed);
     Controller.prototype.update = function(state) {
         if(state.players.length == 0){
             $("#info").text("No players connected")
@@ -141,10 +141,11 @@ var ROSE = (function() {
             $("#start").attr("disabled", "disabled");
             $("#stop").removeAttr("disabled");
         } else {
-            $("#info").text("")
+            $("#info").text("");
             $("#start").removeAttr("disabled");
             $("#stop").attr("disabled", "disabled");
         }
+
     }
 
     Controller.prototype.disable = function() {
@@ -260,7 +261,7 @@ var ROSE = (function() {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text(player.score)
             }
-            $("#seed").text(game.seed)
+            $("#seed").text(game.get_seed())
         }
     }
 
