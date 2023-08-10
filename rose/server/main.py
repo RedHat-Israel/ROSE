@@ -1,3 +1,4 @@
+import random
 import socket
 import logging
 import argparse
@@ -20,6 +21,10 @@ def main():
                         default="random", choices=["random", "same"],
                         help="Definition of driver tracks: random or same."
                              "If not specified, random will be used.")
+    parser.add_argument("--seed", "-s", dest="seed",
+                        default="", type=str,
+                        help="Definition of driver tracks: random or same."
+                             "If not specified, random will be used.")
 
     args = parser.parse_args()
     """
@@ -31,6 +36,22 @@ def main():
         config.is_track_random = False
     else:
         config.is_track_random = True
+
+    """
+    If the argument is '', the seed will be generated in random, otherwise 
+    the seed will be the seed submitted by the user.
+    """
+
+    seed = args.seed
+    if args.seed == "":
+        seed = str(random.randint(1, 100000))
+        config.base_seed = args.seed
+    else:
+        config.base_seed = args.seed
+
+    log.info(f"The seed is {seed}")
+    config.track_seed = seed
+    random.seed(seed)
 
     log.info('starting server')
     g = game.Game()

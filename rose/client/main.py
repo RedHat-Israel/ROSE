@@ -1,3 +1,4 @@
+import random
 import argparse
 import imp
 import logging
@@ -41,7 +42,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     maxDelay = 2
 
     def __init__(self, name, drive_func):
-        self.game = game.Game(self, name, drive_func)
+        self.game = game.Game(self, name, drive_func, config.track_seed)
         self.client = None
 
     # Client events
@@ -102,9 +103,9 @@ def main():
                         help="The server address to connect to."
                              " For example: '10.20.30.44' or 'my-server.com'."
                              " If not specified, localhost will be used.")
+
     parser.add_argument("driver_file",
                         help="The path to the driver python module")
-
     args = parser.parse_args()
 
     try:

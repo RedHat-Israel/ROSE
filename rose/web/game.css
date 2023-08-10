@@ -35,11 +35,31 @@ body {
     background-color: #222;
 }
 
-#start, #stop, #music_ctl {
-    width: 120px;
+ #start, #stop, #music_ctl {
+    width: 140px;
     padding: 8px 24px;
     margin: 0;
+
 }
+ #seed{
+    font-family: helvetica, sans-serif;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: bold;
+    border: 1px solid #666;
+    color: #ccc;
+    background-color: #333;
+    color: #666;
+    width: 140px;
+    padding: 8px 24px;
+    margin: 0;
+ }
+  #seed:hover{
+    transition:0.2s;
+    background-color:#222
+
+  }
+
 
 #rate_ctl {
     position: absolute;
@@ -116,6 +136,8 @@ body {
     font-size: 40px;
     top: 50px;
 }
+
+
 
 #time_left {
     width: 105px;

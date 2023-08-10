@@ -29,6 +29,7 @@ class Game(object):
         self._rate = config.game_rate
         self.started = False
         self.timeleft = config.game_duration
+        self.seed = config.track_seed
 
     @property
     def rate(self):
@@ -50,6 +51,15 @@ class Game(object):
             raise error.GameAlreadyStarted()
         if not self.players:
             raise error.ActionForbidden("start a game with no players.")
+
+        if config.base_seed == "":
+            seed = str(random.randint(1, 1000000))
+        else:
+            seed = config.base_seed
+        self.seed = seed
+        random.seed(self.seed)
+        log.info(f"The seed is {seed}")
+
         self.track.reset()
         for p in six.itervalues(self.players):
             p.reset()
@@ -130,4 +140,6 @@ class Game(object):
                 'track': self.track.state(),
                 'players': [p.state() for p in six.itervalues(self.players)],
                 'timeleft': self.timeleft,
-                'rate': self.rate}
+                'rate': self.rate,
+                'seed': "seed:" + self.seed
+                }

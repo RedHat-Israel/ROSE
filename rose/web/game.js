@@ -131,20 +131,26 @@ var ROSE = (function() {
     }
 
     Controller.prototype.update = function(state) {
+             console.log(state)
+
+
+        $("#seed").text(state.seed);
         if(state.players.length == 0){
-            $("#info").text("No players connected")
+            $("#info").text("No players connected");
             $("#start").attr("disabled", "disabled");
             $("#stop").attr("disabled", "disabled");
         }
         else if (state.started) {
-            $("#info").text("")
+            $("#info").text("");
             $("#start").attr("disabled", "disabled");
             $("#stop").removeAttr("disabled");
+
         } else {
-            $("#info").text("")
+            $("#info").text("");
             $("#start").removeAttr("disabled");
             $("#stop").attr("disabled", "disabled");
         }
+
     }
 
     Controller.prototype.disable = function() {
@@ -254,11 +260,13 @@ var ROSE = (function() {
             if (player.lane == 0) {
                 $("#left.player .name").text(player.name)
                 $("#left.player .score").text(player.score)
+
             }
             if (player.lane == 1) {
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text(player.score)
             }
+
         }
     }
 
@@ -301,6 +309,8 @@ var ROSE = (function() {
             ctx.drawImage(img, x, y);
         }
     }
+
+
 
     function Cars(loader) {
         this.players = null;
@@ -380,6 +390,8 @@ var ROSE = (function() {
             self.textures[2] = img;
         });
     }
+
+
 
     Track.prototype.update = function(state) {
         this.track = state.track;
