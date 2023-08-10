@@ -106,15 +106,7 @@ def main():
 
     parser.add_argument("driver_file",
                         help="The path to the driver python module")
-
-    parser.add_argument("--seed", "-se", dest="seed",
-                        default="", type=str,
-                        help="Definition of driver tracks: random or same."
-                             "If not specified, random will be used.")
     args = parser.parse_args()
-
-    with open("seed.txt", "w") as f:
-        f.write(args.seed)
 
     try:
         driver_mod = load_driver_module(args.driver_file)

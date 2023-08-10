@@ -56,8 +56,8 @@ class Game(object):
             seed = str(random.randint(1, 1000000))
         else:
             seed = config.base_seed
-        config.track_seed = seed
-        random.seed(seed)
+        self.seed = seed
+        random.seed(self.seed)
         log.info(f"The seed is {seed}")
 
         self.track.reset()
