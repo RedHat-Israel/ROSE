@@ -6,6 +6,7 @@ function GetParameterValues(param) {
             return urlparam[1];
         }
     }
+    return 'default';
 }
 var theme = GetParameterValues("theme");
 var ROSE = (function() {
@@ -361,6 +362,21 @@ var ROSE = (function() {
 
     Cars.prototype.update = function(state) {
         this.players = state.players;
+        this.effect = new Audio();
+        this.effect.src = "res/points_effects.mpeg";
+        this.players = state.players;
+        console.log(state)
+        var i;
+        for(i = 0; i < state.track.length; i++){
+            if (state.track[i]['x'] == state.players[0]['x'] && state.track[i]['y'] == state.players[0]['y']){
+
+                this.effect.play();
+
+
+
+            }
+
+        }
     }
 
     Cars.prototype.draw = function(ctx) {
