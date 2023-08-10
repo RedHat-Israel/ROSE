@@ -29,6 +29,7 @@ class Game(object):
         self._rate = config.game_rate
         self.started = False
         self.timeleft = config.game_duration
+        self.seed = config.track_seed
 
     @property
     def rate(self):
@@ -139,4 +140,6 @@ class Game(object):
                 'track': self.track.state(),
                 'players': [p.state() for p in six.itervalues(self.players)],
                 'timeleft': self.timeleft,
-                'rate': self.rate}
+                'rate': self.rate,
+                'seed': self.seed
+                }

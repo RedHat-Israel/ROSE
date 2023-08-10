@@ -129,17 +129,22 @@ var ROSE = (function() {
                 console.log("Error stopping: " + xhr.responseText);
             })
     }
-$("#seed").text(game.seed);
+
     Controller.prototype.update = function(state) {
+             console.log(state)
+
+
+        $("#seed").text(state.seed);
         if(state.players.length == 0){
-            $("#info").text("No players connected")
+            $("#info").text("No players connected");
             $("#start").attr("disabled", "disabled");
             $("#stop").attr("disabled", "disabled");
         }
         else if (state.started) {
-            $("#info").text("")
+            $("#info").text("");
             $("#start").attr("disabled", "disabled");
             $("#stop").removeAttr("disabled");
+
         } else {
             $("#info").text("");
             $("#start").removeAttr("disabled");
@@ -261,7 +266,7 @@ $("#seed").text(game.seed);
                 $("#right.player .name").text(player.name)
                 $("#right.player .score").text(player.score)
             }
-            $("#seed").text(game.get_seed())
+
         }
     }
 

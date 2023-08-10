@@ -1,0 +1,27 @@
+{
+    "started": false,
+    "track": [
+        {
+            "name": "bike",
+            "x": 1,
+            "y": 1
+        },
+        {
+            "name": "bike",
+            "x": 5,
+            "y": 1
+        }
+    ],
+    "players": [
+        {
+            "name": "No Driver",
+            "car": 2,
+            "x": 4,
+            "y": 6,
+            "lane": 1,
+            "score": 20
+        }
+    ],
+    "timeleft": 58,
+    "rate": 1
+}
