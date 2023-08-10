@@ -52,10 +52,11 @@ class Game(object):
             raise error.ActionForbidden("start a game with no players.")
 
         if config.track_seed == "":
-            random.seed(str(random.randint(1, 1000000)))
+            seed = str(random.randint(1, 1000000))
         else:
-            random.seed(config.track_seed)
-        log.info("The seed is " + config.track_seed)
+            seed = config.track_seed
+        random.seed(seed)
+        log.info(f"The seed is {seed}")
 
         self.track.reset()
         for p in six.itervalues(self.players):

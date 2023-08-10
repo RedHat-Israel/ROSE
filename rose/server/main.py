@@ -41,14 +41,16 @@ def main():
     If the argument is '', the seed will be generated in random, otherwise 
     the seed will be the seed submitted by the user.
     """
+
+    seed = args.seed
     if args.seed == "":
-        random.seed(str(random.randint(1, 100000)))
+        seed = str(random.randint(1, 100000))
         config.track_seed = args.seed
     else:
         config.track_seed = args.seed
 
-    log.info("The seed is " + config.track_seed)
-    random.seed(config.track_seed)
+    log.info(f"The seed is {seed}")
+    random.seed(seed)
 
     log.info('starting server')
     g = game.Game()
