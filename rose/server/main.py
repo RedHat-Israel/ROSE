@@ -45,11 +45,12 @@ def main():
     seed = args.seed
     if args.seed == "":
         seed = str(random.randint(1, 100000))
-        config.track_seed = args.seed
+        config.base_seed = args.seed
     else:
-        config.track_seed = args.seed
+        config.base_seed = args.seed
 
     log.info(f"The seed is {seed}")
+    config.track_seed = seed
     random.seed(seed)
 
     log.info('starting server')
