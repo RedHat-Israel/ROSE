@@ -27,9 +27,8 @@ class Player(object):
         self.score = 0
 
     def in_lane(self):
-        min_x = self.lane * config.cells_per_player
-        next_x = min_x + config.cells_per_player
-        return min_x <= self.x < next_x
+        current_lane = self.x // config.cells_per_player
+        return current_lane == self.lane
 
     def __cmp__(self, other):
         x = self.score
