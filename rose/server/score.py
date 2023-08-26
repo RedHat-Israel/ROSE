@@ -27,48 +27,64 @@ def process(players, track):
             if player.x < config.matrix_width - 1:
                 player.x += 1
 
-    # Now handle obstacles, preferring players in their own lane.
+    # Proccess the players by order, first the ones in lane and then
+    # the ones out of lane, this ensure the car in lane will have
+    # priority when picking pinguins and in case of collisions.
 
     sorted_players = sorted(six.itervalues(players),
                             key=lambda p: 0 if p.in_lane() else 1)
     positions = set()
 
+    # Now handle obstacles, preferring players in their own lane.
+
     for player in sorted_players:
-        player.score += config.score_move_forward
         obstacle = track.get(player.x, player.y)
-        if obstacle == obstacles.CRACK:
-            if player.action != actions.JUMP:
-                track.clear(player.x, player.y)
-                player.y += 1
-                player.score += config.score_move_backward * 2
-            else:
-                player.score += config.score_jump
+
+        if obstacle == obstacles.NONE:
+            # Move forward, leaving the obstacle on the track.
+            player.score += config.score_move_forward
+
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
                           obstacles.BARRIER):
-            if player.action not in (actions.LEFT, actions.RIGHT):
-                track.clear(player.x, player.y)
-                player.y += 1
-                player.score += config.score_move_backward * 2
-        elif obstacle == obstacles.WATER:
-            if player.action != actions.BRAKE:
-                track.clear(player.x, player.y)
-                player.y += 1
-                player.score += config.score_move_backward * 2
+            # Move back consuming the obstacle.
+            track.clear(player.x, player.y)
+            player.y += 1
+            player.score += config.score_move_backward
+
+        elif obstacle == obstacles.CRACK:
+            if player.action == actions.JUMP:
+                # Move forward leaving the obstacle on the track
+                player.score += config.score_move_forward + config.score_jump
             else:
-                player.score += config.score_brake
+                # Move back consuming the obstacle.
+                track.clear(player.x, player.y)
+                player.y += 1
+                player.score += config.score_move_backward
+
+        elif obstacle == obstacles.WATER:
+            if player.action == actions.BRAKE:
+                # Move forward leaving the obstacle on the track
+                player.score += config.score_move_forward + config.score_brake
+            else:
+                # Move back consuming the obstacle.
+                track.clear(player.x, player.y)
+                player.y += 1
+                player.score += config.score_move_backward
+
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
+                # Move forward and collect an aquatic bird
                 track.clear(player.x, player.y)
+                player.score += config.score_move_forward + config.score_pickup
+            else:
+                # Move forward leaving the obstacle on the track
                 player.score += config.score_move_forward
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same
         # location.
         player.y = min(config.matrix_height - 1, max(2, player.y))
-
-        # Finally forget action
-        player.action = actions.NONE
 
         # Fix up collisions
 
@@ -83,9 +99,12 @@ def process(players, track):
             elif player.x < config.matrix_width - 1:
                 player.x += 1
 
+        # Finally forget action
+        player.action = actions.NONE
+
+        positions.add((player.x, player.y))
+
         log.info('process_actions: name=%s lane=%d pos=%d,%d score=%d '
                  'response_time=%0.6f',
                  player.name, player.lane, player.x, player.y, player.score,
                  player.response_time)
-
-        positions.add((player.x, player.y))
