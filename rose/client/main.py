@@ -1,7 +1,6 @@
 import argparse
-import imp
+import importlib
 import logging
-import os.path
 import sys
 
 from twisted.internet import reactor, protocol
@@ -73,7 +72,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
 
 def load_driver_module(file_path):
     """
-    Load the driver module from file
+    Load the driver module from the specified path.
 
     Arguments:
       file_path (str): The path to the driver module
@@ -82,16 +81,12 @@ def load_driver_module(file_path):
         Driver module (module)
 
     Raises:
-        ImportError if the module cannot be loaded
+        Exception if the module cannot be loaded
     """
-    module_dir, module_name = os.path.split(os.path.splitext(file_path)[0])
-    fp, pathname, description = imp.find_module(module_name, [module_dir])
-    try:
-        return imp.load_module(module_name, fp, pathname, description)
-    finally:
-        # Since we may exit via an exception, close fp explicitly.
-        if fp:
-            fp.close()
+    spec = importlib.util.spec_from_file_location("driver_module", file_path)
+    driver_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(driver_module)
+    return driver_module
 
 
 def main():
@@ -109,7 +104,7 @@ def main():
 
     try:
         driver_mod = load_driver_module(args.driver_file)
-    except ImportError as e:
+    except Exception as e:
         log.error("error loading driver module %r: %s", args.driver_file, e)
         sys.exit(2)
 

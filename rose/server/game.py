@@ -2,8 +2,6 @@ import random
 import logging
 import os
 
-import six
-
 from twisted.internet import reactor, task
 
 from rose.common import actions, config, error, message, obstacles  # NOQA
@@ -51,7 +49,7 @@ class Game(object):
         if not self.players:
             raise error.ActionForbidden("start a game with no players.")
         self.track.reset()
-        for p in six.itervalues(self.players):
+        for p in self.players.values():
             p.reset()
         self.timeleft = config.game_duration
         self.started = True
@@ -106,7 +104,7 @@ class Game(object):
 
     def print_stats(self):
         lines = ['Stats:']
-        top_scorers = sorted(six.itervalues(self.players), reverse=True)
+        top_scorers = sorted(self.players.values(), reverse=True)
         for i, p in enumerate(top_scorers):
             line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
             lines.append(line)
@@ -128,6 +126,6 @@ class Game(object):
     def state(self):
         return {'started': self.started,
                 'track': self.track.state(),
-                'players': [p.state() for p in six.itervalues(self.players)],
+                'players': [p.state() for p in self.players.values()],
                 'timeleft': self.timeleft,
                 'rate': self.rate}
