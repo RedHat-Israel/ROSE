@@ -4,6 +4,25 @@ from rose.common import actions, config
 class Player(object):
 
     def __init__(self, name, car, lane):
+        """
+        Creates a new Driver object.
+        Args:
+            name (str): The unique name of the driver for display.
+            car (int): A number from 0 to 3, representing the car type.
+            lane (int): The initial lane number, between 0 and the
+                            maximum lane.
+
+        Attributes:
+            x (int, optional): The X-coordinate of the driver.
+                                Starts in the middle of the lane.
+            y (int, optional): The Y-coordinate of the driver.
+                                Starts at 2/3 of the screen height.
+            action (str, optional): The current driver action. Defaults
+                                        to 'none'.
+            response_time (float, optional): The duration the driver takes
+                                                to react. Starts as None.
+            score (int, optional): The driver's current score. Begins at 0.
+        """
         self.name = name
         self.car = car
         self.lane = lane
@@ -23,7 +42,7 @@ class Player(object):
         self.x = self.lane * config.cells_per_player + 1  # | |0| | |1 | |
         self.y = config.matrix_height // 3 * 2             # 1/3 of track
         self.action = actions.NONE
-        self.response_time = 1.0
+        self.response_time = None
         self.score = 0
 
     def in_lane(self):
