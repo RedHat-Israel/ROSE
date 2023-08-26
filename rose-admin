@@ -4,12 +4,7 @@ import sys
 import os
 import logging
 
-import six
-
-if six.PY2:
-    import xmlrpclib
-else:
-    from xmlrpc import client as xmlrpclib
+from xmlrpc import client as xmlrpclib
 
 from rose.common import config
 

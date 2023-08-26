@@ -1,8 +1,6 @@
 """ Score logic """
 import logging
 
-import six
-
 from rose.common import actions, config, obstacles
 
 log = logging.getLogger('score')
@@ -19,7 +17,7 @@ def process(players, track):
     # First handle right and left actions, since they may change in_lane
     # status, used for resolving collisions.
 
-    for player in six.itervalues(players):
+    for player in players.values():
         if player.action == actions.LEFT:
             if player.x > 0:
                 player.x -= 1
@@ -31,7 +29,7 @@ def process(players, track):
     # the ones out of lane, this ensure the car in lane will have
     # priority when picking pinguins and in case of collisions.
 
-    sorted_players = sorted(six.itervalues(players),
+    sorted_players = sorted(players.values(),
                             key=lambda p: 0 if p.in_lane() else 1)
     positions = set()
 
