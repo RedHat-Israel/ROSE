@@ -277,23 +277,23 @@ class TestCollisions(object):
         score.process(players, self.track)
 
     def test_player_in_lane_wins(self):
-        # Player 1 in its lane at 1,5
+        self.track.set(1, 6, obstacles.PENGUIN)
+        # Player 1 in its lane at 1,5, missed the penguin.
         self.player1.x = 1
         self.player1.y = 5
         self.player1.score = 0
         self.player1.action = actions.NONE
-        # Player 2 is not in its lane, trying to pick penguin at 1,6
-        self.track.set(1, 6, obstacles.PENGUIN)
+        # Player 2 is not in its lane, trying to pick up the penguin.
         self.player2.x = 1
         self.player2.y = 6
         self.player2.score = 0
         self.player2.action = actions.PICKUP
         self.process()
-        # Player 1 win because it is in lane
+        # Player got the normal score for this step.
         assert self.player1.x == 1
         assert self.player1.y == 5
-        assert self.player1.score == self.player1.score
-        # Player 2 got more score but move back
+        assert self.player1.score == config.score_move_forward
+        # Player 2 picked up the penging, got extra score.
         assert self.player2.x == 1
         assert self.player2.y == 6
         assert self.player2.score == config.score_move_forward * 2
