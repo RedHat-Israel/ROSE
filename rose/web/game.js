@@ -427,7 +427,7 @@ var ROSE = (function() {
             if (self.playing) {
                 self.playing = false;
                 self.pause();
-                $(this).text("Play");
+                $(this).text("Music");
             } else {
                 self.playing = true;
                 self.play();
