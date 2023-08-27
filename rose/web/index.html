@@ -9,7 +9,6 @@
 
   <body>
     <div id="content">
-
       <form id="control">
 
         <button id="start" disabled>Start</button>
@@ -26,6 +25,7 @@
           </span>
         </div>
       </form>
+
       <div id="players">
         <div id="left" class="player">
           <div class="name"></div>
@@ -36,18 +36,17 @@
           <div class="name"></div>
           <div class="score"></div>
         </div>
-        </div>
+      </div>
+
       <canvas id="game" width="910" height="585">
         <h2>Unsupported browser</h2>
       </canvas>
-
     </div>
 
-    <script src="jquery-3.2.1.min.js"></script>
     <script src="game.js"></script>
 
     <script>
-      $(document).ready(function() {
+      document.addEventListener("DOMContentLoaded", function() {
         ROSE.ready();
       });
     </script>
