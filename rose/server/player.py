@@ -12,6 +12,10 @@ class Player(object):
         self.action = None
         self.response_time = None
         self.score = None
+        self.penguin_collected = 0
+        self.water_collected = 0
+        self.crack_collected = 0
+        self.collision_count = 0
         self.reset()
 
     # Game state interface
@@ -25,6 +29,10 @@ class Player(object):
         self.action = actions.NONE
         self.response_time = 1.0
         self.score = 0
+        self.penguin_collected = 0
+        self.water_collected = 0
+        self.crack_collected = 0
+        self.collision_count = 0
 
     def in_lane(self):
         min_x = self.lane * config.cells_per_player

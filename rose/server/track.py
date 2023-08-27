@@ -6,6 +6,11 @@ class Track(object):
 
     def __init__(self):
         self._matrix = None
+        # object counters
+        self.penguin_counter = 0
+        self.crack_counter = 0
+        self.water_counter = 0
+
         self.reset()
 
     # Game state interface
@@ -14,6 +19,11 @@ class Track(object):
         """ Go to the next game state """
         self._matrix.pop()
         self._matrix.insert(0, self._generate_row())
+
+    # looking for all the penguins in the track
+    def searching_penguin(self):
+        if obstacles.PENGUIN in self._matrix[0]:
+            self.penguin_counter += 1
 
     def state(self):
         """ Return read only serialize-able state for sending to client """
@@ -39,6 +49,7 @@ class Track(object):
         self._matrix[y][x] = obstacles.NONE
 
     def reset(self):
+        self.penguin_counter = 0
         self._matrix = [[obstacles.NONE] * config.matrix_width
                         for x in range(config.matrix_height)]
 
