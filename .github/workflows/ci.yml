@@ -19,7 +19,7 @@ jobs:
       run: flake8 --show-source --statistics
     - name: Run tests
       run: pytest
-  lint:
+  reformat:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
