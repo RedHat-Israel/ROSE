@@ -7,17 +7,16 @@ def parse(line):
         d = json.loads(line)
     except ValueError as e:
         raise error.InvalidMessage(str(e))
-    if 'action' not in d:
+    if "action" not in d:
         raise error.InvalidMessage("action required")
-    return Message(d['action'], d.get('payload'))
+    return Message(d["action"], d.get("payload"))
 
 
 class Message(object):
-
     def __init__(self, action, payload=None):
         self.action = action
         self.payload = payload
 
     def __str__(self):
-        d = {'action': self.action, 'payload': self.payload}
+        d = {"action": self.action, "payload": self.payload}
         return json.dumps(d)

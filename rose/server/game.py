@@ -9,7 +9,7 @@ from . import track
 from . import player
 from . import score
 
-log = logging.getLogger('game')
+log = logging.getLogger("game")
 
 
 class Game(object):
@@ -35,7 +35,7 @@ class Game(object):
     @rate.setter
     def rate(self, value):
         if value != self._rate:
-            log.info('change game rate to %d frames per second', value)
+            log.info("change game rate to %d frames per second", value)
             self._rate = value
             if self.started:
                 self.looper.stop()
@@ -72,7 +72,7 @@ class Game(object):
         self.free_cars.remove(car)
         lane = random.choice(tuple(self.free_lanes))
         self.free_lanes.remove(lane)
-        log.info('add player: %r, lane: %r, car: %r', name, lane, car)
+        log.info("add player: %r, lane: %r, car: %r", name, lane, car)
         self.players[name] = player.Player(name, car, lane)
         reactor.callLater(0, self.update_clients)
 
@@ -82,31 +82,30 @@ class Game(object):
         player = self.players.pop(name)
         self.free_cars.add(player.car)
         self.free_lanes.add(player.lane)
-        log.info('remove player: %r, lane: %r, car: %r',
-                 name, player.lane, player.car)
+        log.info("remove player: %r, lane: %r, car: %r", name, player.lane, player.car)
         if not self.players and self.started:
-            log.info('Stopping game. No players connected.')
+            log.info("Stopping game. No players connected.")
             self.stop()
         else:
             reactor.callLater(0, self.update_clients)
 
     def drive_player(self, name, info):
-        log.info('drive_player: %r %r', name, info)
+        log.info("drive_player: %r %r", name, info)
         if name not in self.players:
             raise error.NoSuchPlayer(name)
-        if 'action' not in info:
+        if "action" not in info:
             raise error.InvalidMessage("action required")
-        action = info['action']
+        action = info["action"]
         if action not in actions.ALL:
             raise error.InvalidMessage("invalid drive action %s" % action)
         self.players[name].action = action
-        self.players[name].response_time = info.get('response_time', 1.0)
+        self.players[name].response_time = info.get("response_time", 1.0)
 
     def print_stats(self):
-        lines = ['Stats:']
+        lines = ["Stats:"]
         top_scorers = sorted(self.players.values(), reverse=True)
         for i, p in enumerate(top_scorers):
-            line = '%d  %10s  row:%d  score:%d' % (i + 1, p.name, p.y, p.score)
+            line = "%d  %10s  row:%d  score:%d" % (i + 1, p.name, p.y, p.score)
             lines.append(line)
         log.info("%s", os.linesep.join(lines))
 
@@ -120,12 +119,14 @@ class Game(object):
             self.stop()
 
     def update_clients(self):
-        msg = message.Message('update', self.state())
+        msg = message.Message("update", self.state())
         self.hub.broadcast(msg)
 
     def state(self):
-        return {'started': self.started,
-                'track': self.track.state(),
-                'players': [p.state() for p in self.players.values()],
-                'timeleft': self.timeleft,
-                'rate': self.rate}
+        return {
+            "started": self.started,
+            "track": self.track.state(),
+            "players": [p.state() for p in self.players.values()],
+            "timeleft": self.timeleft,
+            "rate": self.rate,
+        }

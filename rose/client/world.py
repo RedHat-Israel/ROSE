@@ -9,24 +9,22 @@ def generate_world(game):
     """
 
     class Car(object):
-
         @property
         def x(self):
-            """ Returns car x position in game logical units """
+            """Returns car x position in game logical units"""
             return game.car.x
 
         @property
         def y(self):
-            """ Returns car y position in game logical units """
+            """Returns car y position in game logical units"""
             return game.car.y
 
     car = Car()
 
     class World(object):
-
         @property
         def car(self):
-            """ Return my car """
+            """Return my car"""
             return car
 
         def get(self, pos):

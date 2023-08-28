@@ -69,12 +69,12 @@ def test_player_state():
     player1 = player.Player("John", 1, 1)
 
     expected_state = {
-        'name': player1.name,
-        'car': player1.car,
-        'x': player1.x,
-        'y': player1.y,
-        'lane': player1.lane,
-        'score': player1.score
+        "name": player1.name,
+        "car": player1.car,
+        "x": player1.x,
+        "y": player1.y,
+        "lane": player1.lane,
+        "score": player1.score,
     }
 
     assert player1.state() == expected_state

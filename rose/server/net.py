@@ -9,11 +9,10 @@ from autobahn.twisted.websocket import WebSocketServerProtocol
 
 from rose.common import error, message
 
-log = logging.getLogger('net')
+log = logging.getLogger("net")
 
 
 class Hub(object):
-
     def __init__(self, game):
         game.hub = self
         self.game = game
@@ -54,7 +53,6 @@ class Hub(object):
 
 
 class PlayerProtocol(basic.LineReceiver):
-
     def __init__(self, hub):
         self.hub = hub
         self.name = None
@@ -70,36 +68,35 @@ class PlayerProtocol(basic.LineReceiver):
             self.dispatch(msg)
         except error.Error as e:
             log.warning("Error handling message: %s", e)
-            msg = message.Message('error', {'message': str(e)})
-            self.sendLine(str(msg).encode('utf-8'))
+            msg = message.Message("error", {"message": str(e)})
+            self.sendLine(str(msg).encode("utf-8"))
             self.transport.loseConnection()
 
     # Hub client interface
 
     def send_message(self, data):
-        self.sendLine(data.encode('utf-8'))
+        self.sendLine(data.encode("utf-8"))
 
     # Disaptching messages
 
     def dispatch(self, msg):
         if self.name is None:
             # New player
-            if msg.action != 'join':
+            if msg.action != "join":
                 raise error.ActionForbidden(msg.action)
-            if 'name' not in msg.payload:
+            if "name" not in msg.payload:
                 raise error.InvalidMessage("name required")
-            self.name = msg.payload['name']
+            self.name = msg.payload["name"]
             self.hub.add_player(self)
         else:
             # Registered player
-            if msg.action == 'drive':
+            if msg.action == "drive":
                 self.hub.drive_player(self, msg.payload)
             else:
                 raise error.ActionForbidden(msg.action)
 
 
 class PlayerFactory(protocol.ServerFactory):
-
     def __init__(self, hub):
         self.hub = hub
 
@@ -110,7 +107,6 @@ class PlayerFactory(protocol.ServerFactory):
 
 
 class WatcherProtocol(WebSocketServerProtocol):
-
     def __init__(self, hub):
         self.hub = hub
         WebSocketServerProtocol.__init__(self)
@@ -124,18 +120,18 @@ class WatcherProtocol(WebSocketServerProtocol):
         self.hub.add_watcher(self)
 
     def onClose(self, wasClean, code, reason):
-        log.info("watcher closed (wasClean=%s, code=%s, reason=%s)",
-                 wasClean, code, reason)
+        log.info(
+            "watcher closed (wasClean=%s, code=%s, reason=%s)", wasClean, code, reason
+        )
         self.hub.remove_watcher(self)
 
     # Hub client interface
 
     def send_message(self, data):
-        self.sendMessage(data.encode('utf-8'), False)
+        self.sendMessage(data.encode("utf-8"), False)
 
 
 class WatcherFactory(WebSocketServerFactory):
-
     def __init__(self, url, hub):
         self.hub = hub
         WebSocketServerFactory.__init__(self, url)
@@ -147,7 +143,6 @@ class WatcherFactory(WebSocketServerFactory):
 
 
 class CliAdmin(xmlrpc.XMLRPC):
-
     def __init__(self, game):
         self.game = game
         xmlrpc.XMLRPC.__init__(self, allowNone=True)
@@ -169,7 +164,6 @@ class CliAdmin(xmlrpc.XMLRPC):
 
 
 class WebAdmin(resource.Resource):
-
     def __init__(self, game):
         self.game = game
         resource.Resource.__init__(self)

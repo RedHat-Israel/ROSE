@@ -45,5 +45,6 @@ score_brake = 4
 
 # Logging
 
-logger_format = ("%(asctime)s %(levelname)-7s [%(name)s] %(message)s "
-                 "(%(module)s:%(lineno)d)")
+logger_format = (
+    "%(asctime)s %(levelname)-7s [%(name)s] %(message)s " "(%(module)s:%(lineno)d)"
+)

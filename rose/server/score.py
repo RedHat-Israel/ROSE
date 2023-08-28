@@ -3,7 +3,7 @@ import logging
 
 from rose.common import actions, config, obstacles
 
-log = logging.getLogger('score')
+log = logging.getLogger("score")
 
 
 def process(players, track):
@@ -22,23 +22,26 @@ def process(players, track):
             if player.x > 0:
                 player.x -= 1
                 log.debug(
-                    'player %s moved left to %d,%d',
-                    player.name, player.x, player.y,
+                    "player %s moved left to %d,%d",
+                    player.name,
+                    player.x,
+                    player.y,
                 )
         elif player.action == actions.RIGHT:
             if player.x < config.matrix_width - 1:
                 player.x += 1
                 log.debug(
-                    'player %s moved right to %d,%d',
-                    player.name, player.x, player.y,
+                    "player %s moved right to %d,%d",
+                    player.name,
+                    player.x,
+                    player.y,
                 )
 
     # Proccess the players by order, first the ones in lane and then
     # the ones out of lane, this ensure the car in lane will have
     # priority when picking pinguins and in case of collisions.
 
-    sorted_players = sorted(players.values(),
-                            key=lambda p: 0 if p.in_lane() else 1)
+    sorted_players = sorted(players.values(), key=lambda p: 0 if p.in_lane() else 1)
     positions = set()
 
     # Now handle obstacles, preferring players in their own lane.
@@ -50,21 +53,23 @@ def process(players, track):
             # Move forward, leaving the obstacle on the track.
             player.score += config.score_move_forward
             log.debug(
-                'player %s hit no obstacle: got %d points',
-                player.name, config.score_move_forward,
+                "player %s hit no obstacle: got %d points",
+                player.name,
+                config.score_move_forward,
             )
 
-        elif obstacle in (obstacles.TRASH,
-                          obstacles.BIKE,
-                          obstacles.BARRIER):
+        elif obstacle in (obstacles.TRASH, obstacles.BIKE, obstacles.BARRIER):
             # Move back consuming the obstacle.
             track.clear(player.x, player.y)
             player.y += 1
             player.score += config.score_move_backward
             log.debug(
-                'player %s hit %s: lost %d points, moved back to %d,%d',
-                player.name, obstacle, -config.score_move_backward,
-                player.x, player.y,
+                "player %s hit %s: lost %d points, moved back to %d,%d",
+                player.name,
+                obstacle,
+                -config.score_move_backward,
+                player.x,
+                player.y,
             )
 
         elif obstacle == obstacles.CRACK:
@@ -73,8 +78,10 @@ def process(players, track):
                 points = config.score_move_forward + config.score_jump
                 player.score += points
                 log.debug(
-                    'player %s avoided %s: got %d points',
-                    player.name, obstacle, points,
+                    "player %s avoided %s: got %d points",
+                    player.name,
+                    obstacle,
+                    points,
                 )
             else:
                 # Move back consuming the obstacle.
@@ -82,9 +89,12 @@ def process(players, track):
                 player.y += 1
                 player.score += config.score_move_backward
                 log.debug(
-                    'player %s hit %s: lost %d points, moved back to %d,%d',
-                    player.name, obstacle, -config.score_move_backward,
-                    player.x, player.y,
+                    "player %s hit %s: lost %d points, moved back to %d,%d",
+                    player.name,
+                    obstacle,
+                    -config.score_move_backward,
+                    player.x,
+                    player.y,
                 )
 
         elif obstacle == obstacles.WATER:
@@ -93,8 +103,10 @@ def process(players, track):
                 points = config.score_move_forward + config.score_brake
                 player.score += points
                 log.debug(
-                    'player %s avoided %s: got %d points',
-                    player.name, obstacle, points,
+                    "player %s avoided %s: got %d points",
+                    player.name,
+                    obstacle,
+                    points,
                 )
             else:
                 # Move back consuming the obstacle.
@@ -102,9 +114,12 @@ def process(players, track):
                 player.y += 1
                 player.score += config.score_move_backward
                 log.debug(
-                    'player %s hit %s: lost %d points, moved back to %d,%d',
-                    player.name, obstacle, -config.score_move_backward,
-                    player.x, player.y,
+                    "player %s hit %s: lost %d points, moved back to %d,%d",
+                    player.name,
+                    obstacle,
+                    -config.score_move_backward,
+                    player.x,
+                    player.y,
                 )
 
         elif obstacle == obstacles.PENGUIN:
@@ -114,13 +129,15 @@ def process(players, track):
                 points = config.score_move_forward + config.score_pickup
                 player.score += points
                 log.debug(
-                    'player %s picked up %s: got %d points',
-                    player.name, obstacle, points,
+                    "player %s picked up %s: got %d points",
+                    player.name,
+                    obstacle,
+                    points,
                 )
             else:
                 # Move forward leaving the obstacle on the track
                 player.score += config.score_move_forward
-                log.debug('player %s missed %s', player.name, obstacle)
+                log.debug("player %s missed %s", player.name, obstacle)
 
         # Here we can end the game when player gets out of
         # the track bounds. For now, just keep the player at the same
@@ -139,10 +156,13 @@ def process(players, track):
             elif player.x < config.matrix_width - 1:
                 player.x += 1
             log.debug(
-                'player %s collision at %d,%d: lost %d points, '
-                'moved to %d,%d',
-                player.name, loc[0], loc[1], -config.score_move_backward,
-                player.x, player.y,
+                "player %s collision at %d,%d: lost %d points, " "moved to %d,%d",
+                player.name,
+                loc[0],
+                loc[1],
+                -config.score_move_backward,
+                player.x,
+                player.y,
             )
 
         # Finally forget action
@@ -150,7 +170,13 @@ def process(players, track):
 
         positions.add((player.x, player.y))
 
-        log.info('process_actions: name=%s lane=%d pos=%d,%d score=%d '
-                 'response_time=%0.6f',
-                 player.name, player.lane, player.x, player.y, player.score,
-                 player.response_time)
+        log.info(
+            "process_actions: name=%s lane=%d pos=%d,%d score=%d "
+            "response_time=%0.6f",
+            player.name,
+            player.lane,
+            player.x,
+            player.y,
+            player.score,
+            player.response_time,
+        )

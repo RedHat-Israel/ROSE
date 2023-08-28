@@ -2,7 +2,6 @@ from rose.common import actions, config
 
 
 class Player(object):
-
     def __init__(self, name, car, lane):
         """
         Creates a new Driver object.
@@ -36,11 +35,11 @@ class Player(object):
     # Game state interface
 
     def update(self):
-        """ Go to the next game state """
+        """Go to the next game state"""
 
     def reset(self):
         self.x = self.lane * config.cells_per_player + 1  # | |0| | |1 | |
-        self.y = config.matrix_height // 3 * 2             # 1/3 of track
+        self.y = config.matrix_height // 3 * 2  # 1/3 of track
         self.action = actions.NONE
         self.response_time = None
         self.score = 0
@@ -58,10 +57,12 @@ class Player(object):
         return self.score < other.score
 
     def state(self):
-        """ Return read only serialize-able state for sending to client """
-        return {'name': self.name,
-                'car': self.car,
-                'x': self.x,
-                'y': self.y,
-                'lane': self.lane,
-                'score': self.score}
+        """Return read only serialize-able state for sending to client"""
+        return {
+            "name": self.name,
+            "car": self.car,
+            "x": self.x,
+            "y": self.y,
+            "lane": self.lane,
+            "score": self.score,
+        }
