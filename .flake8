@@ -1,3 +1,8 @@
 [flake8]
 show_source = True
 statistics = True
+
+#comply with Black formater
+
+max-line-length = 88
+extend-ignore = E203
