@@ -2,7 +2,6 @@
 show_source = True
 statistics = True
 
-#comply with Black formater
-
-max-line-length = 88
-extend-ignore = E203
+# E501: line to long.
+# E203 whitespace before ':' to accept black code style
+ignore = E501,E203
