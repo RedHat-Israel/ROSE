@@ -17,10 +17,7 @@ jobs:
         pip install -r requirements-dev.txt
     - name: Lint
       run: flake8 --show-source --statistics
+    - name: Blint
+      run: black --check --diff .
     - name: Run tests
       run: pytest
-  reformat:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: psf/black@stable

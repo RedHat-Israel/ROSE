@@ -1,4 +1,5 @@
 autobahn
+black
 flake8
 pytest
 pytest-check-links
