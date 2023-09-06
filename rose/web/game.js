@@ -438,4 +438,4 @@ const Config = {
     finish_line_duration: 5
 };
 
-const ROSE = new App();
+export const ROSE = new App();

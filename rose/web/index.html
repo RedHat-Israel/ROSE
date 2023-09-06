@@ -43,12 +43,9 @@
       </canvas>
     </div>
 
-    <script src="game.js"></script>
-
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        ROSE.ready();
-      });
+    <script type="module">
+      import { ROSE } from './game.js';
+      ROSE.ready();
     </script>
   </body>
 </html>
