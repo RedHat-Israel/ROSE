@@ -4,5 +4,5 @@ statistics = True
 
 # E501: line to long.
 # E203: whitespace before ':' to accept black code style
-# W504: line break after binary operator
+# W503: line break after binary operator
 ignore = E501,E203,W503
