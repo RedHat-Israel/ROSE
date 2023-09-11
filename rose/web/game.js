@@ -1,43 +1,39 @@
-var ROSE = (function() {
-    "use strict";
 
-    function App() {
-        this.client = null;
-        this.controller = null;
-        this.rate = null;
-        this.context = null;
-        this.dashboard = null;
-        this.track = null;
-        this.obstacles = null;
-        this.cars = null;
-        this.finish_line = null;
-    }
+class App {
+    client = null;
+    controller = null;
+    rate = null;
+    context = null;
+    dashboard = null;
+    track = null;
+    obstacles = null;
+    cars = null;
+    finish_line = null;
 
-    App.prototype.ready = function() {
+    ready() {
         this.controller = new Controller();
         this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
-
-        var image_loader = new ImageLoader(function() {
+        const imageLoader = new ImageLoader(() => {
             this.client = new Client(this.onmessage.bind(this), 2000);
-        }.bind(this));
+        });
 
-        this.context = $("#game").get(0).getContext("2d");
+        this.context = document.querySelector("#game").getContext("2d");
         this.dashboard = new Dashboard();
-        this.track = new Track(image_loader);
-        this.obstacles = new Obstacles(image_loader);
-        this.cars = new Cars(image_loader);
-        this.finish_line = new FinishLine(image_loader);
+        this.track = new Track(imageLoader);
+        this.obstacles = new Obstacles(imageLoader);
+        this.cars = new Cars(imageLoader);
+        this.finish_line = new FinishLine(imageLoader);
         this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
     }
 
-    App.prototype.onmessage = function(m) {
-        var msg = JSON.parse(m.data);
+    onmessage(m) {
+        const msg = JSON.parse(m.data);
         if (msg.action !== "update") {
-            console.log("Ignoring unknown message: " + m.data);
+            console.log(`Ignoring unknown message: ${m.data}`);
             return;
         }
 
-        var state = msg.payload;
+        const state = msg.payload;
 
         // Update
         this.controller.update(state);
@@ -55,149 +51,151 @@ var ROSE = (function() {
         this.cars.draw(this.context);
         this.finish_line.draw(this.context);
     }
+}
 
-    var Config = {
-        left_margin: 95,
-        cell_width: 130,
-        top_margin: 10,
-        row_height: 65,
-        track_length: 9,
-        finish_line_duration: 5
-    };
-
-    function Client(onmessage, reconnect_msec) {
+class Client {
+    constructor(onmessage, reconnect_msec) {
         this.onmessage = onmessage;
         this.reconnect_msec = reconnect_msec;
         this.socket = null;
         this.connect();
     }
 
-    Client.prototype.connect = function() {
+    connect() {
         var wsuri = "ws://" + window.location.hostname + ":8880/ws";
         console.log("Connecting to " + wsuri);
         this.socket = new WebSocket(wsuri);
-        this.socket.onopen = function(e) {
+        this.socket.onopen = (e) => {
             console.log("Connected")
         };
         this.socket.onmessage = this.onmessage;
         this.socket.onclose = this.onclose.bind(this);
     }
 
-    Client.prototype.onclose = function(e) {
+    onclose(e) {
         console.log("Disconnected wasClean=" + e.wasClean + ", code=" +
             e.code + ", reason='" + e.reason + "')");
         this.socket = null;
         console.log("Reconnecting in " + this.reconnect_msec + " milliseconds");
         setTimeout(this.connect.bind(this), this.reconnect_msec);
     }
+}
 
-    function Controller() {
-        var self = this;
-        $("#start").click(function(event) {
+class Controller {
+    constructor() {
+        this.initializeEvents();
+    }
+
+    initializeEvents() {
+        document.querySelector("#start").addEventListener("click", event => {
             event.preventDefault();
-            self.start();
+            this.start();
         });
 
-        $("#stop").click(function(event) {
+        document.querySelector("#stop").addEventListener("click", event => {
             event.preventDefault();
-            self.stop();
+            this.stop();
         });
     }
 
-    Controller.prototype.start = function() {
+    start() {
         var self = this;
         self.disable();
-        $.post("admin", {running: 1})
-            .done(function() {
-                self.update(true);
+
+        fetch("admin?running=1", {method: 'POST'})
+            .then(() => {
+                console.log("starting");
             })
-            .fail(function(xhr) {
-                self.update(false);
-                console.log("Error starting: " + xhr.responseText);
+            .catch((e) => {
+                console.log("Error starting: " + e.toString());
             })
     }
 
-    Controller.prototype.stop = function() {
+    stop() {
         var self = this;
         self.disable();
-        $.post("admin", {running: 0})
-            .done(function() {
-                self.update(false);
+        fetch("admin?running=0", {method: 'POST'})
+            .then(() => {
+                console.log("stopping");
             })
-            .fail(function(xhr) {
-                self.update(true);
-                console.log("Error stopping: " + xhr.responseText);
+            .catch((e) => {
+                console.log("Error stopping: " + e.toString());
             })
     }
 
-    Controller.prototype.update = function(state) {
+    update(state) {
         if(state.players.length == 0){
-            $("#info").text("No players connected")
-            $("#start").attr("disabled", "disabled");
-            $("#stop").attr("disabled", "disabled");
+            document.querySelector("#info").textContent = ("No players connected")
+            document.querySelector("#start").setAttribute("disabled", "disabled");
+            document.querySelector("#stop").setAttribute("disabled", "disabled");
         }
         else if (state.started) {
-            $("#info").text("")
-            $("#start").attr("disabled", "disabled");
-            $("#stop").removeAttr("disabled");
+            document.querySelector("#info").textContent = ("")
+            document.querySelector("#start").setAttribute("disabled", "disabled");
+            document.querySelector("#stop").removeAttribute("disabled");
         } else {
-            $("#info").text("")
-            $("#start").removeAttr("disabled");
-            $("#stop").attr("disabled", "disabled");
+            document.querySelector("#info").textContent = ("")
+            document.querySelector("#start").removeAttribute("disabled");
+            document.querySelector("#stop").setAttribute("disabled", "disabled");
         }
     }
 
-    Controller.prototype.disable = function() {
-        $("#start").attr("disabled", "disabled");
-        $("#stop").attr("disabled", "disabled");
+    disable() {
+        document.querySelector("#start").setAttribute("disabled", "disabled");
+        document.querySelector("#stop").setAttribute("disabled", "disabled");
     }
+}
 
-    function Rate(values) {
+class Rate {
+    constructor(values) {
         this.values = values;
         this.rate = null;
-        var self = this;
+        this.initializeEvents();
+    }
 
-        $("#dec_rate").click(function(event) {
+
+    initializeEvents() {
+        document.querySelector("#dec_rate").addEventListener("click", event => {
             event.preventDefault();
-            self.decrease();
+            this.decrease();
         });
 
-        $("#cur_rate").click(function(event) {
+        document.querySelector("#cur_rate").addEventListener("click", event => {
             event.preventDefault();
-            self.post(1);
+            this.post(1);
         });
 
-        $("#inc_rate").click(function(event) {
+        document.querySelector("#inc_rate").addEventListener("click", event => {
             event.preventDefault();
-            self.increase();
+            this.increase();
         });
     }
 
-    Rate.prototype.update = function(rate) {
+    update(rate) {
         this.rate = rate;
-        $("#cur_rate").text(rate + " FPS");
+        document.querySelector("#cur_rate").textContent = (rate + " FPS");
         this.validate();
     }
 
-    Rate.prototype.validate = function() {
+    validate() {
         if (this.rate == this.values[0]) {
-            $("#dec_rate").attr("disabled", "disabled")
+            document.querySelector("#dec_rate").setAttribute("disabled", "disabled")
         } else {
-            $("#dec_rate").removeAttr("disabled")
+            document.querySelector("#dec_rate").removeAttribute("disabled")
         }
-        $("#cur_rate").removeAttr("disabled");
+        document.querySelector("#cur_rate").removeAttribute("disabled");
         if (this.rate == this.values[this.values.length-1]) {
-            $("#inc_rate").attr("disabled", "disabled")
+            document.querySelector("#inc_rate").setAttribute("disabled", "disabled")
         } else {
-            $("#inc_rate").removeAttr("disabled")
+            document.querySelector("#inc_rate").removeAttribute("disabled")
         }
     }
 
-    Rate.prototype.disable = function() {
-        $("#rate_ctl button").attr("disabled", "disabled");
+    disable() {
+        document.querySelector("#rate_ctl button").setAttribute("disabled", "disabled");
     }
 
-    Rate.prototype.decrease = function() {
+    decrease() {
         var i;
         for (i = this.values.length - 1; i >= 0; i--) {
             if (this.values[i] < this.rate) {
@@ -207,7 +205,7 @@ var ROSE = (function() {
         }
     }
 
-    Rate.prototype.increase = function() {
+    increase() {
         var i;
         for (i = 0; i < this.values.length; i++) {
             if (this.values[i] > this.rate) {
@@ -217,233 +215,227 @@ var ROSE = (function() {
         }
     }
 
-    Rate.prototype.post = function(value) {
+    post(value) {
         var self = this;
         self.disable();
-        $.post("admin", {rate: value})
-            .done(function() {
+        fetch(`admin?rate=${value}`, {method: 'POST'})
+            .then(() => {
                 self.update(value);
             })
-            .fail(function(xhr) {
+            .catch((e) => {
                 self.validate();
-                console.log("Error changing rate: " + xhr.responseText);
+                console.log("Error changing rate: " + e.toString());
             })
     }
 
-    function Dashboard() {
-        this.players = null;
-        this.timeleft = null;
-    }
+}
 
-    Dashboard.prototype.update = function(state) {
+class Dashboard {
+    players = null;
+    timeleft = null;
+
+    update(state) {
         this.players = state.players;
         this.timeleft = state.timeleft;
     }
 
-    Dashboard.prototype.draw = function(ctx) {
+    draw() {
+        const text = this.timeleft < 10 ? `0${this.timeleft}` : this.timeleft.toString();
+        document.querySelector("#time_left").textContent = text;
 
-        var text = this.timeleft.toString()
-        if (this.timeleft < 10) {
-            text = "0" + text;
-        }
-        $("#time_left").text(text)
-
-        var i;
-        for (i = 0; i < this.players.length; i++) {
-            var player = this.players[i];
-            if (player.lane == 0) {
-                $("#left.player .name").text(player.name)
-                $("#left.player .score").text(player.score)
-            }
-            if (player.lane == 1) {
-                $("#right.player .name").text(player.name)
-                $("#right.player .score").text(player.score)
+        for (let player of this.players) {
+            if (player.lane === 0) {
+                document.querySelector("#left.player .name").textContent = player.name;
+                document.querySelector("#left.player .score").textContent = player.score;
+            } 
+            if (player.lane === 1) {
+                document.querySelector("#right.player .name").textContent = player.name;
+                document.querySelector("#right.player .score").textContent = player.score;
             }
         }
     }
+}
 
-    function Obstacles(loader) {
+class Obstacles {
+    constructor(loader) {
         this.track = null;
         this.textures = {};
-        var self = this;
 
-        loader.load("res/obstacles/barrier.png", function(img) {
-            self.textures["barrier"] = img;
-        });
-        loader.load("res/obstacles/bike.png", function(img) {
-            self.textures["bike"] = img;
-        });
-        loader.load("res/obstacles/crack.png", function(img) {
-            self.textures["crack"] = img;
-        });
-        loader.load("res/obstacles/penguin.png", function(img) {
-            self.textures["penguin"] = img;
-        });
-        loader.load("res/obstacles/trash.png", function(img) {
-            self.textures["trash"] = img;
-        });
-        loader.load("res/obstacles/water.png", function(img) {
-            self.textures["water"] = img;
+        const obstacleNames = ["barrier", "bike", "crack", "penguin", "trash", "water"];
+
+        obstacleNames.forEach(name => {
+            loader.load(`res/obstacles/${name}.png`, (img) => {
+                this.textures[name] = img;
+            });
         });
     }
 
-    Obstacles.prototype.update = function(state) {
+    update(state) {
         this.track = state.track;
     }
 
-    Obstacles.prototype.draw = function(ctx) {
-        var i;
-        for (i = 0; i < this.track.length; i++) {
-            var obstacle = this.track[i];
-            var img = this.textures[obstacle["name"]];
-            var x = Config.left_margin + obstacle["x"] * Config.cell_width;
-            var y = Config.top_margin + obstacle["y"] * Config.row_height;
+    draw(ctx) {
+        for (let obstacle of this.track) {
+            const img = this.textures[obstacle.name];
+            const x = Config.left_margin + obstacle.x * Config.cell_width;
+            const y = Config.top_margin + obstacle.y * Config.row_height;
             ctx.drawImage(img, x, y);
         }
     }
+}
 
-    function Cars(loader) {
+class Cars {
+    constructor(loader) {
         this.players = null;
         this.textures = [null, null, null, null];
-        var self = this;
-        loader.load("res/cars/car1.png", function(img) {
-            self.textures[0] = img;
-        });
-        loader.load("res/cars/car2.png", function(img) {
-            self.textures[1] = img;
-        });
-        loader.load("res/cars/car3.png", function(img) {
-            self.textures[2] = img;
-        });
-        loader.load("res/cars/car4.png", function(img) {
-            self.textures[3] = img;
-        });
+
+        for (let i = 0; i < 4; i++) {
+            loader.load(`res/cars/car${i + 1}.png`, (img) => {
+                this.textures[i] = img;
+            });
+        }
     }
 
-    Cars.prototype.update = function(state) {
+    update(state) {
         this.players = state.players;
     }
 
-    Cars.prototype.draw = function(ctx) {
+    draw(ctx) {
         ctx.fillStyle = "rgb(0, 0, 0)";
         ctx.textBaseline = "top";
         ctx.font = "bold 15px sans-serif";
         ctx.textAlign = "center";
-        var i;
-        for (i = 0; i < this.players.length; i++) {
-            var player = this.players[i];
-            var img = this.textures[player["car"]];
-            var x = Config.left_margin + player["x"] * Config.cell_width;
-            var y = player["y"] * Config.row_height;
+
+        for (let player of this.players) {
+            const img = this.textures[player.car];
+            const x = Config.left_margin + player.x * Config.cell_width;
+            const y = player.y * Config.row_height;
+            
             ctx.drawImage(img, x, y);
-            var car_center = x + (img.width / 2);
-            var car_bottom = y + img.height;
+            
+            const car_center = x + (img.width / 2);
+            const car_bottom = y + img.height;
+            
             ctx.fillText(player.name, car_center, car_bottom + 5);
         }
     }
+}
 
-    function FinishLine(loader) {
+class FinishLine {
+    constructor(loader) {
         this.texture = null;
         this.timeleft = null;
-        var self = this;
-        loader.load("res/end/final_flag.png", function(img) {
-            self.texture = img;
+
+        loader.load("res/end/final_flag.png", (img) => {
+            this.texture = img;
         });
     }
 
-    FinishLine.prototype.update = function(state) {
+    update(state) {
         this.timeleft = Math.max(state.timeleft, 0);
     }
 
-    FinishLine.prototype.draw = function(ctx) {
+    draw(ctx) {
         if (this.timeleft > Config.finish_line_duration) {
             return;
         }
+
         // Start at row 0, then move down until row finish_line_duration
-        var row = Config.finish_line_duration - this.timeleft;
-        var y = Config.row_height * row;
+        const row = Config.finish_line_duration - this.timeleft;
+        const y = Config.row_height * row;
+
         ctx.drawImage(this.texture, 0, y);
     }
+}
 
-    function Track(loader) {
-        this.track = null
+class Track {
+    constructor(loader) {
+        this.track = null;
         this.textures = [null, null, null];
-        var self = this;
 
-        loader.load("res/bg/bg_1.png", function(img) {
-            self.textures[0] = img;
+        loader.load("res/bg/bg_1.png", (img) => {
+            this.textures[0] = img;
         });
-        loader.load("res/bg/bg_2.png", function(img) {
-            self.textures[1] = img;
+        loader.load("res/bg/bg_2.png", (img) => {
+            this.textures[1] = img;
         });
-        loader.load("res/bg/bg_3.png", function(img) {
-            self.textures[2] = img;
+        loader.load("res/bg/bg_3.png", (img) => {
+            this.textures[2] = img;
         });
     }
 
-    Track.prototype.update = function(state) {
+    update(state) {
         this.track = state.track;
         if (state.started) {
             // Simulate track movement
-            var last = this.textures.pop();
+            const last = this.textures.pop();
             this.textures.unshift(last);
         }
     }
 
-    Track.prototype.draw = function(ctx) {
-        var i;
-        for (i = 0; i < Config.track_length; i++) {
-            var img = this.textures[i % this.textures.length];
+    draw(ctx) {
+        for (let i = 0; i < Config.track_length; i++) {
+            const img = this.textures[i % this.textures.length];
             ctx.drawImage(img, 0, i * img.height);
         }
     }
+}
 
-    function ImageLoader(done) {
+class ImageLoader {
+    constructor(done) {
         this.loading = 0;
         this.done = done;
     }
 
-    ImageLoader.prototype.load = function(url, done) {
-        var img = new Image();
-        var self = this;
-        self.loading++;
-        $(img).on("load", function() {
+    load(url, done) {
+        const img = new Image();
+        this.loading++;
+        img.onload = () => {
             done(img);
-            self.loading--;
-            if (self.loading == 0) {
-                self.done();
+            this.loading--;
+            if (this.loading === 0) {
+                this.done();
             }
-        });
+        };
         img.src = url;
     }
+}
 
-    function Sound(file_path) {
-        var self = this;
-        self.audio = new Audio();
-        self.audio.src = file_path;
+class Sound {
+    constructor(filePath) {
+        this.audio = new Audio();
+        this.audio.src = filePath;
+        this.playing = false;
 
-        $("#music_ctl").click(function(event) {
+        document.querySelector("#music_ctl").addEventListener("click", event => {
             event.preventDefault();
-            if (self.playing) {
-                self.playing = false;
-                self.pause();
-                $(this).text("Music");
+            if (this.playing) {
+                this.pause();
+                event.target.textContent = "Music";
             } else {
-                self.playing = true;
-                self.play();
-                $(this).text("Mute");
+                this.play();
+                event.target.textContent = "Mute";
             }
+            this.playing = !this.playing;
         });
     }
 
-    Sound.prototype.play = function() {
+    play() {
         this.audio.play();
     }
 
-    Sound.prototype.pause = function() {
+    pause() {
         this.audio.pause();
     }
+}
 
+const Config = {
+    left_margin: 95,
+    cell_width: 130,
+    top_margin: 10,
+    row_height: 65,
+    track_length: 9,
+    finish_line_duration: 5
+};
 
-    return new App();
-}());
+export const ROSE = new App();
