@@ -2,7 +2,7 @@ init:
 	pip install -r rose/client/requirements.txt
 	pip install -r rose/server/requirements.txt
 
-dev-init:
+dev-init: init
 	pip install -r rose/client/requirements-dev.txt
 	pip install -r rose/server/requirements-dev.txt
 
