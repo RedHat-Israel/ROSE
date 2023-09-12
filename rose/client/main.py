@@ -1,121 +1,90 @@
 import argparse
-import importlib
+import importlib.util
 import logging
-import sys
 
-from twisted.internet import reactor, protocol
-from twisted.protocols import basic
-
-from rose.common import config, message
-from . import game
-
-log = logging.getLogger("main")
+from game import server
 
 
-class Client(basic.LineReceiver):
-    def connectionMade(self):
-        self.factory.connected(self)
-
-    def connectionLost(self, reason):
-        self.factory.disconnected(reason)
-
-    def connectionFailed(self, reason):
-        self.factory.failed(reason)
-
-    def lineReceived(self, line):
-        msg = message.parse(line)
-        if msg.action == "update":
-            self.factory.update(msg.payload)
-        elif msg.action == "error":
-            self.factory.error(msg.payload)
-        else:
-            log.info("Unexpected message: %s %s", msg.action, msg.payload)
-
-
-class ClientFactory(protocol.ReconnectingClientFactory):
-    protocol = Client
-    initialDelay = 2
-    maxDelay = 2
-
-    def __init__(self, name, drive_func):
-        self.game = game.Game(self, name, drive_func)
-        self.client = None
-
-    # Client events
-
-    def connected(self, client):
-        self.resetDelay()
-        self.client = client
-        self.game.client_connected()
-
-    def disconnected(self, reason):
-        self.client = None
-        self.game.client_disconnected(reason)
-
-    def failed(self, reason):
-        self.client = None
-        self.game.client_failed(reason)
-
-    def error(self, error):
-        self.game.client_error(error)
-
-    def update(self, info):
-        self.game.client_update(info)
-
-    # Client interface
-
-    def send_message(self, msg):
-        self.client.sendLine(str(msg).encode("utf-8"))
-
-
-def load_driver_module(file_path):
+def load_driver_module(driver_path):
     """
     Load the driver module from the specified path.
 
     Arguments:
       file_path (str): The path to the driver module
-
     Returns:
         Driver module (module)
-
     Raises:
         Exception if the module cannot be loaded
     """
-    spec = importlib.util.spec_from_file_location("driver_module", file_path)
+    spec = importlib.util.spec_from_file_location("driver_module", driver_path)
     driver_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(driver_module)
     return driver_module
 
 
 def main():
-    logging.basicConfig(level=logging.INFO, format=config.logger_format)
-    parser = argparse.ArgumentParser(description="ROSE Client")
+    """
+    Main function to initialize and run the driver HTTP server.
+    """
+    parser = argparse.ArgumentParser(description="Run a ROSE driver HTTP service.")
     parser.add_argument(
-        "--server-address",
-        "-s",
-        dest="server_address",
-        default="localhost",
-        help="The server address to connect to."
-        " For example: '10.20.30.44' or 'my-server.com'."
-        " If not specified, localhost will be used.",
+        "-p",
+        "--port",
+        type=int,
+        default=8081,
+        help="Specify the port number. Default is 8081.",
     )
-    parser.add_argument("driver_file", help="The path to the driver python module")
+    parser.add_argument(
+        "--listen",
+        default="",
+        help="Specify the listen address. Default is all interfaces.",
+    )
+    parser.add_argument(
+        "--name",
+        default="rose-driver",
+        help="Specify the server name for logging purposes. Default is 'rose-driver'.",
+    )
+    parser.add_argument(
+        "-d",
+        "--driver",
+        default="",
+        help="Specify the path to the driver module.",
+    )
+    parser.add_argument(
+        "--log", default="WARNING", help="Set the logging level. E.g. --log DEBUG"
+    )
 
     args = parser.parse_args()
 
+    logging.basicConfig(level=getattr(logging, args.log.upper()))
+
+    if args.driver == "":
+        print("Error: missing driver command line argument")
+        return
+
     try:
-        driver_mod = load_driver_module(args.driver_file)
-    except Exception as e:
-        log.error("error loading driver module %r: %s", args.driver_file, e)
-        sys.exit(2)
+        driver_module = load_driver_module(args.driver)
+        server.MyHTTPRequestHandler.server_name = args.name
+        server.MyHTTPRequestHandler.drive = driver_module.drive
+        server.MyHTTPRequestHandler.driver_name = driver_module.driver_name
 
-    reactor.connectTCP(
-        args.server_address,
-        config.game_port,
-        ClientFactory(driver_mod.driver_name, driver_mod.drive),
-    )
+        print(f"\nDriver module {args.driver} [driver: {driver_module.driver_name}]")
+    except ImportError as e:
+        print(e)
+        return  # Exit the main function if the module loading fails
 
-    url = "http://%s:%d" % (args.server_address, config.web_port)
-    log.info("Please open %s to watch the game." % url)
+    with server.MyTCPServer(
+        (args.listen, args.port), server.MyHTTPRequestHandler
+    ) as httpd:
+        try:
+            print(f"Listen      {args.listen}:{args.port}")
+            print(f"Server URL  http://127.0.0.1:{args.port}")
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print("\nShutting down the server...")
+            httpd.shutdown()
+            httpd.server_close()
 
-    reactor.run()
+
+if __name__ == "__main__":
+    main()

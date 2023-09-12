@@ -1,8 +1,0 @@
-autobahn
-black
-flake8
-pytest
-pytest-check-links
-pytest-coverage
-pytest-timeout
-twisted
