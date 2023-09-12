@@ -1,10 +1,12 @@
 import random
-from rose.common import config, obstacles
+
+from common import config, obstacles
 
 
 class Track(object):
-    def __init__(self):
+    def __init__(self, is_track_random=False):
         self._matrix = None
+        self.is_track_random = is_track_random
         self.reset()
 
     # Game state interface
@@ -22,6 +24,10 @@ class Track(object):
                 if obs != obstacles.NONE:
                     items.append({"name": obs, "x": x, "y": y})
         return items
+
+    def matrix(self):
+        """Return the track matrix"""
+        return self._matrix
 
     # Track interface
 
@@ -52,16 +58,24 @@ class Track(object):
         obstacles, but in different cells if 'is_track_random' is True.
         Otherwise, the tracks will be identical.
         """
+
+        # Create initial empty row
         row = [obstacles.NONE] * config.matrix_width
+
+        # Get a random obstacle
         obstacle = obstacles.get_random_obstacle()
-        if config.is_track_random:
+
+        if self.is_track_random:
             for lane in range(config.max_players):
-                low = lane * config.cells_per_player
-                high = low + config.cells_per_player
-                cell = random.choice(range(low, high))
-                row[cell] = obstacle
+                # Get a random cell for each player
+                cell = random.choice(range(0, config.cells_per_player))
+
+                row[cell + lane * config.cells_per_player] = obstacle
         else:
+            # Get a random cell, and use it for all players
             cell = random.choice(range(0, config.cells_per_player))
+
             for lane in range(config.max_players):
                 row[cell + lane * config.cells_per_player] = obstacle
+
         return row

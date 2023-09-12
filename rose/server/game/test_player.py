@@ -1,5 +1,5 @@
-from rose.common import actions, config
-from . import player
+from common import actions, config
+from game import player
 
 
 def test_player_initialization():
@@ -66,15 +66,24 @@ def test_player_comparison():
 
 
 def test_player_state():
-    player1 = player.Player("John", 1, 1)
+    player1 = player.Player("John", 2, 1)
 
     expected_state = {
-        "name": player1.name,
-        "car": player1.car,
-        "x": player1.x,
-        "y": player1.y,
-        "lane": player1.lane,
-        "score": player1.score,
+        "name": "John",
+        "car": 2,
+        "x": 4,  # 1 * config.cells_per_player + 1
+        "y": config.matrix_height // 3 * 2,
+        "action": actions.NONE,
+        "response_time": None,
+        "error": None,
+        "lane": 1,
+        "score": 0,
+        "pickups": 0,
+        "misses": 0,
+        "hits": 0,
+        "breaks": 0,
+        "jumps": 0,
+        "collisions": 0,
     }
 
     assert player1.state() == expected_state

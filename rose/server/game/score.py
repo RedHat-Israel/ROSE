@@ -1,7 +1,7 @@
 """ Score logic """
 import logging
 
-from rose.common import actions, config, obstacles
+from common import config, actions, obstacles
 
 log = logging.getLogger("score")
 
@@ -17,10 +17,11 @@ def process(players, track):
     # First handle right and left actions, since they may change in_lane
     # status, used for resolving collisions.
 
-    for player in players.values():
+    for player in players:
         if player.action == actions.LEFT:
             if player.x > 0:
                 player.x -= 1
+
                 log.debug(
                     "player %s moved left to %d,%d",
                     player.name,
@@ -30,6 +31,7 @@ def process(players, track):
         elif player.action == actions.RIGHT:
             if player.x < config.matrix_width - 1:
                 player.x += 1
+
                 log.debug(
                     "player %s moved right to %d,%d",
                     player.name,
@@ -41,7 +43,7 @@ def process(players, track):
     # the ones out of lane, this ensure the car in lane will have
     # priority when picking pinguins and in case of collisions.
 
-    sorted_players = sorted(players.values(), key=lambda p: 0 if p.in_lane() else 1)
+    sorted_players = sorted(players, key=lambda p: 0 if p.in_lane() else 1)
     positions = set()
 
     # Now handle obstacles, preferring players in their own lane.
@@ -52,6 +54,7 @@ def process(players, track):
         if obstacle == obstacles.NONE:
             # Move forward, leaving the obstacle on the track.
             player.score += config.score_move_forward
+
             log.debug(
                 "player %s hit no obstacle: got %d points",
                 player.name,
@@ -63,6 +66,8 @@ def process(players, track):
             track.clear(player.x, player.y)
             player.y += 1
             player.score += config.score_move_backward
+            player.hits += 1
+
             log.debug(
                 "player %s hit %s: lost %d points, moved back to %d,%d",
                 player.name,
@@ -77,6 +82,8 @@ def process(players, track):
                 # Move forward leaving the obstacle on the track
                 points = config.score_move_forward + config.score_jump
                 player.score += points
+                player.jumps += 1
+
                 log.debug(
                     "player %s avoided %s: got %d points",
                     player.name,
@@ -88,6 +95,8 @@ def process(players, track):
                 track.clear(player.x, player.y)
                 player.y += 1
                 player.score += config.score_move_backward
+                player.hits += 1
+
                 log.debug(
                     "player %s hit %s: lost %d points, moved back to %d,%d",
                     player.name,
@@ -102,6 +111,8 @@ def process(players, track):
                 # Move forward leaving the obstacle on the track
                 points = config.score_move_forward + config.score_brake
                 player.score += points
+                player.breaks += 1
+
                 log.debug(
                     "player %s avoided %s: got %d points",
                     player.name,
@@ -113,6 +124,8 @@ def process(players, track):
                 track.clear(player.x, player.y)
                 player.y += 1
                 player.score += config.score_move_backward
+                player.hits += 1
+
                 log.debug(
                     "player %s hit %s: lost %d points, moved back to %d,%d",
                     player.name,
@@ -128,6 +141,8 @@ def process(players, track):
                 track.clear(player.x, player.y)
                 points = config.score_move_forward + config.score_pickup
                 player.score += points
+                player.pickups += 1
+
                 log.debug(
                     "player %s picked up %s: got %d points",
                     player.name,
@@ -137,6 +152,7 @@ def process(players, track):
             else:
                 # Move forward leaving the obstacle on the track
                 player.score += config.score_move_forward
+
                 log.debug("player %s missed %s", player.name, obstacle)
 
         # Here we can end the game when player gets out of
@@ -155,6 +171,7 @@ def process(players, track):
                 player.x -= 1
             elif player.x < config.matrix_width - 1:
                 player.x += 1
+
             log.debug(
                 "player %s collision at %d,%d: lost %d points, " "moved to %d,%d",
                 player.name,

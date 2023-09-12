@@ -1,4 +1,4 @@
-from rose.common import actions, config
+from common import config, actions
 
 
 class Player(object):
@@ -24,18 +24,21 @@ class Player(object):
         """
         self.name = name
         self.car = car
+        self.URL = ""
         self.lane = lane
         self.x = None
         self.y = None
         self.action = None
+        self.httperror = None
         self.response_time = None
         self.score = None
+        self.pickups = None
+        self.misses = None
+        self.hits = None
+        self.breaks = None
+        self.jumps = None
+        self.collisions = None
         self.reset()
-
-    # Game state interface
-
-    def update(self):
-        """Go to the next game state"""
 
     def reset(self):
         self.x = self.lane * config.cells_per_player + 1  # | |0| | |1 | |
@@ -43,10 +46,12 @@ class Player(object):
         self.action = actions.NONE
         self.response_time = None
         self.score = 0
-
-    def in_lane(self):
-        current_lane = self.x // config.cells_per_player
-        return current_lane == self.lane
+        self.pickups = 0
+        self.misses = 0
+        self.hits = 0
+        self.breaks = 0
+        self.collisions = 0
+        self.jumps = 0
 
     def __cmp__(self, other):
         x = self.score
@@ -56,6 +61,10 @@ class Player(object):
     def __lt__(self, other):
         return self.score < other.score
 
+    def in_lane(self):
+        current_lane = self.x // config.cells_per_player
+        return current_lane == self.lane
+
     def state(self):
         """Return read only serialize-able state for sending to client"""
         return {
@@ -63,6 +72,15 @@ class Player(object):
             "car": self.car,
             "x": self.x,
             "y": self.y,
+            "action": self.action,
+            "response_time": self.response_time,
+            "error": self.httperror,
             "lane": self.lane,
             "score": self.score,
+            "pickups": self.pickups,
+            "misses": self.misses,
+            "hits": self.hits,
+            "breaks": self.breaks,
+            "jumps": self.jumps,
+            "collisions": self.collisions,
         }

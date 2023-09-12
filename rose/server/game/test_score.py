@@ -1,7 +1,7 @@
-from rose.common import actions, config, obstacles
-from . import track
-from . import player
-from . import score
+from common import actions, config, obstacles
+from game import track
+from game import player
+from game import score
 import pytest
 
 
@@ -21,7 +21,7 @@ class SinglePlayerTest(object):
         self.track.set(self.x, self.y, self.obstacle)
 
     def process(self):
-        score.process({self.player.name: self.player}, self.track)
+        score.process([self.player], self.track)
 
     def assert_score(self, score):
         assert self.player.x == self.x
@@ -271,7 +271,7 @@ class TestCollisions(object):
         self.player2 = player.Player("B", car=0, lane=1)
 
     def process(self):
-        players = {self.player1.name: self.player1, self.player2.name: self.player2}
+        players = [self.player1, self.player2]
         score.process(players, self.track)
 
     def test_player_in_lane_wins(self):
