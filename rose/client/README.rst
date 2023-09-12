@@ -44,23 +44,49 @@ This server uses a default driver logic which chooses the next action randomly. 
 
 Podman Usage
 ============
-1. Build the Podman image:
+1. Build the container image:
 
    .. code-block:: bash
 
       # Edit mydriver.py file.
       podman build -t rose-driver .
 
-2. Run the container:
+2. Build and run a custom container image:
 
    .. code-block:: bash
 
-      # Edit mydriver.py file, and create the best driver code,
-      # once mydriver.py is ready build and run the container.
-      podman build -t rose-driver .
-      podman run -it --rm --network host rose-driver --port 8081
+      # Customize the container using your driver.
+      # Copy a driver to current directory
+      cp ../../examples/none.py ./mydriver.py
 
-3. Run the container using local driver python file:
+      # Edit ./mydriver.py file, and create the best driver code,
+      # once ./mydriver.py is ready build the custom container.
+
+      # Build the custom image:
+      # The driver ./mydriver.py will be baked into the custom container image.
+      podman build -t rose-driver .
+
+      # Run the custom container
+      # Important: ./mydriver.py must be baked into the image during build,
+      #            see bellow for instructions on running a local driver. 
+      podman run -it --rm --network host rose-driver
+
+3. (Optional) To use your custom container image in an Openshift cluster you need to push it to a publich repository.
+
+   .. code-block:: bash
+
+      # Login (this example use quay.io)
+      podman login quay.io
+      
+      # Tag the image uging your name (for example 'jhon_doe')
+      podman tag rose-driver quay.io/john_doe/my_rose_driver:latest
+      
+      # Push the image to the public repository (use the name you like, for example 'my_rose_driver')
+      podman push quay.io/john_doe/my_rose_driver:latest
+
+      # Now you can deploy your custom container image into an openshift cluster
+
+4. Run the container using local driver python file:
 
    .. code-block:: bash
 
