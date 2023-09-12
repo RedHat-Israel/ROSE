@@ -2,17 +2,17 @@
 
 ## Running the checks
 
-First, make sure you are using python 3.7 or later:  
+First, change directory to test folder before running the tests:  
+
+        `cd docs/course_materials/exercises/test_exercises
+
+Make sure you are using python 3.7 or later:  
 
         `pipenv --python /usr/local/bin/python3.7 shell`
 
 Install all dependencies:  
 
         `pipenv install --dev`
-
-Second, change directory to test folder before running the tests:  
-
-        `cd docs/course_materials/exercises/test_exercises`
 
 For getting the Help use:  
 
