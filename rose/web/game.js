@@ -9,12 +9,19 @@ class App {
     obstacles = null;
     cars = null;
     finish_line = null;
+    infoUpdater = null;
 
     ready() {
+        // Start loading game images.
+        document.querySelector("#left.player .name").textContent = "Loading ...";
+
         this.controller = new Controller();
         this.rate = new Rate([0.5, 1.0, 2.0, 5.0, 10.0]);
         const imageLoader = new ImageLoader(() => {
             this.client = new Client(this.onmessage.bind(this), 2000);
+
+            // Finish loading game images.
+            document.querySelector("#left.player .name").textContent = "";
         });
 
         this.context = document.querySelector("#game").getContext("2d");
@@ -23,6 +30,7 @@ class App {
         this.obstacles = new Obstacles(imageLoader);
         this.cars = new Cars(imageLoader);
         this.finish_line = new FinishLine(imageLoader);
+        this.infoUpdater = new Information();
         this.sound = new Sound("res/soundtrack/Nyan_Cat.ogg");
     }
 
@@ -37,12 +45,13 @@ class App {
 
         // Update
         this.controller.update(state);
-        this.rate.update(state.rate);
+        this.rate.update(state);
         this.dashboard.update(state);
         this.track.update(state);
         this.obstacles.update(state);
         this.cars.update(state);
         this.finish_line.update(state);
+        this.infoUpdater.update(state);
 
         // Draw
         this.dashboard.draw(this.context);
@@ -62,7 +71,7 @@ class Client {
     }
 
     connect() {
-        var wsuri = "ws://" + window.location.hostname + ":8880/ws";
+        var wsuri = `ws://${window.location.hostname}:8765/ws`;
         console.log("Connecting to " + wsuri);
         this.socket = new WebSocket(wsuri);
         this.socket.onopen = (e) => {
@@ -73,10 +82,9 @@ class Client {
     }
 
     onclose(e) {
-        console.log("Disconnected wasClean=" + e.wasClean + ", code=" +
-            e.code + ", reason='" + e.reason + "')");
+        console.log(`Disconnected wasClean=${e.wasClean}, code=${e.code}, reason='${e.reason}')`);
         this.socket = null;
-        console.log("Reconnecting in " + this.reconnect_msec + " milliseconds");
+        console.log(`Reconnecting in ${this.reconnect_msec} milliseconds`);
         setTimeout(this.connect.bind(this), this.reconnect_msec);
     }
 }
@@ -87,61 +95,93 @@ class Controller {
     }
 
     initializeEvents() {
-        document.querySelector("#start").addEventListener("click", event => {
+        document.querySelector("#run").addEventListener("click", event => {
             event.preventDefault();
-            this.start();
+            this.run();
         });
 
         document.querySelector("#stop").addEventListener("click", event => {
             event.preventDefault();
             this.stop();
         });
+
+        document.querySelector("#reset").addEventListener("click", event => {
+            event.preventDefault();
+            this.reset();
+        });
+
+        document.getElementById('info-btn').addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default behavior of the anchor
+        
+            var infoPanel = document.getElementById('info-panel');
+            
+            if (infoPanel.classList.contains('hidden')) {
+                infoPanel.classList.remove('hidden');
+            } else {
+                infoPanel.classList.add('hidden');
+            }
+        });
     }
 
-    start() {
-        var self = this;
-        self.disable();
+    run() {
+        this.disable();
 
         fetch("admin?running=1", {method: 'POST'})
             .then(() => {
                 console.log("starting");
             })
             .catch((e) => {
-                console.log("Error starting: " + e.toString());
+                console.log(`Error starting: ${e.toString()}`);
             })
     }
 
     stop() {
-        var self = this;
-        self.disable();
+        this.disable();
+
         fetch("admin?running=0", {method: 'POST'})
             .then(() => {
                 console.log("stopping");
             })
             .catch((e) => {
-                console.log("Error stopping: " + e.toString());
+                console.log(`Error stopping: ${e.toString()}`);
+            })
+    }
+
+    reset() {
+        this.disable();
+
+        fetch("admin?reset=1", {method: 'POST'})
+            .then(() => {
+                console.log("reset");
+            })
+            .catch((e) => {
+                console.log(`Error reset: ${e.toString()}`);
             })
     }
 
     update(state) {
-        if(state.players.length == 0){
-            document.querySelector("#info").textContent = ("No players connected")
-            document.querySelector("#start").setAttribute("disabled", "disabled");
+        if(state.players.length == 0) {
+            document.querySelector("#run").setAttribute("disabled", "disabled");
             document.querySelector("#stop").setAttribute("disabled", "disabled");
-        }
-        else if (state.started) {
+        } else if (state.started) {
             document.querySelector("#info").textContent = ("")
-            document.querySelector("#start").setAttribute("disabled", "disabled");
+            document.querySelector("#run").setAttribute("disabled", "disabled");
             document.querySelector("#stop").removeAttribute("disabled");
+            document.querySelector("#reset").setAttribute("disabled", "disabled");
         } else {
             document.querySelector("#info").textContent = ("")
-            document.querySelector("#start").removeAttribute("disabled");
+            document.querySelector("#run").removeAttribute("disabled");
             document.querySelector("#stop").setAttribute("disabled", "disabled");
+            document.querySelector("#reset").removeAttribute("disabled");
+        }
+
+        if (state.timeleft == 0) {
+            document.querySelector("#run").setAttribute("disabled", "disabled");
         }
     }
 
     disable() {
-        document.querySelector("#start").setAttribute("disabled", "disabled");
+        document.querySelector("#run").setAttribute("disabled", "disabled");
         document.querySelector("#stop").setAttribute("disabled", "disabled");
     }
 }
@@ -152,7 +192,6 @@ class Rate {
         this.rate = null;
         this.initializeEvents();
     }
-
 
     initializeEvents() {
         document.querySelector("#dec_rate").addEventListener("click", event => {
@@ -171,9 +210,9 @@ class Rate {
         });
     }
 
-    update(rate) {
-        this.rate = rate;
-        document.querySelector("#cur_rate").textContent = (rate + " FPS");
+    update(state) {
+        this.rate = state.rate;
+        document.querySelector("#cur_rate").textContent = (state.rate + " FPS");
         this.validate();
     }
 
@@ -196,8 +235,7 @@ class Rate {
     }
 
     decrease() {
-        var i;
-        for (i = this.values.length - 1; i >= 0; i--) {
+        for (let i = this.values.length - 1; i >= 0; i--) {
             if (this.values[i] < this.rate) {
                 this.post(this.values[i]);
                 break;
@@ -206,8 +244,7 @@ class Rate {
     }
 
     increase() {
-        var i;
-        for (i = 0; i < this.values.length; i++) {
+        for (let i = 0; i < this.values.length; i++) {
             if (this.values[i] > this.rate) {
                 this.post(this.values[i]);
                 break;
@@ -216,14 +253,14 @@ class Rate {
     }
 
     post(value) {
-        var self = this;
-        self.disable();
+        this.disable();
+
         fetch(`admin?rate=${value}`, {method: 'POST'})
             .then(() => {
-                self.update(value);
+                this.update({rate: value});
             })
             .catch((e) => {
-                self.validate();
+                this.validate();
                 console.log("Error changing rate: " + e.toString());
             })
     }
@@ -378,6 +415,51 @@ class Track {
             const img = this.textures[i % this.textures.length];
             ctx.drawImage(img, 0, i * img.height);
         }
+    }
+}
+
+class Information {
+    constructor() {
+        this.infoElement = document.getElementById('info-text');
+    }
+
+    update(state) {
+        if (!state.players) {
+            return;
+        }
+
+        let infoText = "";
+
+        if(state.players.length == 0) {
+            infoText += 'No players connected.<br/>';
+        }
+
+        state.players.forEach(player => {
+            const formattedResponseTime = (player.response_time * 1000.0).toFixed(2);
+
+            infoText += `Name: ${player.name}<br/>`;
+            infoText += `Response time: ${formattedResponseTime}ms<br/>`;
+
+            // Check if error is not empty and conditionally apply the CSS class
+            if (player.error && player.error.trim() !== "") {
+                infoText += `Response err: <span class="error-text">${player.error}</span><br/>`;
+            } else {
+                infoText += `Response err: ${player.error}<br/>`;
+            }
+
+            infoText += '<br/>';
+            infoText += `Pinguins: ${player.pickups}<br/>`;
+            infoText += `Breaks: ${player.breaks}<br/>`;
+            infoText += `Jumps: ${player.jumps}<br/>`;
+            infoText += '<br/>';
+            infoText += `Missed: ${player.misses}<br/>`;
+            infoText += `Crashes: ${player.hits}<br/>`;
+            infoText += `Collisions: ${player.collisions}<br/>`;
+
+            infoText += '<br/><br/>';
+        });
+
+        this.infoElement.innerHTML = infoText;
     }
 }
 

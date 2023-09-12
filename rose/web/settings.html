@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Drivers</title>
+    <link rel="stylesheet" href="settings.css">
+    <script>
+        function loadDrivers() {
+            // Fetch data from the server
+            fetch('/admin', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Check if the drivers field exists and has at least 2 entries
+                if (data.drivers && data.drivers.length > 0) {
+                    document.getElementById('driver1').value = data.drivers[0] ?? "";
+                    document.getElementById('driver2').value = data.drivers[1] ?? "";
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function cancelSetting() {
+            window.location.href = "index.html";
+        }
+
+        function sendDrivers(event) {
+            // Prevent the form from submitting in the traditional way
+            event.preventDefault();
+
+            const driver1 = document.getElementById('driver1').value;
+            const driver2 = document.getElementById('driver2').value;
+            const formattedData = `drivers=${driver1},${driver2}`;
+
+            // Send the formatted data to the server using an AJAX POST request
+            fetch(`/admin?${formattedData}`, {
+                method: 'POST'
+            })
+            .then(response => {
+                if(response.ok) {
+                    // If the POST request was successful, redirect to index.html
+                    window.location.href = "index.html";
+                } else {
+                    console.error('Error:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', loadDrivers);
+    </script>
+</head>
+<body class="dark-theme">
+    <h2 class="heading">Set Game Drivers</h2>
+    <form onsubmit="sendDrivers(event)" class="form">
+        <div class="form-group">
+            <label for="driver1" class="label">Driver 1:</label>
+            <input type="text" id="driver1" name="driver1" placeholder="http://127.0.0.1:8081" class="input-field">
+        </div>
+        <div class="form-group">
+            <label for="driver2" class="label">Driver 2:</label>
+            <input type="text" id="driver2" name="driver2" class="input-field">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="submit-button">Send</button>
+            <button type="button" class="cancel-button" onclick="cancelSetting()">Cancel</button>
+        </div>
+    </form>
+</body>
+</html>

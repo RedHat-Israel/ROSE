@@ -9,11 +9,20 @@
 
   <body>
     <div id="content">
+      <a href="settings.html" id="settings-link">Settings</a>
+      <a href="#" id="info-btn">Info</a>
+
+      <div id="info-panel" class="hidden">
+          <h2>Game Information</h2>
+          <span id="info-text"></span>
+      </div>
+
       <form id="control">
 
-        <button id="start" disabled>Start</button>
+        <button id="run" disabled>Run</button>
         <button id="stop"  disabled>Stop</button>
         <button id="music_ctl">Music</button>
+        <button id="reset">Reset</button>
         <label id="info"></label>
 
         <div id="rate_ctl">
