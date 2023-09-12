@@ -10,32 +10,28 @@ from . import car
 from . import world
 from . import component
 
-author = 'gickowic'
-log = logging.getLogger('game')
+author = "gickowic"
+log = logging.getLogger("game")
 
 
 class Game(component.Component):
-
     def __init__(self, client, name, drive_func):
         self.client = client
         self.drive_func = drive_func
         self.name = name
         self.track = track.Track()
         self.players = {}
-        self.cars = [car.Car(1),
-                     car.Car(2),
-                     car.Car(3),
-                     car.Car(4)]
+        self.cars = [car.Car(1), car.Car(2), car.Car(3), car.Car(4)]
         self.world = world.generate_world(self)
 
     # Component interface
 
     def update(self, info):
         self.track.update(info)
-        self.players = {p["name"]: p for p in info['players']}
+        self.players = {p["name"]: p for p in info["players"]}
         for player in self.players.values():
-            self.cars[player['car']].update(player)
-        if info['started']:
+            self.cars[player["car"]].update(player)
+        if info["started"]:
             self.drive()
 
     # Driving
@@ -51,31 +47,32 @@ class Game(component.Component):
             reactor.stop()
             raise
         response_time = time.time() - start
-        msg = message.Message('drive', {"action": action,
-                                        "response_time": response_time})
+        msg = message.Message(
+            "drive", {"action": action, "response_time": response_time}
+        )
         self.client.send_message(msg)
 
     # Accessing
 
     @property
     def car(self):
-        return self.cars[self.players[self.name]['car']]
+        return self.cars[self.players[self.name]["car"]]
 
     # Handling client events
 
     def client_connected(self):
-        log.info('client connected: joining as %s', self.name)
-        msg = message.Message('join', {"name": self.name})
+        log.info("client connected: joining as %s", self.name)
+        msg = message.Message("join", {"name": self.name})
         self.client.send_message(msg)
 
     def client_disconnected(self, reason):
-        log.info('client disconnected: %s', reason.getErrorMessage())
+        log.info("client disconnected: %s", reason.getErrorMessage())
 
     def client_failed(self, reason):
-        log.info('client failed: %s', reason.getErrorMessage())
+        log.info("client failed: %s", reason.getErrorMessage())
 
     def client_error(self, error):
-        log.info('client error: %s', error.get('message'))
+        log.info("client error: %s", error.get("message"))
         reactor.stop()
 
     def client_update(self, info):

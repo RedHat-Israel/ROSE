@@ -9,11 +9,10 @@ from twisted.protocols import basic
 from rose.common import config, message
 from . import game
 
-log = logging.getLogger('main')
+log = logging.getLogger("main")
 
 
 class Client(basic.LineReceiver):
-
     def connectionMade(self):
         self.factory.connected(self)
 
@@ -25,16 +24,15 @@ class Client(basic.LineReceiver):
 
     def lineReceived(self, line):
         msg = message.parse(line)
-        if msg.action == 'update':
+        if msg.action == "update":
             self.factory.update(msg.payload)
-        elif msg.action == 'error':
+        elif msg.action == "error":
             self.factory.error(msg.payload)
         else:
-            log.info('Unexpected message: %s %s', msg.action, msg.payload)
+            log.info("Unexpected message: %s %s", msg.action, msg.payload)
 
 
 class ClientFactory(protocol.ReconnectingClientFactory):
-
     protocol = Client
     initialDelay = 2
     maxDelay = 2
@@ -67,7 +65,7 @@ class ClientFactory(protocol.ReconnectingClientFactory):
     # Client interface
 
     def send_message(self, msg):
-        self.client.sendLine(str(msg).encode('utf-8'))
+        self.client.sendLine(str(msg).encode("utf-8"))
 
 
 def load_driver_module(file_path):
@@ -92,13 +90,16 @@ def load_driver_module(file_path):
 def main():
     logging.basicConfig(level=logging.INFO, format=config.logger_format)
     parser = argparse.ArgumentParser(description="ROSE Client")
-    parser.add_argument("--server-address", "-s", dest="server_address",
-                        default="localhost",
-                        help="The server address to connect to."
-                             " For example: '10.20.30.44' or 'my-server.com'."
-                             " If not specified, localhost will be used.")
-    parser.add_argument("driver_file",
-                        help="The path to the driver python module")
+    parser.add_argument(
+        "--server-address",
+        "-s",
+        dest="server_address",
+        default="localhost",
+        help="The server address to connect to."
+        " For example: '10.20.30.44' or 'my-server.com'."
+        " If not specified, localhost will be used.",
+    )
+    parser.add_argument("driver_file", help="The path to the driver python module")
 
     args = parser.parse_args()
 
@@ -108,8 +109,11 @@ def main():
         log.error("error loading driver module %r: %s", args.driver_file, e)
         sys.exit(2)
 
-    reactor.connectTCP(args.server_address, config.game_port,
-                       ClientFactory(driver_mod.driver_name, driver_mod.drive))
+    reactor.connectTCP(
+        args.server_address,
+        config.game_port,
+        ClientFactory(driver_mod.driver_name, driver_mod.drive),
+    )
 
     url = "http://%s:%d" % (args.server_address, config.web_port)
     log.info("Please open %s to watch the game." % url)

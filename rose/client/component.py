@@ -1,5 +1,5 @@
 class Component(object):
-    """ Component intarface """
+    """Component intarface"""
 
     def update(self, info):
         """

@@ -17,5 +17,7 @@ jobs:
         pip install -r requirements-dev.txt
     - name: Lint
       run: flake8 --show-source --statistics
+    - name: Blint
+      run: black --check --diff .
     - name: Run tests
       run: pytest

@@ -5,12 +5,10 @@ from . import score
 import pytest
 
 
-FORWARD_ACTIONS = [a for a in actions.ALL
-                   if a not in (actions.RIGHT, actions.LEFT)]
+FORWARD_ACTIONS = [a for a in actions.ALL if a not in (actions.RIGHT, actions.LEFT)]
 
 
 class SinglePlayerTest(object):
-
     # Must be defined in subclass
     obstacle = None
 
@@ -58,7 +56,6 @@ class SinglePlayerTest(object):
 
 
 class TestNoObstacle(SinglePlayerTest):
-
     obstacle = obstacles.NONE
 
     def test_right(self):
@@ -113,7 +110,8 @@ class TestPenguin(SinglePlayerTest):
         self.assert_keep_obstacle()
 
     @pytest.mark.parametrize(
-        "action", [a for a in FORWARD_ACTIONS if a != actions.PICKUP])
+        "action", [a for a in FORWARD_ACTIONS if a != actions.PICKUP]
+    )
     def test_other(self, action):
         self.player.action = action
         self.process()
@@ -213,6 +211,7 @@ class TestLimits(SinglePlayerTest):
     """
     Handling movement out of the track
     """
+
     obstacle = obstacles.NONE
 
     def test_left(self):
@@ -272,8 +271,7 @@ class TestCollisions(object):
         self.player2 = player.Player("B", car=0, lane=1)
 
     def process(self):
-        players = {self.player1.name: self.player1,
-                   self.player2.name: self.player2}
+        players = {self.player1.name: self.player1, self.player2.name: self.player2}
         score.process(players, self.track)
 
     def test_player_in_lane_wins(self):
