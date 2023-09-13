@@ -108,6 +108,6 @@ async def send_to_all_websockets(data, active_websockets):
     json_encoded_data = json.dumps(data)
     for ws in active_websockets:
         try:
-            await ws.send(json_encoded_data)
+            await ws.send_str(json_encoded_data)
         except Exception as e:
             log.error("Fail ws send", e)

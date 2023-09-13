@@ -34,8 +34,4 @@ spec:
       protocol: TCP
       port: 8880
       targetPort: 8880
-    - name: ws
-      protocol: TCP
-      port: 8765
-      targetPort: 8765
-  type: LoadBalancer  # run outside the cluster: kubectl port-forward service/rose-server-service 8880:8880 8765:8765 .
+  type: LoadBalancer  # run outside the cluster: kubectl port-forward service/rose-server-service 8880:8880 .

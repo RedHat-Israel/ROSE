@@ -2,7 +2,6 @@ import json
 import os
 
 import aiohttp
-import websockets
 from aiohttp import web
 
 from common import config
@@ -62,28 +61,36 @@ async def admin_handler(request):
     return web.Response(text=json.dumps(state))
 
 
-async def websocket_handler(websocket, path):
+async def websocket_handler(request):
     """
-    Handle websocket connections, sending a greeting to the client.
+    Handle WebSocket connections, echoing received messages with a prefix.
 
     Args:
-        websocket (websockets.WebSocketServerProtocol): The websocket protocol instance.
-        path (str): The path the client connected to.
+        request (aiohttp.web.Request): The request object.
+
+    Returns:
+        aiohttp.web.WebSocketResponse: The WebSocket response object.
     """
-    active_websockets.add(websocket)
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
+
+    active_websockets.add(ws)
     try:
-        async for message in websocket:
-            # Handle or respond to the message if necessary
-            await websocket.send(f"Received: {message}")
-    except Exception as e:
-        print(f"WebSocket error: {e}")
+        async for msg in ws:
+            if msg.type == web.WSMsgType.TEXT:
+                response_message = f"Received: {msg.data}"
+                await ws.send_str(response_message)
+            elif msg.type == web.WSMsgType.ERROR:
+                print(f"WebSocket error: {ws.exception()}")
     finally:
-        active_websockets.remove(websocket)
+        active_websockets.remove(ws)
+        await ws.close()
+
+    return ws
 
 
 async def run(
     http_port,
-    ws_port,
     listen_address,
     initial_rate,
     initial_running,
@@ -120,9 +127,12 @@ async def run(
     async def index_handler(request):
         return web.FileResponse(os.path.join(public, "index.html"))
 
+    # Add application routes
     app.router.add_get("/", index_handler)
+    app.router.add_get("/ws", websocket_handler)
     app.router.add_post("/admin", admin_handler)
 
+    # Add public static routes
     app.router.add_static("/res/", path=theme, name="theme")
     app.router.add_static("/", path=public, name="static")
 
@@ -132,9 +142,6 @@ async def run(
 
     # Start HTTP server
     await site.start()
-
-    # Start websocket server
-    await websockets.serve(websocket_handler, listen_address, ws_port)
 
     print(f"Theme         {theme}")
     print(f"Track         {track_type}")

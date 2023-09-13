@@ -74,7 +74,7 @@ Instructions:
 
 .. code-block:: bash
 
-   kubectl port-forward deployment/rose-engine-deployment 8880:8880 8765:8765
+   kubectl port-forward deployment/rose-engine-deployment 8880:8880
 
 Now, the service will be accessible locally at http://localhost:8880.
 

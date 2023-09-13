@@ -16,9 +16,6 @@ def main():
         "-p", "--port", type=int, default=8880, help="Port for HTTP server"
     )
     parser.add_argument(
-        "--ws-port", type=int, default=8765, help="Port for WebSocket server"
-    )
-    parser.add_argument(
         "--listen", default="127.0.0.1", help="Listening address for servers"
     )
     parser.add_argument(
@@ -59,7 +56,6 @@ def main():
     loop.run_until_complete(
         server.run(
             args.port,
-            args.ws_port,
             args.listen,
             args.initial_rate,
             args.running,

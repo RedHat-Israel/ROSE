@@ -2,7 +2,6 @@
 
 IMAGE_NAME ?= quay.io/rose/rose-server
 PORT ?= 8880
-WS_PORT ?= 8765
 
 # Default driver when running on localhost
 DRIVERS ?= http://127.0.0.1:8081

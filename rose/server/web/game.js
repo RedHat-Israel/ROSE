@@ -71,7 +71,7 @@ class Client {
     }
 
     connect() {
-        var wsuri = `ws://${window.location.hostname}:8765/ws`;
+        var wsuri = `ws://${window.location.host}/ws`;
         console.log("Connecting to " + wsuri);
         this.socket = new WebSocket(wsuri);
         this.socket.onopen = (e) => {

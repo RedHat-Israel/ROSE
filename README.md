@@ -100,7 +100,7 @@ Build the Docker image:
 
 Run the Docker image on port 8880:
 
-    podman run -it --rm --name=rose_server -p 8880:8880 -p 8765:8765 rose_server
+    podman run -it --rm --name=rose_server -p 8880:8880 rose_server
 
 If you don't want to see the log of the run in the current window,
 replace `-it` with `-d`.
@@ -113,7 +113,7 @@ game.
 You can use SSH tunneling when running the server on your remote VM, so
 you can view the game in you local browser:
 
-    ssh -L 8880:127.0.0.1:8880 -L 8765:127.0.0.1:8765 {user}@{server-address}
+    ssh -L 8880:127.0.0.1:8880 {user}@{server-address}
 
 After starting the server (as mentioned above), open a browser at
 http://127.0.0.1:8880/ to view and control the game.
@@ -125,7 +125,6 @@ server, and browse from a local machine in case port 8880 or 8888 are
 blocked by [firewalld](https://firewalld.org/):
 
     sudo firewall-cmd --add-port=8880/tcp --permanent
-    sudo firewall-cmd --add-port=8765/tcp --permanent
     sudo firewall-cmd --reload
 
 ## Running a driver
