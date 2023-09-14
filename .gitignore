@@ -1,6 +1,3 @@
-# Python
-*.pyc
-
 # Editors
 .idea
 .vscode
