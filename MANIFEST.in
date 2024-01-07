@@ -1,2 +1,0 @@
-include AUTHORS LICENSE README
-recursive-include examples *
