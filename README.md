@@ -58,30 +58,27 @@ The following commands should be performed only once; after creating the
 environment you will be connecting to the same environment each time you
 open a new session.
 
-Use venv to create a virtual environment and to install the rest of
-the dependencies:
+## Cloning the Repository
 
-    python3 -m venv ~/.venv/rose
+First, clone the ROSE repository from GitHub:
 
-After creating the environment, we want to activate and enter our
-environment (make sure you're in the ROSE directory):
+```bash
+git clone https://github.com/RedHat-Israel/ROSE.git
+```
 
-    source ~/.venv/rose/bin/activate
+Navigate to the cloned directory:
 
-After entering the virtual enviornment we need to install the project dependencies:
+```bash
+cd ROSE
+```
 
-    pip install -r requirements.txt
+Once you're in the ROSE directory, install the project dependencies:
 
-Indication that you are inside the environment, the prompt line will
-look like this:
-
-    (rose) [username@hostname ROSE]$
+```bash
+pip install -r requirements.txt
+```
 
 ## Running the server
-
-If you are not in your virtual environment, please activate it:
-
-    source ~/.venv/rose/bin/activate
 
 Start the server on some machine:
 
@@ -103,7 +100,7 @@ Build the Docker image:
 
 Run the Docker image on port 8880:
 
-    podman run -it --rm --name=rose_server -p 8880:8880 rose_server python ./rose-server
+    podman run -it --rm --name=rose_server -p 8880:8880 rose_server
 
 If you don't want to see the log of the run in the current window,
 replace `-it` with `-d`.
@@ -128,14 +125,9 @@ server, and browse from a local machine in case port 8880 or 8888 are
 blocked by [firewalld](https://firewalld.org/):
 
     sudo firewall-cmd --add-port=8880/tcp --permanent
-    sudo firewall-cmd --add-port=8888/tcp --permanent
     sudo firewall-cmd --reload
 
 ## Running a driver
-
-In a new window, open your virtual environment:
-
-    source ~/.venv/rose/bin/activate
 
 Create your driver file:
 
@@ -146,16 +138,11 @@ name.
 
 Start up the client, using your driver file:
 
-    ./rose-client mydriver.py
-
-The server address can be specified that way (Replace '10.20.30.44' with
-your server address):
-
-    ./rose-client -s 10.20.30.44 mydriver.py
+    ./rose-client --driver mydriver.py
 
 For running the driver on the Docker container use:
 
-    docker exec -it rose_server python ./rose-client examples/random-driver.py
+    docker exec -it rose_server --driver examples/random-driver.py
 
 For driver modules, see the [examples](examples) directory.
 
@@ -175,6 +162,14 @@ To start a race, use the rose-admin tool on any machine:
 To stop a race, use the rose-admin tool on any machine:
 
     ./rose-admin {server-address} stop
+
+To reset a race, use the rose-admin tool on any machine:
+
+    ./rose-admin {server-address} reset
+
+To set drivers, use the rose-admin tool on any machine:
+
+    ./rose-admin {server-address} set-drivers {URL of driver1} {URL of driver2}
 
 To modify the game rate, you can use the "set-rate" command. The
 following command would change game rate to 10 frames per second:
@@ -208,13 +203,15 @@ Example `tmux` commands:
 Should you want to contribute to the project, please read the
 [Code of Conduct](docs/code-of-conduct.md).
 
-To create venv use:
+Make sure you have python and make installed
 
-    python3 -m venv ~/.venv/rose
-    
-To enter the venv:
+    # On fedora
+    dnf install python make
 
-    source ~/.venv/rose/bin/activate
+Change directory to the application you want to work on:
+
+    # For the client code
+    cd rose/client
 
 To install development requirements:
 
@@ -222,12 +219,12 @@ To install development requirements:
 
 For development in docker, use:
 
-    docker build --build-arg DEV=True -t rose_dev .
+    make build-image
 
 Before submitting patches, please run the tests:
 
-    flake8
-    pytest
+    make test
+    make lint
 
 Creating coverage report in html format:
 

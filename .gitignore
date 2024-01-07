@@ -1,5 +1,7 @@
 # Python
+__pycache__
 *.pyc
+.pytest_cache
 
 # Editors
 .idea
@@ -9,7 +11,8 @@
 .coverage
 htmlcov/
 
-Pipfile.lock
+rose_project.egg-info
+dist
 
 # Classroom setup
 classroom/credentials.json

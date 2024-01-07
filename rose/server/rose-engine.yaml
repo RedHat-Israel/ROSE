@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rose-server-deployment
+  labels:
+    app: rose-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rose-server
+  template:
+    metadata:
+      labels:
+        app: rose-server
+    spec:
+      containers:
+      - name: rose-server-container
+        image: quay.io/rose/rose-server:latest  # Modify with your Docker image name and tag.
+        ports:
+        - containerPort: 8880
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rose-server-service
+spec:
+  selector:
+    app: rose-server
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8880
+      targetPort: 8880
+  type: LoadBalancer  # run outside the cluster: kubectl port-forward service/rose-server-service 8880:8880 .

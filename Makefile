@@ -1,22 +1,27 @@
-init: Pipfile
-	python -m pip install pipenv --user
-	pipenv install
+init:
+	pip install -r rose/client/requirements.txt
+	pip install -r rose/server/requirements.txt
 
-dev-init: Pipfile
-	python -m pip install pipenv --user
-	pipenv install --dev
+dev-init: init
+	pip install -r rose/client/requirements-dev.txt
+	pip install -r rose/server/requirements-dev.txt
 
-test: pytest.ini
-	pipenv run pytest
+lint:
+	make -C rose/client lint
+	make -C rose/server lint
 
-admin: rose-admin
-	pipenv run ./rose-admin
+lint-fix:
+	make -C rose/client lint-fix
+	make -C rose/server lint-fix
 
-server: rose-server
-	pipenv run ./rose-server
+test:
+	make -C rose/client test
+	make -C rose/server test
 
-client: rose-client
-	pipenv run ./rose-client
+clean:
+	-find . -name '.coverage' -exec rm {} \;
+	-find . -name 'htmlcov' -exec rmdir {} \;
+	-find . -name '*.pyc' -exec rm {} \;
+	-find . -name '__pycache__' -exec rmdir {} \;
+	-find . -name '.pytest_cache' -exec rmdir {} \;
 
-container-image:
-	podman build --build-arg DEV=True -t rose_dev .
