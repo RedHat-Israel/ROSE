@@ -14,9 +14,11 @@ COPY Pipfile ./Pipfile
 # Generate requirements.txt file from Pipfile
 RUN if [ -z ${DEV} ]; \
     then \
-        pipenv lock -r > requirements.txt; \
+        pipenv lock && \
+        pipenv requirements > requirements.txt; \
     else \
-        pipenv lock --dev -r > requirements.txt; \
+        pipenv lock --dev && \
+        pipenv requirements --dev > requirements.txt; \
     fi
 
 # Generate work image
