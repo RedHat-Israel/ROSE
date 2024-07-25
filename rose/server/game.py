@@ -19,7 +19,8 @@ class Game(object):
 
     def __init__(self):
         self.hub = None
-        self.track = track.Track()
+        self.seed = ""
+        self.track = track.Track(seed=self.seed)
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.number_of_cars))
@@ -70,7 +71,7 @@ class Game(object):
             raise error.TooManyPlayers()
         car = random.choice(tuple(self.free_cars))
         self.free_cars.remove(car)
-        lane = random.choice(tuple(self.free_lanes))
+        lane = 1
         self.free_lanes.remove(lane)
         log.info("add player: %r, lane: %r, car: %r", name, lane, car)
         self.players[name] = player.Player(name, car, lane)

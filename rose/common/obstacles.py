@@ -13,5 +13,3 @@ BARRIER = "barrier"  # NOQA
 ALL = (NONE, CRACK, TRASH, PENGUIN, BIKE, WATER, BARRIER)
 
 
-def get_random_obstacle():
-    return random.choice(ALL)

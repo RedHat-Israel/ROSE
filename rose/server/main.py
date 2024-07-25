@@ -1,6 +1,8 @@
+import random
 import socket
 import logging
 import argparse
+import string
 
 from twisted.internet import reactor
 from twisted.web import server, static
@@ -25,6 +27,12 @@ def main():
         help="Definition of driver tracks: random or same."
         "If not specified, random will be used.",
     )
+    parser.add_argument(
+        "--imported_seed",
+        "-ps",
+        dest = "imported_seed",
+        help = "Optianal, providing a predefined seed to use an already existing map",
+    )
 
     args = parser.parse_args()
     """
@@ -32,13 +40,23 @@ def main():
     same place for both drivers, otherwise, the obstacles will be genrated in
     random locations for each driver.
     """
+
     if args.track_definition == "same":
         config.is_track_random = False
     else:
         config.is_track_random = True
+    if args.imported_seed is None:
+        seed = generate_seed()
+    elif len(args.imported_seed) > 0:
+        seed = args.imported_seed
+    else:
+        print("error seed option was not selected")
 
+    log.info(f"This is the map seed {seed}")
     log.info("starting server")
+
     g = game.Game()
+    g.seed = seed
     h = net.Hub(g)
     reactor.listenTCP(config.game_port, net.PlayerFactory(h))
     root = static.File(config.web_root)
@@ -51,3 +69,15 @@ def main():
     site = server.Site(root)
     reactor.listenTCP(config.web_port, site)
     reactor.run()
+
+
+def generate_seed():
+        lenght = 5
+        lis = []
+        for x in range(lenght):
+            ramdom_generate = (random.choice(string.ascii_lowercase))
+            lis.append(ramdom_generate)
+        randon_seed = ''.join(lis)
+        return randon_seed
+
+
