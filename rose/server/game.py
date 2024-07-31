@@ -17,9 +17,10 @@ class Game(object):
     Implements the server for the car race
     """
 
-    def __init__(self):
+    def __init__(self, seed):
         self.hub = None
-        self.track = track.Track()
+        self.rng = random.Random(seed)
+        self.track = track.Track(seed=seed)
         self.looper = task.LoopingCall(self.loop)
         self.players = {}
         self.free_cars = set(range(config.number_of_cars))
@@ -68,9 +69,9 @@ class Game(object):
             raise error.PlayerExists(name)
         if not self.free_cars:
             raise error.TooManyPlayers()
-        car = random.choice(tuple(self.free_cars))
+        car = self.rng.choice(tuple(self.free_cars))
         self.free_cars.remove(car)
-        lane = random.choice(tuple(self.free_lanes))
+        lane = self.rng.choice(tuple(self.free_lanes))
         self.free_lanes.remove(lane)
         log.info("add player: %r, lane: %r, car: %r", name, lane, car)
         self.players[name] = player.Player(name, car, lane)

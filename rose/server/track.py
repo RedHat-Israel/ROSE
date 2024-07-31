@@ -3,8 +3,9 @@ from rose.common import config, obstacles
 
 
 class Track(object):
-    def __init__(self):
+    def __init__(self, seed=""):
         self._matrix = None
+        self.rng = random.Random(seed)
         self.reset()
 
     # Game state interface
@@ -53,15 +54,18 @@ class Track(object):
         Otherwise, the tracks will be identical.
         """
         row = [obstacles.NONE] * config.matrix_width
-        obstacle = obstacles.get_random_obstacle()
+        obstacle = self.get_random_obstacle()
         if config.is_track_random:
             for lane in range(config.max_players):
                 low = lane * config.cells_per_player
                 high = low + config.cells_per_player
-                cell = random.choice(range(low, high))
+                cell = self.rng.choice(range(low, high))
                 row[cell] = obstacle
         else:
-            cell = random.choice(range(0, config.cells_per_player))
+            cell = self.rng.choice(range(0, config.cells_per_player))
             for lane in range(config.max_players):
                 row[cell + lane * config.cells_per_player] = obstacle
         return row
+
+    def get_random_obstacle(self):
+        return self.rng.choice(obstacles.ALL)
